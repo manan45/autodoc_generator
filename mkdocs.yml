@@ -30,10 +30,6 @@ nav:
 - Code Quality: complexity.md
 plugins:
 - search
-- mermaid2
-- git-revision-date-localized
-- minify:
-    minify_html: true
 site_description: Comprehensive documentation generated automatically from code analysis
 site_dir: site
 site_name: Auto-Generated Documentation
