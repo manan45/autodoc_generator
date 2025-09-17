@@ -1,0 +1,63 @@
+docs_dir: docs
+markdown_extensions:
+- codehilite:
+    guess_lang: true
+- toc:
+    permalink: true
+- tables
+- fenced_code
+- admonition
+- pymdownx.details
+- pymdownx.superfences:
+    custom_fences:
+    - name: mermaid
+      class: mermaid
+      format: !!python/name:pymdownx.superfences.fence_code_format
+- pymdownx.highlight:
+    anchor_linenums: true
+- pymdownx.inlinehilite
+- pymdownx.tabbed:
+    alternate_style: true
+- pymdownx.tasklist:
+    custom_checkbox: true
+nav:
+- Home: index.md
+- Architecture: architecture.md
+- API Reference: api.md
+- AI Models: ai_models.md
+- AI Pipelines: ai_pipelines.md
+- Onboarding: onboarding.md
+- Code Quality: complexity.md
+plugins:
+- search
+- mermaid2
+site_description: Comprehensive documentation generated automatically from code analysis
+site_dir: site
+site_name: Auto-Generated Documentation
+theme:
+  features:
+  - navigation.tabs
+  - navigation.sections
+  - navigation.top
+  - navigation.tracking
+  - toc.integrate
+  - search.suggest
+  - search.highlight
+  - search.share
+  - content.tabs.link
+  - content.code.annotation
+  - content.code.copy
+  name: material
+  palette:
+  - accent: indigo
+    primary: indigo
+    scheme: default
+    toggle:
+      icon: material/brightness-7
+      name: Switch to dark mode
+  - accent: indigo
+    primary: indigo
+    scheme: slate
+    toggle:
+      icon: material/brightness-4
+      name: Switch to light mode

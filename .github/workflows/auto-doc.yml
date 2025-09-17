@@ -1,0 +1,254 @@
+name: Auto Documentation Generation
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+    types: [ closed ]
+  workflow_dispatch:  # Allow manual triggering
+
+jobs:
+  generate-docs:
+    # Only run on merged PRs or direct pushes to main/master
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true) || github.event_name == 'workflow_dispatch'
+    
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write  # Required to push to gh-pages
+      pages: write     # Required for GitHub Pages
+      id-token: write  # Required for GitHub Pages
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Full history for better analysis
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+        cache: 'pip'
+    
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y graphviz
+    
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        
+        # Install additional dependencies for documentation generation
+        pip install mkdocs mkdocs-material mkdocs-mermaid2-plugin
+    
+    - name: Generate Documentation
+      run: |
+        echo "🔍 Starting documentation generation..."
+        python src/main.py --analyze --generate --build
+        
+        echo "📊 Documentation generation completed!"
+        
+        # List generated files for verification
+        echo "Generated files:"
+        find docs -type f -name "*.md" -o -name "*.yml" | head -20
+      env:
+        PYTHONPATH: ${{ github.workspace }}/src
+    
+    - name: Verify Documentation
+      run: |
+        echo "🔍 Verifying generated documentation..."
+        
+        # Check if key files exist
+        if [ -f "docs/index.md" ]; then
+          echo "✅ Main documentation generated"
+        else
+          echo "❌ Main documentation missing"
+          exit 1
+        fi
+        
+        if [ -f "docs/mkdocs.yml" ]; then
+          echo "✅ MkDocs configuration generated"
+        else
+          echo "❌ MkDocs configuration missing"
+          exit 1
+        fi
+        
+        # Check if site was built
+        if [ -d "docs/site" ]; then
+          echo "✅ Documentation site built successfully"
+        else
+          echo "❌ Documentation site build failed"
+          exit 1
+        fi
+    
+    - name: Deploy to GitHub Pages
+      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs/site
+        publish_branch: gh-pages
+        commit_message: |
+          Deploy documentation from ${{ github.sha }}
+          
+          Auto-generated documentation update
+        
+        # Keep history for better tracking
+        keep_files: false
+        force_orphan: true
+    
+    - name: Create Documentation Summary
+      run: |
+        echo "📚 Documentation Generation Summary" >> $GITHUB_STEP_SUMMARY
+        echo "=================================" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        # Count generated files
+        TOTAL_FILES=$(find docs -name "*.md" | wc -l)
+        echo "📄 Generated Files: $TOTAL_FILES" >> $GITHUB_STEP_SUMMARY
+        
+        # List key documentation sections
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "📋 Generated Sections:" >> $GITHUB_STEP_SUMMARY
+        
+        if [ -f "docs/index.md" ]; then
+          echo "- ✅ Project Overview" >> $GITHUB_STEP_SUMMARY
+        fi
+        
+        if [ -f "docs/architecture.md" ]; then
+          echo "- ✅ Architecture Documentation" >> $GITHUB_STEP_SUMMARY
+        fi
+        
+        if [ -f "docs/api.md" ]; then
+          echo "- ✅ API Reference" >> $GITHUB_STEP_SUMMARY
+        fi
+        
+        if [ -f "docs/onboarding.md" ]; then
+          echo "- ✅ Developer Onboarding Guide" >> $GITHUB_STEP_SUMMARY
+        fi
+        
+        if [ -f "docs/ai_models.md" ]; then
+          echo "- ✅ AI/ML Models Documentation" >> $GITHUB_STEP_SUMMARY
+        fi
+        
+        if [ -f "docs/complexity.md" ]; then
+          echo "- ✅ Code Complexity Analysis" >> $GITHUB_STEP_SUMMARY
+        fi
+        
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        if [ "${{ github.ref }}" == "refs/heads/main" ] || [ "${{ github.ref }}" == "refs/heads/master" ]; then
+          echo "🌐 **Documentation Site**: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "ℹ️ Documentation will be deployed when merged to main branch" >> $GITHUB_STEP_SUMMARY
+        fi
+    
+    - name: Upload Documentation Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: documentation
+        path: |
+          docs/
+          !docs/site/
+        retention-days: 30
+    
+    - name: Comment on PR (if applicable)
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          const path = require('path');
+          
+          // Check if documentation was generated
+          const docsExist = fs.existsSync('docs/index.md');
+          
+          if (docsExist) {
+            const comment = `## 📚 Documentation Generated
+            
+            Your changes have been analyzed and documentation has been automatically generated!
+            
+            ### Generated Documentation Sections:
+            ${fs.existsSync('docs/architecture.md') ? '- ✅ Architecture Overview' : ''}
+            ${fs.existsSync('docs/api.md') ? '- ✅ API Reference' : ''}
+            ${fs.existsSync('docs/onboarding.md') ? '- ✅ Developer Onboarding' : ''}
+            ${fs.existsSync('docs/ai_models.md') ? '- ✅ AI/ML Models' : ''}
+            ${fs.existsSync('docs/complexity.md') ? '- ✅ Code Quality Analysis' : ''}
+            
+            The documentation will be automatically deployed to GitHub Pages when this PR is merged.
+            
+            *This comment was automatically generated by the Auto Documentation System.*`;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+          }
+
+  # Job to run documentation linting and quality checks
+  lint-docs:
+    runs-on: ubuntu-latest
+    needs: generate-docs
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Download documentation artifacts
+      uses: actions/download-artifact@v3
+      with:
+        name: documentation
+        path: docs/
+    
+    - name: Set up Node.js for markdown linting
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    
+    - name: Install markdown linting tools
+      run: |
+        npm install -g markdownlint-cli
+    
+    - name: Lint generated documentation
+      run: |
+        echo "🔍 Linting generated markdown files..."
+        
+        # Create markdownlint config
+        cat > .markdownlint.json << EOF
+        {
+          "MD013": { "line_length": 120 },
+          "MD041": false,
+          "MD033": false,
+          "MD024": false
+        }
+        EOF
+        
+        # Lint all markdown files
+        markdownlint docs/*.md || echo "⚠️ Some markdown linting issues found (non-blocking)"
+    
+    - name: Check documentation completeness
+      run: |
+        echo "📋 Checking documentation completeness..."
+        
+        # Required files check
+        required_files=("index.md" "architecture.md" "api.md" "onboarding.md")
+        missing_files=()
+        
+        for file in "${required_files[@]}"; do
+          if [ ! -f "docs/$file" ]; then
+            missing_files+=("$file")
+          fi
+        done
+        
+        if [ ${#missing_files[@]} -eq 0 ]; then
+          echo "✅ All required documentation files generated"
+        else
+          echo "⚠️ Missing documentation files: ${missing_files[*]}"
+        fi

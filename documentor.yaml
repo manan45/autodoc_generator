@@ -1,0 +1,314 @@
+# Documentor Agent Configuration
+# This file defines the configuration for the Auto Documentation Generation Agent
+
+agent:
+  name: "AutoDoc Agent"
+  version: "1.0.0"
+  description: "Intelligent code documentation generation agent with AI/ML pipeline support"
+  
+analysis:
+  # Code Analysis Settings
+  languages:
+    - python
+    - javascript
+    - typescript
+    - java
+    - cpp
+  
+  include_patterns:
+    - "*.py"
+    - "*.js"
+    - "*.ts"
+    - "*.jsx"
+    - "*.tsx"
+    - "*.java"
+    - "*.cpp"
+    - "*.hpp"
+  
+  exclude_patterns:
+    - "*/tests/*"
+    - "*/test/*"
+    - "*/__pycache__/*"
+    - "*/node_modules/*"
+    - "*/.git/*"
+    - "*/venv/*"
+    - "*/.venv/*"
+    - "*/env/*"
+    - "*/.env/*"
+    - "*/build/*"
+    - "*/dist/*"
+    - "*/site-packages/*"
+    - "*/.tox/*"
+    - "*/coverage/*"
+    - "*/.pytest_cache/*"
+  
+  # Code Quality Thresholds
+  complexity_thresholds:
+    cyclomatic:
+      low: 5
+      medium: 10
+      high: 15
+      critical: 25
+    
+    maintainability:
+      excellent: 85
+      good: 70
+      moderate: 50
+      poor: 25
+  
+  # AI/ML Analysis
+  ai_analysis:
+    enabled: true
+    detect_frameworks: true
+    analyze_pipelines: true
+    generate_flow_diagrams: true
+    
+    frameworks:
+      - tensorflow
+      - torch
+      - pytorch
+      - sklearn
+      - pandas
+      - numpy
+      - keras
+      - mlflow
+      - wandb
+      - transformers
+      - lightgbm
+      - xgboost
+      - opencv
+      - scipy
+    
+    patterns:
+      models:
+        - "class.*Model"
+        - "class.*Classifier"
+        - "class.*Regressor"
+        - "class.*Network"
+        - "class.*Estimator"
+      
+      pipelines:
+        - "class.*Pipeline"
+        - "def.*pipeline"
+        - "def.*workflow"
+      
+      training:
+        - "def.*train"
+        - "def.*fit"
+        - "def.*learn"
+        - "def.*optimize"
+      
+      inference:
+        - "def.*predict"
+        - "def.*infer"
+        - "def.*classify"
+        - "def.*score"
+        - "def.*evaluate"
+      
+      data_processing:
+        - "def.*preprocess"
+        - "def.*clean"
+        - "def.*transform"
+        - "def.*feature"
+        - "def.*load_data"
+
+documentation:
+  # Documentation Generation Settings
+  output_format: "mkdocs"
+  theme: "material"
+  
+  # Content Generation
+  sections:
+    overview: true
+    architecture: true
+    api_reference: true
+    onboarding: true
+    ai_models: true
+    ai_pipelines: true
+    complexity_report: true
+    changelog: false
+    troubleshooting: false
+  
+  # Template Settings
+  templates:
+    base: "base_template.md"
+    overview: "overview_template.md"
+    architecture: "architecture_template.md"
+    api: "api_template.md"
+    onboarding: "onboarding_template.md"
+  
+  # Diagram Generation
+  diagrams:
+    enabled: true
+    formats:
+      - "mermaid"
+      - "graphviz"
+    
+    types:
+      architecture: true
+      data_flow: true
+      class_hierarchy: true
+      dependency_graph: true
+      ai_pipeline: true
+  
+  # Content Preferences
+  content:
+    max_function_list: 50
+    max_class_list: 30
+    max_module_list: 25
+    truncate_docstring_length: 200
+    include_private_methods: false
+    include_test_files: false
+    include_complexity_details: true
+    include_usage_examples: true
+
+mkdocs:
+  # MkDocs Specific Configuration
+  site_name: "Auto-Generated Documentation"
+  site_description: "Comprehensive documentation generated automatically from code analysis"
+  
+  theme:
+    name: "material"
+    features:
+      - navigation.tabs
+      - navigation.sections
+      - navigation.top
+      - navigation.tracking
+      - toc.integrate
+      - search.suggest
+      - search.highlight
+      - search.share
+      - content.tabs.link
+      - content.code.annotation
+      - content.code.copy
+    
+    palette:
+      - scheme: default
+        primary: indigo
+        accent: indigo
+        toggle:
+          icon: material/brightness-7
+          name: Switch to dark mode
+      - scheme: slate
+        primary: indigo
+        accent: indigo
+        toggle:
+          icon: material/brightness-4
+          name: Switch to light mode
+  
+  plugins:
+    - search
+    - mermaid2
+    - git-revision-date-localized
+    - minify:
+        minify_html: true
+  
+  markdown_extensions:
+    - codehilite:
+        guess_lang: true
+    - toc:
+        permalink: true
+    - tables
+    - fenced_code
+    - admonition
+    - pymdownx.details
+    - pymdownx.superfences:
+        custom_fences:
+          - name: mermaid
+            class: mermaid
+            format: pymdownx.superfences.fence_code_format
+    - pymdownx.highlight:
+        anchor_linenums: true
+    - pymdownx.inlinehilite
+    - pymdownx.tabbed:
+        alternate_style: true
+    - pymdownx.tasklist:
+        custom_checkbox: true
+
+deployment:
+  # Deployment Configuration
+  targets:
+    github_pages:
+      enabled: true
+      branch: "gh-pages"
+      custom_domain: null
+    
+    netlify:
+      enabled: false
+      site_id: null
+    
+    aws_s3:
+      enabled: false
+      bucket: null
+      region: "us-east-1"
+    
+    custom:
+      enabled: false
+      command: null
+  
+  # CI/CD Settings
+  automation:
+    trigger_on_push: true
+    trigger_on_pr_merge: true
+    trigger_on_schedule: false
+    schedule_cron: "0 2 * * 1"  # Weekly on Monday at 2 AM
+    
+    quality_checks:
+      lint_documentation: true
+      check_links: true
+      validate_structure: true
+
+logging:
+  # Logging Configuration
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "documentor.log"
+  
+  # What to log
+  log_analysis_details: true
+  log_generation_steps: true
+  log_performance_metrics: true
+  log_errors_only: false
+
+performance:
+  # Performance Settings
+  max_file_size_mb: 10
+  max_functions_per_file: 100
+  parallel_processing: true
+  cache_analysis_results: true
+  cache_duration_hours: 24
+
+notifications:
+  # Notification Settings
+  enabled: false
+  
+  slack:
+    enabled: false
+    webhook_url: null
+    channel: "#documentation"
+  
+  email:
+    enabled: false
+    smtp_server: null
+    recipients: []
+  
+  discord:
+    enabled: false
+    webhook_url: null
+
+# Agent Behavior Settings
+behavior:
+  auto_detect_project_type: true
+  suggest_improvements: true
+  generate_todos: false
+  create_badges: true
+  
+  # Documentation Quality
+  enforce_docstring_coverage: false
+  minimum_docstring_coverage: 80
+  suggest_missing_documentation: true
+  
+  # AI Features
+  ai_enhanced_descriptions: false  # Future feature
+  auto_generate_examples: false    # Future feature
+  smart_categorization: true

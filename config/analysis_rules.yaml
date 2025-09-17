@@ -1,0 +1,66 @@
+complexity_thresholds:
+  cyclomatic:
+    low: 5
+    medium: 10
+    high: 15
+  
+  maintainability:
+    low: 20
+    medium: 50
+    high: 80
+
+code_patterns:
+  ai_pipeline:
+    - "class.*Pipeline"
+    - "def.*train"
+    - "def.*predict"
+    - "def.*preprocess"
+    - "def.*fit"
+    - "def.*transform"
+    - "Model"
+    - "Classifier"
+    - "Regressor"
+  
+  api_endpoints:
+    - "@app.route"
+    - "@api.route"
+    - "def.*api"
+    - "FastAPI"
+    - "flask"
+    - "django"
+  
+  database:
+    - "class.*Model"
+    - "db\."
+    - "Session"
+    - "query"
+    - "SELECT"
+    - "INSERT"
+    - "UPDATE"
+    - "DELETE"
+
+documentation_priorities:
+  high:
+    - "main"
+    - "app"
+    - "api"
+    - "core"
+    - "service"
+    - "model"
+    - "pipeline"
+  
+  medium:
+    - "utils"
+    - "helper"
+    - "config"
+    - "handler"
+  
+  low:
+    - "test"
+    - "mock"
+    - "temp"
+
+analysis_depth:
+  max_file_size_mb: 10
+  max_lines_per_function: 100
+  min_complexity_for_analysis: 3

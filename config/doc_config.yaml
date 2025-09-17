@@ -1,0 +1,61 @@
+analysis:
+  include_patterns:
+    - "*.py"
+    - "*.js"
+    - "*.ts"
+    - "*.jsx"
+    - "*.tsx"
+  exclude_patterns:
+    - "*/tests/*"
+    - "*/test/*"
+    - "*/__pycache__/*"
+    - "*/node_modules/*"
+    - "*/.git/*"
+    - "*/venv/*"
+    - "*/.venv/*"
+    - "*/env/*"
+    - "*/.env/*"
+    - "*/build/*"
+    - "*/dist/*"
+    - "*/site-packages/*"
+  
+  ai_analysis:
+    detect_frameworks: true
+    analyze_pipelines: true
+    generate_flow_diagrams: true
+    ml_frameworks:
+      - tensorflow
+      - torch
+      - pytorch
+      - sklearn
+      - pandas
+      - numpy
+      - keras
+      - mlflow
+      - wandb
+
+generation:
+  output_format: "mkdocs"
+  theme: "material"
+  include_diagrams: true
+  include_api_docs: true
+  include_complexity_analysis: true
+  
+  templates:
+    architecture: "architecture_template.md"
+    api: "api_template.md"
+    onboarding: "onboarding_template.md"
+    base: "base_template.md"
+  
+deployment:
+  target: "github_pages"
+  auto_deploy: true
+  update_frequency: "on_merge"
+  
+  mkdocs:
+    site_name: "Auto-Generated Documentation"
+    site_description: "Automatically generated documentation for the codebase"
+    
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
