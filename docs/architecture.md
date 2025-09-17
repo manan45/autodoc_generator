@@ -100,24 +100,24 @@ It analyzes Python codebases and generates comprehensive documentation.
 
 ### External Dependencies
 
-- radon
 - re
-- ast
-- diagram_generator
-- os
-- diagrams
-- yaml
-- typing
-- subprocess
-- jinja2
-- setuptools
-- sys
-- generators
-- pathlib
-- logging
 - datetime
+- generators
+- setuptools
+- typing
 - analyzers
+- radon
+- pathlib
+- diagram_generator
+- subprocess
+- ast
+- sys
+- jinja2
+- logging
+- diagrams
+- os
 - argparse
+- yaml
 
 ### Internal Dependencies
 
@@ -259,11 +259,11 @@ flowchart TD
 ```mermaid
 graph LR
     subgraph External
-        radon[radon]
         re[re]
-        ast[ast]
-        diagram_generator[diagram_generator]
-        os[os]
+        datetime[datetime]
+        generators[generators]
+        setuptools[setuptools]
+        typing[typing]
     end
 
 ```

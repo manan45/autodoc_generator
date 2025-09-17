@@ -83,7 +83,7 @@ Set up logging configuration.
 **Returns:** `None`
 
 
-**Function Calls:** logging.basicConfig, getattr, config.get, log_config.get, Call.upper
+**Function Calls:** logging.basicConfig, log_config.get, config.get, getattr, Call.upper
 
 ---
 
@@ -99,7 +99,7 @@ Save Mermaid diagrams to markdown files.
 **Returns:** `None`
 
 
-**Function Calls:** diagrams.items, open, Call.title, diagram_name.replace, f.write (and 1 more)
+**Function Calls:** diagrams.items, open, Call.title, diagram_name.replace, print (and 1 more)
 
 ---
 
@@ -115,7 +115,7 @@ Save all generated documentation to files.
 **Returns:** `None`
 
 
-**Function Calls:** file_path.parent.mkdir, open, docs.items, f.write, print
+**Function Calls:** open, docs.items, print, file_path.parent.mkdir, f.write
 
 ---
 
@@ -133,7 +133,7 @@ Load configuration from YAML file.
 **Returns:** `Subscript`
 
 
-**Function Calls:** open, Path, sys.exit, config_file.exists, yaml.safe_load (and 1 more)
+**Function Calls:** yaml.safe_load, open, Path, config_file.exists, print (and 1 more)
 
 ---
 
@@ -151,7 +151,7 @@ Analyze the codebase and return analysis results.
 **Returns:** `tuple`
 
 
-**Function Calls:** ai_analyzer.analyze_ai_components, code_analysis.get, CodeAnalyzer, Call.get, Path (and 5 more)
+**Function Calls:** CodeAnalyzer, len, ai_analyzer.analyze_ai_components, code_analyzer.analyze_codebase, Path (and 5 more)
 
 ---
 
@@ -167,7 +167,7 @@ Serve the documentation site locally.
 **Returns:** `None`
 
 
-**Function Calls:** os.chdir, subprocess.run, print, os.getcwd
+**Function Calls:** subprocess.run, os.getcwd, os.chdir, print
 
 ---
 
@@ -183,7 +183,7 @@ Print analysis summary.
 **Returns:** `None`
 
 
-**Function Calls:** code_analysis.get, set, overview.get, len, ai_analysis.get (and 4 more)
+**Function Calls:** , .join, len, complexity.get, set, summary.get (and 4 more)
 
 ---
 
@@ -199,7 +199,7 @@ Main method to analyze AI/ML components in the repository.
 **Returns:** `Subscript`
 
 
-**Function Calls:** open, set, repo_path.rglob, Subscript.extend, unique_items.append (and 7 more)
+**Function Calls:** self._analyze_file, repo_path.rglob, f.read, Subscript.extend, unique_items.append (and 7 more)
 
 ---
 
@@ -215,7 +215,7 @@ Analyze entire codebase structure and generate insights.
 **Returns:** `Subscript`
 
 
-**Function Calls:** self._analyze_classes, self._analyze_complexity, self._generate_overview, print, self._analyze_architecture (and 6 more)
+**Function Calls:** self._analyze_data_flow, self._generate_overview, self._analyze_modules, self._analyze_classes, self._analyze_dependencies (and 6 more)
 
 ---
 
@@ -233,7 +233,7 @@ Generate documentation from analysis results.
 **Returns:** `None`
 
 
-**Function Calls:** DiagramGenerator, markdown_gen.save_documentation, diagram_gen.save_mermaid_diagrams, config.get, markdown_gen.generate_all_documentation (and 4 more)
+**Function Calls:** diagram_gen.generate_all_diagrams, diagram_gen.save_mermaid_diagrams, config.get, MarkdownGenerator, markdown_gen.save_documentation (and 4 more)
 
 ---
 
@@ -265,7 +265,7 @@ Generate documentation sections for AI pipelines.
 **Returns:** `Subscript`
 
 
-**Function Calls:** analysis_results.get, , .join
+**Function Calls:** , .join, analysis_results.get
 
 ---
 
@@ -281,7 +281,7 @@ Generate all types of diagrams.
 **Returns:** `Subscript`
 
 
-**Function Calls:** self.generate_dependency_graph, self.generate_class_hierarchy, self.generate_mermaid_diagrams, ai_analysis.get, self.generate_ai_pipeline_diagram (and 4 more)
+**Function Calls:** self.generate_mermaid_diagrams, any, self.generate_data_flow_diagram, print, self.generate_ai_pipeline_diagram (and 4 more)
 
 ---
 
@@ -297,7 +297,7 @@ Generate Mermaid diagrams as fallback.
 **Returns:** `Subscript`
 
 
-**Function Calls:** any, self._generate_mermaid_architecture, self._generate_mermaid_ai_pipeline, self._generate_mermaid_dependencies, ai_analysis.get (and 1 more)
+**Function Calls:** self._generate_mermaid_data_flow, self._generate_mermaid_architecture, any, self._generate_mermaid_ai_pipeline, ai_analysis.get (and 1 more)
 
 ---
 
@@ -313,7 +313,7 @@ Generate system architecture diagram using diagrams library.
 **Returns:** `str`
 
 
-**Function Calls:** Subscript.lower, str, architecture.get, Cluster, analysis.get (and 10 more)
+**Function Calls:** str, dep.split, self._generate_mermaid_architecture, Flask, dependencies.get (and 10 more)
 
 ---
 
@@ -329,7 +329,7 @@ Generate dependency graph.
 **Returns:** `str`
 
 
-**Function Calls:** dep.replace, analysis.get, Path, Call.replace, dependencies.get (and 1 more)
+**Function Calls:** dependencies.get, Path, analysis.get, Call.replace, dep.replace (and 1 more)
 
 ---
 
@@ -345,7 +345,7 @@ Generate data flow diagram.
 **Returns:** `str`
 
 
-**Function Calls:** analysis.get, range, data_flow.get, len, enumerate
+**Function Calls:** len, data_flow.get, range, analysis.get, enumerate
 
 ---
 
@@ -361,7 +361,7 @@ Generate AI/ML pipeline diagram.
 **Returns:** `str`
 
 
-**Function Calls:** Storage, Cluster, str, data_sources.append, SagemakerModel (and 10 more)
+**Function Calls:** str, SagemakerModel, processors.append, training_components.append, inference_components.append (and 10 more)
 
 ---
 
@@ -377,7 +377,7 @@ Generate class hierarchy diagram.
 **Returns:** `str`
 
 
-**Function Calls:** cls.get, analysis.get
+**Function Calls:** analysis.get, cls.get
 
 ---
 
@@ -393,7 +393,7 @@ Generate all documentation sections.
 **Returns:** `Subscript`
 
 
-**Function Calls:** self.generate_complexity_report, self.generate_mkdocs_config, generated_docs.keys, any, ai_analysis.get (and 6 more)
+**Function Calls:** self.generate_complexity_report, self.generate_overview, self.generate_api_documentation, self.generate_ai_pipelines_doc, any (and 6 more)
 
 ---
 
@@ -409,7 +409,7 @@ Generate project overview documentation.
 **Returns:** `str`
 
 
-**Function Calls:** code_analysis.get, datetime.now, self.env.from_string, self._get_project_name, Call.get (and 5 more)
+**Function Calls:** self._get_project_name, self.env.from_string, len, Call.strftime, Call.get (and 5 more)
 
 ---
 
@@ -425,7 +425,7 @@ Generate architecture documentation with embedded diagrams.
 **Returns:** `str`
 
 
-**Function Calls:** DiagramGenerator, analysis.get, diagram_gen._generate_mermaid_data_flow, diagram_gen._generate_mermaid_architecture, self.env.from_string (and 3 more)
+**Function Calls:** self.env.from_string, self._identify_high_level_components, diagram_gen._generate_mermaid_data_flow, diagram_gen._generate_mermaid_dependencies, analysis.get (and 3 more)
 
 ---
 
@@ -441,7 +441,7 @@ Generate comprehensive API documentation.
 **Returns:** `str`
 
 
-**Function Calls:** cls.get, analysis.get, self.env.from_string, Subscript.append, func.get (and 1 more)
+**Function Calls:** self.env.from_string, cls.get, func.get, analysis.get, template.render (and 1 more)
 
 ---
 
@@ -457,7 +457,7 @@ Generate new developer onboarding guide.
 **Returns:** `str`
 
 
-**Function Calls:** code_analysis.get, self._get_key_modules, self.env.from_string, Call.get, self._detect_setup_files (and 3 more)
+**Function Calls:** self._get_key_modules, self.env.from_string, any, self._detect_setup_files, Call.get (and 3 more)
 
 ---
 
@@ -473,7 +473,7 @@ Generate AI models documentation.
 **Returns:** `str`
 
 
-**Function Calls:** template.render, self.env.from_string
+**Function Calls:** self.env.from_string, template.render
 
 ---
 
@@ -489,7 +489,7 @@ Generate AI pipelines documentation.
 **Returns:** `str`
 
 
-**Function Calls:** template.render, self.env.from_string
+**Function Calls:** self.env.from_string, template.render
 
 ---
 
@@ -505,7 +505,7 @@ Generate code complexity report.
 **Returns:** `str`
 
 
-**Function Calls:** template.render, self.env.from_string, analysis.get
+**Function Calls:** analysis.get, self.env.from_string, template.render
 
 ---
 
@@ -521,7 +521,7 @@ Generate MkDocs configuration.
 **Returns:** `str`
 
 
-**Function Calls:** hasattr, yaml.dump, Subscript.append, self.config.get, mkdocs_config.get (and 1 more)
+**Function Calls:** Subscript.insert, hasattr, self.config.get, yaml.dump, mkdocs_config.get (and 1 more)
 
 ---
 
@@ -537,7 +537,7 @@ Main entry point for the documentation generator.
 
 
 
-**Function Calls:** datetime.now, parser.add_argument, generate_documentation, Call.resolve, Call.strftime (and 13 more)
+**Function Calls:** sys.exit, serve_site, generate_documentation, Call.strftime, load_config (and 13 more)
 
 ---
 
@@ -554,7 +554,7 @@ Main entry point for the documentation generator.
 - `self`- `config`: `Subscript` = `None`
 
 
-**Function Calls:** Call.get, self.config.get, ai_analysis_config.get
+**Function Calls:** self.config.get, Call.get, ai_analysis_config.get
 
 ---
 
@@ -569,7 +569,7 @@ Main entry point for the documentation generator.
 - `self`- `repo_path`: `str`- `config`: `Subscript` = `None`
 
 
-**Function Calls:** analysis_config.get, Path, self.config.get
+**Function Calls:** Path, analysis_config.get, self.config.get
 
 ---
 
@@ -584,7 +584,7 @@ Main entry point for the documentation generator.
 - `self`- `output_dir`: `str` = `docs/diagrams`
 
 
-**Function Calls:** self.output_dir.mkdir, Path
+**Function Calls:** Path, self.output_dir.mkdir
 
 ---
 
@@ -599,7 +599,7 @@ Main entry point for the documentation generator.
 - `self`- `template_dir`: `str`- `output_dir`: `str` = `docs`- `config`: `Subscript` = `None`
 
 
-**Function Calls:** str, self.output_dir.mkdir, FileSystemLoader, Path, Environment
+**Function Calls:** str, FileSystemLoader, Path, Environment, self.output_dir.mkdir
 
 ---
 
@@ -617,7 +617,7 @@ Analyze a single file for AI/ML components.
 **Returns:** `Subscript`
 
 
-**Function Calls:** self._analyze_class, class_analysis.items, str, file_analysis.items, file_path.relative_to (and 10 more)
+**Function Calls:** str, file_path.relative_to, self._extract_imports, self._analyze_class, Subscript.extend (and 10 more)
 
 ---
 
@@ -633,7 +633,7 @@ Analyze a class for ML patterns.
 **Returns:** `Subscript`
 
 
-**Function Calls:** methods.append, self._get_node_name, Subscript.append, isinstance, class_name.lower (and 2 more)
+**Function Calls:** ast.get_docstring, class_name.lower, any, methods.append, self._get_node_name (and 2 more)
 
 ---
 
@@ -649,7 +649,7 @@ Analyze a function for ML patterns.
 **Returns:** `Subscript`
 
 
-**Function Calls:** ast.get_source_segment, func_name.lower, hasattr, Subscript.append, any (and 2 more)
+**Function Calls:** func_name.lower, hasattr, ast.get_source_segment, ast.get_docstring, any (and 2 more)
 
 ---
 
@@ -665,7 +665,7 @@ Analyze file-level patterns.
 **Returns:** `Subscript`
 
 
-**Function Calls:** any, content.lower, Subscript.append
+**Function Calls:** content.lower, Subscript.append, any
 
 ---
 
@@ -697,7 +697,7 @@ Get string representation of AST node.
 **Returns:** `str`
 
 
-**Function Calls:** self._get_node_name, str, isinstance
+**Function Calls:** str, self._get_node_name, isinstance
 
 ---
 
@@ -713,7 +713,7 @@ Check if file should be skipped.
 **Returns:** `bool`
 
 
-**Function Calls:** Path, str, part.startswith
+**Function Calls:** str, Path, part.startswith
 
 ---
 
@@ -729,7 +729,7 @@ Generate project overview statistics.
 **Returns:** `Subscript`
 
 
-**Function Calls:** open, self._detect_languages, content.split, isinstance, self.repo_path.rglob (and 8 more)
+**Function Calls:** self.repo_path.rglob, self._detect_project_type, len, f.read, open (and 8 more)
 
 ---
 
@@ -745,7 +745,7 @@ Extract module information and docstrings.
 **Returns:** `Subscript`
 
 
-**Function Calls:** str, open, print, modules.append, content.split (and 10 more)
+**Function Calls:** self.repo_path.rglob, str, len, f.read, self._extract_imports (and 10 more)
 
 ---
 
@@ -761,7 +761,7 @@ Analyze class definitions and their methods with detailed information.
 **Returns:** `Subscript`
 
 
-**Function Calls:** properties.append, getattr, static_methods.append, isinstance, any (and 16 more)
+**Function Calls:** getattr, open, any, ast.walk, ast.parse (and 16 more)
 
 ---
 
@@ -777,7 +777,7 @@ Analyze function definitions with detailed information.
 **Returns:** `Subscript`
 
 
-**Function Calls:** getattr, isinstance, any, self.repo_path.rglob, py_file.relative_to (and 17 more)
+**Function Calls:** getattr, open, any, ast.walk, parameters.append (and 17 more)
 
 ---
 
@@ -793,7 +793,7 @@ Analyze import dependencies and create dependency graph.
 **Returns:** `Subscript`
 
 
-**Function Calls:** str, any, open, set, dep.split (and 11 more)
+**Function Calls:** self.repo_path.rglob, str, dep.split, self._extract_imports, f.read (and 11 more)
 
 ---
 
@@ -809,7 +809,7 @@ Analyze code complexity metrics.
 **Returns:** `Subscript`
 
 
-**Function Calls:** str, open, getattr, Subscript.append, h_visit (and 7 more)
+**Function Calls:** self.repo_path.rglob, str, f.read, py_file.relative_to, getattr (and 7 more)
 
 ---
 
@@ -825,7 +825,7 @@ Analyze comprehensive data flow patterns in the codebase.
 **Returns:** `Subscript`
 
 
-**Function Calls:** isinstance, self._classify_output, any, self.repo_path.rglob, py_file.relative_to (and 16 more)
+**Function Calls:** any, open, self._classify_output, ast.walk, self._classify_transformation (and 16 more)
 
 ---
 
@@ -841,7 +841,7 @@ Analyze overall architecture patterns.
 **Returns:** `Subscript`
 
 
-**Function Calls:** self._classify_directory, Subscript.append, d.is_dir, list, directory.rglob (and 6 more)
+**Function Calls:** len, self._classify_directory, d.name.lower, directory.rglob, any (and 6 more)
 
 ---
 
@@ -873,7 +873,7 @@ Get string representation of AST node.
 **Returns:** `str`
 
 
-**Function Calls:** self._get_node_name, str, isinstance
+**Function Calls:** str, self._get_node_name, isinstance
 
 ---
 
@@ -889,7 +889,7 @@ Check if file should be excluded from analysis.
 **Returns:** `bool`
 
 
-**Function Calls:** str, pattern.replace, Path, pattern.startswith, pattern.endswith
+**Function Calls:** str, pattern.startswith, pattern.replace, Path, pattern.endswith
 
 ---
 
@@ -905,7 +905,7 @@ Detect programming languages in the project.
 **Returns:** `Subscript`
 
 
-**Function Calls:** set, languages.add, list, self.repo_path.rglob, file_path.is_file
+**Function Calls:** self.repo_path.rglob, set, list, file_path.is_file, languages.add
 
 ---
 
@@ -921,7 +921,7 @@ Detect the type of project based on files and structure.
 **Returns:** `str`
 
 
-**Function Calls:** any, BinOp.exists, self.repo_path.rglob
+**Function Calls:** self.repo_path.rglob, BinOp.exists, any
 
 ---
 
@@ -937,7 +937,7 @@ Classify directory type based on name.
 **Returns:** `Subscript`
 
 
-**Function Calls:** any, dir_name.lower, classifications.items
+**Function Calls:** classifications.items, dir_name.lower, any
 
 ---
 
@@ -969,7 +969,7 @@ Categorize function based on name and characteristics.
 **Returns:** `str`
 
 
-**Function Calls:** any, func_name.lower, func_name.startswith, func_name.endswith
+**Function Calls:** func_name.endswith, any, func_name.lower, func_name.startswith
 
 ---
 
@@ -985,7 +985,7 @@ Extract function calls made within a function.
 **Returns:** `Subscript`
 
 
-**Function Calls:** set, calls.append, self._get_node_name, isinstance, list (and 1 more)
+**Function Calls:** calls.append, set, ast.walk, list, self._get_node_name (and 1 more)
 
 ---
 
@@ -1001,7 +1001,7 @@ Categorize class based on name and characteristics.
 **Returns:** `str`
 
 
-**Function Calls:** any, str, Call.lower, class_name.lower
+**Function Calls:** str, any, class_name.lower, Call.lower
 
 ---
 
@@ -1017,7 +1017,7 @@ Classify the type of data transformation.
 **Returns:** `str`
 
 
-**Function Calls:** any, func_name.lower
+**Function Calls:** func_name.lower, any
 
 ---
 
@@ -1033,7 +1033,7 @@ Classify the type of output operation.
 **Returns:** `str`
 
 
-**Function Calls:** any, func_name.lower
+**Function Calls:** func_name.lower, any
 
 ---
 
@@ -1049,7 +1049,7 @@ Classify the type of data store operation.
 **Returns:** `str`
 
 
-**Function Calls:** any, func_name.lower
+**Function Calls:** func_name.lower, any
 
 ---
 
@@ -1065,7 +1065,7 @@ Analyze potential flow chains between functions.
 **Returns:** `Subscript`
 
 
-**Function Calls:** chains.append, data_flow.get, Subscript.append
+**Function Calls:** chains.append, Subscript.append, data_flow.get
 
 ---
 
@@ -1081,7 +1081,7 @@ Generate Mermaid architecture diagram.
 **Returns:** `str`
 
 
-**Function Calls:** architecture.get, analysis.get, Subscript.replace, range, len
+**Function Calls:** len, Subscript.replace, range, analysis.get, architecture.get
 
 ---
 
@@ -1097,7 +1097,7 @@ Generate Mermaid dependency diagram.
 **Returns:** `str`
 
 
-**Function Calls:** Call.stem.replace, dep.replace, analysis.get, list, Path (and 3 more)
+**Function Calls:** dependencies.get, Call.stem.replace, Call.replace, analysis.get, dep.replace (and 3 more)
 
 ---
 
@@ -1113,7 +1113,7 @@ Generate Mermaid data flow diagram.
 **Returns:** `str`
 
 
-**Function Calls:** analysis.get, range, data_flow.get, len, enumerate
+**Function Calls:** len, data_flow.get, range, analysis.get, enumerate
 
 ---
 
@@ -1129,7 +1129,7 @@ Generate Mermaid AI pipeline diagram.
 **Returns:** `str`
 
 
-**Function Calls:** connections.append, enumerate, ai_analysis.get
+**Function Calls:** ai_analysis.get, enumerate, connections.append
 
 ---
 
@@ -1193,7 +1193,7 @@ Get project name from current directory.
 **Returns:** `str`
 
 
-**Function Calls:** Call.title, Path.cwd, Call.replace, Call.name.replace
+**Function Calls:** Call.title, Call.name.replace, Path.cwd, Call.replace
 
 ---
 
@@ -1209,7 +1209,7 @@ Identify high-level system components.
 **Returns:** `list`
 
 
-**Function Calls:** str, m.get, components.append, analysis.get, Call.title (and 8 more)
+**Function Calls:** str, directories.items, len, m.get, Call.name.replace (and 8 more)
 
 ---
 
@@ -1241,7 +1241,7 @@ Get key modules for onboarding.
 **Returns:** `list`
 
 
-**Function Calls:** key_modules.append, analysis.get, module.get, len, self._get_module_description
+**Function Calls:** len, key_modules.append, analysis.get, module.get, self._get_module_description
 
 ---
 
@@ -1257,7 +1257,7 @@ Get description for a module.
 **Returns:** `str`
 
 
-**Function Calls:** Subscript.lower, len, module.get
+**Function Calls:** module.get, Subscript.lower, len
 
 ---
 
@@ -1273,7 +1273,7 @@ Detect common setup files.
 **Returns:** `Subscript`
 
 
-**Function Calls:** Path.cwd, BinOp.exists
+**Function Calls:** BinOp.exists, Path.cwd
 
 ---
 

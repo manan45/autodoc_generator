@@ -10,9 +10,9 @@ markdown_extensions:
 - pymdownx.details
 - pymdownx.superfences:
     custom_fences:
-    - name: mermaid
-      class: mermaid
-      format: !!python/name:pymdownx.superfences.fence_code_format
+    - class: mermaid
+      format: pymdownx.superfences.fence_code_format
+      name: mermaid
 - pymdownx.highlight:
     anchor_linenums: true
 - pymdownx.inlinehilite
@@ -31,6 +31,9 @@ nav:
 plugins:
 - search
 - mermaid2
+- git-revision-date-localized
+- minify:
+    minify_html: true
 site_description: Comprehensive documentation generated automatically from code analysis
 site_dir: site
 site_name: Auto-Generated Documentation

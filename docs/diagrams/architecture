@@ -4,10 +4,10 @@ digraph "System Architecture" {
 	edge [color="#7B8894"]
 	subgraph "cluster_Config Layer" {
 		graph [bgcolor="#E5F5FD" fontname="Sans-Serif" fontsize=12 label="Config Layer" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
-		"540b0b6cbf1d40d5850d2ed7117b4320" [label=Config height=1.9 image="/Users/manan/auto_doc_generator/venv/lib/python3.9/site-packages/resources/programming/language/python.png" shape=none]
+		f8193f74e54d49fcbb2eaf516ce93600 [label=Config height=1.9 image="/Users/manan/auto_doc_generator/venv/lib/python3.9/site-packages/resources/programming/language/python.png" shape=none]
 	}
 	subgraph "cluster_Templates Layer" {
 		graph [bgcolor="#E5F5FD" fontname="Sans-Serif" fontsize=12 label="Templates Layer" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
-		"14643737c56b4099af4a44d448c4564c" [label=Templates height=1.9 image="/Users/manan/auto_doc_generator/venv/lib/python3.9/site-packages/resources/programming/language/python.png" shape=none]
+		f32602dc8a154c9ca364c943f07fa20e [label=Templates height=1.9 image="/Users/manan/auto_doc_generator/venv/lib/python3.9/site-packages/resources/programming/language/python.png" shape=none]
 	}
 }

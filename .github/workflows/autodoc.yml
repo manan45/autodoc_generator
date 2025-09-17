@@ -79,7 +79,7 @@ jobs:
         fi
         
         # Check if site was built
-        if [ -d "docs/site" ]; then
+        if [ -d "site" ]; then
           echo "✅ Documentation site built successfully"
         else
           echo "❌ Documentation site build failed"
@@ -91,7 +91,7 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./docs/site
+        publish_dir: ./site
         publish_branch: gh-pages
         commit_message: |
           Deploy documentation from ${{ github.sha }}
