@@ -5,7 +5,7 @@
 
 ### Architecture Diagram
 
-```mermaid
+```
 graph TB
     config[config<br/>0 files]
     templates[templates<br/>0 files]
@@ -240,7 +240,7 @@ Get description for a module.
 
 ### Data Flow Diagram
 
-```mermaid
+```
 flowchart TD
     subgraph Entry Points
         E0[serve_site]
@@ -256,7 +256,7 @@ flowchart TD
 
 ### Dependencies Diagram
 
-```mermaid
+```
 graph LR
     subgraph External
         re[re]
