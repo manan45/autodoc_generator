@@ -71,7 +71,7 @@ jobs:
           exit 1
         fi
         
-        if [ -f "docs/mkdocs.yml" ]; then
+        if [ -f "mkdocs.yml" ]; then
           echo "✅ MkDocs configuration generated"
         else
           echo "❌ MkDocs configuration missing"
