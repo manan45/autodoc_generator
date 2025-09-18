@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Reference - Auto-Generated Documentation</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="nav-header">
+            <h2><i class="fas fa-file-alt"></i> Documentation</h2>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="architecture.html" class="nav-link"><i class="fas fa-sitemap"></i> Architecture</a></li>
+            <li><a href="api.html" class="nav-link active"><i class="fas fa-code"></i> API Reference</a></li>
+            <li><a href="ai_models.html" class="nav-link"><i class="fas fa-robot"></i> AI Models</a></li>
+            <li><a href="ai_pipelines.html" class="nav-link"><i class="fas fa-flow-chart"></i> AI Pipelines</a></li>
+            <li><a href="onboarding.html" class="nav-link"><i class="fas fa-user-plus"></i> Onboarding</a></li>
+            <li><a href="complexity.html" class="nav-link"><i class="fas fa-chart-line"></i> Code Quality</a></li>
+        </ul>
+        
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search documentation...">
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <header class="content-header">
+            <button class="mobile-nav-toggle" id="mobile-nav-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="breadcrumb">
+                <span class="breadcrumb-item">API Reference</span>
+            </div>
+            <div class="header-actions">
+                <button class="theme-toggle" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </header>
+
+        <div class="content">
+            <div class="content-meta">
+                <p class="generated-date">Generated on <span id="generation-date"></span></p>
+            </div>
+            
+            <h1><i class="fas fa-code"></i> API Reference</h1>
+            
+            
+            <div class="alert alert-info">
+                This page documents the REST API endpoints and service interfaces detected in the codebase.
+            </div>
+
+            <h2 id="authentication">Authentication</h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-key"></i>
+                    <h3>JWT Authentication</h3>
+                </div>
+                <p>All API requests require a valid JWT token in the Authorization header:</p>
+                <pre><code class="language-http">Authorization: Bearer &lt;your-jwt-token&gt;</code></pre>
+            </div>
+
+            <h2 id="endpoints">API Endpoints</h2>
+            
+            <div id="api-endpoints-placeholder">
+                <table><thead><tr><th>File</th><th>Framework</th></tr></thead><tbody><tr><td><code>autodoc_module.py</code></td><td>FastAPI</td></tr><tr><td><code>app/api/main.py</code></td><td>FastAPI</td></tr><tr><td><code>.venv/lib/python3.9/site-packages/fastapi/applications.py</code></td><td>FastAPI</td></tr><tr><td><code>.venv/lib/python3.9/site-packages/fastapi/background.py</code></td><td>FastAPI</td></tr><tr><td><code>.venv/lib/python3.9/site-packages/fastapi/exceptions.py</code></td><td>FastAPI</td></tr><tr><td><code>.venv/lib/python3.9/site-packages/fastapi/param_functions.py</code></td><td>FastAPI</td></tr><tr><td><code>.venv/lib/python3.9/site-packages/fastapi/datastructures.py</code></td><td>FastAPI</td></tr><tr><td><code>.venv/lib/python3.9/site-packages/fastapi/security/oauth2.py</code></td><td>FastAPI</td></tr><tr><td><code>.venv/lib/python3.9/site-packages/fastapi/security/api_key.py</code></td><td>FastAPI</td></tr><tr><td><code>.venv/lib/python3.9/site-packages/fastapi/security/http.py</code></td><td>FastAPI</td></tr><tr><td><code>.venv/lib/python3.9/site-packages/litellm/proxy/proxy_server.py</code></td><td>FastAPI</td></tr><tr><td><code>.venv/lib/python3.9/site-packages/ray/workflow/http_event_provider.py</code></td><td>FastAPI</td></tr><tr><td><code>.venv/lib/python3.9/site-packages/ray/serve/api.py</code></td><td>FastAPI</td></tr></tbody></table>
+            </div>
+
+            <h2 id="websocket">WebSocket API</h2>
+            
+            <div id="websocket-api-placeholder">
+                <p><em>WebSocket endpoints and real-time APIs will be documented here if detected in the codebase.</em></p>
+            </div>
+        
+
+            <footer class="content-footer">
+                <p><em>This documentation was automatically generated by the Auto Documentation Generation System.</em></p>
+            </footer>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        // Set the generation date
+        document.getElementById('generation-date').textContent = new Date().toLocaleString();
+        
+        // Initialize Mermaid if needed
+        if (typeof mermaid !== 'undefined') {
+            mermaid.initialize({ 
+                startOnLoad: true,
+                theme: 'default',
+                themeVariables: {
+                    primaryColor: '#3f51b5',
+                    primaryTextColor: '#ffffff',
+                    primaryBorderColor: '#303f9f',
+                    lineColor: '#757575',
+                    sectionBkgColor: '#f5f5f5',
+                    altSectionBkgColor: '#fafafa',
+                    gridColor: '#e0e0e0',
+                    secondaryColor: '#7986cb',
+                    tertiaryColor: '#e8eaf6'
+                }
+            });
+        }
+    </script>
+</body>
+</html>

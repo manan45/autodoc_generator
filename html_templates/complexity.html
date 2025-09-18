@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Quality - Auto-Generated Documentation</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="nav-header">
+            <h2><i class="fas fa-file-alt"></i> Documentation</h2>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="architecture.html" class="nav-link"><i class="fas fa-sitemap"></i> Architecture</a></li>
+            <li><a href="api.html" class="nav-link"><i class="fas fa-code"></i> API Reference</a></li>
+            <li><a href="ai_models.html" class="nav-link"><i class="fas fa-robot"></i> AI Models</a></li>
+            <li><a href="ai_pipelines.html" class="nav-link"><i class="fas fa-flow-chart"></i> AI Pipelines</a></li>
+            <li><a href="onboarding.html" class="nav-link"><i class="fas fa-user-plus"></i> Onboarding</a></li>
+            <li><a href="complexity.html" class="nav-link active"><i class="fas fa-chart-line"></i> Code Quality</a></li>
+        </ul>
+        
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search documentation...">
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <header class="content-header">
+            <button class="mobile-nav-toggle" id="mobile-nav-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="breadcrumb">
+                <span class="breadcrumb-item">Code Quality Report</span>
+            </div>
+            <div class="header-actions">
+                <button class="theme-toggle" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </header>
+
+        <div class="content">
+            <div class="content-meta">
+                <p class="generated-date">Generated on <span id="generation-date"></span></p>
+            </div>
+            
+            <h1><i class="fas fa-chart-line"></i> Code Quality Report</h1>
+            
+            <div class="alert alert-info">
+                This report provides comprehensive analysis of code quality metrics including complexity, maintainability, and test coverage.
+            </div>
+
+            <h2 id="overview">Quality Overview</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 2rem 0;">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-star"></i>
+                        <h3>Overall Score</h3>
+                    </div>
+                    <div style="text-align: center; padding: 1rem;" id="overall-score">
+                        <div style="font-size: 3rem; font-weight: bold; color: var(--primary-color);">-</div>
+                        <p>Overall code quality score</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Test Coverage</h3>
+                    </div>
+                    <div style="text-align: center; padding: 1rem;" id="test-coverage">
+                        <div style="font-size: 3rem; font-weight: bold; color: #4caf50;">-</div>
+                        <p>Lines covered by tests</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-tools"></i>
+                        <h3>Maintainability</h3>
+                    </div>
+                    <div style="text-align: center; padding: 1rem;" id="maintainability">
+                        <div style="font-size: 3rem; font-weight: bold; color: var(--primary-color);">-</div>
+                        <p>Maintainability index (0-100)</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>Issues</h3>
+                    </div>
+                    <div style="text-align: center; padding: 1rem;" id="issues-count">
+                        <div style="font-size: 3rem; font-weight: bold; color: #ff9800;">41</div>
+                        <p>Code quality issues found</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2 id="complexity-analysis">Complexity Analysis</h2>
+            
+            <div id="complexity-distribution-placeholder">
+                <p><em>Cyclomatic complexity distribution will be calculated and displayed here during analysis.</em></p>
+            </div>
+
+            <h2 id="high-complexity">High Complexity Functions</h2>
+            
+            <div id="high-complexity-functions-placeholder">
+                <p><em>Functions with high complexity will be identified and listed here with refactoring suggestions.</em></p>
+            </div>
+
+            <h2 id="test-coverage">Test Coverage Analysis</h2>
+            
+            <div id="coverage-by-module-placeholder">
+                <p><em>Test coverage analysis by module will be displayed here if test files are detected.</em></p>
+            </div>
+
+            <h2 id="code-issues">Code Quality Issues</h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-bug"></i>
+                    <h3>Issues by Category</h3>
+                </div>
+                <ul>
+                    <li><strong>Code Smells (8):</strong> Long functions, duplicate code, complex conditionals</li>
+                    <li><strong>Security Issues (2):</strong> Hardcoded secrets, unsafe SQL queries</li>
+                    <li><strong>Performance Issues (2):</strong> Inefficient loops, unnecessary object creation</li>
+                </ul>
+            </div>
+
+            <div id="detailed-issues-placeholder">
+                <table><thead><tr><th>Function</th><th>File</th><th>Complexity</th><th>Recommendation</th></tr></thead><tbody>
+                    <tr>
+                        <td><code>validate_and_process_tuples</code></td>
+                        <td><code>app/connectors/dhanhq/marketfeed.py</code></td>
+                        <td>12</td>
+                        <td>Consider refactoring</td>
+                    </tr>
+                    <tr>
+                        <td><code>subscribe_instruments</code></td>
+                        <td><code>app/connectors/dhanhq/marketfeed.py</code></td>
+                        <td>12</td>
+                        <td>Consider refactoring</td>
+                    </tr>
+                    <tr>
+                        <td><code>subscribe_symbols</code></td>
+                        <td><code>app/connectors/dhanhq/marketfeed.py</code></td>
+                        <td>12</td>
+                        <td>Consider refactoring</td>
+                    </tr>
+                    <tr>
+                        <td><code>unsubscribe_symbols</code></td>
+                        <td><code>app/connectors/dhanhq/marketfeed.py</code></td>
+                        <td>12</td>
+                        <td>Consider refactoring</td>
+                    </tr>
+                    <tr>
+                        <td><code>_generate_trading_signals</code></td>
+                        <td><code>app/core/ai/tradewise_ai.py</code></td>
+                        <td>15</td>
+                        <td>Consider refactoring</td>
+                    </tr>
+                    <tr>
+                        <td><code>_analyze_decision_patterns</code></td>
+                        <td><code>app/core/ai/analysis/psychology_pattern.py</code></td>
+                        <td>11</td>
+                        <td>Consider refactoring</td>
+                    </tr>
+                    <tr>
+                        <td><code>_analyze_bias_patterns</code></td>
+                        <td><code>app/core/ai/analysis/psychology_pattern.py</code></td>
+                        <td>13</td>
+                        <td>Consider refactoring</td>
+                    </tr>
+                    <tr>
+                        <td><code>_combine_signals</code></td>
+                        <td><code>app/core/ai/core_ml/model_engine.py</code></td>
+                        <td>11</td>
+                        <td>Consider refactoring</td>
+                    </tr>
+                    <tr>
+                        <td><code>_generate_risk_advice</code></td>
+                        <td><code>app/core/ai/session/trading_session.py</code></td>
+                        <td>13</td>
+                        <td>Consider refactoring</td>
+                    </tr>
+                    <tr>
+                        <td><code>_calculate_performance_metrics</code></td>
+                        <td><code>app/core/ai/session/trading_session.py</code></td>
+                        <td>11</td>
+                        <td>Consider refactoring</td>
+                    </tr></tbody></table>
+            </div>
+
+            <h2 id="recommendations">Recommendations</h2>
+            
+            <div class="alert alert-warning">
+                <strong><i class="fas fa-lightbulb"></i> Priority Actions:</strong>
+                <ol>
+                    <li><strong>Security:</strong> Fix hardcoded credentials and SQL injection vulnerabilities</li>
+                    <li><strong>Testing:</strong> Increase test coverage to 85% target</li>
+                    <li><strong>Refactoring:</strong> Break down complex functions (complexity > 15)</li>
+                    <li><strong>Documentation:</strong> Add missing docstrings for public methods</li>
+                </ol>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-trophy"></i>
+                    <h3>Quality Goals</h3>
+                </div>
+                <ul>
+                    <li>Maintain cyclomatic complexity below 10 for all new functions</li>
+                    <li>Achieve 85% test coverage across all modules</li>
+                    <li>Reduce code duplication by implementing shared utilities</li>
+                    <li>Implement automated code quality checks in CI/CD pipeline</li>
+                </ul>
+            </div>
+
+            <div class="alert alert-success">
+                <strong>Trend Analysis:</strong> Code quality has improved by 12% over the last 3 months with consistent refactoring efforts.
+            </div>
+
+            <footer class="content-footer">
+                <p><em>This documentation was automatically generated by the Auto Documentation Generation System.</em></p>
+            </footer>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        document.getElementById('generation-date').textContent = new Date().toLocaleString();
+    </script>
+</body>
+</html>

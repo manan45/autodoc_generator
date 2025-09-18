@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onboarding - Auto-Generated Documentation</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="nav-header">
+            <h2><i class="fas fa-file-alt"></i> Documentation</h2>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="architecture.html" class="nav-link"><i class="fas fa-sitemap"></i> Architecture</a></li>
+            <li><a href="api.html" class="nav-link"><i class="fas fa-code"></i> API Reference</a></li>
+            <li><a href="ai_models.html" class="nav-link"><i class="fas fa-robot"></i> AI Models</a></li>
+            <li><a href="ai_pipelines.html" class="nav-link"><i class="fas fa-flow-chart"></i> AI Pipelines</a></li>
+            <li><a href="onboarding.html" class="nav-link active"><i class="fas fa-user-plus"></i> Onboarding</a></li>
+            <li><a href="complexity.html" class="nav-link"><i class="fas fa-chart-line"></i> Code Quality</a></li>
+        </ul>
+        
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search documentation...">
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <header class="content-header">
+            <button class="mobile-nav-toggle" id="mobile-nav-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="breadcrumb">
+                <span class="breadcrumb-item">Getting Started Guide</span>
+            </div>
+            <div class="header-actions">
+                <button class="theme-toggle" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </header>
+
+        <div class="content">
+            <div class="content-meta">
+                <p class="generated-date">Generated on <span id="generation-date"></span></p>
+            </div>
+            
+            <h1><i class="fas fa-user-plus"></i> Getting Started</h1>
+            
+            <div class="alert alert-info">
+                This guide will help you set up your development environment and get started with the codebase.
+            </div>
+
+            <h2 id="prerequisites">Prerequisites</h2>
+            
+            <div id="prerequisites-placeholder">
+                <p><em>Prerequisites and required software will be automatically detected and listed here.</em></p>
+            </div>
+
+            <h2 id="installation">Installation</h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-download"></i>
+                    <h3>Step 1: Clone the Repository</h3>
+                </div>
+                <pre><code class="language-bash">git clone [REPOSITORY_URL]
+cd [PROJECT_NAME]</code></pre>
+                <p><em>Repository URL and project name will be automatically populated during documentation generation.</em></p>
+            </div>
+
+            <div id="environment-setup-placeholder">
+                <p><em>Environment setup instructions will be generated based on detected package managers and dependencies.</em></p>
+            </div>
+
+            <div id="configuration-placeholder">
+                <p><em>Configuration instructions will be generated based on detected environment files and config patterns.</em></p>
+            </div>
+
+            <h2 id="database-setup">Database Setup</h2>
+            
+            <div id="database-setup-placeholder">
+                <p><em>Database setup instructions will be generated if database components are detected.</em></p>
+            </div>
+
+            <h2 id="running-services">Running the Services</h2>
+            
+            <div id="running-services-placeholder">
+                <p><em>Service startup instructions will be generated based on detected entry points and service definitions.</em></p>
+            </div>
+
+            <h2 id="verification">Verify Installation</h2>
+            
+            <div id="verification-placeholder">
+                <p><em>Verification steps and health check endpoints will be automatically detected and documented here.</em></p>
+            </div>
+
+            <h2 id="development-workflow">Development Workflow</h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-code-branch"></i>
+                    <h3>Git Workflow</h3>
+                </div>
+                <ol>
+                    <li>Create a feature branch: <code>git checkout -b feature/your-feature</code></li>
+                    <li>Make your changes and commit regularly</li>
+                    <li>Run tests: <code>pytest</code></li>
+                    <li>Run linting: <code>black . && flake8</code></li>
+                    <li>Push and create a pull request</li>
+                </ol>
+            </div>
+
+            <h2 id="useful-commands">Useful Commands</h2>
+            
+            <table>
+                <thead>
+                    <tr><th>Task</th><th>Command</th><th>Description</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Run Tests</td><td><code>pytest</code></td><td>Run all unit tests</td></tr>
+                    <tr><td>Code Formatting</td><td><code>black .</code></td><td>Format code with Black</td></tr>
+                    <tr><td>Linting</td><td><code>flake8</code></td><td>Check code style</td></tr>
+                    <tr><td>Type Checking</td><td><code>mypy app/</code></td><td>Run static type checking</td></tr>
+                    <tr><td>Generate Docs</td><td><code>mkdocs serve</code></td><td>Serve documentation locally</td></tr>
+                    <tr><td>DB Migration</td><td><code>alembic revision --autogenerate -m "message"</code></td><td>Create database migration</td></tr>
+                </tbody>
+            </table>
+
+            <div class="alert alert-success">
+                <strong><i class="fas fa-rocket"></i> Ready to Go!</strong> 
+                You're all set up! Check out the <a href="architecture.html">Architecture</a> guide to understand the system structure.
+            </div>
+
+            <footer class="content-footer">
+                <p><em>This documentation was automatically generated by the Auto Documentation Generation System.</em></p>
+            </footer>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        document.getElementById('generation-date').textContent = new Date().toLocaleString();
+    </script>
+</body>
+</html>
