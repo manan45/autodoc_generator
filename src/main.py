@@ -175,14 +175,8 @@ def serve_site(output_dir: str = "docs", port: int = 8000) -> None:
     try:
         import subprocess
         
-        # Change to output directory
-        original_dir = os.getcwd()
-        os.chdir(output_dir)
-        
-        # Serve the site
+        # Serve the site from project root (where mkdocs.yml is located)
         subprocess.run(['mkdocs', 'serve', '--dev-addr', f'127.0.0.1:{port}'])
-        
-        os.chdir(original_dir)
         
     except ImportError:
         print("⚠️ MkDocs not installed. Install with: pip install mkdocs mkdocs-material")

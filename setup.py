@@ -26,7 +26,7 @@ setup(
     description="Automatic code documentation generation system with AI/ML pipeline support",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/auto-doc-generator",
+    url="https://github.com/manan45/auto-doc-generator",
     packages=find_packages(where="src"),
     package_dir={"": "src"},
     classifiers=[
@@ -66,6 +66,7 @@ setup(
         "console_scripts": [
             "auto-doc-gen=main:main",
             "autodoc=main:main",
+            "autodoc-remote=remote_editor:cli_remote_edit",
         ],
     },
     include_package_data=True,
@@ -74,8 +75,8 @@ setup(
     },
     keywords="documentation, automatic, code-analysis, ai, ml, python, mkdocs",
     project_urls={
-        "Bug Reports": "https://github.com/yourusername/auto-doc-generator/issues",
-        "Source": "https://github.com/yourusername/auto-doc-generator",
-        "Documentation": "https://yourusername.github.io/auto-doc-generator/",
+        "Bug Reports": "https://github.com/manan45/auto-doc-generator/issues",
+        "Source": "https://github.com/manan45/auto-doc-generator",
+        "Documentation": "https://manan45.github.io/auto-doc-generator/",
     },
 )
