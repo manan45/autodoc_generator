@@ -64,9 +64,9 @@ setup(
     },
     entry_points={
         "console_scripts": [
-            "auto-doc-gen=main:main",
-            "autodoc=main:main",
-            "autodoc-remote=remote_editor:cli_remote_edit",
+            "auto-doc-gen=auto_doc_generator.main:main",
+            "autodoc=auto_doc_generator.main:main",
+            "autodoc-remote=auto_doc_generator.remote_editor:cli_remote_edit",
         ],
     },
     include_package_data=True,
