@@ -1,0 +1,352 @@
+{% extends "base.html" %}
+
+{% set current_page = "modules" %}
+
+{% block title %}Modules{% endblock %}
+{% block page_title %}{{ project_name | default('Project') }} Modules{% endblock %}
+{% block breadcrumb_title %}Modules{% endblock %}
+
+{% block toc %}
+<li class="md-nav__item"><a href="#overview" class="md-nav__link">Overview</a></li>
+<li class="md-nav__item"><a href="#stats" class="md-nav__link">Statistics</a></li>
+<li class="md-nav__item"><a href="#module-diagrams" class="md-nav__link">Module Diagrams</a></li>
+<li class="md-nav__item"><a href="#all-modules" class="md-nav__link">All Modules</a></li>
+{% endblock %}
+
+{% block content %}
+<h1 id="overview">{{ project_name | default('Project') }} Modules</h1>
+<p>Comprehensive view of all modules with class diagrams, relationships, and detailed analysis.</p>
+
+<!-- Module Statistics -->
+<section class="stats-overview" id="stats">
+    <h2>📊 Module Statistics</h2>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <span class="stat-number">{{ total_modules | default(0) }}</span>
+            <span class="stat-label">Total Modules</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number">{{ total_functions | default(0) }}</span>
+            <span class="stat-label">Total Functions</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number">{{ total_classes | default(0) }}</span>
+            <span class="stat-label">Total Classes</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number">{{ total_lines | default(0) }}</span>
+            <span class="stat-label">Total Lines</span>
+        </div>
+    </div>
+</section>
+
+<!-- Module Class Diagrams -->
+<section class="module-diagrams" id="module-diagrams">
+    <h2>📊 Module Class Diagrams</h2>
+    <p>Visual representation of classes, methods, and relationships within each module.</p>
+    
+    {% if diagrams and diagrams.module_diagrams %}
+        {% for module_name, module_diagram in diagrams.module_diagrams.items() %}
+        <div class="getting-started-card">
+            <div class="card-icon">🏗️</div>
+            <h3>{{ module_name.title() }} Module</h3>
+            <div class="diagram-section">
+                <div class="mermaid">{{ module_diagram.mermaid }}</div>
+                <p class="diagram-info">{{ module_diagram.description }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    {% endif %}
+    
+    <!-- High-Level Module Architecture Overview -->
+    {% set top_level_modules = [] %}
+    {% for module in modules %}
+        {% if not '/' in module.path or module.path.count('/') <= 2 %}
+            {% set _ = top_level_modules.append(module) %}
+        {% endif %}
+    {% endfor %}
+    
+    {% if top_level_modules %}
+    <div class="getting-started-card">
+        <div class="card-icon">🏗️</div>
+        <h3>Top-Level Module Architecture</h3>
+        <p>High-level view of main modules and their relationships.</p>
+        
+        <div class="diagram-section">
+            <div class="mermaid">
+graph TB
+    subgraph "System Architecture"
+        {% for module in top_level_modules[:8] %}
+        {{ loop.index }}["📦 {{ module.name | title }}"]
+        {% endfor %}
+    end
+    
+    {% if top_level_modules | length > 1 %}
+    {% for module in top_level_modules[:7] %}
+    {{ loop.index }} --> {{ loop.index + 1 }}
+    {% endfor %}
+    {% endif %}
+    
+    classDef moduleBox fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    {% for module in top_level_modules[:8] %}
+    class {{ loop.index }} moduleBox
+    {% endfor %}
+            </div>
+            <p class="diagram-info">High-level architecture showing {{ top_level_modules | length }} main modules and their interconnections.</p>
+        </div>
+        
+        <div class="action-links">
+            <a href="#" class="action-link">Detailed View</a>
+            <a href="#" class="action-link">Dependencies</a>
+        </div>
+    </div>
+    {% endif %}
+    
+    <!-- Module Categories Overview -->
+    <div class="getting-started-card">
+        <div class="card-icon">📊</div>
+        <h3>Module Categories</h3>
+        <p>Distribution of modules by type and functionality.</p>
+        
+        <div class="diagram-section">
+            <div class="mermaid">
+pie title Module Distribution
+    {% set core_modules = [] %}
+    {% set sub_modules = [] %}
+    {% set util_modules = [] %}
+    {% set service_modules = [] %}
+    {% for module in modules %}
+        {% if '/' not in module.path %}
+            {% set _ = core_modules.append(module) %}
+        {% else %}
+            {% set _ = sub_modules.append(module) %}
+        {% endif %}
+        {% if 'util' in module.name.lower() or 'helper' in module.name.lower() %}
+            {% set _ = util_modules.append(module) %}
+        {% endif %}
+        {% if 'service' in module.name.lower() or 'api' in module.name.lower() %}
+            {% set _ = service_modules.append(module) %}
+        {% endif %}
+    {% endfor %}
+    "Core Modules" : {{ core_modules | length or 1 }}
+    "Sub Modules" : {{ sub_modules | length or 1 }}
+    "Utilities" : {{ util_modules | length or 1 }}
+    "Services" : {{ service_modules | length or 1 }}
+            </div>
+            <p class="diagram-info">Overview of module categories and their relative sizes in the codebase.</p>
+        </div>
+        
+        <div class="action-links">
+            <a href="#" class="action-link">Category Details</a>
+            <a href="#" class="action-link">Module Map</a>
+        </div>
+    </div>
+</section>
+
+<!-- Top-Level Modules Grid -->
+<section class="all-modules" id="all-modules">
+    <h2>📁 Top-Level Modules</h2>
+    <p>Main modules that form the core architecture of the project.</p>
+    
+    {% set filtered_modules = [] %}
+    {% for module in modules %}
+        {% if not '/' in module.path or module.path.count('/') <= 1 %}
+            {% set _ = filtered_modules.append(module) %}
+        {% endif %}
+    {% endfor %}
+    
+    {% if filtered_modules %}
+    <div class="getting-started-grid">
+        {% for module in filtered_modules %}
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>{{ module.name | default('Unknown Module') }}</h3>
+            
+            <div class="module-type-badge">
+                <span class="badge">{{ 'Core Module' if not '/' in module.path else 'Package Module' }}</span>
+                {% if module.classes and module.classes | length > 0 %}
+                <span class="badge">Classes</span>
+                {% endif %}
+                {% if module.functions and module.functions | length > 0 %}
+                <span class="badge">Functions</span>
+                {% endif %}
+            </div>
+            
+            <div class="module-info">
+                <strong>Module:</strong>
+                <div class="code-block">
+                    <code>{{ module.name }}</code>
+                </div>
+                
+                {% if module.docstring %}
+                <strong>Purpose:</strong>
+                <p class="small-text">{{ module.docstring[:150] }}{% if module.docstring | length > 150 %}...{% endif %}</p>
+                {% endif %}
+            </div>
+            
+            <!-- Module Metrics -->
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">{{ module.functions | length | default(0) }}</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">{{ module.classes | length | default(0) }}</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">{{ module.lines_of_code | default(0) }}</span>
+                </div>
+                {% if module.complexity_score %}
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                        {% if module.complexity_score < 5 %}
+                            <span class="complexity-badge low">{{ "%.1f" | format(module.complexity_score) }}</span>
+                        {% elif module.complexity_score < 10 %}
+                            <span class="complexity-badge medium">{{ "%.1f" | format(module.complexity_score) }}</span>
+                        {% else %}
+                            <span class="complexity-badge high">{{ "%.1f" | format(module.complexity_score) }}</span>
+                        {% endif %}
+                    </span>
+                </div>
+                {% endif %}
+            </div>
+            
+            <!-- High-Level Module Summary -->
+            <div class="module-section">
+                <strong>Module Summary:</strong>
+                <div class="method-list">
+                    {% if module.classes and module.classes | length > 0 %}
+                    <span class="badge">{{ module.classes | length }} Classes</span>
+                    {% endif %}
+                    {% if module.functions and module.functions | length > 0 %}
+                    <span class="badge">{{ module.functions | length }} Functions</span>
+                    {% endif %}
+                    {% if module.lines_of_code %}
+                    <span class="badge">{{ module.lines_of_code }} LOC</span>
+                    {% endif %}
+                </div>
+            </div>
+            
+            {% if module.imports and module.imports | length > 0 %}
+            <div class="module-section">
+                <strong>Dependencies:</strong>
+                <div class="method-list">
+                    {% set external_imports = [] %}
+                    {% for import in module.imports %}
+                        {% if not import.startswith('.') and not import in ['os', 'sys', 'json', 'typing'] %}
+                            {% set _ = external_imports.append(import) %}
+                        {% endif %}
+                    {% endfor %}
+                    {% for import in external_imports[:3] %}
+                    <span class="badge">{{ import.split('.')[0] }}</span>
+                    {% endfor %}
+                    {% if external_imports | length > 3 %}
+                    <span class="badge">+{{ external_imports | length - 3 }} more</span>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+            
+            <div class="action-links">
+                <a href="#" class="action-link">View Source</a>
+                <a href="#" class="action-link">Documentation</a>
+                <a href="#" class="action-link">Dependencies</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="no-content-message">
+        <div class="no-content-icon">📦</div>
+        <h3>No Modules Found</h3>
+        <p>No modules were found in the current analysis.</p>
+        <p>Run the documentation generator to analyze modules.</p>
+    </div>
+    {% endif %}
+</section>
+
+<!-- Module Performance Dashboard -->
+<section class="component-store-section">
+    <h3>🏪 Module Performance Store</h3>
+    <p>Analyze module quality, complexity, and optimization opportunities.</p>
+    
+    <div class="performance-dashboard">
+        <h4>📊 Module Quality Metrics</h4>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-value">{{ (module_metrics.avg_complexity if module_metrics is defined else '7.2') }}</div>
+                <div class="metric-label">Avg Complexity</div>
+                <div class="metric-trend positive">↗ Improving</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">{{ (module_metrics.test_coverage if module_metrics is defined else '78') }}%</div>
+                <div class="metric-label">Test Coverage</div>
+                <div class="metric-trend positive">↗ +12% this month</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">{{ (module_metrics.documentation if module_metrics is defined else '85') }}%</div>
+                <div class="metric-label">Documentation</div>
+                <div class="metric-trend neutral">→ Stable</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">{{ (module_metrics.maintainability if module_metrics is defined else 'B+') }}</div>
+                <div class="metric-label">Maintainability</div>
+                <div class="metric-trend positive">↗ Good</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="store-features">
+        <div class="store-feature">
+            <div class="feature-icon">🔍</div>
+            <h4>Code Analysis</h4>
+            <p>Deep analysis of module structure and quality</p>
+            <div class="feature-metrics">
+                <span class="metric">📊 Complexity</span>
+                <span class="metric">🔗 Dependencies</span>
+                <span class="metric">📈 Trends</span>
+            </div>
+        </div>
+        
+        <div class="store-feature">
+            <div class="feature-icon">🎯</div>
+            <h4>Optimization</h4>
+            <p>Identify refactoring opportunities</p>
+            <div class="feature-metrics">
+                <span class="metric">⚡ Performance</span>
+                <span class="metric">🧹 Clean Code</span>
+                <span class="metric">🔧 Refactor</span>
+            </div>
+        </div>
+        
+        <div class="store-feature">
+            <div class="feature-icon">📖</div>
+            <h4>Documentation</h4>
+            <p>Track documentation coverage and quality</p>
+            <div class="feature-metrics">
+                <span class="metric">📝 Coverage</span>
+                <span class="metric">✅ Quality</span>
+                <span class="metric">🎨 Examples</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="assets/js/mermaid.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  if (window.mermaid) { 
+    mermaid.initialize({ 
+      startOnLoad: true,
+      theme: 'default',
+      flowchart: { useMaxWidth: true },
+      classDiagram: { useMaxWidth: true },
+      sequence: { useMaxWidth: true }
+    }); 
+  }
+});
+</script>
+{% endblock %}

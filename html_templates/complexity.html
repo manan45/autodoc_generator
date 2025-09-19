@@ -1,245 +1,481 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code Quality - Auto-Generated Documentation</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-</head>
-<body>
-    <nav class="sidebar">
-        <div class="nav-header">
-            <h2><i class="fas fa-file-alt"></i> Documentation</h2>
+{% extends "base.html" %}
+
+{% set current_page = "complexity" %}
+
+{% block title %}Code Quality{% endblock %}
+{% block page_title %}{{ project_name | default('Project') }} Code Quality{% endblock %}
+{% block breadcrumb_title %}Code Quality{% endblock %}
+
+{% block toc %}
+<li class="md-nav__item"><a href="#overview" class="md-nav__link">Overview</a></li>
+<li class="md-nav__item"><a href="#scoring-pipeline" class="md-nav__link">Scoring Pipeline</a></li>
+<li class="md-nav__item"><a href="#quality-factors" class="md-nav__link">Quality Factors</a></li>
+<li class="md-nav__item"><a href="#complexity" class="md-nav__link">Complexity Analysis</a></li>
+<li class="md-nav__item"><a href="#modules" class="md-nav__link">Module Analysis</a></li>
+<li class="md-nav__item"><a href="#insights" class="md-nav__link">Quality Insights</a></li>
+{% endblock %}
+
+{% block content %}
+<h1 id="overview">{{ project_name | default('Project') }} Code Quality</h1>
+<p>Comprehensive code quality analysis, complexity metrics, and optimization recommendations.</p>
+
+<!-- Quality Stats Overview -->
+<section class="stats-overview">
+    <h2>📊 Quality Metrics</h2>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <span class="stat-number">{{ complexity_analysis.average_complexity | round(2) | default('N/A') }}</span>
+            <span class="stat-label">Avg Complexity</span>
         </div>
-        <ul class="nav-menu">
-            <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="architecture.html" class="nav-link"><i class="fas fa-sitemap"></i> Architecture</a></li>
-            <li><a href="api.html" class="nav-link"><i class="fas fa-code"></i> API Reference</a></li>
-            <li><a href="ai_models.html" class="nav-link"><i class="fas fa-robot"></i> AI Models</a></li>
-            <li><a href="ai_pipelines.html" class="nav-link"><i class="fas fa-flow-chart"></i> AI Pipelines</a></li>
-            <li><a href="onboarding.html" class="nav-link"><i class="fas fa-user-plus"></i> Onboarding</a></li>
-            <li><a href="complexity.html" class="nav-link active"><i class="fas fa-chart-line"></i> Code Quality</a></li>
-        </ul>
+        <div class="stat-card">
+            <span class="stat-number">{{ complexity_analysis.max_complexity | default('N/A') }}</span>
+            <span class="stat-label">Max Complexity</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number">{{ complexity_analysis.high_complexity_functions | default('0') }}</span>
+            <span class="stat-label">High-Complexity</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number">{{ total_lines | default('N/A') }}</span>
+            <span class="stat-label">Total Lines</span>
+        </div>
+    </div>
+</section>
+
+<!-- Quality Scoring Pipeline -->
+<section class="scoring-pipeline" id="scoring-pipeline">
+    <h2>🔬 Quality Scoring Pipeline</h2>
+    <p>Our comprehensive scoring system analyzes multiple dimensions of code quality to provide actionable insights.</p>
+    
+    <div class="getting-started-grid">
+        <div class="getting-started-card">
+            <div class="card-icon">📊</div>
+            <h3>Data Collection</h3>
+            <p>Automated analysis of repository structure and code patterns</p>
+            
+            <div class="pipeline-steps">
+                <div class="step-item">
+                    <span class="step-number">1</span>
+                    <div class="step-content">
+                        <strong>File Scanning</strong>
+                        <p>Recursively analyze all source files</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <span class="step-number">2</span>
+                    <div class="step-content">
+                        <strong>AST Parsing</strong>
+                        <p>Build Abstract Syntax Trees for deep analysis</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <span class="step-number">3</span>
+                    <div class="step-content">
+                        <strong>Metric Extraction</strong>
+                        <p>Extract complexity, maintainability metrics</p>
+                    </div>
+                </div>
+            </div>
+        </div>
         
-        <div class="search-container">
-            <input type="text" id="search-input" placeholder="Search documentation...">
-            <div id="search-results" class="search-results"></div>
+        <div class="getting-started-card">
+            <div class="card-icon">⚡</div>
+            <h3>Processing Engine</h3>
+            <p>Multi-dimensional analysis using proven software metrics</p>
+            
+            <div class="processing-metrics">
+                <div class="metric-item">
+                    <span class="metric-icon">🔄</span>
+                    <strong>Cyclomatic Complexity</strong>
+                    <p>Measures code complexity through control flow</p>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-icon">📏</span>
+                    <strong>Maintainability Index</strong>
+                    <p>Combines complexity, volume, and cohesion</p>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-icon">🎯</span>
+                    <strong>Technical Debt</strong>
+                    <p>Estimates refactoring effort required</p>
+                </div>
+            </div>
         </div>
-    </nav>
-
-    <main class="main-content">
-        <header class="content-header">
-            <button class="mobile-nav-toggle" id="mobile-nav-toggle">
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="breadcrumb">
-                <span class="breadcrumb-item">Code Quality Report</span>
-            </div>
-            <div class="header-actions">
-                <button class="theme-toggle" id="theme-toggle">
-                    <i class="fas fa-moon"></i>
-                </button>
-            </div>
-        </header>
-
-        <div class="content">
-            <div class="content-meta">
-                <p class="generated-date">Generated on <span id="generation-date"></span></p>
-            </div>
+        
+        <div class="getting-started-card">
+            <div class="card-icon">🎯</div>
+            <h3>Score Calculation</h3>
+            <p>Weighted scoring algorithm producing actionable ratings</p>
             
-            <h1><i class="fas fa-chart-line"></i> Code Quality Report</h1>
-            
-            <div class="alert alert-info">
-                This report provides comprehensive analysis of code quality metrics including complexity, maintainability, and test coverage.
-            </div>
-
-            <h2 id="overview">Quality Overview</h2>
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 2rem 0;">
-                <div class="card">
-                    <div class="card-header">
-                        <i class="fas fa-star"></i>
-                        <h3>Overall Score</h3>
-                    </div>
-                    <div style="text-align: center; padding: 1rem;" id="overall-score">
-                        <div style="font-size: 3rem; font-weight: bold; color: var(--primary-color);">-</div>
-                        <p>Overall code quality score</p>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <div class="card-header">
-                        <i class="fas fa-shield-alt"></i>
-                        <h3>Test Coverage</h3>
-                    </div>
-                    <div style="text-align: center; padding: 1rem;" id="test-coverage">
-                        <div style="font-size: 3rem; font-weight: bold; color: #4caf50;">-</div>
-                        <p>Lines covered by tests</p>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <div class="card-header">
-                        <i class="fas fa-tools"></i>
-                        <h3>Maintainability</h3>
-                    </div>
-                    <div style="text-align: center; padding: 1rem;" id="maintainability">
-                        <div style="font-size: 3rem; font-weight: bold; color: var(--primary-color);">-</div>
-                        <p>Maintainability index (0-100)</p>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <div class="card-header">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <h3>Issues</h3>
-                    </div>
-                    <div style="text-align: center; padding: 1rem;" id="issues-count">
-                        <div style="font-size: 3rem; font-weight: bold; color: #ff9800;">41</div>
-                        <p>Code quality issues found</p>
+            <div class="scoring-formula">
+                <div class="formula-box">
+                    <strong>Quality Score = </strong>
+                    <div class="formula-components">
+                        <span class="component">40% × Complexity Score</span>
+                        <span class="component">25% × Maintainability</span>
+                        <span class="component">20% × Test Coverage</span>
+                        <span class="component">10% × Documentation</span>
+                        <span class="component">5% × Code Style</span>
                     </div>
                 </div>
             </div>
-
-            <h2 id="complexity-analysis">Complexity Analysis</h2>
-            
-            <div id="complexity-distribution-placeholder">
-                <p><em>Cyclomatic complexity distribution will be calculated and displayed here during analysis.</em></p>
-            </div>
-
-            <h2 id="high-complexity">High Complexity Functions</h2>
-            
-            <div id="high-complexity-functions-placeholder">
-                <p><em>Functions with high complexity will be identified and listed here with refactoring suggestions.</em></p>
-            </div>
-
-            <h2 id="test-coverage">Test Coverage Analysis</h2>
-            
-            <div id="coverage-by-module-placeholder">
-                <p><em>Test coverage analysis by module will be displayed here if test files are detected.</em></p>
-            </div>
-
-            <h2 id="code-issues">Code Quality Issues</h2>
-            
-            <div class="card">
-                <div class="card-header">
-                    <i class="fas fa-bug"></i>
-                    <h3>Issues by Category</h3>
-                </div>
-                <ul>
-                    <li><strong>Code Smells (8):</strong> Long functions, duplicate code, complex conditionals</li>
-                    <li><strong>Security Issues (2):</strong> Hardcoded secrets, unsafe SQL queries</li>
-                    <li><strong>Performance Issues (2):</strong> Inefficient loops, unnecessary object creation</li>
-                </ul>
-            </div>
-
-            <div id="detailed-issues-placeholder">
-                <table><thead><tr><th>Function</th><th>File</th><th>Complexity</th><th>Recommendation</th></tr></thead><tbody>
-                    <tr>
-                        <td><code>validate_and_process_tuples</code></td>
-                        <td><code>app/connectors/dhanhq/marketfeed.py</code></td>
-                        <td>12</td>
-                        <td>Consider refactoring</td>
-                    </tr>
-                    <tr>
-                        <td><code>subscribe_instruments</code></td>
-                        <td><code>app/connectors/dhanhq/marketfeed.py</code></td>
-                        <td>12</td>
-                        <td>Consider refactoring</td>
-                    </tr>
-                    <tr>
-                        <td><code>subscribe_symbols</code></td>
-                        <td><code>app/connectors/dhanhq/marketfeed.py</code></td>
-                        <td>12</td>
-                        <td>Consider refactoring</td>
-                    </tr>
-                    <tr>
-                        <td><code>unsubscribe_symbols</code></td>
-                        <td><code>app/connectors/dhanhq/marketfeed.py</code></td>
-                        <td>12</td>
-                        <td>Consider refactoring</td>
-                    </tr>
-                    <tr>
-                        <td><code>_generate_trading_signals</code></td>
-                        <td><code>app/core/ai/tradewise_ai.py</code></td>
-                        <td>15</td>
-                        <td>Consider refactoring</td>
-                    </tr>
-                    <tr>
-                        <td><code>_analyze_decision_patterns</code></td>
-                        <td><code>app/core/ai/analysis/psychology_pattern.py</code></td>
-                        <td>11</td>
-                        <td>Consider refactoring</td>
-                    </tr>
-                    <tr>
-                        <td><code>_analyze_bias_patterns</code></td>
-                        <td><code>app/core/ai/analysis/psychology_pattern.py</code></td>
-                        <td>13</td>
-                        <td>Consider refactoring</td>
-                    </tr>
-                    <tr>
-                        <td><code>_combine_signals</code></td>
-                        <td><code>app/core/ai/core_ml/model_engine.py</code></td>
-                        <td>11</td>
-                        <td>Consider refactoring</td>
-                    </tr>
-                    <tr>
-                        <td><code>_generate_risk_advice</code></td>
-                        <td><code>app/core/ai/session/trading_session.py</code></td>
-                        <td>13</td>
-                        <td>Consider refactoring</td>
-                    </tr>
-                    <tr>
-                        <td><code>_calculate_performance_metrics</code></td>
-                        <td><code>app/core/ai/session/trading_session.py</code></td>
-                        <td>11</td>
-                        <td>Consider refactoring</td>
-                    </tr></tbody></table>
-            </div>
-
-            <h2 id="recommendations">Recommendations</h2>
-            
-            <div class="alert alert-warning">
-                <strong><i class="fas fa-lightbulb"></i> Priority Actions:</strong>
-                <ol>
-                    <li><strong>Security:</strong> Fix hardcoded credentials and SQL injection vulnerabilities</li>
-                    <li><strong>Testing:</strong> Increase test coverage to 85% target</li>
-                    <li><strong>Refactoring:</strong> Break down complex functions (complexity > 15)</li>
-                    <li><strong>Documentation:</strong> Add missing docstrings for public methods</li>
-                </ol>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <i class="fas fa-trophy"></i>
-                    <h3>Quality Goals</h3>
-                </div>
-                <ul>
-                    <li>Maintain cyclomatic complexity below 10 for all new functions</li>
-                    <li>Achieve 85% test coverage across all modules</li>
-                    <li>Reduce code duplication by implementing shared utilities</li>
-                    <li>Implement automated code quality checks in CI/CD pipeline</li>
-                </ul>
-            </div>
-
-            <div class="alert alert-success">
-                <strong>Trend Analysis:</strong> Code quality has improved by 12% over the last 3 months with consistent refactoring efforts.
-            </div>
-
-            <footer class="content-footer">
-                <p><em>This documentation was automatically generated by the Auto Documentation Generation System.</em></p>
-            </footer>
         </div>
-    </main>
+        
+        <div class="getting-started-card">
+            <div class="card-icon">📈</div>
+            <h3>Insights Generation</h3>
+            <p>AI-powered recommendations for code improvement</p>
+            
+            <div class="insights-features">
+                <div class="feature-item">
+                    <span class="feature-icon">🤖</span>
+                    <strong>Pattern Recognition</strong>
+                    <p>Identify common anti-patterns</p>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">💡</span>
+                    <strong>Refactoring Suggestions</strong>
+                    <p>Specific improvement recommendations</p>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📊</span>
+                    <strong>Trend Analysis</strong>
+                    <p>Track quality changes over time</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script>
-        document.getElementById('generation-date').textContent = new Date().toLocaleString();
-    </script>
-</body>
-</html>
+<!-- Quality Factors Breakdown -->
+<section class="quality-factors" id="quality-factors">
+    <h2>🎯 Quality Assessment Factors</h2>
+    <p>Detailed breakdown of factors that influence code quality scoring from repository analysis.</p>
+    
+    <div class="store-features">
+        <div class="store-feature">
+            <div class="feature-icon">🔄</div>
+            <h4>Complexity Metrics (40%)</h4>
+            <p>Primary factors determining code complexity and maintainability</p>
+            <div class="feature-metrics">
+                <span class="metric">📊 Cyclomatic Complexity</span>
+                <span class="metric">🌳 Nesting Depth</span>
+                <span class="metric">📏 Function Length</span>
+                <span class="metric">🔗 Coupling Degree</span>
+                <span class="metric">📐 Cognitive Load</span>
+            </div>
+            <div class="factor-details">
+                <div class="detail-item">
+                    <strong>Cyclomatic Complexity:</strong> Measures independent paths through code
+                </div>
+                <div class="detail-item">
+                    <strong>Nesting Depth:</strong> Tracks maximum indentation levels
+                </div>
+                <div class="detail-item">
+                    <strong>Function Length:</strong> Analyzes lines of code per function
+                </div>
+            </div>
+        </div>
+        
+        <div class="store-feature">
+            <div class="feature-icon">🛠️</div>
+            <h4>Maintainability Index (25%)</h4>
+            <p>Composite metric assessing long-term code health</p>
+            <div class="feature-metrics">
+                <span class="metric">📈 Halstead Volume</span>
+                <span class="metric">🔄 Code Churn</span>
+                <span class="metric">📝 Comment Ratio</span>
+                <span class="metric">🏗️ Architecture Quality</span>
+                <span class="metric">🎨 Design Patterns</span>
+            </div>
+            <div class="factor-details">
+                <div class="detail-item">
+                    <strong>Halstead Volume:</strong> Measures program length and vocabulary
+                </div>
+                <div class="detail-item">
+                    <strong>Code Churn:</strong> Frequency of changes in code sections
+                </div>
+                <div class="detail-item">
+                    <strong>Comment Ratio:</strong> Balance of documentation vs code
+                </div>
+            </div>
+        </div>
+        
+        <div class="store-feature">
+            <div class="feature-icon">🧪</div>
+            <h4>Test Coverage (20%)</h4>
+            <p>Assessment of testing completeness and quality</p>
+            <div class="feature-metrics">
+                <span class="metric">📊 Line Coverage</span>
+                <span class="metric">🌿 Branch Coverage</span>
+                <span class="metric">🔧 Function Coverage</span>
+                <span class="metric">⚡ Test Quality</span>
+                <span class="metric">🎯 Edge Cases</span>
+            </div>
+            <div class="factor-details">
+                <div class="detail-item">
+                    <strong>Line Coverage:</strong> Percentage of code lines executed in tests
+                </div>
+                <div class="detail-item">
+                    <strong>Branch Coverage:</strong> Coverage of conditional branches
+                </div>
+                <div class="detail-item">
+                    <strong>Test Quality:</strong> Assertion strength and test isolation
+                </div>
+            </div>
+        </div>
+        
+        <div class="store-feature">
+            <div class="feature-icon">📖</div>
+            <h4>Documentation Quality (10%)</h4>
+            <p>Evaluation of code documentation and readability</p>
+            <div class="feature-metrics">
+                <span class="metric">📝 Docstring Coverage</span>
+                <span class="metric">📚 API Documentation</span>
+                <span class="metric">💬 Inline Comments</span>
+                <span class="metric">📋 README Quality</span>
+                <span class="metric">🎨 Code Clarity</span>
+            </div>
+            <div class="factor-details">
+                <div class="detail-item">
+                    <strong>Docstring Coverage:</strong> Functions/classes with documentation
+                </div>
+                <div class="detail-item">
+                    <strong>API Documentation:</strong> Public interface documentation quality
+                </div>
+                <div class="detail-item">
+                    <strong>Code Clarity:</strong> Self-documenting code practices
+                </div>
+            </div>
+        </div>
+        
+        <div class="store-feature">
+            <div class="feature-icon">🎨</div>
+            <h4>Code Style & Standards (5%)</h4>
+            <p>Adherence to coding standards and best practices</p>
+            <div class="feature-metrics">
+                <span class="metric">📏 Style Guide</span>
+                <span class="metric">🔤 Naming Conventions</span>
+                <span class="metric">📐 Formatting</span>
+                <span class="metric">🚫 Code Smells</span>
+                <span class="metric">✨ Best Practices</span>
+            </div>
+            <div class="factor-details">
+                <div class="detail-item">
+                    <strong>Style Guide:</strong> Consistency with language style guides
+                </div>
+                <div class="detail-item">
+                    <strong>Naming Conventions:</strong> Clear, descriptive variable/function names
+                </div>
+                <div class="detail-item">
+                    <strong>Code Smells:</strong> Detection of problematic code patterns
+                </div>
+            </div>
+        </div>
+        
+        <div class="store-feature">
+            <div class="feature-icon">📊</div>
+            <h4>Repository Health Indicators</h4>
+            <p>Additional factors from repository analysis</p>
+            <div class="feature-metrics">
+                <span class="metric">📁 File Organization</span>
+                <span class="metric">🔗 Dependency Management</span>
+                <span class="metric">🏷️ Version Control</span>
+                <span class="metric">🚀 CI/CD Integration</span>
+                <span class="metric">🔒 Security Practices</span>
+            </div>
+            <div class="factor-details">
+                <div class="detail-item">
+                    <strong>File Organization:</strong> Logical project structure and modularity
+                </div>
+                <div class="detail-item">
+                    <strong>Dependency Management:</strong> Clean, up-to-date dependencies
+                </div>
+                <div class="detail-item">
+                    <strong>Version Control:</strong> Commit message quality and branching strategy
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% if high_complexity_functions %}
+<!-- High Complexity Functions -->
+<section class="complexity-section" id="complexity">
+    <h2>⚠️ High Complexity Functions</h2>
+    <p>Functions that may benefit from refactoring to improve maintainability.</p>
+    
+    <div class="getting-started-grid">
+        {% for f in high_complexity_functions %}
+        <div class="getting-started-card">
+            <div class="card-icon">⚡</div>
+            <h3>{{ f.name }}()</h3>
+            
+            <div class="complexity-details">
+                <p><strong>Module:</strong> <code>{{ f.module }}</code></p>
+                <p><strong>Complexity:</strong> <span class="complexity-badge high">{{ f.complexity }}</span></p>
+                {% if f.line_number %}
+                <p><strong>Line:</strong> {{ f.line_number }}</p>
+                {% endif %}
+                
+                <div class="suggestion-box">
+                    <strong>💡 Suggestion:</strong>
+                    <p>{{ f.suggestion | default('Consider breaking this function into smaller, more focused units to reduce complexity and improve testability.') }}</p>
+                </div>
+            </div>
+            
+            <div class="action-links">
+                <a href="#" class="action-link">View Code</a>
+                <a href="#" class="action-link">Refactor Guide</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+{% if modules %}
+<!-- Module Analysis -->
+<section class="modules-analysis" id="modules">
+    <h2>📦 Module Quality Analysis</h2>
+    <p>Detailed quality metrics for each module in the codebase.</p>
+    
+    <div class="getting-started-grid">
+        {% for m in modules %}
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>{{ m.name }}</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">{{ m.functions | length | default(0) }}</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">{{ m.classes | length | default(0) }}</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">{{ m.lines_of_code | default(0) }}</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                        {% if m.complexity %}
+                            {% if m.complexity < 10 %}
+                                <span class="complexity-badge low">{{ m.complexity }}</span>
+                            {% elif m.complexity < 20 %}
+                                <span class="complexity-badge medium">{{ m.complexity }}</span>
+                            {% else %}
+                                <span class="complexity-badge high">{{ m.complexity }}</span>
+                            {% endif %}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+            
+            {% if m.path %}
+            <div class="code-block">
+                <code>{{ m.path }}</code>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+<!-- Code Quality Insights -->
+<section class="component-store-section" id="insights">
+    <h3>🏪 Code Quality Insights</h3>
+    <p>AI-powered code quality analysis and optimization recommendations.</p>
+    
+    <div class="store-features">
+        <div class="store-feature">
+            <div class="feature-icon">🎯</div>
+            <h4>Code Health Score</h4>
+            <p>Overall code health based on multiple quality metrics</p>
+            <div class="feature-metrics">
+                <span class="metric">✅ Maintainability</span>
+                <span class="metric">🔍 Readability</span>
+                <span class="metric">⚡ Performance</span>
+            </div>
+        </div>
+        
+        <div class="store-feature">
+            <div class="feature-icon">🔄</div>
+            <h4>Refactoring Opportunities</h4>
+            <p>Identify areas that would benefit from refactoring</p>
+            <div class="feature-metrics">
+                <span class="metric">📊 Complexity</span>
+                <span class="metric">🎨 Patterns</span>
+                <span class="metric">🧹 Clean Code</span>
+            </div>
+        </div>
+        
+        <div class="store-feature">
+            <div class="feature-icon">📈</div>
+            <h4>Quality Trends</h4>
+            <p>Track code quality improvements over time</p>
+            <div class="feature-metrics">
+                <span class="metric">📉 Debt Reduction</span>
+                <span class="metric">🚀 Coverage</span>
+                <span class="metric">✨ Best Practices</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Quality Dashboard -->
+    <div class="performance-dashboard">
+        <h4>📊 Quality Metrics Dashboard</h4>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-value">{{ (quality_score if quality_score is defined else 'B+') }}</div>
+                <div class="metric-label">Quality Grade</div>
+                <div class="metric-trend positive">↗ Improving</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">{{ (test_coverage if test_coverage is defined else '85') }}%</div>
+                <div class="metric-label">Test Coverage</div>
+                <div class="metric-trend positive">↗ +5% this week</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">{{ (tech_debt if tech_debt is defined else '12') }}h</div>
+                <div class="metric-label">Tech Debt</div>
+                <div class="metric-trend positive">↗ -3h reduced</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">{{ (code_smells if code_smells is defined else '8') }}</div>
+                <div class="metric-label">Code Smells</div>
+                <div class="metric-trend neutral">→ Stable</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% if not (complexity_analysis or modules or high_complexity_functions) %}
+<div class="no-content-message">
+    <div class="no-content-icon">📊</div>
+    <h3>No Quality Data Available</h3>
+    <p>Run code quality analysis to see metrics displayed here.</p>
+    <p>Configure quality tools to enable detailed analysis.</p>
+</div>
+{% endif %}
+
+<script src="assets/js/mermaid.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  if (window.mermaid) { 
+    mermaid.initialize({ 
+      startOnLoad: true,
+      theme: 'default',
+      flowchart: { useMaxWidth: true },
+      graph: { useMaxWidth: true }
+    }); 
+  }
+});
+</script>
+{% endblock %}

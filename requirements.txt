@@ -35,3 +35,13 @@ pathlib2==2.3.7
 # Additional utilities
 tqdm==4.66.1
 rich==13.7.0
+
+# AI/OpenAI integration for AI-powered diagram generation
+openai==1.51.0
+httpx==0.25.2
+python-dotenv==1.0.0
+
+# Optional: Vector embeddings for semantic search and code memory
+# Install with: pip install sentence-transformers numpy
+# sentence-transformers==2.2.2
+# numpy==1.24.3

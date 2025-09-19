@@ -1,16 +1,14 @@
 # Auto Doc Generator - Documentation
 
-*Generated automatically on 2025-09-18 00:01:56*
+*Generated automatically on 2025-09-19 01:57:17*
 
 ## Project Overview
 
-Flask Web Application with 6 Python files containing 79 functions and 4 classes across 3187 lines of code.
+General Software Project with 10 Python files containing 108 functions and 6 classes across 3838 lines of code.
 
 ### Languages & Technologies
 
 **Programming Languages:**
-- JavaScript
-- C
 - Python
 
 
@@ -18,10 +16,10 @@ Flask Web Application with 6 Python files containing 79 functions and 4 classes 
 
 | Metric | Value |
 |--------|--------|
-| Total Files | 6 |
-| Total Lines | 3187 |
-| Total Functions | 79 |
-| Total Classes | 4 |
+| Total Files | 10 |
+| Total Lines | 3838 |
+| Total Functions | 108 |
+| Total Classes | 6 |
 | AI/ML Components | 6 |
 ## Quick Navigation
 

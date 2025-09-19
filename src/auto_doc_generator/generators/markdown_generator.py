@@ -332,10 +332,27 @@ Contains {{ layer.files }} Python files.
     
     def generate_api_documentation(self, analysis: Dict[str, Any]) -> str:
         """Generate comprehensive API documentation."""
+        # Filter out virtual environment and third-party files
+        filtered_modules = [
+            module for module in analysis.get('modules', [])
+            if self._is_project_file(module.get('path', ''))
+        ]
+        
+        # Filter classes and functions based on their file locations
+        filtered_classes = [
+            cls for cls in analysis.get('classes', [])
+            if self._is_project_file(cls.get('file', ''))
+        ]
+        
+        filtered_functions = [
+            func for func in analysis.get('functions', [])
+            if self._is_project_file(func.get('file', ''))
+        ]
+        
         api_data = {
-            'classes': analysis.get('classes', []),
-            'functions': analysis.get('functions', []),
-            'modules': analysis.get('modules', [])
+            'classes': filtered_classes,
+            'functions': filtered_functions,
+            'modules': filtered_modules
         }
         
         # Group functions by category
@@ -1129,3 +1146,26 @@ Consider breaking this function into smaller, more focused functions.
             'pipfile': (cwd / 'Pipfile').exists(),
             'poetry': (cwd / 'pyproject.toml').exists()
         }
+    
+    def _is_project_file(self, file_path: str) -> bool:
+        """Check if a file is part of the actual project (not venv or third-party)."""
+        # Get exclusion patterns from configuration
+        api_config = self.config.get('analysis', {}).get('api_documentation', {})
+        
+        # Check if API filtering is enabled
+        if not api_config.get('include_only_project_files', True):
+            return True
+            
+        # Get exclusion patterns from config
+        excluded_paths = api_config.get('exclude_from_api_reference', [])
+        
+        # Convert to lowercase for case-insensitive matching
+        path_lower = file_path.lower()
+        
+        # Return False if path contains any excluded patterns
+        for excluded in excluded_paths:
+            excluded_lower = excluded.lower()
+            if excluded_lower in path_lower:
+                return False
+        
+        return True

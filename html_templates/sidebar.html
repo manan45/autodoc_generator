@@ -1,0 +1,161 @@
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+    <!-- Project Header -->
+    <label class="md-nav__title" for="__drawer">
+        <a href="index.html" title="{{ project_name | default('Documentation') }}" class="md-nav__button md-logo" aria-label="{{ project_name | default('Documentation') }}">
+            {{ project_name | default('Documentation') }}
+        </a>
+    </label>
+
+    <ul class="md-nav__list" data-md-scrollfix>
+        <!-- Overview Section -->
+        <li class="md-nav__item">
+            <a href="index.html" class="md-nav__link {% if current_page == 'index' %}md-nav__link--active{% endif %}">
+                Overview
+            </a>
+        </li>
+
+        <!-- Architecture & Design Section -->
+        <li class="md-nav__item md-nav__item--section">
+            <input class="md-nav__toggle md-toggle" data-md-toggle="nav-architecture" type="checkbox" id="nav-architecture" {% if current_page in ['architecture', 'modules'] %}checked{% endif %}>
+            <label class="md-nav__link md-nav__link--index" for="nav-architecture">
+                Architecture & Design
+                <span class="md-nav__icon md-nav__icon--expand">▼</span>
+            </label>
+            <nav class="md-nav" data-md-level="1">
+                <label class="md-nav__title" for="nav-architecture">
+                    Architecture & Design
+                </label>
+                <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                        <a href="architecture.html" class="md-nav__link {% if current_page == 'architecture' %}md-nav__link--active{% endif %}">
+                            System Architecture
+                        </a>
+                    </li>
+                    <li class="md-nav__item">
+                        <a href="modules.html" class="md-nav__link {% if current_page == 'modules' %}md-nav__link--active{% endif %}">
+                            Modules & Components
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </li>
+
+        <!-- Development Section -->
+        <li class="md-nav__item md-nav__item--section">
+            <input class="md-nav__toggle md-toggle" data-md-toggle="nav-development" type="checkbox" id="nav-development" {% if current_page in ['api'] %}checked{% endif %}>
+            <label class="md-nav__link md-nav__link--index" for="nav-development">
+                Development
+                <span class="md-nav__icon md-nav__icon--expand">▼</span>
+            </label>
+            <nav class="md-nav" data-md-level="1">
+                <label class="md-nav__title" for="nav-development">
+                    Development
+                </label>
+                <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                        <a href="api.html" class="md-nav__link {% if current_page == 'api' %}md-nav__link--active{% endif %}">
+                            API Reference
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </li>
+
+        <!-- Code Quality Section -->
+        <li class="md-nav__item md-nav__item--section">
+            <input class="md-nav__toggle md-toggle" data-md-toggle="nav-quality" type="checkbox" id="nav-quality" {% if current_page in ['complexity'] %}checked{% endif %}>
+            <label class="md-nav__link md-nav__link--index" for="nav-quality">
+                Code Quality
+                <span class="md-nav__icon md-nav__icon--expand">▼</span>
+            </label>
+            <nav class="md-nav" data-md-level="1">
+                <label class="md-nav__title" for="nav-quality">
+                    Code Quality
+                </label>
+                <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                        <a href="complexity.html" class="md-nav__link {% if current_page == 'complexity' %}md-nav__link--active{% endif %}">
+                            Quality Analysis
+                        </a>
+                    </li>
+                    <li class="md-nav__item">
+                        <a href="complexity.html#scoring-pipeline" class="md-nav__link">
+                            Scoring Pipeline
+                        </a>
+                    </li>
+                    <li class="md-nav__item">
+                        <a href="complexity.html#quality-factors" class="md-nav__link">
+                            Quality Factors
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </li>
+
+        <!-- AI & Machine Learning Section -->
+        {% if has_ai_components %}
+        <li class="md-nav__item md-nav__item--section">
+            <input class="md-nav__toggle md-toggle" data-md-toggle="nav-ai" type="checkbox" id="nav-ai" {% if current_page in ['ai_models', 'ai_pipelines'] %}checked{% endif %}>
+            <label class="md-nav__link md-nav__link--index" for="nav-ai">
+                AI & Machine Learning
+                <span class="md-nav__icon md-nav__icon--expand">▼</span>
+            </label>
+            <nav class="md-nav" data-md-level="1">
+                <label class="md-nav__title" for="nav-ai">
+                    AI & Machine Learning
+                </label>
+                <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                        <a href="ai_models.html" class="md-nav__link {% if current_page == 'ai_models' %}md-nav__link--active{% endif %}">
+                            AI Models
+                        </a>
+                    </li>
+                    <li class="md-nav__item">
+                        <a href="ai_pipelines.html" class="md-nav__link {% if current_page == 'ai_pipelines' %}md-nav__link--active{% endif %}">
+                            AI Pipelines
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </li>
+        {% endif %}
+
+        <!-- Getting Started Section -->
+        <li class="md-nav__item">
+            <a href="onboarding.html" class="md-nav__link {% if current_page == 'onboarding' %}md-nav__link--active{% endif %}">
+                Getting Started
+            </a>
+        </li>
+
+        <!-- Quick Links Section -->
+        <li class="md-nav__item md-nav__item--section">
+            <div class="md-nav__separator"></div>
+            <label class="md-nav__section-title">Quick Links</label>
+        </li>
+        
+        <li class="md-nav__item">
+            <a href="#search" class="md-nav__link" data-md-search-button>
+                Search Documentation
+            </a>
+        </li>
+
+        <!-- Project Stats -->
+        <li class="md-nav__item md-nav__item--section">
+            <div class="md-nav__separator"></div>
+            <div class="md-nav__stats">
+                <div class="md-nav__stats-item">
+                    <span class="md-nav__stats-number">{{ total_files | default(0) }}</span>
+                    <span class="md-nav__stats-label">Files</span>
+                </div>
+                <div class="md-nav__stats-item">
+                    <span class="md-nav__stats-number">{{ total_functions | default(0) }}</span>
+                    <span class="md-nav__stats-label">Functions</span>
+                </div>
+                <div class="md-nav__stats-item">
+                    <span class="md-nav__stats-number">{{ total_classes | default(0) }}</span>
+                    <span class="md-nav__stats-label">Classes</span>
+                </div>
+            </div>
+        </li>
+    </ul>
+</nav>

@@ -13,7 +13,7 @@ from .main import main
 from .analyzers.code_analyzer import CodeAnalyzer
 from .analyzers.ai_pipeline_analyzer import AIPipelineAnalyzer
 from .generators.markdown_generator import MarkdownGenerator
-from .generators.diagram_generator import DiagramGenerator
+from .generators.ai_analysis_generator import AIAnalysisGenerator
 from .remote_editor import RemoteEditor
 
 __all__ = [
@@ -21,6 +21,6 @@ __all__ = [
     "CodeAnalyzer", 
     "AIPipelineAnalyzer",
     "MarkdownGenerator",
-    "DiagramGenerator",
+    "AIAnalysisGenerator",
     "RemoteEditor"
 ]

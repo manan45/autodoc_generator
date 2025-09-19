@@ -113,8 +113,8 @@ analysis:
         - "def.*load_data"
 
 documentation:
-  # Documentation Generation Settings
-  output_format: "mkdocs"
+  # Documentation Generation Settings  
+  output_format: "html"
   theme: "material"
   
   # Content Generation
@@ -312,3 +312,23 @@ behavior:
   ai_enhanced_descriptions: false  # Future feature
   auto_generate_examples: false    # Future feature
   smart_categorization: true
+
+# AI Diagram Generation
+ai:
+  # OpenAI Configuration for AI-powered diagram generation
+  openai_api_key: null  # Set via environment variable OPENAI_API_KEY or .env file
+  model: "gpt-4"
+  
+  # Diagram Generation Settings
+  diagram_generation:
+    enabled: true
+    fallback_to_basic: true
+    max_tokens: 2000
+    temperature: 0.3
+    
+    # Types of AI diagrams to generate
+    logical_architecture: true
+    physical_architecture: true
+    module_interactions: true
+    data_flow_architecture: true
+    component_communication: true

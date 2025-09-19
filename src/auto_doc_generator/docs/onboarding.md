@@ -1,6 +1,6 @@
 # Developer Onboarding Guide
 
-Welcome to the Flask Web Application project! This guide will help you get started quickly.
+Welcome to the General Software Project project! This guide will help you get started quickly.
 
 ## Prerequisites
 
@@ -19,30 +19,32 @@ python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 # Install dependencies
-pip install -r requirements.txt
+# Install dependencies manually based on imports found in code
 ```
 
 ### 2. Project Structure Understanding
 
 **Key modules to understand:**
 
-- **main** (`src/main.py`) - Main entry point of the application
-- **ai_pipeline_analyzer** (`src/analyzers/ai_pipeline_analyzer.py`) - Core module with 10 functions and 1 classes
-- **code_analyzer** (`src/analyzers/code_analyzer.py`) - Core module with 24 functions and 1 classes
-- **diagram_generator** (`src/generators/diagram_generator.py`) - Core module with 13 functions and 1 classes
-- **markdown_generator** (`src/generators/markdown_generator.py`) - Core module with 20 functions and 1 classes
+- **remote_editor** (`remote_editor.py`) - Core module with 6 functions and 1 classes
+- **main** (`main.py`) - Main entry point of the application
+- **ai_pipeline_analyzer** (`analyzers/ai_pipeline_analyzer.py`) - Core module with 10 functions and 1 classes
+- **code_analyzer** (`analyzers/code_analyzer.py`) - Core module with 24 functions and 1 classes
+- **html_generator** (`generators/html_generator.py`) - Core module with 21 functions and 1 classes
 
 ### 3. Getting Started
 
 **Main entry points:**
 
-- `serve_site` in `src/main.py` - Starting point for serve_site operations
-- `main` in `src/main.py` - Starting point for main operations
-- `_truncate_docstring` in `src/generators/markdown_generator.py` - Starting point for _truncate_docstring operations
+- `serve_site` in `main.py` - Starting point for serve_site operations
+- `main` in `main.py` - Starting point for main operations
+- `_find_entry_points` in `generators/html_generator.py` - Starting point for _find_entry_points operations
+- `_truncate_docstring` in `generators/html_generator.py` - Starting point for _truncate_docstring operations
+- `_truncate_docstring` in `generators/markdown_generator.py` - Starting point for _truncate_docstring operations
 
 To run the application:
 ```bash
-python src/main.py
+python main.py
 ```
 
 ### 4. AI/ML Components
@@ -62,11 +64,11 @@ See [AI Models Documentation](ai_models.md) for detailed information.
 
 The project follows these conventions:
 
-- `src/main.py` - Main entry point of the application
-- `src/analyzers/ai_pipeline_analyzer.py` - Core module with 10 functions and 1 classes
-- `src/analyzers/code_analyzer.py` - Core module with 24 functions and 1 classes
-- `src/generators/diagram_generator.py` - Core module with 13 functions and 1 classes
-- `src/generators/markdown_generator.py` - Core module with 20 functions and 1 classes
+- `remote_editor.py` - Core module with 6 functions and 1 classes
+- `main.py` - Main entry point of the application
+- `analyzers/ai_pipeline_analyzer.py` - Core module with 10 functions and 1 classes
+- `analyzers/code_analyzer.py` - Core module with 24 functions and 1 classes
+- `generators/html_generator.py` - Core module with 21 functions and 1 classes
 
 ### Running Tests
 

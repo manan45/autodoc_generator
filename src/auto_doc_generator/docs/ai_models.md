@@ -8,7 +8,7 @@ No ML models detected in the codebase.
 
 ### Model Serving
 
-**File:** `src/analyzers/ai_pipeline_analyzer.py`
+**File:** `analyzers/ai_pipeline_analyzer.py`
 
 **Detected patterns:**
 - model.predict

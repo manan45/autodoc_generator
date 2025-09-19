@@ -21,7 +21,8 @@ sys.path.insert(0, str(Path(__file__).parent))
 from analyzers.code_analyzer import CodeAnalyzer
 from analyzers.ai_pipeline_analyzer import AIPipelineAnalyzer
 from generators.markdown_generator import MarkdownGenerator
-from generators.diagram_generator import DiagramGenerator
+from generators.html_generator import HTMLGenerator
+from generators.ai_analysis_coordinator import AIAnalysisCoordinator
 
 
 def setup_logging(config: Dict[str, Any]) -> None:
@@ -55,7 +56,7 @@ def load_config(config_path: str = "documentor.yaml") -> Dict[str, Any]:
                 }
             },
             'documentation': {
-                'output_format': 'mkdocs',
+                'output_format': 'html',
                 'theme': 'material',
                 'sections': {
                     'overview': True,
@@ -118,29 +119,51 @@ def generate_documentation(code_analysis: Dict[str, Any], ai_analysis: Dict[str,
     print("📚 GENERATING DOCUMENTATION")
     print("=" * 60)
     
-    # Initialize generators
-    markdown_gen = MarkdownGenerator(template_dir="templates", output_dir=output_dir, config=config)
-    diagram_gen = DiagramGenerator(output_dir=f"{output_dir}/diagrams")
+    # Determine which generator to use (default to HTML)
+    output_format = config.get('documentation', {}).get('output_format', 'html')
     
-    # Generate markdown documentation
-    print("\n📝 Generating markdown documentation...")
-    docs = markdown_gen.generate_all_documentation(code_analysis, ai_analysis)
+    if output_format == 'html':
+        # Initialize HTML generator (default)
+        doc_gen = HTMLGenerator(template_dir="html_templates", output_dir=output_dir, config=config)
+        print("\n🌐 Generating HTML documentation...")
+    else:
+        # Fall back to markdown generator
+        doc_gen = MarkdownGenerator(template_dir="templates", output_dir=output_dir, config=config)
+        print("\n📝 Generating markdown documentation...")
     
-    # Generate diagrams
-    if config.get('generation', {}).get('include_diagrams', True):
-        print("📊 Generating diagrams...")
-        diagrams = diagram_gen.generate_all_diagrams(code_analysis, ai_analysis)
+    # Initialize AI analysis coordinator (refactored from generator)
+    ai_analysis_coordinator = AIAnalysisCoordinator(config=config)
+    
+    # Step 1: Enhance code analysis with AI insights
+    print("🧠 Enhancing analysis with AI insights...")
+    enhanced_analysis = ai_analysis_coordinator.enhance_code_analysis(code_analysis, ai_analysis)
+    
+    # Step 2: Generate documentation using enhanced analysis
+    print("📚 Generating documentation with enhanced analysis...")
+    docs = doc_gen.generate_all_documentation(code_analysis, ai_analysis, enhanced_analysis)
+    
+    # Step 3: Use AI-enhanced diagrams (already generated in enhanced analysis)
+    if 'diagrams' in enhanced_analysis and enhanced_analysis['diagrams']:
+        print("✨ Using AI-enhanced diagrams...")
         
-        # Save Mermaid diagrams
-        diagram_gen.save_mermaid_diagrams(diagrams)
+        # Regenerate architecture page with full enhanced analysis (not just diagrams)
+        docs['architecture.html'] = doc_gen.generate_architecture_page(code_analysis, enhanced_analysis)
+        
+        # Merge enhanced diagrams into docs
+        if 'diagrams' not in docs:
+            docs['diagrams'] = {}
+        docs['diagrams'].update(enhanced_analysis['diagrams'])
     
     # Save all documentation
     print("💾 Saving documentation files...")
-    markdown_gen.save_documentation(docs)
+    doc_gen.save_documentation(docs)
     
     print("\n✅ Documentation generation complete!")
     print(f"   📁 Documentation saved to: {output_dir}/")
-    print(f"   🌐 Open {output_dir}/index.md to view the documentation")
+    if output_format == 'html':
+        print(f"   🌐 Open {output_dir}/index.html to view the documentation")
+    else:
+        print(f"   🌐 Open {output_dir}/index.md to view the documentation")
 
 
 def build_site(output_dir: str = "docs") -> None:
@@ -174,9 +197,28 @@ def serve_site(output_dir: str = "docs", port: int = 8000) -> None:
     
     try:
         import subprocess
+        import os
+        from pathlib import Path
         
-        # Serve the site from project root (where mkdocs.yml is located)
-        subprocess.run(['mkdocs', 'serve', '--dev-addr', f'127.0.0.1:{port}'])
+        # Check if we're serving HTML or MkDocs format
+        output_path = Path(output_dir)
+        html_index = output_path / "index.html"
+        mkdocs_config = Path("mkdocs.yml")
+        
+        if html_index.exists() and not mkdocs_config.exists():
+            # Serve HTML files directly using Python's built-in server
+            print(f"📄 Serving HTML documentation from {output_dir}")
+            os.chdir(output_dir)
+            subprocess.run(['python3', '-m', 'http.server', str(port)])
+        elif mkdocs_config.exists():
+            # Use MkDocs serve
+            print(f"📚 Serving MkDocs site")
+            subprocess.run(['mkdocs', 'serve', '--dev-addr', f'127.0.0.1:{port}'])
+        else:
+            # Fallback to simple HTTP server
+            print(f"📄 Serving documentation from {output_dir}")
+            os.chdir(output_dir)
+            subprocess.run(['python3', '-m', 'http.server', str(port)])
         
     except ImportError:
         print("⚠️ MkDocs not installed. Install with: pip install mkdocs mkdocs-material")
@@ -184,6 +226,13 @@ def serve_site(output_dir: str = "docs", port: int = 8000) -> None:
         print("\n🛑 Server stopped")
     except Exception as e:
         print(f"❌ Error serving site: {e}")
+        # Fallback to simple HTTP server
+        try:
+            import os
+            os.chdir(output_dir)
+            subprocess.run(['python3', '-m', 'http.server', str(port)])
+        except Exception as fallback_error:
+            print(f"❌ Fallback server also failed: {fallback_error}")
 
 
 def print_summary(code_analysis: Dict[str, Any], ai_analysis: Dict[str, Any]) -> None:
@@ -287,6 +336,12 @@ Examples:
     )
     
     parser.add_argument(
+        '--format',
+        choices=['html', 'markdown', 'mkdocs'],
+        help='Documentation output format (default: html)'
+    )
+    
+    parser.add_argument(
         '--deploy',
         action='store_true',
         help='Deploy to GitHub Pages (requires GitHub Actions)'
@@ -301,6 +356,13 @@ Examples:
     
     # Load configuration
     config = load_config(args.config)
+    
+    # Override format from command line if provided
+    if args.format:
+        if 'documentation' not in config:
+            config['documentation'] = {}
+        config['documentation']['output_format'] = args.format
+    
     setup_logging(config)
     
     print("🚀 Auto Documentation Generation System")

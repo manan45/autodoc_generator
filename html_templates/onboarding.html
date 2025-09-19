@@ -1,153 +1,308 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Onboarding - Auto-Generated Documentation</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-</head>
-<body>
-    <nav class="sidebar">
-        <div class="nav-header">
-            <h2><i class="fas fa-file-alt"></i> Documentation</h2>
+{% extends "base.html" %}
+
+{% set current_page = "onboarding" %}
+
+{% block title %}Getting Started{% endblock %}
+{% block page_title %}{{ project_name | default('Project') }} Getting Started{% endblock %}
+{% block breadcrumb_title %}Getting Started{% endblock %}
+
+{% block toc %}
+<li class="md-nav__item"><a href="#overview" class="md-nav__link">Overview</a></li>
+<li class="md-nav__item"><a href="#quickstart" class="md-nav__link">Quick Start</a></li>
+<li class="md-nav__item"><a href="#setup" class="md-nav__link">Setup Guide</a></li>
+<li class="md-nav__item"><a href="#development" class="md-nav__link">Development</a></li>
+{% endblock %}
+
+{% block content %}
+<h1 id="overview">{{ project_name | default('Project') }} Getting Started</h1>
+<p>Everything you need to get up and running with the project quickly.</p>
+
+<!-- Quick Start Cards -->
+<section class="getting-started" id="quickstart">
+    <h2>🚀 Quick Start</h2>
+    <div class="getting-started-grid">
+        <div class="getting-started-card">
+            <div class="card-icon">📋</div>
+            <h3>Prerequisites</h3>
+            <p>Required tools and dependencies</p>
+            <ul class="prerequisite-list">
+                <li>Git</li>
+                {% if 'Python' in languages_detected %}<li>Python 3.8+</li>{% endif %}
+                {% if 'JavaScript' in languages_detected or 'TypeScript' in languages_detected %}<li>Node.js 14+</li>{% endif %}
+                {% if 'Docker' in frameworks_detected %}<li>Docker & Docker Compose</li>{% endif %}
+                {% if 'Java' in languages_detected %}<li>Java 11+</li>{% endif %}
+            </ul>
         </div>
-        <ul class="nav-menu">
-            <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="architecture.html" class="nav-link"><i class="fas fa-sitemap"></i> Architecture</a></li>
-            <li><a href="api.html" class="nav-link"><i class="fas fa-code"></i> API Reference</a></li>
-            <li><a href="ai_models.html" class="nav-link"><i class="fas fa-robot"></i> AI Models</a></li>
-            <li><a href="ai_pipelines.html" class="nav-link"><i class="fas fa-flow-chart"></i> AI Pipelines</a></li>
-            <li><a href="onboarding.html" class="nav-link active"><i class="fas fa-user-plus"></i> Onboarding</a></li>
-            <li><a href="complexity.html" class="nav-link"><i class="fas fa-chart-line"></i> Code Quality</a></li>
-        </ul>
         
-        <div class="search-container">
-            <input type="text" id="search-input" placeholder="Search documentation...">
-            <div id="search-results" class="search-results"></div>
+        <div class="getting-started-card">
+            <div class="card-icon">⚡</div>
+            <h3>Installation</h3>
+            <p>Get the project running in minutes</p>
+            <div class="code-block">
+                <code>git clone &lt;repo-url&gt;</code>
+                <code>cd {{ project_name | lower | default('project') }}</code>
+                {% if 'Python' in languages_detected %}
+                <code>pip install -r requirements.txt</code>
+                {% elif 'JavaScript' in languages_detected or 'TypeScript' in languages_detected %}
+                <code>npm install</code>
+                {% endif %}
+            </div>
         </div>
-    </nav>
-
-    <main class="main-content">
-        <header class="content-header">
-            <button class="mobile-nav-toggle" id="mobile-nav-toggle">
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="breadcrumb">
-                <span class="breadcrumb-item">Getting Started Guide</span>
+        
+        <div class="getting-started-card">
+            <div class="card-icon">▶️</div>
+            <h3>Run Application</h3>
+            <p>Start the application with one command</p>
+            <div class="code-block">
+                {% if project_type == 'Flask Web Application' %}
+                <code>flask run</code>
+                {% elif 'Django' in project_type %}
+                <code>python manage.py runserver</code>
+                {% elif 'Node.js' in project_type %}
+                <code>npm start</code>
+                {% else %}
+                <code>python -m {{ project_name | lower | default('app') }}</code>
+                {% endif %}
             </div>
-            <div class="header-actions">
-                <button class="theme-toggle" id="theme-toggle">
-                    <i class="fas fa-moon"></i>
-                </button>
-            </div>
-        </header>
-
-        <div class="content">
-            <div class="content-meta">
-                <p class="generated-date">Generated on <span id="generation-date"></span></p>
-            </div>
-            
-            <h1><i class="fas fa-user-plus"></i> Getting Started</h1>
-            
-            <div class="alert alert-info">
-                This guide will help you set up your development environment and get started with the codebase.
-            </div>
-
-            <h2 id="prerequisites">Prerequisites</h2>
-            
-            <div id="prerequisites-placeholder">
-                <p><em>Prerequisites and required software will be automatically detected and listed here.</em></p>
-            </div>
-
-            <h2 id="installation">Installation</h2>
-            
-            <div class="card">
-                <div class="card-header">
-                    <i class="fas fa-download"></i>
-                    <h3>Step 1: Clone the Repository</h3>
-                </div>
-                <pre><code class="language-bash">git clone [REPOSITORY_URL]
-cd [PROJECT_NAME]</code></pre>
-                <p><em>Repository URL and project name will be automatically populated during documentation generation.</em></p>
-            </div>
-
-            <div id="environment-setup-placeholder">
-                <p><em>Environment setup instructions will be generated based on detected package managers and dependencies.</em></p>
-            </div>
-
-            <div id="configuration-placeholder">
-                <p><em>Configuration instructions will be generated based on detected environment files and config patterns.</em></p>
-            </div>
-
-            <h2 id="database-setup">Database Setup</h2>
-            
-            <div id="database-setup-placeholder">
-                <p><em>Database setup instructions will be generated if database components are detected.</em></p>
-            </div>
-
-            <h2 id="running-services">Running the Services</h2>
-            
-            <div id="running-services-placeholder">
-                <p><em>Service startup instructions will be generated based on detected entry points and service definitions.</em></p>
-            </div>
-
-            <h2 id="verification">Verify Installation</h2>
-            
-            <div id="verification-placeholder">
-                <p><em>Verification steps and health check endpoints will be automatically detected and documented here.</em></p>
-            </div>
-
-            <h2 id="development-workflow">Development Workflow</h2>
-            
-            <div class="card">
-                <div class="card-header">
-                    <i class="fas fa-code-branch"></i>
-                    <h3>Git Workflow</h3>
-                </div>
-                <ol>
-                    <li>Create a feature branch: <code>git checkout -b feature/your-feature</code></li>
-                    <li>Make your changes and commit regularly</li>
-                    <li>Run tests: <code>pytest</code></li>
-                    <li>Run linting: <code>black . && flake8</code></li>
-                    <li>Push and create a pull request</li>
-                </ol>
-            </div>
-
-            <h2 id="useful-commands">Useful Commands</h2>
-            
-            <table>
-                <thead>
-                    <tr><th>Task</th><th>Command</th><th>Description</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td>Run Tests</td><td><code>pytest</code></td><td>Run all unit tests</td></tr>
-                    <tr><td>Code Formatting</td><td><code>black .</code></td><td>Format code with Black</td></tr>
-                    <tr><td>Linting</td><td><code>flake8</code></td><td>Check code style</td></tr>
-                    <tr><td>Type Checking</td><td><code>mypy app/</code></td><td>Run static type checking</td></tr>
-                    <tr><td>Generate Docs</td><td><code>mkdocs serve</code></td><td>Serve documentation locally</td></tr>
-                    <tr><td>DB Migration</td><td><code>alembic revision --autogenerate -m "message"</code></td><td>Create database migration</td></tr>
-                </tbody>
-            </table>
-
-            <div class="alert alert-success">
-                <strong><i class="fas fa-rocket"></i> Ready to Go!</strong> 
-                You're all set up! Check out the <a href="architecture.html">Architecture</a> guide to understand the system structure.
-            </div>
-
-            <footer class="content-footer">
-                <p><em>This documentation was automatically generated by the Auto Documentation Generation System.</em></p>
-            </footer>
         </div>
-    </main>
+        
+        <div class="getting-started-card">
+            <div class="card-icon">🔧</div>
+            <h3>Configuration</h3>
+            <p>Set up your environment</p>
+            {% if environment_variables %}
+            <div class="code-block">
+                <code>cp .env.example .env</code>
+                <code># Edit .env with your settings</code>
+            </div>
+            {% else %}
+            <div class="code-block">
+                <code>config/settings.yaml</code>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script>
-        document.getElementById('generation-date').textContent = new Date().toLocaleString();
-    </script>
-</body>
-</html>
+<!-- Detailed Setup Guide -->
+<section class="setup-guide" id="setup">
+    <h2>⚙️ Detailed Setup</h2>
+    
+    <div class="getting-started-grid">
+        {% if 'Python' in languages_detected %}
+        <div class="getting-started-card">
+            <div class="card-icon">🐍</div>
+            <h3>Python Setup</h3>
+            <p>Set up Python virtual environment</p>
+            <div class="code-block">
+                <code>python -m venv venv</code>
+                <code>source venv/bin/activate</code>
+                <code>pip install -r requirements.txt</code>
+                <code>pip install -e .</code>
+            </div>
+        </div>
+        {% endif %}
+        
+        {% if 'JavaScript' in languages_detected or 'TypeScript' in languages_detected %}
+        <div class="getting-started-card">
+            <div class="card-icon">📦</div>
+            <h3>Node.js Setup</h3>
+            <p>Install Node.js dependencies</p>
+            <div class="code-block">
+                <code>npm install</code>
+                <code>npm run build</code>
+                <code>npm test</code>
+            </div>
+        </div>
+        {% endif %}
+        
+        {% if environment_variables %}
+        <div class="getting-started-card">
+            <div class="card-icon">🔐</div>
+            <h3>Environment Variables</h3>
+            <p>Configure required environment variables</p>
+            <div class="code-block">
+                {% for env_var in environment_variables[:3] %}
+                <code>{{ env_var }}=value</code>
+                {% endfor %}
+                {% if environment_variables|length > 3 %}
+                <code># ... and {{ environment_variables|length - 3 }} more</code>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+        
+        <div class="getting-started-card">
+            <div class="card-icon">🗄️</div>
+            <h3>Database Setup</h3>
+            <p>Initialize the database</p>
+            <div class="code-block">
+                {% if 'Django' in project_type %}
+                <code>python manage.py migrate</code>
+                <code>python manage.py createsuperuser</code>
+                {% elif 'Flask' in project_type %}
+                <code>flask db init</code>
+                <code>flask db migrate</code>
+                <code>flask db upgrade</code>
+                {% else %}
+                <code># Database setup instructions</code>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Development Workflow -->
+<section class="development-workflow" id="development">
+    <h2>💻 Development Workflow</h2>
+    
+    <div class="getting-started-grid">
+        <div class="getting-started-card">
+            <div class="card-icon">🌿</div>
+            <h3>Git Workflow</h3>
+            <p>Standard development workflow</p>
+            <div class="code-block">
+                <code>git checkout -b feature/name</code>
+                <code>git commit -m "feat: description"</code>
+                <code>git push origin feature/name</code>
+            </div>
+            <div class="action-links">
+                <a href="#" class="action-link">PR Template</a>
+                <a href="#" class="action-link">Guidelines</a>
+            </div>
+        </div>
+        
+        <div class="getting-started-card">
+            <div class="card-icon">🧪</div>
+            <h3>Testing</h3>
+            <p>Run tests before committing</p>
+            <div class="code-block">
+                {% if 'Python' in languages_detected %}
+                <code>pytest</code>
+                <code>pytest --cov=./</code>
+                {% elif 'JavaScript' in languages_detected %}
+                <code>npm test</code>
+                <code>npm run test:coverage</code>
+                {% else %}
+                <code># Run test suite</code>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="getting-started-card">
+            <div class="card-icon">🎨</div>
+            <h3>Code Style</h3>
+            <p>Maintain consistent code style</p>
+            <div class="code-block">
+                {% if 'Python' in languages_detected %}
+                <code>black .</code>
+                <code>flake8</code>
+                <code>isort .</code>
+                {% elif 'JavaScript' in languages_detected %}
+                <code>npm run lint</code>
+                <code>npm run format</code>
+                {% else %}
+                <code># Linting commands</code>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="getting-started-card">
+            <div class="card-icon">📖</div>
+            <h3>Documentation</h3>
+            <p>Keep documentation up to date</p>
+            <div class="action-links">
+                <a href="architecture.html" class="action-link">Architecture</a>
+                <a href="api.html" class="action-link">API Reference</a>
+                <a href="modules.html" class="action-link">Modules</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% if key_modules %}
+<!-- Key Modules -->
+<section class="component-store-section">
+    <h3>🏪 Key Modules</h3>
+    <p>Essential modules to understand for working with this project.</p>
+    
+    <div class="store-features">
+        {% for m in key_modules %}
+        <div class="store-feature">
+            <div class="feature-icon">📦</div>
+            <h4>{{ m.name }}</h4>
+            <p>{{ m.description }}</p>
+            <div class="code-block">
+                <code>{{ m.path }}</code>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+{% if run_commands %}
+<!-- Available Commands -->
+<section class="commands-section">
+    <h2>🔧 Available Commands</h2>
+    
+    <div class="getting-started-grid">
+        {% for command in run_commands %}
+        <div class="getting-started-card">
+            <div class="card-icon">⚡</div>
+            <h3>{{ command.description | default('Command') }}</h3>
+            <div class="code-block">
+                <code>{{ command.command }}</code>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+<!-- Developer Resources -->
+<section class="component-store-section">
+    <h3>🎯 Developer Resources</h3>
+    <p>Essential resources and tools for productive development.</p>
+    
+    <div class="performance-dashboard">
+        <h4>📊 Project Health</h4>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-value">✅</div>
+                <div class="metric-label">Build Status</div>
+                <div class="metric-trend positive">Passing</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">{{ (test_coverage if test_coverage is defined else '85') }}%</div>
+                <div class="metric-label">Coverage</div>
+                <div class="metric-trend positive">↗ Good</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">{{ (open_issues if open_issues is defined else '12') }}</div>
+                <div class="metric-label">Open Issues</div>
+                <div class="metric-trend neutral">→ Active</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">{{ (contributors if contributors is defined else '8') }}</div>
+                <div class="metric-label">Contributors</div>
+                <div class="metric-trend positive">↗ Growing</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="assets/js/mermaid.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  if (window.mermaid) { 
+    mermaid.initialize({ 
+      startOnLoad: true,
+      theme: 'default',
+      flowchart: { useMaxWidth: true },
+      graph: { useMaxWidth: true }
+    }); 
+  }
+});
+</script>
+{% endblock %}

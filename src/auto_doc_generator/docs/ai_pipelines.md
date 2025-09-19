@@ -4,7 +4,7 @@
 
 ### AIPipelineAnalyzer
 
-**Location:** `src/analyzers/ai_pipeline_analyzer.py:7`
+**Location:** `analyzers/ai_pipeline_analyzer.py:7`
 
 Analyzes AI/ML pipeline components and generates specialized documentation.
 
@@ -21,7 +21,7 @@ No training functions detected.
 
 ### _classify_directory
 
-**Location:** `src/analyzers/code_analyzer.py:593`
+**Location:** `analyzers/code_analyzer.py:593`
 
 Classify directory type based on name.
 
@@ -31,7 +31,7 @@ Classify directory type based on name.
 
 ### _classify_transformation
 
-**Location:** `src/analyzers/code_analyzer.py:696`
+**Location:** `analyzers/code_analyzer.py:696`
 
 Classify the type of data transformation.
 
@@ -41,7 +41,7 @@ Classify the type of data transformation.
 
 ### _classify_output
 
-**Location:** `src/analyzers/code_analyzer.py:715`
+**Location:** `analyzers/code_analyzer.py:715`
 
 Classify the type of output operation.
 
@@ -51,7 +51,7 @@ Classify the type of output operation.
 
 ### _classify_data_store
 
-**Location:** `src/analyzers/code_analyzer.py:732`
+**Location:** `analyzers/code_analyzer.py:732`
 
 Classify the type of data store operation.
 
@@ -61,7 +61,7 @@ Classify the type of data store operation.
 
 ### _classify_component
 
-**Location:** `src/generators/markdown_generator.py:1066`
+**Location:** `generators/markdown_generator.py:1066`
 
 Classify component type based on directory name.
 
@@ -72,19 +72,19 @@ Classify component type based on directory name.
 
 ## Data Sources
 
-### Data Source in src/analyzers/ai_pipeline_analyzer.py
+### Data Source in analyzers/ai_pipeline_analyzer.py
 
 **Data Types:** .csv, .json, .parquet, .sql, database, mongodb, postgres
 
 ---
 
-### Data Source in src/analyzers/code_analyzer.py
+### Data Source in analyzers/code_analyzer.py
 
 **Data Types:** .json, database
 
 ---
 
-### Data Source in src/generators/diagram_generator.py
+### Data Source in generators/diagram_generator.py
 
 **Data Types:** database, postgres
 
@@ -95,7 +95,7 @@ Classify component type based on directory name.
 
 ### __init__
 
-**Location:** `src/analyzers/ai_pipeline_analyzer.py:10`
+**Location:** `analyzers/ai_pipeline_analyzer.py:10`
 
 
 **Tracking Tools:** mlflow, wandb
@@ -104,7 +104,7 @@ Classify component type based on directory name.
 
 ### _analyze_function
 
-**Location:** `src/analyzers/ai_pipeline_analyzer.py:220`
+**Location:** `analyzers/ai_pipeline_analyzer.py:220`
 
 Analyze a function for ML patterns.
 

@@ -1,65 +1,215 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }} - Auto-Generated Documentation</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{% block title %}{{ title | default('Documentation') }}{% endblock %} - {{ project_name | default('Project') }}</title>
+    <meta name="description" content="{% block description %}Auto-generated documentation for {{ project_name | default('Project') }}{% endblock %}">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    {% block extra_css %}{% endblock %}
 </head>
-<body>
-    <nav class="sidebar">
-        <div class="nav-header">
-            <h2><i class="fas fa-file-alt"></i> Documentation</h2>
-        </div>
-        <ul class="nav-menu">
-            <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="architecture.html" class="nav-link"><i class="fas fa-sitemap"></i> Architecture</a></li>
-            <li><a href="api.html" class="nav-link"><i class="fas fa-code"></i> API Reference</a></li>
-            <li><a href="ai_models.html" class="nav-link"><i class="fas fa-robot"></i> AI Models</a></li>
-            <li><a href="ai_pipelines.html" class="nav-link"><i class="fas fa-flow-chart"></i> AI Pipelines</a></li>
-            <li><a href="onboarding.html" class="nav-link"><i class="fas fa-user-plus"></i> Onboarding</a></li>
-            <li><a href="complexity.html" class="nav-link"><i class="fas fa-chart-line"></i> Code Quality</a></li>
-        </ul>
-        
-        <div class="search-container">
-            <input type="text" id="search-input" placeholder="Search documentation...">
-            <div id="search-results" class="search-results"></div>
-        </div>
-    </nav>
 
-    <main class="main-content">
-        <header class="content-header">
-            <button class="mobile-nav-toggle" id="mobile-nav-toggle">
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="breadcrumb">
-                <span class="breadcrumb-item">{{ breadcrumb }}</span>
+<body dir="ltr" data-md-color-scheme="" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <!-- Skip to content -->
+    <input class="md-skip" data-md-skip tabindex="-1" type="checkbox" id="__skip" autocomplete="off">
+    <label class="md-skip__button" for="__skip">
+        Skip to content
+    </label>
+
+    <!-- Header -->
+    <header class="md-header" data-md-component="header">
+        <nav class="md-header__inner md-grid" aria-label="Header">
+            <!-- Link to home -->
+            <a href="index.html" title="{{ project_name | default('Documentation') }}" class="md-header__button md-logo" aria-label="{{ project_name | default('Documentation') }}">
+                <span class="logo-text">📚</span>
+            </a>
+
+            <!-- Button to toggle drawer -->
+            <label class="md-header__button md-icon" for="__drawer">
+                <span class="menu-icon">☰</span>
+            </label>
+
+            <!-- Header title -->
+            <div class="md-header__title" data-md-component="header-title">
+                <div class="md-header__ellipsis">
+                    <div class="md-header__topic">
+                        <span class="md-ellipsis">{{ project_name | default('Documentation') }}</span>
+                    </div>
+                    <div class="md-header__topic" data-md-component="header-topic">
+                        <span class="md-ellipsis">{% block page_title %}{{ title | default('Documentation') }}{% endblock %}</span>
+                    </div>
+                </div>
             </div>
-            <div class="header-actions">
-                <button class="theme-toggle" id="theme-toggle">
-                    <i class="fas fa-moon"></i>
+
+            <!-- Header actions -->
+            <div class="md-header__option">
+                <!-- Search button -->
+                <div class="md-header__source">
+                    <button class="md-search__button md-icon" aria-label="Search" data-md-search-button>
+                        <span class="search-icon">🔍</span>
+                    </button>
+                </div>
+
+                <!-- Theme toggle -->
+                <button class="md-header__button md-icon theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode">
+                    <span id="theme-icon" class="theme-icon">🌙</span>
                 </button>
             </div>
-        </header>
+        </nav>
 
-        <div class="content">
-            <div class="content-meta">
-                <p class="generated-date">Generated on {{ generation_date }}</p>
+        <!-- Search interface -->
+        <div class="md-search" data-md-component="search" role="dialog">
+            <label class="md-search__overlay" for="__search"></label>
+            <div class="md-search__inner" role="search">
+                <form class="md-search__form" name="search">
+                    <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-md-search-input id="search-input">
+                    <label class="md-search__icon md-icon" for="__search">
+                        <span class="search-icon">🔍</span>
+                    </label>
+                    <nav class="md-search__options" aria-label="Search">
+                        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+                            <span class="close-icon">✕</span>
+                        </button>
+                    </nav>
+                </form>
+                <div class="md-search__output">
+                    <div class="md-search__scrollwrap" data-md-scrollfix>
+                        <div class="md-search-result" data-md-component="search-result" id="search-results">
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            {{ content }}
-
-            <footer class="content-footer">
-                <p><em>This documentation was automatically generated by the Auto Documentation Generation System.</em></p>
-            </footer>
         </div>
-    </main>
+    </header>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <!-- Container -->
+    <div class="md-container" data-md-component="container">
+        <!-- Sidebar -->
+        <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+        <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+        
+        <!-- Navigation -->
+        <div class="md-overlay" data-md-component="overlay"></div>
+        
+        <!-- Main Navigation Sidebar (Left) -->
+        <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+            <div class="md-sidebar__scrollwrap">
+                <div class="md-sidebar__inner">
+                    {% include 'sidebar.html' %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Table of contents (Right) -->
+        {% block toc_sidebar %}
+        <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+            <div class="md-sidebar__scrollwrap">
+                <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+                        <label class="md-nav__title" for="__toc">Table of contents</label>
+                        <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+                            {% block toc %}{% endblock %}
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+
+        <!-- Main content -->
+        <main class="md-main" data-md-component="main">
+            <div class="md-main__inner md-grid">
+                <div class="md-content" data-md-component="content">
+                    <article class="md-content__inner md-typeset">
+                        <!-- Breadcrumbs -->
+                        {% block breadcrumbs %}
+                        <div class="md-breadcrumbs">
+                            <nav class="md-breadcrumbs__list" aria-label="Breadcrumbs">
+                                <ol class="md-breadcrumbs__list">
+                                    <li class="md-breadcrumbs__item">
+                                        <a href="index.html" class="md-breadcrumbs__link">Home</a>
+                                    </li>
+                                    <li class="md-breadcrumbs__item">
+                                        <a href="#" class="md-breadcrumbs__link">{% block breadcrumb_title %}{{ title | default('Page') }}{% endblock %}</a>
+                                    </li>
+                                </ol>
+                            </nav>
+                        </div>
+                        {% endblock %}
+
+                        <!-- Content -->
+                        {% block content %}
+                        <h1>{{ title | default('Documentation') }}</h1>
+                        <p>Content not provided.</p>
+                        {% endblock %}
+
+                        <!-- Edit button -->
+                        <div class="md-source-file">
+                            <small>
+                                Generated on {{ generation_date | default('Recently') }}
+                            </small>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="md-footer">
+        <div class="md-footer-meta md-typeset">
+            <div class="md-footer-meta__inner md-grid">
+                <div class="md-copyright">
+                    Made with ❤️ using Auto Documentation Generator
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
     <script src="assets/js/main.js"></script>
+    
+    <!-- Theme Toggle Script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const html = document.documentElement;
+        
+        // Check for saved theme preference or default to light
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', currentTheme);
+        
+        // Update icon based on current theme
+        if (currentTheme === 'dark') {
+            themeIcon.textContent = '☀️';
+        } else {
+            themeIcon.textContent = '🌙';
+        }
+        
+        themeToggle.addEventListener('click', function() {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Update icon
+            if (newTheme === 'dark') {
+                themeIcon.textContent = '☀️';
+            } else {
+                themeIcon.textContent = '🌙';
+            }
+        });
+    });
+    </script>
+    
+    {% block extra_js %}{% endblock %}
 </body>
 </html>

@@ -1,279 +1,433 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Architecture - Auto-Generated Documentation</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-</head>
-<body>
-    <nav class="sidebar">
-        <div class="nav-header">
-            <h2><i class="fas fa-file-alt"></i> Documentation</h2>
-        </div>
-        <ul class="nav-menu">
-            <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="architecture.html" class="nav-link active"><i class="fas fa-sitemap"></i> Architecture</a></li>
-            <li><a href="api.html" class="nav-link"><i class="fas fa-code"></i> API Reference</a></li>
-            <li><a href="ai_models.html" class="nav-link"><i class="fas fa-robot"></i> AI Models</a></li>
-            <li><a href="ai_pipelines.html" class="nav-link"><i class="fas fa-flow-chart"></i> AI Pipelines</a></li>
-            <li><a href="onboarding.html" class="nav-link"><i class="fas fa-user-plus"></i> Onboarding</a></li>
-            <li><a href="complexity.html" class="nav-link"><i class="fas fa-chart-line"></i> Code Quality</a></li>
-        </ul>
+{% extends "base.html" %}
+
+{% set current_page = "architecture" %}
+
+{% block title %}Architecture{% endblock %}
+{% block page_title %}{{ project_name | default('Project') }} Architecture{% endblock %}
+{% block breadcrumb_title %}Architecture{% endblock %}
+
+{% block toc %}
+<li class="md-nav__item"><a href="#overview" class="md-nav__link">Overview</a></li>
+{% if diagrams.dataflow %}<li class="md-nav__item"><a href="#data-flow" class="md-nav__link">Data Flow</a></li>{% endif %}
+<li class="md-nav__item"><a href="#components" class="md-nav__link">Components</a></li>
+<li class="md-nav__item"><a href="#modules" class="md-nav__link">Modules</a></li>
+{% endblock %}
+
+{% block content %}
+<h1 id="overview">{{ project_name | default('Project') }} Architecture</h1>
+<p>Comprehensive multi-level view of the system's architectural components, patterns, and relationships.</p>
+
+<!-- Repository Overview -->
+<section class="overview-section">
+    <h2>🏠 Repository Structure</h2>
+    <p>High-level overview of the repository organization and main components.</p>
+    
+    {% if diagrams and diagrams.repository_overview %}
+    <div class="diagram-section">
+        <div class="mermaid">{{ diagrams.repository_overview.mermaid }}</div>
+        <p class="diagram-info">{{ diagrams.repository_overview.description }}</p>
+    </div>
+    {% endif %}
+</section>
+
+<!-- Enterprise Architecture -->
+<section class="enterprise-section">
+    <h2>🏢 Enterprise Architecture</h2>
+    <p>System-level view showing major components, external integrations, and processing layers.</p>
+    
+    {% if diagrams and diagrams.enterprise_architecture %}
+    <div class="diagram-section">
+        <div class="mermaid">{{ diagrams.enterprise_architecture.mermaid }}</div>
+        <p class="diagram-info">{{ diagrams.enterprise_architecture.description }}</p>
+</div>
+{% endif %}
+</section>
+
+<!-- Logical Architecture -->
+<section class="logical-section">
+    <h2>🧠 Logical Architecture</h2>
+    <p>Component relationships and data flow patterns within the system.</p>
+    
+    {% if diagrams and diagrams.logical_architecture %}
+    <div class="diagram-section">
+        <div class="mermaid">{{ diagrams.logical_architecture.mermaid }}</div>
+        <p class="diagram-info">{{ diagrams.logical_architecture.description }}</p>
+</div>
+{% endif %}
+</section>
+
+<!-- Physical Architecture -->
+<section class="physical-section">
+    <h2>🖥️ Physical Architecture</h2>
+    <p>Deployment environment, runtime components, and infrastructure layout.</p>
+    
+    {% if diagrams and diagrams.physical_architecture %}
+    <div class="diagram-section">
+        <div class="mermaid">{{ diagrams.physical_architecture.mermaid }}</div>
+        <p class="diagram-info">{{ diagrams.physical_architecture.description }}</p>
+</div>
+{% endif %}
+</section>
+
+<!-- Pipeline Architecture -->
+<section class="pipeline-section">
+    <h2>⚙️ Pipeline Architecture</h2>
+    <p>Data processing pipelines, AI enhancement workflows, and content generation flows.</p>
+    
+    {% if diagrams and diagrams.pipeline_architecture %}
+    <div class="diagram-section">
+        <div class="mermaid">{{ diagrams.pipeline_architecture.mermaid }}</div>
+        <p class="diagram-info">{{ diagrams.pipeline_architecture.description }}</p>
+    </div>
+    {% endif %}
+</section>
+
+<!-- System Component Overview -->
+<section class="system-components">
+    <h2>🏗️ System Component Overview</h2>
+    <p>High-level view of system components and their architectural relationships.</p>
+    
+    <div class="getting-started-card">
+        <div class="card-icon">🏢</div>
+        <h3>Component Hierarchy</h3>
+        <p>Simplified view of main system components and their interactions.</p>
         
-        <div class="search-container">
-            <input type="text" id="search-input" placeholder="Search documentation...">
-            <div id="search-results" class="search-results"></div>
-        </div>
-    </nav>
-
-    <main class="main-content">
-        <header class="content-header">
-            <button class="mobile-nav-toggle" id="mobile-nav-toggle">
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="breadcrumb">
-                <span class="breadcrumb-item">Architecture Overview</span>
-            </div>
-            <div class="header-actions">
-                <button class="theme-toggle" id="theme-toggle">
-                    <i class="fas fa-moon"></i>
-                </button>
-            </div>
-        </header>
-
-        <div class="content">
-            <div class="content-meta">
-                <p class="generated-date">Generated on <span id="generation-date"></span></p>
-            </div>
-            
-            <h1><i class="fas fa-sitemap"></i> System Architecture</h1>
-            
-            <div class="alert alert-info">
-                This document provides a comprehensive overview of the system architecture, including component relationships, data flow, and design patterns detected in the codebase.
-            </div>
-
-            <div class="table-of-contents">
-                <h3>Table of Contents</h3>
-                <!-- TOC will be generated by JavaScript -->
-            </div>
-
-            <h2 id="architecture-patterns">Architecture Patterns</h2>
-            
-            <div class="card">
-                <div class="card-header">
-                    <i class="fas fa-puzzle-piece"></i>
-                    <h3>Detected Architecture Patterns</h3>
-                </div>
-                <div id="architecture-patterns-placeholder">
-                    <ul><li><strong>MVC:</strong> Detected architectural pattern</li><li><strong>Repository:</strong> Detected architectural pattern</li></ul>
-                </div>
-            </div>
-
-            <h2 id="high-level-components">High-Level Components</h2>
-
-            <div id="high-level-components-placeholder">
-                <p><em>High-level components will be automatically detected and documented here during generation.</em></p>
-            </div>
-
-            <h2 id="system-diagram">System Architecture Diagram</h2>
-            
-            <div id="system-diagram-placeholder">
-                <p><em>System architecture diagram will be automatically generated based on code analysis.</em></p>
-            </div>
-
-            <h2 id="data-flow">Data Flow Architecture</h2>
-
-            <div class="card">
-                <div class="card-header">
-                    <i class="fas fa-route"></i>
-                    <h3>Entry Points</h3>
-                </div>
-                <ul>
-                    <li><strong>REST API Endpoints</strong> (<code>app/api/main.py:25</code>) - Primary entry point for client operations</li>
-                    <li><strong>Market Data Connectors</strong> (<code>app/connectors/</code>) - Real-time market data ingestion</li>
-                    <li><strong>Background Services</strong> (<code>app/services/</code>) - Scheduled tasks and continuous processing</li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <i class="fas fa-exchange-alt"></i>
-                    <h3>Data Transformation Flow</h3>
-                </div>
-                <div class="mermaid">
-                    flowchart LR
-                        Raw[Raw Market Data]
-                        Clean[Data Cleaning]
-                        Feature[Feature Engineering]
-                        Model[Model Processing]
-                        Signal[Trading Signals]
-                        
-                        Raw --> Clean
-                        Clean --> Feature
-                        Feature --> Model
-                        Model --> Signal
-                </div>
-            </div>
-
-            <h2 id="architectural-layers">Architectural Layers</h2>
-
-            <div class="card">
-                <div class="card-header">
-                    <i class="fas fa-layer-group"></i>
-                    <h3>Presentation Layer</h3>
-                </div>
-                <p><strong>Type:</strong> API Controllers<br>
-                <strong>Files:</strong> 8 files</p>
-                <p>This layer handles HTTP requests, response formatting, and client communication protocols.</p>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <i class="fas fa-cogs"></i>
-                    <h3>Business Logic Layer</h3>
-                </div>
-                <p><strong>Type:</strong> Services & Use Cases<br>
-                <strong>Files:</strong> 15 files</p>
-                <p>Contains core business logic, trading algorithms, and AI model orchestration.</p>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <i class="fas fa-database"></i>
-                    <h3>Data Access Layer</h3>
-                </div>
-                <p><strong>Type:</strong> Repositories & Connectors<br>
-                <strong>Files:</strong> 12 files</p>
-                <p>Handles data persistence, external API connections, and caching strategies.</p>
-            </div>
-
-            <h3>Layer Interaction Diagram</h3>
+        <div class="diagram-section">
             <div class="mermaid">
-                graph TB
-                    Presentation["Presentation Layer<br/>8 files"]
-                    Business["Business Logic Layer<br/>15 files"]
-                    Data["Data Access Layer<br/>12 files"]
-                    
-                    Presentation --> Business
-                    Business --> Data
+graph TB
+    subgraph "Presentation Layer"
+        UI[🖥️ User Interface]
+        API[🔌 API Gateway]
+    end
+    
+    subgraph "Business Layer"
+        CORE[🧠 Core Logic]
+        SERVICES[⚙️ Services]
+        WORKFLOW[🔄 Workflows]
+    end
+    
+    subgraph "Data Layer"
+        STORAGE[💾 Data Storage]
+        CACHE[⚡ Cache Layer]
+        CONFIG[⚙️ Configuration]
+    end
+    
+    UI --> API
+    API --> CORE
+    CORE --> SERVICES
+    SERVICES --> WORKFLOW
+    WORKFLOW --> STORAGE
+    SERVICES --> CACHE
+    CORE --> CONFIG
+    
+    classDef presentation fill:#e3f2fd,stroke:#1976d2
+    classDef business fill:#e8f5e8,stroke:#4caf50
+    classDef data fill:#fff3e0,stroke:#ff9800
+    
+    class UI,API presentation
+    class CORE,SERVICES,WORKFLOW business
+    class STORAGE,CACHE,CONFIG data
             </div>
-
-            <h2 id="scalability">Scalability Considerations</h2>
-
-            <div class="card">
-                <div class="card-header">
-                    <i class="fas fa-chart-line"></i>
-                    <h3>Current Architecture Benefits</h3>
-                </div>
-                <ul>
-                    <li><strong>Modularity:</strong> Clear separation of concerns with well-defined interfaces</li>
-                    <li><strong>Maintainability:</strong> Well-organized code structure following SOLID principles</li>
-                    <li><strong>Extensibility:</strong> Plugin-based architecture allows easy addition of new features</li>
-                    <li><strong>Performance:</strong> Asynchronous processing and efficient data pipelines</li>
-                    <li><strong>Reliability:</strong> Robust error handling and fault tolerance mechanisms</li>
-                </ul>
-            </div>
-
-            <div class="alert alert-warning">
-                <strong><i class="fas fa-lightbulb"></i> Potential Improvements:</strong>
-                <ul>
-                    <li>Consider implementing dependency injection for better testability</li>
-                    <li>Evaluate caching strategies for performance optimization</li>
-                    <li>Review error handling patterns across components</li>
-                    <li>Implement circuit breakers for external service calls</li>
-                </ul>
-            </div>
-
-            <h2 id="security">Security Architecture</h2>
-
-            <div class="card">
-                <div class="card-header">
-                    <i class="fas fa-shield-alt"></i>
-                    <h3>Security Measures</h3>
-                </div>
-                <ul>
-                    <li><strong>Authentication:</strong> JWT-based authentication with refresh token rotation</li>
-                    <li><strong>Authorization:</strong> Role-based access control (RBAC) for API endpoints</li>
-                    <li><strong>Data Encryption:</strong> Encryption at rest and in transit</li>
-                    <li><strong>Input Validation:</strong> Comprehensive request validation at all entry points</li>
-                    <li><strong>Rate Limiting:</strong> API rate limiting to prevent abuse</li>
-                    <li><strong>Audit Logging:</strong> Comprehensive logging of all system activities</li>
-                </ul>
-            </div>
-
-            <h2 id="performance">Performance Characteristics</h2>
-
-            <div class="card">
-                <div class="card-header">
-                    <i class="fas fa-tachometer-alt"></i>
-                    <h3>Performance Metrics</h3>
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Component</th>
-                            <th>Response Time</th>
-                            <th>Throughput</th>
-                            <th>Resource Usage</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>API Gateway</td>
-                            <td>&lt; 50ms</td>
-                            <td>1000+ req/sec</td>
-                            <td>Low CPU, Memory</td>
-                        </tr>
-                        <tr>
-                            <td>AI Inference</td>
-                            <td>&lt; 200ms</td>
-                            <td>100+ pred/sec</td>
-                            <td>High GPU, Memory</td>
-                        </tr>
-                        <tr>
-                            <td>Data Processing</td>
-                            <td>&lt; 1s</td>
-                            <td>10k+ records/sec</td>
-                            <td>Medium CPU, High Memory</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <footer class="content-footer">
-                <p><em>This architecture documentation was automatically generated from code analysis.</em></p>
-            </footer>
+            <p class="diagram-info">High-level component architecture showing the three-tier system design with clear separation of concerns.</p>
         </div>
-    </main>
+    </div>
+</section>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script>
-        // Set the generation date
-        document.getElementById('generation-date').textContent = new Date().toLocaleString();
-        
-        // Initialize Mermaid
-        mermaid.initialize({ 
-            startOnLoad: true,
-            theme: 'default',
-            themeVariables: {
-                primaryColor: '#3f51b5',
-                primaryTextColor: '#ffffff',
-                primaryBorderColor: '#303f9f',
-                lineColor: '#757575',
-                sectionBkgColor: '#f5f5f5',
-                altSectionBkgColor: '#fafafa',
-                gridColor: '#e0e0e0',
-                secondaryColor: '#7986cb',
-                tertiaryColor: '#e8eaf6'
-            }
-        });
-    </script>
-</body>
-</html>
+{% if components %}
+<section class="components-overview" id="components">
+    <h2>📦 System Components</h2>
+    <p>High-level overview of major system components and their roles.</p>
+    
+    <div class="getting-started-grid">
+        {% for c in components %}
+        <div class="getting-started-card">
+            <div class="card-icon">📦</div>
+            <h3>{{ c.name }}</h3>
+            <p>{{ c.description | default('Core system component') }}</p>
+            
+            <div class="component-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Scope:</span>
+                    <span class="metric-value">{{ c.files | default(0) }} modules</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                        {% set total_items = (c.functions | default(0)) + (c.classes | default(0)) %}
+                        {% if total_items > 50 %}High
+                        {% elif total_items > 20 %}Medium
+                        {% else %}Low{% endif %}
+                    </span>
+                </div>
+            </div>
+            
+            <div class="action-links">
+                <a href="#" class="action-link">View Details</a>
+                <a href="#" class="action-link">Dependencies</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+<!-- High-Level Module Architecture -->
+<section class="top-modules-section">
+    <h2 id="modules">📁 Module Architecture</h2>
+    <p>High-level view of core modules and their architectural relationships.</p>
+    
+    {% if diagrams and diagrams.module_dependency_flow %}
+    <div class="diagram-section">
+        <h3>Module Dependency Flow</h3>
+        <div class="mermaid">{{ diagrams.module_dependency_flow.mermaid }}</div>
+        <p class="diagram-info">{{ diagrams.module_dependency_flow.description }}</p>
+    </div>
+    {% elif modules %}
+    <!-- AI-Generated Module Dependency Diagram -->
+<div class="diagram-section">
+        <h3>Module Dependency Flow: UI → Business Logic → Features</h3>
+        <div class="mermaid">
+graph TD
+    subgraph "🎨 User Interface Layer"
+        CLI[🖥️ CLI Interface<br/>main.py]
+        CONFIG[⚙️ Configuration<br/>documentor.yaml]
+        TEMPLATES[📋 Templates<br/>html_templates/]
+    end
+    
+    subgraph "🧠 Business Logic Layer"
+        {% for module in modules[:6] %}
+        {% if 'analyzer' in module.path.lower() or 'generator' in module.path.lower() or 'main' in module.path.lower() %}
+        M{{ loop.index }}[📊 {{ module.name | title }}<br/>{{ module.path }}]
+        {% endif %}
+    {% endfor %}
+    end
+    
+    subgraph "🏭 Product Features"
+        DOC_GEN[📄 Documentation Generation]
+        AI_ENHANCE[🤖 AI Enhancement]
+        DIAGRAM_CREATE[📈 Diagram Creation]
+        CODE_ANALYSIS[🔍 Code Analysis]
+        HTML_OUTPUT[🌐 HTML Output]
+    end
+    
+    subgraph "💾 Data Layer"
+        FILE_IO[📁 File Operations]
+        CACHE[💾 Caching System]
+        MEMORY[🧠 Memory Store]
+    end
+    
+    %% User Interface to Business Logic
+    CLI --> M1
+    CONFIG --> M1
+    TEMPLATES --> M2
+    
+    %% Business Logic to Features
+    M1 --> CODE_ANALYSIS
+    M2 --> DOC_GEN
+    M3 --> AI_ENHANCE
+    M4 --> DIAGRAM_CREATE
+    M5 --> HTML_OUTPUT
+    
+    %% Features to Data Layer
+    CODE_ANALYSIS --> FILE_IO
+    AI_ENHANCE --> CACHE
+    DOC_GEN --> MEMORY
+    HTML_OUTPUT --> FILE_IO
+    
+    %% Cross-layer dependencies
+    DOC_GEN --> AI_ENHANCE
+    AI_ENHANCE --> DIAGRAM_CREATE
+    DIAGRAM_CREATE --> HTML_OUTPUT
+    
+    classDef ui fill:#e3f2fd
+    classDef business fill:#e8f5e8
+    classDef features fill:#fff3e0
+    classDef data fill:#f3e5f5
+    
+    class CLI,CONFIG,TEMPLATES ui
+    class M1,M2,M3,M4,M5,M6 business
+    class DOC_GEN,AI_ENHANCE,DIAGRAM_CREATE,CODE_ANALYSIS,HTML_OUTPUT features
+    class FILE_IO,CACHE,MEMORY data
+        </div>
+        <p class="diagram-info">Module dependency flow showing how user interface components connect through business logic to deliver product features, with data layer support.</p>
+            </div>
+            {% endif %}
+
+    <!-- Top Modules Summary Table -->
+    {% if modules %}
+    <div class="top-modules-table">
+        <h3>Key Contributing Modules</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Module</th>
+              <th>Layer</th>
+              <th>Primary Function</th>
+              <th>Complexity</th>
+              <th>Impact</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for module in modules[:8] %}
+            <tr>
+              <td><strong>{{ module.name }}</strong><br/><code>{{ module.path }}</code></td>
+              <td>
+                {% if 'main' in module.path.lower() or 'cli' in module.path.lower() %}
+                <span class="layer-badge ui">UI Layer</span>
+                {% elif 'analyzer' in module.path.lower() or 'generator' in module.path.lower() %}
+                <span class="layer-badge business">Business Logic</span>
+                {% elif 'template' in module.path.lower() or 'html' in module.path.lower() %}
+                <span class="layer-badge features">Product Features</span>
+                {% else %}
+                <span class="layer-badge data">Data Layer</span>
+                {% endif %}
+              </td>
+              <td>
+                {% if 'analyzer' in module.path.lower() %}
+                🔍 Code Analysis & Parsing
+                {% elif 'generator' in module.path.lower() %}
+                📄 Documentation Generation
+                {% elif 'main' in module.path.lower() %}
+                🚀 Application Orchestration
+                {% elif 'template' in module.path.lower() %}
+                📋 Template Processing
+                {% else %}
+                ⚙️ System Component
+            {% endif %}
+              </td>
+              <td>
+                {% set complexity = (module.functions | length) + (module.classes | length * 2) %}
+                <span class="complexity-indicator complexity-{{ 'high' if complexity > 15 else ('medium' if complexity > 5 else 'low') }}">
+                  {{ 'High' if complexity > 15 else ('Medium' if complexity > 5 else 'Low') }}
+                </span>
+              </td>
+              <td>
+                {% set impact = (module.lines_of_code | default(0)) / 100 + (module.functions | length) + (module.classes | length * 2) %}
+                <div class="impact-bar" data-impact="{{ impact | round }}">
+                  <div class="impact-fill"></div>
+                  <span class="impact-text">{{ impact | round }}</span>
+                </div>
+              </td>
+            </tr>
+    {% endfor %}
+          </tbody>
+        </table>
+</div>
+{% endif %}
+</section>
+
+<style>
+/* Top Modules specific styles */
+.top-modules-section {
+    margin-top: 2rem;
+}
+
+.top-modules-table {
+    margin-top: 2rem;
+}
+
+.layer-badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.layer-badge.ui {
+    background: #e3f2fd;
+    color: #1976d2;
+}
+
+.layer-badge.business {
+    background: #e8f5e8;
+    color: #388e3c;
+}
+
+.layer-badge.features {
+    background: #fff3e0;
+    color: #f57c00;
+}
+
+.layer-badge.data {
+    background: #f3e5f5;
+    color: #7b1fa2;
+}
+
+.complexity-indicator {
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.complexity-indicator.complexity-low {
+    background: #e8f5e8;
+    color: #4caf50;
+}
+
+.complexity-indicator.complexity-medium {
+    background: #fff3e0;
+    color: #ff9800;
+}
+
+.complexity-indicator.complexity-high {
+    background: #ffebee;
+    color: #f44336;
+}
+
+.impact-bar {
+    position: relative;
+    width: 100px;
+    height: 20px;
+    background: #f0f0f0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.impact-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4caf50, #2196f3);
+    transition: width 0.3s ease;
+}
+
+.impact-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: #333;
+    text-shadow: 0 0 2px rgba(255,255,255,0.8);
+}
+</style>
+
+<script src="assets/js/mermaid.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  if (window.mermaid) { 
+    mermaid.initialize({ 
+      startOnLoad: true,
+      theme: 'default',
+      flowchart: { useMaxWidth: true },
+      sequence: { useMaxWidth: true },
+      classDiagram: { useMaxWidth: true }
+    }); 
+  }
+  
+  // Set impact bar widths
+  document.querySelectorAll('.impact-bar').forEach(function(bar) {
+    const impact = parseInt(bar.getAttribute('data-impact'));
+    const percentage = Math.min((impact / 50) * 100, 100);
+    const fill = bar.querySelector('.impact-fill');
+    if (fill) {
+      fill.style.width = percentage + '%';
+    }
+  });
+});
+</script>
+{% endblock %}
+
+

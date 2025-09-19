@@ -2,8 +2,8 @@
 
 ## Summary
 
-- **Total Functions Analyzed:** 79
-- **Average Complexity:** 7.06
+- **Total Functions Analyzed:** 108
+- **Average Complexity:** 6.26
 - **Maximum Complexity:** 27
 - **High Complexity Functions:** 17
 
@@ -13,7 +13,7 @@ Functions with cyclomatic complexity > 10 should be considered for refactoring.
 
 ### AIPipelineAnalyzer (Complexity: 11)
 
-**File:** `src/analyzers/ai_pipeline_analyzer.py`
+**File:** `analyzers/ai_pipeline_analyzer.py`
 
 Consider breaking this function into smaller, more focused functions.
 
@@ -21,7 +21,7 @@ Consider breaking this function into smaller, more focused functions.
 
 ### analyze_ai_components (Complexity: 12)
 
-**File:** `src/analyzers/ai_pipeline_analyzer.py`
+**File:** `analyzers/ai_pipeline_analyzer.py`
 
 Consider breaking this function into smaller, more focused functions.
 
@@ -29,7 +29,7 @@ Consider breaking this function into smaller, more focused functions.
 
 ### _analyze_file (Complexity: 14)
 
-**File:** `src/analyzers/ai_pipeline_analyzer.py`
+**File:** `analyzers/ai_pipeline_analyzer.py`
 
 Consider breaking this function into smaller, more focused functions.
 
@@ -37,7 +37,7 @@ Consider breaking this function into smaller, more focused functions.
 
 ### _analyze_class (Complexity: 17)
 
-**File:** `src/analyzers/ai_pipeline_analyzer.py`
+**File:** `analyzers/ai_pipeline_analyzer.py`
 
 Consider breaking this function into smaller, more focused functions.
 
@@ -45,7 +45,7 @@ Consider breaking this function into smaller, more focused functions.
 
 ### _analyze_function (Complexity: 17)
 
-**File:** `src/analyzers/ai_pipeline_analyzer.py`
+**File:** `analyzers/ai_pipeline_analyzer.py`
 
 Consider breaking this function into smaller, more focused functions.
 
@@ -53,7 +53,7 @@ Consider breaking this function into smaller, more focused functions.
 
 ### generate_pipeline_documentation (Complexity: 17)
 
-**File:** `src/analyzers/ai_pipeline_analyzer.py`
+**File:** `analyzers/ai_pipeline_analyzer.py`
 
 Consider breaking this function into smaller, more focused functions.
 
@@ -61,7 +61,7 @@ Consider breaking this function into smaller, more focused functions.
 
 ### CodeAnalyzer (Complexity: 11)
 
-**File:** `src/analyzers/code_analyzer.py`
+**File:** `analyzers/code_analyzer.py`
 
 Consider breaking this function into smaller, more focused functions.
 
@@ -69,7 +69,7 @@ Consider breaking this function into smaller, more focused functions.
 
 ### _analyze_classes (Complexity: 25)
 
-**File:** `src/analyzers/code_analyzer.py`
+**File:** `analyzers/code_analyzer.py`
 
 Consider breaking this function into smaller, more focused functions.
 
@@ -77,7 +77,7 @@ Consider breaking this function into smaller, more focused functions.
 
 ### _analyze_functions (Complexity: 18)
 
-**File:** `src/analyzers/code_analyzer.py`
+**File:** `analyzers/code_analyzer.py`
 
 Consider breaking this function into smaller, more focused functions.
 
@@ -85,7 +85,7 @@ Consider breaking this function into smaller, more focused functions.
 
 ### _analyze_data_flow (Complexity: 27)
 
-**File:** `src/analyzers/code_analyzer.py`
+**File:** `analyzers/code_analyzer.py`
 
 Consider breaking this function into smaller, more focused functions.
 
@@ -93,7 +93,7 @@ Consider breaking this function into smaller, more focused functions.
 
 ### _categorize_function (Complexity: 20)
 
-**File:** `src/analyzers/code_analyzer.py`
+**File:** `analyzers/code_analyzer.py`
 
 Consider breaking this function into smaller, more focused functions.
 
@@ -101,7 +101,7 @@ Consider breaking this function into smaller, more focused functions.
 
 ### _categorize_class (Complexity: 23)
 
-**File:** `src/analyzers/code_analyzer.py`
+**File:** `analyzers/code_analyzer.py`
 
 Consider breaking this function into smaller, more focused functions.
 
@@ -109,7 +109,7 @@ Consider breaking this function into smaller, more focused functions.
 
 ### _classify_transformation (Complexity: 13)
 
-**File:** `src/analyzers/code_analyzer.py`
+**File:** `analyzers/code_analyzer.py`
 
 Consider breaking this function into smaller, more focused functions.
 
@@ -117,7 +117,7 @@ Consider breaking this function into smaller, more focused functions.
 
 ### _classify_output (Complexity: 11)
 
-**File:** `src/analyzers/code_analyzer.py`
+**File:** `analyzers/code_analyzer.py`
 
 Consider breaking this function into smaller, more focused functions.
 
@@ -125,7 +125,7 @@ Consider breaking this function into smaller, more focused functions.
 
 ### generate_architecture_diagram (Complexity: 12)
 
-**File:** `src/generators/diagram_generator.py`
+**File:** `generators/diagram_generator.py`
 
 Consider breaking this function into smaller, more focused functions.
 
@@ -133,7 +133,7 @@ Consider breaking this function into smaller, more focused functions.
 
 ### generate_ai_pipeline_diagram (Complexity: 16)
 
-**File:** `src/generators/diagram_generator.py`
+**File:** `generators/diagram_generator.py`
 
 Consider breaking this function into smaller, more focused functions.
 
@@ -141,7 +141,7 @@ Consider breaking this function into smaller, more focused functions.
 
 ### _generate_mermaid_ai_pipeline (Complexity: 20)
 
-**File:** `src/generators/diagram_generator.py`
+**File:** `generators/diagram_generator.py`
 
 Consider breaking this function into smaller, more focused functions.
 
@@ -150,30 +150,45 @@ Consider breaking this function into smaller, more focused functions.
 
 ## File-by-File Analysis
 
-### setup.py
+### remote_editor.py
 
+**Functions:**
+- **cli_remote_edit** - Complexity: 8 (A)
+- **RemoteEditor** - Complexity: 5 (A)
+- **__init__** - Complexity: 2 (A)
+- **clone_repository** - Complexity: 2 (A)
+- **generate_docs_for_repo** - Complexity: 3 (A)
+- **commit_and_push** - Complexity: 5 (A)
+- **process_repository** - Complexity: 9 (A)
 
-**Maintainability Index:** 82.7/100
+**Maintainability Index:** 56.5/100
 
 ---
 
-### src/main.py
+### __init__.py
+
+
+**Maintainability Index:** 100.0/100
+
+---
+
+### main.py
 
 **Functions:**
 - **setup_logging** - Complexity: 1 (A)
 - **load_config** - Complexity: 3 (A)
 - **analyze_codebase** - Complexity: 1 (A)
-- **generate_documentation** - Complexity: 2 (A)
+- **generate_documentation** - Complexity: 4 (A)
 - **build_site** - Complexity: 4 (A)
 - **serve_site** - Complexity: 4 (A)
 - **print_summary** - Complexity: 4 (A)
 - **main** - Complexity: 10 (A)
 
-**Maintainability Index:** 49.4/100
+**Maintainability Index:** 48.5/100
 
 ---
 
-### src/analyzers/ai_pipeline_analyzer.py
+### analyzers/ai_pipeline_analyzer.py
 
 **Functions:**
 - **AIPipelineAnalyzer** - Complexity: 11 (A)
@@ -192,7 +207,14 @@ Consider breaking this function into smaller, more focused functions.
 
 ---
 
-### src/analyzers/code_analyzer.py
+### analyzers/__init__.py
+
+
+**Maintainability Index:** 100.0/100
+
+---
+
+### analyzers/code_analyzer.py
 
 **Functions:**
 - **CodeAnalyzer** - Complexity: 11 (A)
@@ -225,7 +247,44 @@ Consider breaking this function into smaller, more focused functions.
 
 ---
 
-### src/generators/diagram_generator.py
+### generators/html_generator.py
+
+**Functions:**
+- **HTMLGenerator** - Complexity: 4 (A)
+- **__init__** - Complexity: 2 (A)
+- **generate_all_documentation** - Complexity: 1 (A)
+- **generate_index_page** - Complexity: 4 (A)
+- **generate_architecture_page** - Complexity: 1 (A)
+- **generate_api_page** - Complexity: 1 (A)
+- **generate_onboarding_page** - Complexity: 1 (A)
+- **generate_ai_models_page** - Complexity: 1 (A)
+- **generate_ai_pipelines_page** - Complexity: 1 (A)
+- **generate_complexity_page** - Complexity: 1 (A)
+- **save_documentation** - Complexity: 2 (A)
+- **_copy_assets** - Complexity: 3 (A)
+- **_analyze_components** - Complexity: 4 (A)
+- **_detect_architecture_patterns** - Complexity: 10 (A)
+- **_extract_api_endpoints** - Complexity: 10 (A)
+- **_extract_http_method** - Complexity: 4 (A)
+- **_find_entry_points** - Complexity: 5 (A)
+- **_identify_key_modules** - Complexity: 6 (A)
+- **_calculate_complexity_metrics** - Complexity: 9 (A)
+- **_format_complexity** - Complexity: 3 (A)
+- **_truncate_docstring** - Complexity: 4 (A)
+- **_format_list** - Complexity: 5 (A)
+
+**Maintainability Index:** 36.4/100
+
+---
+
+### generators/__init__.py
+
+
+**Maintainability Index:** 100.0/100
+
+---
+
+### generators/diagram_generator.py
 
 **Functions:**
 - **DiagramGenerator** - Complexity: 8 (A)
@@ -247,7 +306,7 @@ Consider breaking this function into smaller, more focused functions.
 
 ---
 
-### src/generators/markdown_generator.py
+### generators/markdown_generator.py
 
 **Functions:**
 - **MarkdownGenerator** - Complexity: 3 (A)
