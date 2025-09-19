@@ -1,0 +1,3473 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js" data-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Code Quality - Project</title>
+    <meta name="description" content="Auto-generated documentation for Project">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+</head>
+
+<body dir="ltr" data-md-color-scheme="" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <!-- Skip to content -->
+    <input class="md-skip" data-md-skip tabindex="-1" type="checkbox" id="__skip" autocomplete="off">
+    <label class="md-skip__button" for="__skip">
+        Skip to content
+    </label>
+
+    <!-- Header -->
+    <header class="md-header" data-md-component="header">
+        <nav class="md-header__inner md-grid" aria-label="Header">
+            <!-- Link to home -->
+            <a href="index.html" title="Documentation" class="md-header__button md-logo" aria-label="Documentation">
+                <span class="logo-text">📚</span>
+            </a>
+
+            <!-- Button to toggle drawer -->
+            <label class="md-header__button md-icon" for="__drawer">
+                <span class="menu-icon">☰</span>
+            </label>
+
+            <!-- Header title -->
+            <div class="md-header__title" data-md-component="header-title">
+                <div class="md-header__ellipsis">
+                    <div class="md-header__topic">
+                        <span class="md-ellipsis">Documentation</span>
+                    </div>
+                    <div class="md-header__topic" data-md-component="header-topic">
+                        <span class="md-ellipsis">Project Code Quality</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Header actions -->
+            <div class="md-header__option">
+                <!-- Search button -->
+                <div class="md-header__source">
+                    <button class="md-search__button md-icon" aria-label="Search" data-md-search-button>
+                        <span class="search-icon">🔍</span>
+                    </button>
+                </div>
+
+                <!-- Theme toggle -->
+                <button class="md-header__button md-icon theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode">
+                    <span id="theme-icon" class="theme-icon">🌙</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Search interface -->
+        <div class="md-search" data-md-component="search" role="dialog">
+            <label class="md-search__overlay" for="__search"></label>
+            <div class="md-search__inner" role="search">
+                <form class="md-search__form" name="search">
+                    <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-md-search-input id="search-input">
+                    <label class="md-search__icon md-icon" for="__search">
+                        <span class="search-icon">🔍</span>
+                    </label>
+                    <nav class="md-search__options" aria-label="Search">
+                        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+                            <span class="close-icon">✕</span>
+                        </button>
+                    </nav>
+                </form>
+                <div class="md-search__output">
+                    <div class="md-search__scrollwrap" data-md-scrollfix>
+                        <div class="md-search-result" data-md-component="search-result" id="search-results">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Container -->
+    <div class="md-container" data-md-component="container">
+        <!-- Sidebar -->
+        <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+        <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+        
+        <!-- Navigation -->
+        <div class="md-overlay" data-md-component="overlay"></div>
+        
+        <!-- Main Navigation Sidebar (Left) -->
+        <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+            <div class="md-sidebar__scrollwrap">
+                <div class="md-sidebar__inner">
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+    <!-- Project Header -->
+    <label class="md-nav__title" for="__drawer">
+        <a href="index.html" title="Documentation" class="md-nav__button md-logo" aria-label="Documentation">
+            Documentation
+        </a>
+    </label>
+
+    <ul class="md-nav__list" data-md-scrollfix>
+        <!-- Overview Section -->
+        <li class="md-nav__item">
+            <a href="index.html" class="md-nav__link ">
+                Overview
+            </a>
+        </li>
+
+        <!-- Architecture & Design Section -->
+        <li class="md-nav__item md-nav__item--section">
+            <input class="md-nav__toggle md-toggle" data-md-toggle="nav-architecture" type="checkbox" id="nav-architecture" >
+            <label class="md-nav__link md-nav__link--index" for="nav-architecture">
+                Architecture & Design
+                <span class="md-nav__icon md-nav__icon--expand">▼</span>
+            </label>
+            <nav class="md-nav" data-md-level="1">
+                <label class="md-nav__title" for="nav-architecture">
+                    Architecture & Design
+                </label>
+                <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                        <a href="architecture.html" class="md-nav__link ">
+                            System Architecture
+                        </a>
+                    </li>
+                    <li class="md-nav__item">
+                        <a href="modules.html" class="md-nav__link ">
+                            Modules & Components
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </li>
+
+        <!-- Development Section -->
+        <li class="md-nav__item md-nav__item--section">
+            <input class="md-nav__toggle md-toggle" data-md-toggle="nav-development" type="checkbox" id="nav-development" >
+            <label class="md-nav__link md-nav__link--index" for="nav-development">
+                Development
+                <span class="md-nav__icon md-nav__icon--expand">▼</span>
+            </label>
+            <nav class="md-nav" data-md-level="1">
+                <label class="md-nav__title" for="nav-development">
+                    Development
+                </label>
+                <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                        <a href="api.html" class="md-nav__link ">
+                            API Reference
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </li>
+
+        <!-- Code Quality Section -->
+        <li class="md-nav__item md-nav__item--section">
+            <input class="md-nav__toggle md-toggle" data-md-toggle="nav-quality" type="checkbox" id="nav-quality" checked>
+            <label class="md-nav__link md-nav__link--index" for="nav-quality">
+                Code Quality
+                <span class="md-nav__icon md-nav__icon--expand">▼</span>
+            </label>
+            <nav class="md-nav" data-md-level="1">
+                <label class="md-nav__title" for="nav-quality">
+                    Code Quality
+                </label>
+                <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                        <a href="complexity.html" class="md-nav__link md-nav__link--active">
+                            Quality Analysis
+                        </a>
+                    </li>
+                    <li class="md-nav__item">
+                        <a href="complexity.html#scoring-pipeline" class="md-nav__link">
+                            Scoring Pipeline
+                        </a>
+                    </li>
+                    <li class="md-nav__item">
+                        <a href="complexity.html#quality-factors" class="md-nav__link">
+                            Quality Factors
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </li>
+
+        <!-- AI & Machine Learning Section -->
+
+        <!-- Getting Started Section -->
+        <li class="md-nav__item">
+            <a href="onboarding.html" class="md-nav__link ">
+                Getting Started
+            </a>
+        </li>
+
+        <!-- Quick Links Section -->
+        <li class="md-nav__item md-nav__item--section">
+            <div class="md-nav__separator"></div>
+            <label class="md-nav__section-title">Quick Links</label>
+        </li>
+        
+        <li class="md-nav__item">
+            <a href="#search" class="md-nav__link" data-md-search-button>
+                Search Documentation
+            </a>
+        </li>
+
+        <!-- Project Stats -->
+        <li class="md-nav__item md-nav__item--section">
+            <div class="md-nav__separator"></div>
+            <div class="md-nav__stats">
+                <div class="md-nav__stats-item">
+                    <span class="md-nav__stats-number">0</span>
+                    <span class="md-nav__stats-label">Files</span>
+                </div>
+                <div class="md-nav__stats-item">
+                    <span class="md-nav__stats-number">0</span>
+                    <span class="md-nav__stats-label">Functions</span>
+                </div>
+                <div class="md-nav__stats-item">
+                    <span class="md-nav__stats-number">0</span>
+                    <span class="md-nav__stats-label">Classes</span>
+                </div>
+            </div>
+        </li>
+    </ul>
+</nav>                </div>
+            </div>
+        </div>
+
+        <!-- Table of contents (Right) -->
+        <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+            <div class="md-sidebar__scrollwrap">
+                <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+                        <label class="md-nav__title" for="__toc">Table of contents</label>
+                        <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+<li class="md-nav__item"><a href="#overview" class="md-nav__link">Overview</a></li>
+<li class="md-nav__item"><a href="#scoring-pipeline" class="md-nav__link">Scoring Pipeline</a></li>
+<li class="md-nav__item"><a href="#quality-factors" class="md-nav__link">Quality Factors</a></li>
+<li class="md-nav__item"><a href="#complexity" class="md-nav__link">Complexity Analysis</a></li>
+<li class="md-nav__item"><a href="#modules" class="md-nav__link">Module Analysis</a></li>
+<li class="md-nav__item"><a href="#insights" class="md-nav__link">Quality Insights</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <main class="md-main" data-md-component="main">
+            <div class="md-main__inner md-grid">
+                <div class="md-content" data-md-component="content">
+                    <article class="md-content__inner md-typeset">
+                        <!-- Breadcrumbs -->
+                        <div class="md-breadcrumbs">
+                            <nav class="md-breadcrumbs__list" aria-label="Breadcrumbs">
+                                <ol class="md-breadcrumbs__list">
+                                    <li class="md-breadcrumbs__item">
+                                        <a href="index.html" class="md-breadcrumbs__link">Home</a>
+                                    </li>
+                                    <li class="md-breadcrumbs__item">
+                                        <a href="#" class="md-breadcrumbs__link">Code Quality</a>
+                                    </li>
+                                </ol>
+                            </nav>
+                        </div>
+
+                        <!-- Content -->
+<h1 id="overview">Project Code Quality</h1>
+<p>Comprehensive code quality analysis, complexity metrics, and optimization recommendations.</p>
+
+<!-- Quality Stats Overview -->
+<section class="stats-overview">
+    <h2>📊 Quality Metrics</h2>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <span class="stat-number">0</span>
+            <span class="stat-label">Avg Complexity</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number">0</span>
+            <span class="stat-label">Max Complexity</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number">0</span>
+            <span class="stat-label">High-Complexity</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number">20888</span>
+            <span class="stat-label">Total Lines</span>
+        </div>
+    </div>
+</section>
+
+<!-- Quality Scoring Pipeline -->
+<section class="scoring-pipeline" id="scoring-pipeline">
+    <h2>🔬 Quality Scoring Pipeline</h2>
+    <p>Our comprehensive scoring system analyzes multiple dimensions of code quality to provide actionable insights.</p>
+    
+    <div class="getting-started-grid">
+        <div class="getting-started-card">
+            <div class="card-icon">📊</div>
+            <h3>Data Collection</h3>
+            <p>Automated analysis of repository structure and code patterns</p>
+            
+            <div class="pipeline-steps">
+                <div class="step-item">
+                    <span class="step-number">1</span>
+                    <div class="step-content">
+                        <strong>File Scanning</strong>
+                        <p>Recursively analyze all source files</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <span class="step-number">2</span>
+                    <div class="step-content">
+                        <strong>AST Parsing</strong>
+                        <p>Build Abstract Syntax Trees for deep analysis</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <span class="step-number">3</span>
+                    <div class="step-content">
+                        <strong>Metric Extraction</strong>
+                        <p>Extract complexity, maintainability metrics</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="getting-started-card">
+            <div class="card-icon">⚡</div>
+            <h3>Processing Engine</h3>
+            <p>Multi-dimensional analysis using proven software metrics</p>
+            
+            <div class="processing-metrics">
+                <div class="metric-item">
+                    <span class="metric-icon">🔄</span>
+                    <strong>Cyclomatic Complexity</strong>
+                    <p>Measures code complexity through control flow</p>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-icon">📏</span>
+                    <strong>Maintainability Index</strong>
+                    <p>Combines complexity, volume, and cohesion</p>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-icon">🎯</span>
+                    <strong>Technical Debt</strong>
+                    <p>Estimates refactoring effort required</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="getting-started-card">
+            <div class="card-icon">🎯</div>
+            <h3>Score Calculation</h3>
+            <p>Weighted scoring algorithm producing actionable ratings</p>
+            
+            <div class="scoring-formula">
+                <div class="formula-box">
+                    <strong>Quality Score = </strong>
+                    <div class="formula-components">
+                        <span class="component">40% × Complexity Score</span>
+                        <span class="component">25% × Maintainability</span>
+                        <span class="component">20% × Test Coverage</span>
+                        <span class="component">10% × Documentation</span>
+                        <span class="component">5% × Code Style</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="getting-started-card">
+            <div class="card-icon">📈</div>
+            <h3>Insights Generation</h3>
+            <p>AI-powered recommendations for code improvement</p>
+            
+            <div class="insights-features">
+                <div class="feature-item">
+                    <span class="feature-icon">🤖</span>
+                    <strong>Pattern Recognition</strong>
+                    <p>Identify common anti-patterns</p>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">💡</span>
+                    <strong>Refactoring Suggestions</strong>
+                    <p>Specific improvement recommendations</p>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📊</span>
+                    <strong>Trend Analysis</strong>
+                    <p>Track quality changes over time</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quality Factors Breakdown -->
+<section class="quality-factors" id="quality-factors">
+    <h2>🎯 Quality Assessment Factors</h2>
+    <p>Detailed breakdown of factors that influence code quality scoring from repository analysis.</p>
+    
+    <div class="store-features">
+        <div class="store-feature">
+            <div class="feature-icon">🔄</div>
+            <h4>Complexity Metrics (40%)</h4>
+            <p>Primary factors determining code complexity and maintainability</p>
+            <div class="feature-metrics">
+                <span class="metric">📊 Cyclomatic Complexity</span>
+                <span class="metric">🌳 Nesting Depth</span>
+                <span class="metric">📏 Function Length</span>
+                <span class="metric">🔗 Coupling Degree</span>
+                <span class="metric">📐 Cognitive Load</span>
+            </div>
+            <div class="factor-details">
+                <div class="detail-item">
+                    <strong>Cyclomatic Complexity:</strong> Measures independent paths through code
+                </div>
+                <div class="detail-item">
+                    <strong>Nesting Depth:</strong> Tracks maximum indentation levels
+                </div>
+                <div class="detail-item">
+                    <strong>Function Length:</strong> Analyzes lines of code per function
+                </div>
+            </div>
+        </div>
+        
+        <div class="store-feature">
+            <div class="feature-icon">🛠️</div>
+            <h4>Maintainability Index (25%)</h4>
+            <p>Composite metric assessing long-term code health</p>
+            <div class="feature-metrics">
+                <span class="metric">📈 Halstead Volume</span>
+                <span class="metric">🔄 Code Churn</span>
+                <span class="metric">📝 Comment Ratio</span>
+                <span class="metric">🏗️ Architecture Quality</span>
+                <span class="metric">🎨 Design Patterns</span>
+            </div>
+            <div class="factor-details">
+                <div class="detail-item">
+                    <strong>Halstead Volume:</strong> Measures program length and vocabulary
+                </div>
+                <div class="detail-item">
+                    <strong>Code Churn:</strong> Frequency of changes in code sections
+                </div>
+                <div class="detail-item">
+                    <strong>Comment Ratio:</strong> Balance of documentation vs code
+                </div>
+            </div>
+        </div>
+        
+        <div class="store-feature">
+            <div class="feature-icon">🧪</div>
+            <h4>Test Coverage (20%)</h4>
+            <p>Assessment of testing completeness and quality</p>
+            <div class="feature-metrics">
+                <span class="metric">📊 Line Coverage</span>
+                <span class="metric">🌿 Branch Coverage</span>
+                <span class="metric">🔧 Function Coverage</span>
+                <span class="metric">⚡ Test Quality</span>
+                <span class="metric">🎯 Edge Cases</span>
+            </div>
+            <div class="factor-details">
+                <div class="detail-item">
+                    <strong>Line Coverage:</strong> Percentage of code lines executed in tests
+                </div>
+                <div class="detail-item">
+                    <strong>Branch Coverage:</strong> Coverage of conditional branches
+                </div>
+                <div class="detail-item">
+                    <strong>Test Quality:</strong> Assertion strength and test isolation
+                </div>
+            </div>
+        </div>
+        
+        <div class="store-feature">
+            <div class="feature-icon">📖</div>
+            <h4>Documentation Quality (10%)</h4>
+            <p>Evaluation of code documentation and readability</p>
+            <div class="feature-metrics">
+                <span class="metric">📝 Docstring Coverage</span>
+                <span class="metric">📚 API Documentation</span>
+                <span class="metric">💬 Inline Comments</span>
+                <span class="metric">📋 README Quality</span>
+                <span class="metric">🎨 Code Clarity</span>
+            </div>
+            <div class="factor-details">
+                <div class="detail-item">
+                    <strong>Docstring Coverage:</strong> Functions/classes with documentation
+                </div>
+                <div class="detail-item">
+                    <strong>API Documentation:</strong> Public interface documentation quality
+                </div>
+                <div class="detail-item">
+                    <strong>Code Clarity:</strong> Self-documenting code practices
+                </div>
+            </div>
+        </div>
+        
+        <div class="store-feature">
+            <div class="feature-icon">🎨</div>
+            <h4>Code Style & Standards (5%)</h4>
+            <p>Adherence to coding standards and best practices</p>
+            <div class="feature-metrics">
+                <span class="metric">📏 Style Guide</span>
+                <span class="metric">🔤 Naming Conventions</span>
+                <span class="metric">📐 Formatting</span>
+                <span class="metric">🚫 Code Smells</span>
+                <span class="metric">✨ Best Practices</span>
+            </div>
+            <div class="factor-details">
+                <div class="detail-item">
+                    <strong>Style Guide:</strong> Consistency with language style guides
+                </div>
+                <div class="detail-item">
+                    <strong>Naming Conventions:</strong> Clear, descriptive variable/function names
+                </div>
+                <div class="detail-item">
+                    <strong>Code Smells:</strong> Detection of problematic code patterns
+                </div>
+            </div>
+        </div>
+        
+        <div class="store-feature">
+            <div class="feature-icon">📊</div>
+            <h4>Repository Health Indicators</h4>
+            <p>Additional factors from repository analysis</p>
+            <div class="feature-metrics">
+                <span class="metric">📁 File Organization</span>
+                <span class="metric">🔗 Dependency Management</span>
+                <span class="metric">🏷️ Version Control</span>
+                <span class="metric">🚀 CI/CD Integration</span>
+                <span class="metric">🔒 Security Practices</span>
+            </div>
+            <div class="factor-details">
+                <div class="detail-item">
+                    <strong>File Organization:</strong> Logical project structure and modularity
+                </div>
+                <div class="detail-item">
+                    <strong>Dependency Management:</strong> Clean, up-to-date dependencies
+                </div>
+                <div class="detail-item">
+                    <strong>Version Control:</strong> Commit message quality and branching strategy
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Module Analysis -->
+<section class="modules-analysis" id="modules">
+    <h2>📦 Module Quality Analysis</h2>
+    <p>Detailed quality metrics for each module in the codebase.</p>
+    
+    <div class="getting-started-grid">
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>autodoc_module</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">8</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">322</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>autodoc_module.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>env</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">2</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">81</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>migrations/env.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>e3ed24f70ba0_initial_migration</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">2</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">65</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>migrations/versions/e3ed24f70ba0_initial_migration.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>8104afe36029_description_of_the_changes</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">2</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">29</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>migrations/versions/8104afe36029_description_of_the_changes.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>main</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">31</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/main.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>postgres_client</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">10</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">105</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/connectors/postgres_client.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>kafka_connector</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">10</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">120</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/connectors/kafka_connector.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>yahoo_finance</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">4</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">159</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/connectors/yahoo_finance.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>dhan_client</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">3</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">71</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/connectors/dhan_client.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>dhanhq</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">34</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">1152</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/connectors/dhanhq/dhanhq.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>marketfeed</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">21</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">522</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/connectors/dhanhq/marketfeed.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>__init__</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">3</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/connectors/dhanhq/__init__.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>orderupdate</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">2</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">91</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/connectors/dhanhq/orderupdate.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>orders</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">116</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/connectors/dhanhq/examples/orders.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>container</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">32</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/di/container.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>traning_logger</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">16</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">6</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">265</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/utils/traning_logger.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>commodity_repository</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">5</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">216</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/repositories/commodity_repository.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>index_repository</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">98</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/repositories/index_repository.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>stock_repository</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">165</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/repositories/stock_repository.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>mutual_fund_repository</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">3</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">133</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/repositories/mutual_fund_repository.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>trading_repository</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">7</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">80</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/repositories/trading_repository.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>tradewise_ai</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">16</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">4</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">556</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/ai/tradewise_ai.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>market_state</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">10</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">157</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/ai/reinforcement/market_state.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>action_space</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">7</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">128</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/ai/reinforcement/action_space.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>reward_calculator</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">7</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">110</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/ai/reinforcement/reward_calculator.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>technical</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">11</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">224</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/ai/analysis/technical.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>zone</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">17</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">325</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/ai/analysis/zone.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>psychology_pattern</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">9</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">203</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/ai/analysis/psychology_pattern.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>trading_psychology</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">13</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">311</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/ai/analysis/trading_psychology.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>analysis_system</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">7</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">265</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/ai/analysis/analysis_system.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>learning_system</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">7</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">2</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">371</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/ai/learning/learning_system.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>data_transformer</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">10</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">245</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/ai/features/data_transformer.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>feature_generation</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">36</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">2</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">756</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/ai/features/feature_generation.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>model_builder</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">10</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">2</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">266</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/ai/core_ml/model_builder.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>config</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">3</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">48</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/ai/core_ml/config.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>core_ml</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">5</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">230</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/ai/core_ml/core_ml.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>__init__</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">12</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/ai/core_ml/__init__.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>model_engine</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">23</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">4</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">587</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/ai/core_ml/model_engine.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>market_environment</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">6</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">139</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/ai/core_ml/market_environment.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>model_factory</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">3</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">70</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/ai/core_ml/model_factory.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>feedback_system</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/ai/feedback/feedback_system.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>portfolio_system</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">10</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">2</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">363</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/ai/portfolio/portfolio_system.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>portfolio_optimizer</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">7</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">2</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">235</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/ai/portfolio/portfolio_optimizer.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>risk_manager</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">13</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">2</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">279</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/ai/portfolio/risk_manager.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>feedback_system</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">10</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">312</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/ai/session/feedback_system.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>session_manager</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">35</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">2</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">800</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/ai/session/session_manager.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>trading_session</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">16</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">3</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">545</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/ai/session/trading_session.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>fetch_option_data</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">12</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/use_cases/fetch_option_data.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>trade_suggestions</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">54</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/use_cases/trade_suggestions.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>fetch_and_ingest</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">3</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">107</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/use_cases/fetch_and_ingest.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>dhan_enums</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">4</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">32</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/domain/enums/dhan_enums.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>stock_repository_interface</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">112</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/domain/repositories/stock_repository_interface.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>session_models</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">4</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">88</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/domain/models/session_models.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>trade_suggestion</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">13</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/domain/models/trade_suggestion.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>database_models</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">7</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">102</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/domain/models/database_models.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>trading_models</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">2</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">36</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/domain/models/trading_models.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>trade_suggestion_request</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">14</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/domain/models/trade_suggestion_request.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>trade_suggestion_response</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">5</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">58</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/domain/models/trade_suggestion_response.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>index</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">2</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">35</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/domain/entities/index.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>option_data</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">4</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">55</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/domain/entities/option_data.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>commodity</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">4</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">5</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">84</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/domain/entities/commodity.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>stock</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">4</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">4</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">71</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/domain/entities/stock.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>mutual_fund</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">4</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">4</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">73</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/domain/entities/mutual_fund.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>base_entity</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">8</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">2</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">86</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/domain/entities/base_entity.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>mutual_fund_repository_interface</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">47</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/domain/interfaces/mutual_fund_repository_interface.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>commodity_repository_interface</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">47</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/domain/interfaces/commodity_repository_interface.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>trade_suggestion_interface</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">59</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/domain/interfaces/trade_suggestion_interface.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>stock_repository_interface</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">56</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/domain/interfaces/stock_repository_interface.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>session_manager</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/core/session/session_manager.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>commodity_config</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">3</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">22</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/config/commodity_config.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>settings</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">2</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">29</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/config/settings.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>ingestor</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">5</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">47</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/pipelines/ingestor.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>fetcher</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">5</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">34</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/pipelines/fetcher.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>main</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">151</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/api/main.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>data_service</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">3</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">2</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">363</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/services/data_service.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>training_service</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">5</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">263</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/services/training_service.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>trading_service</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">92</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/services/trading_service.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>base_data_service</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">3</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">103</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>app/services/base_data_service.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>generate_html</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">7</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">343</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>autodoc/generate_html.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>setup</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">83</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>autodoc/setup.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>publish</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">9</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">181</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>autodoc/publish.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>remote_editor</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">6</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">258</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>autodoc/src/auto_doc_generator/remote_editor.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>__init__</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">27</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>autodoc/src/auto_doc_generator/__init__.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>main</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">8</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">352</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>autodoc/src/auto_doc_generator/main.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>ai_pipeline_analyzer</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">10</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">417</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>autodoc/src/auto_doc_generator/analyzers/ai_pipeline_analyzer.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>__init__</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">9</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>autodoc/src/auto_doc_generator/analyzers/__init__.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>code_analyzer</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">24</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">778</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>autodoc/src/auto_doc_generator/analyzers/code_analyzer.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>__init__</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">9</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>autodoc/src/auto_doc_generator/generators/__init__.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>diagram_generator</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">13</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">420</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>autodoc/src/auto_doc_generator/generators/diagram_generator.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>markdown_generator</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">20</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">1132</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>autodoc/src/auto_doc_generator/generators/markdown_generator.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>modelv3</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">21</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">2</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">827</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>experiments/modelv3.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>modelv2</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">14</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">688</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>experiments/modelv2.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>modelv4Enhanced</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">30</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">2</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">932</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>experiments/modelv4Enhanced.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>__init__</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>experiments/__init__.py</code>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>modev1</h3>
+            
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">13</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">691</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Complexity:</span>
+                    <span class="metric-value">
+                            -
+                    </span>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>experiments/modev1.py</code>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Code Quality Insights -->
+<section class="component-store-section" id="insights">
+    <h3>🏪 Code Quality Insights</h3>
+    <p>AI-powered code quality analysis and optimization recommendations.</p>
+    
+    <div class="store-features">
+        <div class="store-feature">
+            <div class="feature-icon">🎯</div>
+            <h4>Code Health Score</h4>
+            <p>Overall code health based on multiple quality metrics</p>
+            <div class="feature-metrics">
+                <span class="metric">✅ Maintainability</span>
+                <span class="metric">🔍 Readability</span>
+                <span class="metric">⚡ Performance</span>
+            </div>
+        </div>
+        
+        <div class="store-feature">
+            <div class="feature-icon">🔄</div>
+            <h4>Refactoring Opportunities</h4>
+            <p>Identify areas that would benefit from refactoring</p>
+            <div class="feature-metrics">
+                <span class="metric">📊 Complexity</span>
+                <span class="metric">🎨 Patterns</span>
+                <span class="metric">🧹 Clean Code</span>
+            </div>
+        </div>
+        
+        <div class="store-feature">
+            <div class="feature-icon">📈</div>
+            <h4>Quality Trends</h4>
+            <p>Track code quality improvements over time</p>
+            <div class="feature-metrics">
+                <span class="metric">📉 Debt Reduction</span>
+                <span class="metric">🚀 Coverage</span>
+                <span class="metric">✨ Best Practices</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Quality Dashboard -->
+    <div class="performance-dashboard">
+        <h4>📊 Quality Metrics Dashboard</h4>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-value">B+</div>
+                <div class="metric-label">Quality Grade</div>
+                <div class="metric-trend positive">↗ Improving</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">85%</div>
+                <div class="metric-label">Test Coverage</div>
+                <div class="metric-trend positive">↗ +5% this week</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">12h</div>
+                <div class="metric-label">Tech Debt</div>
+                <div class="metric-trend positive">↗ -3h reduced</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">8</div>
+                <div class="metric-label">Code Smells</div>
+                <div class="metric-trend neutral">→ Stable</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script src="assets/js/mermaid.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  if (window.mermaid) { 
+    mermaid.initialize({ 
+      startOnLoad: true,
+      theme: 'default',
+      flowchart: { useMaxWidth: true },
+      graph: { useMaxWidth: true }
+    }); 
+  }
+});
+</script>
+
+                        <!-- Edit button -->
+                        <div class="md-source-file">
+                            <small>
+                                Generated on 2025-09-20 02:28:22
+                            </small>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="md-footer">
+        <div class="md-footer-meta md-typeset">
+            <div class="md-footer-meta__inner md-grid">
+                <div class="md-copyright">
+                    Made with ❤️ using Auto Documentation Generator
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+    
+    <!-- Theme Toggle Script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const html = document.documentElement;
+        
+        // Check for saved theme preference or default to light
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', currentTheme);
+        
+        // Update icon based on current theme
+        if (currentTheme === 'dark') {
+            themeIcon.textContent = '☀️';
+        } else {
+            themeIcon.textContent = '🌙';
+        }
+        
+        themeToggle.addEventListener('click', function() {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Update icon
+            if (newTheme === 'dark') {
+                themeIcon.textContent = '☀️';
+            } else {
+                themeIcon.textContent = '🌙';
+            }
+        });
+    });
+    </script>
+    
+</body>
+</html>

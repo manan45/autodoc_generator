@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js" data-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Getting Started - Project</title>
+    <meta name="description" content="Auto-generated documentation for Project">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+</head>
+
+<body dir="ltr" data-md-color-scheme="" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <!-- Skip to content -->
+    <input class="md-skip" data-md-skip tabindex="-1" type="checkbox" id="__skip" autocomplete="off">
+    <label class="md-skip__button" for="__skip">
+        Skip to content
+    </label>
+
+    <!-- Header -->
+    <header class="md-header" data-md-component="header">
+        <nav class="md-header__inner md-grid" aria-label="Header">
+            <!-- Link to home -->
+            <a href="index.html" title="Project" class="md-header__button md-logo" aria-label="Project">
+                <span class="logo-text">📚</span>
+            </a>
+
+            <!-- Button to toggle drawer -->
+            <label class="md-header__button md-icon" for="__drawer">
+                <span class="menu-icon">☰</span>
+            </label>
+
+            <!-- Header title -->
+            <div class="md-header__title" data-md-component="header-title">
+                <div class="md-header__ellipsis">
+                    <div class="md-header__topic">
+                        <span class="md-ellipsis">Project</span>
+                    </div>
+                    <div class="md-header__topic" data-md-component="header-topic">
+                        <span class="md-ellipsis">Project Getting Started</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Header actions -->
+            <div class="md-header__option">
+                <!-- Search button -->
+                <div class="md-header__source">
+                    <button class="md-search__button md-icon" aria-label="Search" data-md-search-button>
+                        <span class="search-icon">🔍</span>
+                    </button>
+                </div>
+
+                <!-- Theme toggle -->
+                <button class="md-header__button md-icon theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode">
+                    <span id="theme-icon" class="theme-icon">🌙</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Search interface -->
+        <div class="md-search" data-md-component="search" role="dialog">
+            <label class="md-search__overlay" for="__search"></label>
+            <div class="md-search__inner" role="search">
+                <form class="md-search__form" name="search">
+                    <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-md-search-input id="search-input">
+                    <label class="md-search__icon md-icon" for="__search">
+                        <span class="search-icon">🔍</span>
+                    </label>
+                    <nav class="md-search__options" aria-label="Search">
+                        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+                            <span class="close-icon">✕</span>
+                        </button>
+                    </nav>
+                </form>
+                <div class="md-search__output">
+                    <div class="md-search__scrollwrap" data-md-scrollfix>
+                        <div class="md-search-result" data-md-component="search-result" id="search-results">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Container -->
+    <div class="md-container" data-md-component="container">
+        <!-- Sidebar -->
+        <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+        <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+        
+        <!-- Navigation -->
+        <div class="md-overlay" data-md-component="overlay"></div>
+        
+        <!-- Main Navigation Sidebar (Left) -->
+        <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+            <div class="md-sidebar__scrollwrap">
+                <div class="md-sidebar__inner">
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+    <!-- Project Header -->
+    <label class="md-nav__title" for="__drawer">
+        <a href="index.html" title="Project" class="md-nav__button md-logo" aria-label="Project">
+            Project
+        </a>
+    </label>
+
+    <ul class="md-nav__list" data-md-scrollfix>
+        <!-- Overview Section -->
+        <li class="md-nav__item">
+            <a href="index.html" class="md-nav__link ">
+                Overview
+            </a>
+        </li>
+
+        <!-- Architecture & Design Section -->
+        <li class="md-nav__item md-nav__item--section">
+            <input class="md-nav__toggle md-toggle" data-md-toggle="nav-architecture" type="checkbox" id="nav-architecture" >
+            <label class="md-nav__link md-nav__link--index" for="nav-architecture">
+                Architecture & Design
+                <span class="md-nav__icon md-nav__icon--expand">▼</span>
+            </label>
+            <nav class="md-nav" data-md-level="1">
+                <label class="md-nav__title" for="nav-architecture">
+                    Architecture & Design
+                </label>
+                <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                        <a href="architecture.html" class="md-nav__link ">
+                            System Architecture
+                        </a>
+                    </li>
+                    <li class="md-nav__item">
+                        <a href="modules.html" class="md-nav__link ">
+                            Modules & Components
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </li>
+
+        <!-- Development Section -->
+        <li class="md-nav__item md-nav__item--section">
+            <input class="md-nav__toggle md-toggle" data-md-toggle="nav-development" type="checkbox" id="nav-development" >
+            <label class="md-nav__link md-nav__link--index" for="nav-development">
+                Development
+                <span class="md-nav__icon md-nav__icon--expand">▼</span>
+            </label>
+            <nav class="md-nav" data-md-level="1">
+                <label class="md-nav__title" for="nav-development">
+                    Development
+                </label>
+                <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                        <a href="api.html" class="md-nav__link ">
+                            API Reference
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </li>
+
+        <!-- Code Quality Section -->
+        <li class="md-nav__item md-nav__item--section">
+            <input class="md-nav__toggle md-toggle" data-md-toggle="nav-quality" type="checkbox" id="nav-quality" >
+            <label class="md-nav__link md-nav__link--index" for="nav-quality">
+                Code Quality
+                <span class="md-nav__icon md-nav__icon--expand">▼</span>
+            </label>
+            <nav class="md-nav" data-md-level="1">
+                <label class="md-nav__title" for="nav-quality">
+                    Code Quality
+                </label>
+                <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                        <a href="complexity.html" class="md-nav__link ">
+                            Quality Analysis
+                        </a>
+                    </li>
+                    <li class="md-nav__item">
+                        <a href="complexity.html#scoring-pipeline" class="md-nav__link">
+                            Scoring Pipeline
+                        </a>
+                    </li>
+                    <li class="md-nav__item">
+                        <a href="complexity.html#quality-factors" class="md-nav__link">
+                            Quality Factors
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </li>
+
+        <!-- AI & Machine Learning Section -->
+        <li class="md-nav__item md-nav__item--section">
+            <input class="md-nav__toggle md-toggle" data-md-toggle="nav-ai" type="checkbox" id="nav-ai" >
+            <label class="md-nav__link md-nav__link--index" for="nav-ai">
+                AI & Machine Learning
+                <span class="md-nav__icon md-nav__icon--expand">▼</span>
+            </label>
+            <nav class="md-nav" data-md-level="1">
+                <label class="md-nav__title" for="nav-ai">
+                    AI & Machine Learning
+                </label>
+                <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                        <a href="ai_models.html" class="md-nav__link ">
+                            AI Models
+                        </a>
+                    </li>
+                    <li class="md-nav__item">
+                        <a href="ai_pipelines.html" class="md-nav__link ">
+                            AI Pipelines
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </li>
+
+        <!-- Getting Started Section -->
+        <li class="md-nav__item">
+            <a href="onboarding.html" class="md-nav__link md-nav__link--active">
+                Getting Started
+            </a>
+        </li>
+
+        <!-- Quick Links Section -->
+        <li class="md-nav__item md-nav__item--section">
+            <div class="md-nav__separator"></div>
+            <label class="md-nav__section-title">Quick Links</label>
+        </li>
+        
+        <li class="md-nav__item">
+            <a href="#search" class="md-nav__link" data-md-search-button>
+                Search Documentation
+            </a>
+        </li>
+
+        <!-- Project Stats -->
+        <li class="md-nav__item md-nav__item--section">
+            <div class="md-nav__separator"></div>
+            <div class="md-nav__stats">
+                <div class="md-nav__stats-item">
+                    <span class="md-nav__stats-number">0</span>
+                    <span class="md-nav__stats-label">Files</span>
+                </div>
+                <div class="md-nav__stats-item">
+                    <span class="md-nav__stats-number">0</span>
+                    <span class="md-nav__stats-label">Functions</span>
+                </div>
+                <div class="md-nav__stats-item">
+                    <span class="md-nav__stats-number">0</span>
+                    <span class="md-nav__stats-label">Classes</span>
+                </div>
+            </div>
+        </li>
+    </ul>
+</nav>                </div>
+            </div>
+        </div>
+
+        <!-- Table of contents (Right) -->
+        <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+            <div class="md-sidebar__scrollwrap">
+                <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+                        <label class="md-nav__title" for="__toc">Table of contents</label>
+                        <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+<li class="md-nav__item"><a href="#overview" class="md-nav__link">Overview</a></li>
+<li class="md-nav__item"><a href="#quickstart" class="md-nav__link">Quick Start</a></li>
+<li class="md-nav__item"><a href="#setup" class="md-nav__link">Setup Guide</a></li>
+<li class="md-nav__item"><a href="#development" class="md-nav__link">Development</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <main class="md-main" data-md-component="main">
+            <div class="md-main__inner md-grid">
+                <div class="md-content" data-md-component="content">
+                    <article class="md-content__inner md-typeset">
+                        <!-- Breadcrumbs -->
+                        <div class="md-breadcrumbs">
+                            <nav class="md-breadcrumbs__list" aria-label="Breadcrumbs">
+                                <ol class="md-breadcrumbs__list">
+                                    <li class="md-breadcrumbs__item">
+                                        <a href="index.html" class="md-breadcrumbs__link">Home</a>
+                                    </li>
+                                    <li class="md-breadcrumbs__item">
+                                        <a href="#" class="md-breadcrumbs__link">Getting Started</a>
+                                    </li>
+                                </ol>
+                            </nav>
+                        </div>
+
+                        <!-- Content -->
+<h1 id="overview">Project Getting Started</h1>
+<p>Everything you need to get up and running with the project quickly.</p>
+
+<!-- Quick Start Cards -->
+<section class="getting-started" id="quickstart">
+    <h2>🚀 Quick Start</h2>
+    <div class="getting-started-grid">
+        <div class="getting-started-card">
+            <div class="card-icon">📋</div>
+            <h3>Prerequisites</h3>
+            <p>Required tools and dependencies</p>
+            <ul class="prerequisite-list">
+                <li>Git</li>
+            </ul>
+        </div>
+        
+        <div class="getting-started-card">
+            <div class="card-icon">⚡</div>
+            <h3>Installation</h3>
+            <p>Get the project running in minutes</p>
+            <div class="code-block">
+                <code>git clone &lt;repo-url&gt;</code>
+                <code>cd project</code>
+            </div>
+        </div>
+        
+        <div class="getting-started-card">
+            <div class="card-icon">▶️</div>
+            <h3>Run Application</h3>
+            <p>Start the application with one command</p>
+            <div class="code-block">
+                <code>python -m project</code>
+            </div>
+        </div>
+        
+        <div class="getting-started-card">
+            <div class="card-icon">🔧</div>
+            <h3>Configuration</h3>
+            <p>Set up your environment</p>
+            <div class="code-block">
+                <code>config/settings.yaml</code>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Detailed Setup Guide -->
+<section class="setup-guide" id="setup">
+    <h2>⚙️ Detailed Setup</h2>
+    
+    <div class="getting-started-grid">
+        
+        
+        
+        <div class="getting-started-card">
+            <div class="card-icon">🗄️</div>
+            <h3>Database Setup</h3>
+            <p>Initialize the database</p>
+            <div class="code-block">
+                <code># Database setup instructions</code>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Development Workflow -->
+<section class="development-workflow" id="development">
+    <h2>💻 Development Workflow</h2>
+    
+    <div class="getting-started-grid">
+        <div class="getting-started-card">
+            <div class="card-icon">🌿</div>
+            <h3>Git Workflow</h3>
+            <p>Standard development workflow</p>
+            <div class="code-block">
+                <code>git checkout -b feature/name</code>
+                <code>git commit -m "feat: description"</code>
+                <code>git push origin feature/name</code>
+            </div>
+            <div class="action-links">
+                <a href="#" class="action-link">PR Template</a>
+                <a href="#" class="action-link">Guidelines</a>
+            </div>
+        </div>
+        
+        <div class="getting-started-card">
+            <div class="card-icon">🧪</div>
+            <h3>Testing</h3>
+            <p>Run tests before committing</p>
+            <div class="code-block">
+                <code># Run test suite</code>
+            </div>
+        </div>
+        
+        <div class="getting-started-card">
+            <div class="card-icon">🎨</div>
+            <h3>Code Style</h3>
+            <p>Maintain consistent code style</p>
+            <div class="code-block">
+                <code># Linting commands</code>
+            </div>
+        </div>
+        
+        <div class="getting-started-card">
+            <div class="card-icon">📖</div>
+            <h3>Documentation</h3>
+            <p>Keep documentation up to date</p>
+            <div class="action-links">
+                <a href="architecture.html" class="action-link">Architecture</a>
+                <a href="api.html" class="action-link">API Reference</a>
+                <a href="modules.html" class="action-link">Modules</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Key Modules -->
+<section class="component-store-section">
+    <h3>🏪 Key Modules</h3>
+    <p>Essential modules to understand for working with this project.</p>
+    
+    <div class="store-features">
+        <div class="store-feature">
+            <div class="feature-icon">📦</div>
+            <h4>feature_generation</h4>
+            <p>Contains 36 functions and 2 classes</p>
+            <div class="code-block">
+                <code>app/core/ai/features/feature_generation.py</code>
+            </div>
+        </div>
+        <div class="store-feature">
+            <div class="feature-icon">📦</div>
+            <h4>session_manager</h4>
+            <p>Contains 35 functions and 2 classes</p>
+            <div class="code-block">
+                <code>app/core/ai/session/session_manager.py</code>
+            </div>
+        </div>
+        <div class="store-feature">
+            <div class="feature-icon">📦</div>
+            <h4>modelv4Enhanced</h4>
+            <p>Contains 30 functions and 2 classes</p>
+            <div class="code-block">
+                <code>experiments/modelv4Enhanced.py</code>
+            </div>
+        </div>
+        <div class="store-feature">
+            <div class="feature-icon">📦</div>
+            <h4>model_engine</h4>
+            <p>Contains 23 functions and 4 classes</p>
+            <div class="code-block">
+                <code>app/core/ai/core_ml/model_engine.py</code>
+            </div>
+        </div>
+        <div class="store-feature">
+            <div class="feature-icon">📦</div>
+            <h4>traning_logger</h4>
+            <p>Contains 16 functions and 6 classes</p>
+            <div class="code-block">
+                <code>app/core/utils/traning_logger.py</code>
+            </div>
+        </div>
+        <div class="store-feature">
+            <div class="feature-icon">📦</div>
+            <h4>dhanhq</h4>
+            <p>A class to interact with the DhanHQ APIs.</p>
+            <div class="code-block">
+                <code>app/connectors/dhanhq/dhanhq.py</code>
+            </div>
+        </div>
+        <div class="store-feature">
+            <div class="feature-icon">📦</div>
+            <h4>modelv3</h4>
+            <p>Contains 21 functions and 2 classes</p>
+            <div class="code-block">
+                <code>experiments/modelv3.py</code>
+            </div>
+        </div>
+        <div class="store-feature">
+            <div class="feature-icon">📦</div>
+            <h4>tradewise_ai</h4>
+            <p>Contains 16 functions and 4 classes</p>
+            <div class="code-block">
+                <code>app/core/ai/tradewise_ai.py</code>
+            </div>
+        </div>
+        <div class="store-feature">
+            <div class="feature-icon">📦</div>
+            <h4>trading_session</h4>
+            <p>Contains 16 functions and 3 classes</p>
+            <div class="code-block">
+                <code>app/core/ai/session/trading_session.py</code>
+            </div>
+        </div>
+        <div class="store-feature">
+            <div class="feature-icon">📦</div>
+            <h4>zone</h4>
+            <p>Contains 17 functions and 1 classes</p>
+            <div class="code-block">
+                <code>app/core/ai/analysis/zone.py</code>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Developer Resources -->
+<section class="component-store-section">
+    <h3>🎯 Developer Resources</h3>
+    <p>Essential resources and tools for productive development.</p>
+    
+    <div class="performance-dashboard">
+        <h4>📊 Project Health</h4>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-value">✅</div>
+                <div class="metric-label">Build Status</div>
+                <div class="metric-trend positive">Passing</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">85%</div>
+                <div class="metric-label">Coverage</div>
+                <div class="metric-trend positive">↗ Good</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">12</div>
+                <div class="metric-label">Open Issues</div>
+                <div class="metric-trend neutral">→ Active</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">8</div>
+                <div class="metric-label">Contributors</div>
+                <div class="metric-trend positive">↗ Growing</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="assets/js/mermaid.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  if (window.mermaid) { 
+    mermaid.initialize({ 
+      startOnLoad: true,
+      theme: 'default',
+      flowchart: { useMaxWidth: true },
+      graph: { useMaxWidth: true }
+    }); 
+  }
+});
+</script>
+
+                        <!-- Edit button -->
+                        <div class="md-source-file">
+                            <small>
+                                Generated on 2025-09-20 02:28:22
+                            </small>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="md-footer">
+        <div class="md-footer-meta md-typeset">
+            <div class="md-footer-meta__inner md-grid">
+                <div class="md-copyright">
+                    Made with ❤️ using Auto Documentation Generator
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+    
+    <!-- Theme Toggle Script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const html = document.documentElement;
+        
+        // Check for saved theme preference or default to light
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', currentTheme);
+        
+        // Update icon based on current theme
+        if (currentTheme === 'dark') {
+            themeIcon.textContent = '☀️';
+        } else {
+            themeIcon.textContent = '🌙';
+        }
+        
+        themeToggle.addEventListener('click', function() {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Update icon
+            if (newTheme === 'dark') {
+                themeIcon.textContent = '☀️';
+            } else {
+                themeIcon.textContent = '🌙';
+            }
+        });
+    });
+    </script>
+    
+</body>
+</html>

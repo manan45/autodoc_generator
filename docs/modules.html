@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js" data-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Modules - App</title>
+    <meta name="description" content="Auto-generated documentation for App">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+</head>
+
+<body dir="ltr" data-md-color-scheme="" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <!-- Skip to content -->
+    <input class="md-skip" data-md-skip tabindex="-1" type="checkbox" id="__skip" autocomplete="off">
+    <label class="md-skip__button" for="__skip">
+        Skip to content
+    </label>
+
+    <!-- Header -->
+    <header class="md-header" data-md-component="header">
+        <nav class="md-header__inner md-grid" aria-label="Header">
+            <!-- Link to home -->
+            <a href="index.html" title="App" class="md-header__button md-logo" aria-label="App">
+                <span class="logo-text">📚</span>
+            </a>
+
+            <!-- Button to toggle drawer -->
+            <label class="md-header__button md-icon" for="__drawer">
+                <span class="menu-icon">☰</span>
+            </label>
+
+            <!-- Header title -->
+            <div class="md-header__title" data-md-component="header-title">
+                <div class="md-header__ellipsis">
+                    <div class="md-header__topic">
+                        <span class="md-ellipsis">App</span>
+                    </div>
+                    <div class="md-header__topic" data-md-component="header-topic">
+                        <span class="md-ellipsis">App Modules</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Header actions -->
+            <div class="md-header__option">
+                <!-- Search button -->
+                <div class="md-header__source">
+                    <button class="md-search__button md-icon" aria-label="Search" data-md-search-button>
+                        <span class="search-icon">🔍</span>
+                    </button>
+                </div>
+
+                <!-- Theme toggle -->
+                <button class="md-header__button md-icon theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode">
+                    <span id="theme-icon" class="theme-icon">🌙</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Search interface -->
+        <div class="md-search" data-md-component="search" role="dialog">
+            <label class="md-search__overlay" for="__search"></label>
+            <div class="md-search__inner" role="search">
+                <form class="md-search__form" name="search">
+                    <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-md-search-input id="search-input">
+                    <label class="md-search__icon md-icon" for="__search">
+                        <span class="search-icon">🔍</span>
+                    </label>
+                    <nav class="md-search__options" aria-label="Search">
+                        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+                            <span class="close-icon">✕</span>
+                        </button>
+                    </nav>
+                </form>
+                <div class="md-search__output">
+                    <div class="md-search__scrollwrap" data-md-scrollfix>
+                        <div class="md-search-result" data-md-component="search-result" id="search-results">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Container -->
+    <div class="md-container" data-md-component="container">
+        <!-- Sidebar -->
+        <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+        <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+        
+        <!-- Navigation -->
+        <div class="md-overlay" data-md-component="overlay"></div>
+        
+        <!-- Main Navigation Sidebar (Left) -->
+        <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+            <div class="md-sidebar__scrollwrap">
+                <div class="md-sidebar__inner">
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+    <!-- Project Header -->
+    <label class="md-nav__title" for="__drawer">
+        <a href="index.html" title="App" class="md-nav__button md-logo" aria-label="App">
+            App
+        </a>
+    </label>
+
+    <ul class="md-nav__list" data-md-scrollfix>
+        <!-- Overview Section -->
+        <li class="md-nav__item">
+            <a href="index.html" class="md-nav__link ">
+                Overview
+            </a>
+        </li>
+
+        <!-- Architecture & Design Section -->
+        <li class="md-nav__item md-nav__item--section">
+            <input class="md-nav__toggle md-toggle" data-md-toggle="nav-architecture" type="checkbox" id="nav-architecture" checked>
+            <label class="md-nav__link md-nav__link--index" for="nav-architecture">
+                Architecture & Design
+                <span class="md-nav__icon md-nav__icon--expand">▼</span>
+            </label>
+            <nav class="md-nav" data-md-level="1">
+                <label class="md-nav__title" for="nav-architecture">
+                    Architecture & Design
+                </label>
+                <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                        <a href="architecture.html" class="md-nav__link ">
+                            System Architecture
+                        </a>
+                    </li>
+                    <li class="md-nav__item">
+                        <a href="modules.html" class="md-nav__link md-nav__link--active">
+                            Modules & Components
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </li>
+
+        <!-- Development Section -->
+        <li class="md-nav__item md-nav__item--section">
+            <input class="md-nav__toggle md-toggle" data-md-toggle="nav-development" type="checkbox" id="nav-development" >
+            <label class="md-nav__link md-nav__link--index" for="nav-development">
+                Development
+                <span class="md-nav__icon md-nav__icon--expand">▼</span>
+            </label>
+            <nav class="md-nav" data-md-level="1">
+                <label class="md-nav__title" for="nav-development">
+                    Development
+                </label>
+                <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                        <a href="api.html" class="md-nav__link ">
+                            API Reference
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </li>
+
+        <!-- Code Quality Section -->
+        <li class="md-nav__item md-nav__item--section">
+            <input class="md-nav__toggle md-toggle" data-md-toggle="nav-quality" type="checkbox" id="nav-quality" >
+            <label class="md-nav__link md-nav__link--index" for="nav-quality">
+                Code Quality
+                <span class="md-nav__icon md-nav__icon--expand">▼</span>
+            </label>
+            <nav class="md-nav" data-md-level="1">
+                <label class="md-nav__title" for="nav-quality">
+                    Code Quality
+                </label>
+                <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                        <a href="complexity.html" class="md-nav__link ">
+                            Quality Analysis
+                        </a>
+                    </li>
+                    <li class="md-nav__item">
+                        <a href="complexity.html#scoring-pipeline" class="md-nav__link">
+                            Scoring Pipeline
+                        </a>
+                    </li>
+                    <li class="md-nav__item">
+                        <a href="complexity.html#quality-factors" class="md-nav__link">
+                            Quality Factors
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </li>
+
+        <!-- AI & Machine Learning Section -->
+
+        <!-- Getting Started Section -->
+        <li class="md-nav__item">
+            <a href="onboarding.html" class="md-nav__link ">
+                Getting Started
+            </a>
+        </li>
+
+        <!-- Quick Links Section -->
+        <li class="md-nav__item md-nav__item--section">
+            <div class="md-nav__separator"></div>
+            <label class="md-nav__section-title">Quick Links</label>
+        </li>
+        
+        <li class="md-nav__item">
+            <a href="#search" class="md-nav__link" data-md-search-button>
+                Search Documentation
+            </a>
+        </li>
+
+        <!-- Project Stats -->
+        <li class="md-nav__item md-nav__item--section">
+            <div class="md-nav__separator"></div>
+            <div class="md-nav__stats">
+                <div class="md-nav__stats-item">
+                    <span class="md-nav__stats-number">0</span>
+                    <span class="md-nav__stats-label">Files</span>
+                </div>
+                <div class="md-nav__stats-item">
+                    <span class="md-nav__stats-number">646</span>
+                    <span class="md-nav__stats-label">Functions</span>
+                </div>
+                <div class="md-nav__stats-item">
+                    <span class="md-nav__stats-number">132</span>
+                    <span class="md-nav__stats-label">Classes</span>
+                </div>
+            </div>
+        </li>
+    </ul>
+</nav>                </div>
+            </div>
+        </div>
+
+        <!-- Table of contents (Right) -->
+        <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+            <div class="md-sidebar__scrollwrap">
+                <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+                        <label class="md-nav__title" for="__toc">Table of contents</label>
+                        <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+<li class="md-nav__item"><a href="#overview" class="md-nav__link">Overview</a></li>
+<li class="md-nav__item"><a href="#stats" class="md-nav__link">Statistics</a></li>
+<li class="md-nav__item"><a href="#module-diagrams" class="md-nav__link">Module Diagrams</a></li>
+<li class="md-nav__item"><a href="#all-modules" class="md-nav__link">All Modules</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <main class="md-main" data-md-component="main">
+            <div class="md-main__inner md-grid">
+                <div class="md-content" data-md-component="content">
+                    <article class="md-content__inner md-typeset">
+                        <!-- Breadcrumbs -->
+                        <div class="md-breadcrumbs">
+                            <nav class="md-breadcrumbs__list" aria-label="Breadcrumbs">
+                                <ol class="md-breadcrumbs__list">
+                                    <li class="md-breadcrumbs__item">
+                                        <a href="index.html" class="md-breadcrumbs__link">Home</a>
+                                    </li>
+                                    <li class="md-breadcrumbs__item">
+                                        <a href="#" class="md-breadcrumbs__link">Modules</a>
+                                    </li>
+                                </ol>
+                            </nav>
+                        </div>
+
+                        <!-- Content -->
+<h1 id="overview">App Modules</h1>
+<p>Comprehensive view of all modules with class diagrams, relationships, and detailed analysis.</p>
+
+<!-- Module Statistics -->
+<section class="stats-overview" id="stats">
+    <h2>📊 Module Statistics</h2>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <span class="stat-number">95</span>
+            <span class="stat-label">Total Modules</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number">646</span>
+            <span class="stat-label">Total Functions</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number">132</span>
+            <span class="stat-label">Total Classes</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number">20888</span>
+            <span class="stat-label">Total Lines</span>
+        </div>
+    </div>
+</section>
+
+<!-- Module Class Diagrams -->
+<section class="module-diagrams" id="module-diagrams">
+    <h2>📊 Module Class Diagrams</h2>
+    <p>Visual representation of classes, methods, and relationships within each module.</p>
+    
+        <div class="getting-started-card">
+            <div class="card-icon">🏗️</div>
+            <h3>Analyzers Module</h3>
+            <div class="diagram-section">
+                <div class="mermaid">classDiagram
+    class CodeAnalyzer {
+        +repo_path: str
+        +config: Dict
+        +analyze_codebase() Dict
+        +_analyze_file(file_path) Dict
+        +_extract_functions(node) List
+        +_extract_classes(node) List
+        +_calculate_complexity(node) int
+    }
+    
+    class AIPipelineAnalyzer {
+        +config: Dict
+        +analyze_ai_components(path) Dict
+        +_detect_ml_frameworks() List
+        +_find_model_files() List
+        +_analyze_training_scripts() List
+        +_detect_inference_endpoints() List
+    }
+    
+    CodeAnalyzer --&gt; &#34;uses&#34; AIPipelineAnalyzer
+    CodeAnalyzer --&gt; &#34;analyzes&#34; PythonFiles
+    AIPipelineAnalyzer --&gt; &#34;detects&#34; MLFrameworks
+    AIPipelineAnalyzer --&gt; &#34;finds&#34; ModelFiles</div>
+                <p class="diagram-info">Analyzers module showing code analysis and AI pipeline detection components</p>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">🏗️</div>
+            <h3>Generators Module</h3>
+            <div class="diagram-section">
+                <div class="mermaid">classDiagram
+    class HTMLGenerator {
+        +template_dir: str
+        +output_dir: str
+        +config: Dict
+        +generate_all_documentation() Dict
+        +generate_index_page() str
+        +generate_architecture_page() str
+        +generate_api_page() str
+    }
+    
+    class MarkdownGenerator {
+        +template_dir: str
+        +output_dir: str
+        +generate_documentation() Dict
+        +_render_template() str
+    }
+    
+    class AIAnalysisGenerator {
+        +config: Dict
+        +client: OpenAI
+        +enhance_code_analysis() Dict
+        +_analyze_api_endpoints() Dict
+        +_generate_mermaid_diagrams() Dict
+    }
+    
+    class DiagramFactory {
+        +create_architecture_diagram() str
+        +create_flow_diagram() str
+        +render_mermaid() str
+    }
+    
+    class AIPromptBuilder {
+        +build_api_analysis_prompt() str
+        +build_architecture_analysis_prompt() str
+        +optimize_prompt_length() str
+    }
+    
+    HTMLGenerator --&gt; &#34;uses&#34; AIAnalysisGenerator
+    MarkdownGenerator --&gt; &#34;uses&#34; AIAnalysisGenerator
+    AIAnalysisGenerator --&gt; &#34;creates&#34; DiagramFactory
+    AIAnalysisGenerator --&gt; &#34;uses&#34; AIPromptBuilder
+    AIAnalysisGenerator --&gt; &#34;calls&#34; OpenAIAPI</div>
+                <p class="diagram-info">Generators module showing HTML, Markdown, AI analysis, diagram generation, and prompt building components</p>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">🏗️</div>
+            <h3>Main_Flow Module</h3>
+            <div class="diagram-section">
+                <div class="mermaid">sequenceDiagram
+    participant User
+    participant Main
+    participant CodeAnalyzer
+    participant AIPipelineAnalyzer
+    participant AIAnalysisGenerator
+    participant AIPromptBuilder
+    participant DiagramFactory
+    participant HTMLGenerator
+    participant OpenAI
+    
+    User-&gt;&gt;Main: python main.py --analyze --generate
+    Main-&gt;&gt;CodeAnalyzer: analyze_codebase()
+    CodeAnalyzer-&gt;&gt;Main: code_analysis
+    Main-&gt;&gt;AIPipelineAnalyzer: analyze_ai_components()
+    AIPipelineAnalyzer-&gt;&gt;Main: ai_analysis
+    Main-&gt;&gt;AIAnalysisGenerator: enhance_code_analysis()
+    AIAnalysisGenerator-&gt;&gt;AIPromptBuilder: build_prompts()
+    AIPromptBuilder-&gt;&gt;AIAnalysisGenerator: optimized_prompts
+    AIAnalysisGenerator-&gt;&gt;OpenAI: API calls for analysis
+    OpenAI-&gt;&gt;AIAnalysisGenerator: enhanced insights
+    AIAnalysisGenerator-&gt;&gt;DiagramFactory: create_all_diagrams()
+    DiagramFactory-&gt;&gt;AIAnalysisGenerator: diagram_specs
+    AIAnalysisGenerator-&gt;&gt;Main: enhanced_analysis
+    Main-&gt;&gt;HTMLGenerator: generate_all_documentation()
+    HTMLGenerator-&gt;&gt;Main: documentation files
+    Main-&gt;&gt;User: Documentation generated successfully</div>
+                <p class="diagram-info">Main application flow showing the sequence of operations from user input to documentation output with refactored components</p>
+            </div>
+        </div>
+    
+    <!-- High-Level Module Architecture Overview -->
+    
+    <div class="getting-started-card">
+        <div class="card-icon">🏗️</div>
+        <h3>Top-Level Module Architecture</h3>
+        <p>High-level view of main modules and their relationships.</p>
+        
+        <div class="diagram-section">
+            <div class="mermaid">
+graph TB
+    subgraph "System Architecture"
+        1["📦 Modelv4enhanced"]
+        2["📦 Modelv3"]
+        3["📦 Modelv2"]
+        4["📦 Modev1"]
+        5["📦 Kafka_connector"]
+        6["📦 Postgres_client"]
+        7["📦 Generate_html"]
+        8["📦 Autodoc_module"]
+    end
+    
+    1 --> 2
+    2 --> 3
+    3 --> 4
+    4 --> 5
+    5 --> 6
+    6 --> 7
+    7 --> 8
+    
+    classDef moduleBox fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    class 1 moduleBox
+    class 2 moduleBox
+    class 3 moduleBox
+    class 4 moduleBox
+    class 5 moduleBox
+    class 6 moduleBox
+    class 7 moduleBox
+    class 8 moduleBox
+            </div>
+            <p class="diagram-info">High-level architecture showing 26 main modules and their interconnections.</p>
+        </div>
+        
+        <div class="action-links">
+            <a href="#" class="action-link">Detailed View</a>
+            <a href="#" class="action-link">Dependencies</a>
+        </div>
+    </div>
+    
+    <!-- Module Categories Overview -->
+    <div class="getting-started-card">
+        <div class="card-icon">📊</div>
+        <h3>Module Categories</h3>
+        <p>Distribution of modules by type and functionality.</p>
+        
+        <div class="diagram-section">
+            <div class="mermaid">
+pie title Module Distribution
+    "Core Modules" : 1
+    "Sub Modules" : 94
+    "Utilities" : 1
+    "Services" : 4
+            </div>
+            <p class="diagram-info">Overview of module categories and their relative sizes in the codebase.</p>
+        </div>
+        
+        <div class="action-links">
+            <a href="#" class="action-link">Category Details</a>
+            <a href="#" class="action-link">Module Map</a>
+        </div>
+    </div>
+</section>
+
+<!-- Top-Level Modules Grid -->
+<section class="all-modules" id="all-modules">
+    <h2>📁 Top-Level Modules</h2>
+    <p>Main modules that form the core architecture of the project.</p>
+    
+    
+    <div class="getting-started-grid">
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>modelv4Enhanced</h3>
+            
+            <div class="module-type-badge">
+                <span class="badge">Package Module</span>
+                <span class="badge">Classes</span>
+                <span class="badge">Functions</span>
+            </div>
+            
+            <div class="module-info">
+                <strong>Module:</strong>
+                <div class="code-block">
+                    <code>modelv4Enhanced</code>
+                </div>
+                
+            </div>
+            
+            <!-- Module Metrics -->
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">30</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">2</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">932</span>
+                </div>
+            </div>
+            
+            <!-- High-Level Module Summary -->
+            <div class="module-section">
+                <strong>Module Summary:</strong>
+                <div class="method-list">
+                    <span class="badge">2 Classes</span>
+                    <span class="badge">30 Functions</span>
+                    <span class="badge">932 LOC</span>
+                </div>
+            </div>
+            
+            <div class="module-section">
+                <strong>Dependencies:</strong>
+                <div class="method-list">
+                    <span class="badge">random</span>
+                    <span class="badge">pandas</span>
+                    <span class="badge">numpy</span>
+                    <span class="badge">+15 more</span>
+                </div>
+            </div>
+            
+            <div class="action-links">
+                <a href="#" class="action-link">View Source</a>
+                <a href="#" class="action-link">Documentation</a>
+                <a href="#" class="action-link">Dependencies</a>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>modelv3</h3>
+            
+            <div class="module-type-badge">
+                <span class="badge">Package Module</span>
+                <span class="badge">Classes</span>
+                <span class="badge">Functions</span>
+            </div>
+            
+            <div class="module-info">
+                <strong>Module:</strong>
+                <div class="code-block">
+                    <code>modelv3</code>
+                </div>
+                
+            </div>
+            
+            <!-- Module Metrics -->
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">21</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">2</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">827</span>
+                </div>
+            </div>
+            
+            <!-- High-Level Module Summary -->
+            <div class="module-section">
+                <strong>Module Summary:</strong>
+                <div class="method-list">
+                    <span class="badge">2 Classes</span>
+                    <span class="badge">21 Functions</span>
+                    <span class="badge">827 LOC</span>
+                </div>
+            </div>
+            
+            <div class="module-section">
+                <strong>Dependencies:</strong>
+                <div class="method-list">
+                    <span class="badge">random</span>
+                    <span class="badge">pandas</span>
+                    <span class="badge">numpy</span>
+                    <span class="badge">+12 more</span>
+                </div>
+            </div>
+            
+            <div class="action-links">
+                <a href="#" class="action-link">View Source</a>
+                <a href="#" class="action-link">Documentation</a>
+                <a href="#" class="action-link">Dependencies</a>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>modelv2</h3>
+            
+            <div class="module-type-badge">
+                <span class="badge">Package Module</span>
+                <span class="badge">Functions</span>
+            </div>
+            
+            <div class="module-info">
+                <strong>Module:</strong>
+                <div class="code-block">
+                    <code>modelv2</code>
+                </div>
+                
+            </div>
+            
+            <!-- Module Metrics -->
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">14</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">688</span>
+                </div>
+            </div>
+            
+            <!-- High-Level Module Summary -->
+            <div class="module-section">
+                <strong>Module Summary:</strong>
+                <div class="method-list">
+                    <span class="badge">14 Functions</span>
+                    <span class="badge">688 LOC</span>
+                </div>
+            </div>
+            
+            <div class="module-section">
+                <strong>Dependencies:</strong>
+                <div class="method-list">
+                    <span class="badge">pandas</span>
+                    <span class="badge">numpy</span>
+                    <span class="badge">sklearn</span>
+                    <span class="badge">+11 more</span>
+                </div>
+            </div>
+            
+            <div class="action-links">
+                <a href="#" class="action-link">View Source</a>
+                <a href="#" class="action-link">Documentation</a>
+                <a href="#" class="action-link">Dependencies</a>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>modev1</h3>
+            
+            <div class="module-type-badge">
+                <span class="badge">Package Module</span>
+                <span class="badge">Functions</span>
+            </div>
+            
+            <div class="module-info">
+                <strong>Module:</strong>
+                <div class="code-block">
+                    <code>modev1</code>
+                </div>
+                
+            </div>
+            
+            <!-- Module Metrics -->
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">13</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">691</span>
+                </div>
+            </div>
+            
+            <!-- High-Level Module Summary -->
+            <div class="module-section">
+                <strong>Module Summary:</strong>
+                <div class="method-list">
+                    <span class="badge">13 Functions</span>
+                    <span class="badge">691 LOC</span>
+                </div>
+            </div>
+            
+            <div class="module-section">
+                <strong>Dependencies:</strong>
+                <div class="method-list">
+                    <span class="badge">pandas</span>
+                    <span class="badge">numpy</span>
+                    <span class="badge">sklearn</span>
+                    <span class="badge">+8 more</span>
+                </div>
+            </div>
+            
+            <div class="action-links">
+                <a href="#" class="action-link">View Source</a>
+                <a href="#" class="action-link">Documentation</a>
+                <a href="#" class="action-link">Dependencies</a>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>generate_html</h3>
+            
+            <div class="module-type-badge">
+                <span class="badge">Package Module</span>
+                <span class="badge">Classes</span>
+                <span class="badge">Functions</span>
+            </div>
+            
+            <div class="module-info">
+                <strong>Module:</strong>
+                <div class="code-block">
+                    <code>generate_html</code>
+                </div>
+                
+                <strong>Purpose:</strong>
+                <p class="small-text">HTML Documentation Generator
+Converts template data to HTML pages for MkDocs</p>
+            </div>
+            
+            <!-- Module Metrics -->
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">7</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">1</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">343</span>
+                </div>
+            </div>
+            
+            <!-- High-Level Module Summary -->
+            <div class="module-section">
+                <strong>Module Summary:</strong>
+                <div class="method-list">
+                    <span class="badge">1 Classes</span>
+                    <span class="badge">7 Functions</span>
+                    <span class="badge">343 LOC</span>
+                </div>
+            </div>
+            
+            <div class="module-section">
+                <strong>Dependencies:</strong>
+                <div class="method-list">
+                    <span class="badge">datetime</span>
+                    <span class="badge">pathlib</span>
+                </div>
+            </div>
+            
+            <div class="action-links">
+                <a href="#" class="action-link">View Source</a>
+                <a href="#" class="action-link">Documentation</a>
+                <a href="#" class="action-link">Dependencies</a>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>autodoc_module</h3>
+            
+            <div class="module-type-badge">
+                <span class="badge">Core Module</span>
+                <span class="badge">Functions</span>
+            </div>
+            
+            <div class="module-info">
+                <strong>Module:</strong>
+                <div class="code-block">
+                    <code>autodoc_module</code>
+                </div>
+                
+                <strong>Purpose:</strong>
+                <p class="small-text">AutoDoc Module - Wrapper for the existing AutoDoc system
+Uses the existing autodoc functionality from @autodoc/src/</p>
+            </div>
+            
+            <!-- Module Metrics -->
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">8</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">322</span>
+                </div>
+            </div>
+            
+            <!-- High-Level Module Summary -->
+            <div class="module-section">
+                <strong>Module Summary:</strong>
+                <div class="method-list">
+                    <span class="badge">8 Functions</span>
+                    <span class="badge">322 LOC</span>
+                </div>
+            </div>
+            
+            <div class="module-section">
+                <strong>Dependencies:</strong>
+                <div class="method-list">
+                    <span class="badge">pathlib</span>
+                    <span class="badge">auto_doc_generator</span>
+                    <span class="badge">auto_doc_generator</span>
+                    <span class="badge">+2 more</span>
+                </div>
+            </div>
+            
+            <div class="action-links">
+                <a href="#" class="action-link">View Source</a>
+                <a href="#" class="action-link">Documentation</a>
+                <a href="#" class="action-link">Dependencies</a>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>publish</h3>
+            
+            <div class="module-type-badge">
+                <span class="badge">Package Module</span>
+                <span class="badge">Functions</span>
+            </div>
+            
+            <div class="module-info">
+                <strong>Module:</strong>
+                <div class="code-block">
+                    <code>publish</code>
+                </div>
+                
+                <strong>Purpose:</strong>
+                <p class="small-text">Package Publishing Helper
+
+This script helps with publishing the auto-doc-generator package.</p>
+            </div>
+            
+            <!-- Module Metrics -->
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">9</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">181</span>
+                </div>
+            </div>
+            
+            <!-- High-Level Module Summary -->
+            <div class="module-section">
+                <strong>Module Summary:</strong>
+                <div class="method-list">
+                    <span class="badge">9 Functions</span>
+                    <span class="badge">181 LOC</span>
+                </div>
+            </div>
+            
+            <div class="module-section">
+                <strong>Dependencies:</strong>
+                <div class="method-list">
+                    <span class="badge">subprocess</span>
+                    <span class="badge">argparse</span>
+                    <span class="badge">pathlib</span>
+                    <span class="badge">+5 more</span>
+                </div>
+            </div>
+            
+            <div class="action-links">
+                <a href="#" class="action-link">View Source</a>
+                <a href="#" class="action-link">Documentation</a>
+                <a href="#" class="action-link">Dependencies</a>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>env</h3>
+            
+            <div class="module-type-badge">
+                <span class="badge">Package Module</span>
+                <span class="badge">Functions</span>
+            </div>
+            
+            <div class="module-info">
+                <strong>Module:</strong>
+                <div class="code-block">
+                    <code>env</code>
+                </div>
+                
+            </div>
+            
+            <!-- Module Metrics -->
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">2</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">81</span>
+                </div>
+            </div>
+            
+            <!-- High-Level Module Summary -->
+            <div class="module-section">
+                <strong>Module Summary:</strong>
+                <div class="method-list">
+                    <span class="badge">2 Functions</span>
+                    <span class="badge">81 LOC</span>
+                </div>
+            </div>
+            
+            <div class="module-section">
+                <strong>Dependencies:</strong>
+                <div class="method-list">
+                    <span class="badge">logging</span>
+                    <span class="badge">sqlalchemy</span>
+                    <span class="badge">sqlalchemy</span>
+                    <span class="badge">+2 more</span>
+                </div>
+            </div>
+            
+            <div class="action-links">
+                <a href="#" class="action-link">View Source</a>
+                <a href="#" class="action-link">Documentation</a>
+                <a href="#" class="action-link">Dependencies</a>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>setup</h3>
+            
+            <div class="module-type-badge">
+                <span class="badge">Package Module</span>
+            </div>
+            
+            <div class="module-info">
+                <strong>Module:</strong>
+                <div class="code-block">
+                    <code>setup</code>
+                </div>
+                
+                <strong>Purpose:</strong>
+                <p class="small-text">Setup script for Auto Documentation Generation System</p>
+            </div>
+            
+            <!-- Module Metrics -->
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">83</span>
+                </div>
+            </div>
+            
+            <!-- High-Level Module Summary -->
+            <div class="module-section">
+                <strong>Module Summary:</strong>
+                <div class="method-list">
+                    <span class="badge">83 LOC</span>
+                </div>
+            </div>
+            
+            <div class="module-section">
+                <strong>Dependencies:</strong>
+                <div class="method-list">
+                    <span class="badge">setuptools</span>
+                    <span class="badge">pathlib</span>
+                </div>
+            </div>
+            
+            <div class="action-links">
+                <a href="#" class="action-link">View Source</a>
+                <a href="#" class="action-link">Documentation</a>
+                <a href="#" class="action-link">Dependencies</a>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>main</h3>
+            
+            <div class="module-type-badge">
+                <span class="badge">Package Module</span>
+            </div>
+            
+            <div class="module-info">
+                <strong>Module:</strong>
+                <div class="code-block">
+                    <code>main</code>
+                </div>
+                
+            </div>
+            
+            <!-- Module Metrics -->
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">31</span>
+                </div>
+            </div>
+            
+            <!-- High-Level Module Summary -->
+            <div class="module-section">
+                <strong>Module Summary:</strong>
+                <div class="method-list">
+                    <span class="badge">31 LOC</span>
+                </div>
+            </div>
+            
+            <div class="module-section">
+                <strong>Dependencies:</strong>
+                <div class="method-list">
+                    <span class="badge">asyncio</span>
+                    <span class="badge">logging</span>
+                    <span class="badge">core</span>
+                    <span class="badge">+3 more</span>
+                </div>
+            </div>
+            
+            <div class="action-links">
+                <a href="#" class="action-link">View Source</a>
+                <a href="#" class="action-link">Documentation</a>
+                <a href="#" class="action-link">Dependencies</a>
+            </div>
+        </div>
+        <div class="getting-started-card">
+            <div class="card-icon">📁</div>
+            <h3>__init__</h3>
+            
+            <div class="module-type-badge">
+                <span class="badge">Package Module</span>
+            </div>
+            
+            <div class="module-info">
+                <strong>Module:</strong>
+                <div class="code-block">
+                    <code>__init__</code>
+                </div>
+                
+            </div>
+            
+            <!-- Module Metrics -->
+            <div class="module-metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Functions:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Classes:</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Lines:</span>
+                    <span class="metric-value">1</span>
+                </div>
+            </div>
+            
+            <!-- High-Level Module Summary -->
+            <div class="module-section">
+                <strong>Module Summary:</strong>
+                <div class="method-list">
+                    <span class="badge">1 LOC</span>
+                </div>
+            </div>
+            
+            
+            <div class="action-links">
+                <a href="#" class="action-link">View Source</a>
+                <a href="#" class="action-link">Documentation</a>
+                <a href="#" class="action-link">Dependencies</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Module Performance Dashboard -->
+<section class="component-store-section">
+    <h3>🏪 Module Performance Store</h3>
+    <p>Analyze module quality, complexity, and optimization opportunities.</p>
+    
+    <div class="performance-dashboard">
+        <h4>📊 Module Quality Metrics</h4>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-value">7.2</div>
+                <div class="metric-label">Avg Complexity</div>
+                <div class="metric-trend positive">↗ Improving</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">78%</div>
+                <div class="metric-label">Test Coverage</div>
+                <div class="metric-trend positive">↗ +12% this month</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">85%</div>
+                <div class="metric-label">Documentation</div>
+                <div class="metric-trend neutral">→ Stable</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">B+</div>
+                <div class="metric-label">Maintainability</div>
+                <div class="metric-trend positive">↗ Good</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="store-features">
+        <div class="store-feature">
+            <div class="feature-icon">🔍</div>
+            <h4>Code Analysis</h4>
+            <p>Deep analysis of module structure and quality</p>
+            <div class="feature-metrics">
+                <span class="metric">📊 Complexity</span>
+                <span class="metric">🔗 Dependencies</span>
+                <span class="metric">📈 Trends</span>
+            </div>
+        </div>
+        
+        <div class="store-feature">
+            <div class="feature-icon">🎯</div>
+            <h4>Optimization</h4>
+            <p>Identify refactoring opportunities</p>
+            <div class="feature-metrics">
+                <span class="metric">⚡ Performance</span>
+                <span class="metric">🧹 Clean Code</span>
+                <span class="metric">🔧 Refactor</span>
+            </div>
+        </div>
+        
+        <div class="store-feature">
+            <div class="feature-icon">📖</div>
+            <h4>Documentation</h4>
+            <p>Track documentation coverage and quality</p>
+            <div class="feature-metrics">
+                <span class="metric">📝 Coverage</span>
+                <span class="metric">✅ Quality</span>
+                <span class="metric">🎨 Examples</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="assets/js/mermaid.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  if (window.mermaid) { 
+    mermaid.initialize({ 
+      startOnLoad: true,
+      theme: 'default',
+      flowchart: { useMaxWidth: true },
+      classDiagram: { useMaxWidth: true },
+      sequence: { useMaxWidth: true }
+    }); 
+  }
+});
+</script>
+
+                        <!-- Edit button -->
+                        <div class="md-source-file">
+                            <small>
+                                Generated on 2025-09-20 02:28:22
+                            </small>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="md-footer">
+        <div class="md-footer-meta md-typeset">
+            <div class="md-footer-meta__inner md-grid">
+                <div class="md-copyright">
+                    Made with ❤️ using Auto Documentation Generator
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+    
+    <!-- Theme Toggle Script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const html = document.documentElement;
+        
+        // Check for saved theme preference or default to light
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', currentTheme);
+        
+        // Update icon based on current theme
+        if (currentTheme === 'dark') {
+            themeIcon.textContent = '☀️';
+        } else {
+            themeIcon.textContent = '🌙';
+        }
+        
+        themeToggle.addEventListener('click', function() {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Update icon
+            if (newTheme === 'dark') {
+                themeIcon.textContent = '☀️';
+            } else {
+                themeIcon.textContent = '🌙';
+            }
+        });
+    });
+    </script>
+    
+</body>
+</html>
