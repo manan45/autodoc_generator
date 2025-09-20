@@ -22,53 +22,57 @@
 <!-- Repository Overview -->
 <section class="overview-section">
     <h2>🏠 Repository Structure</h2>
-    <p>High-level overview of the repository organization and main components.</p>
+    <p>Actual repository organization based on detected structure and main directories.</p>
     
-    {% if diagrams and diagrams.repository_overview %}
-    <div class="diagram-section">
-        <div class="mermaid">{{ diagrams.repository_overview.mermaid }}</div>
-        <p class="diagram-info">{{ diagrams.repository_overview.description }}</p>
+    <div id="repo-structure-dynamic" class="diagram-section">
+        <h3>Live Repository Structure</h3>
+        <div class="loading-placeholder">
+            <div class="loading-spinner">🔄</div>
+            <span>Loading repository structure...</span>
+        </div>
     </div>
-    {% endif %}
 </section>
 
 <!-- Enterprise Architecture -->
 <section class="enterprise-section">
     <h2>🏢 Enterprise Architecture</h2>
-    <p>System-level view showing major components, external integrations, and processing layers.</p>
+    <p>System-level components, integrations, and data flows based on detected patterns.</p>
     
-    {% if diagrams and diagrams.enterprise_architecture %}
-    <div class="diagram-section">
-        <div class="mermaid">{{ diagrams.enterprise_architecture.mermaid }}</div>
-        <p class="diagram-info">{{ diagrams.enterprise_architecture.description }}</p>
-</div>
-{% endif %}
+    <div id="enterprise-arch-dynamic" class="diagram-section">
+        <h3>Live System Architecture</h3>
+        <div class="loading-placeholder">
+            <div class="loading-spinner">🔄</div>
+            <span>Analyzing system components...</span>
+        </div>
+    </div>
 </section>
 
 <!-- Logical Architecture -->
 <section class="logical-section">
     <h2>🧠 Logical Architecture</h2>
-    <p>Component relationships and data flow patterns within the system.</p>
+    <p>Data flow patterns and component interactions based on actual code analysis.</p>
     
-    {% if diagrams and diagrams.logical_architecture %}
-    <div class="diagram-section">
-        <div class="mermaid">{{ diagrams.logical_architecture.mermaid }}</div>
-        <p class="diagram-info">{{ diagrams.logical_architecture.description }}</p>
-</div>
-{% endif %}
+    <div id="logical-arch-dynamic" class="diagram-section">
+        <h3>Live Data Flow Analysis</h3>
+        <div class="loading-placeholder">
+            <div class="loading-spinner">🔄</div>
+            <span>Analyzing component relationships...</span>
+        </div>
+    </div>
 </section>
 
 <!-- Physical Architecture -->
 <section class="physical-section">
     <h2>🖥️ Physical Architecture</h2>
-    <p>Deployment environment, runtime components, and infrastructure layout.</p>
+    <p>Deployment patterns, runtime environments, and infrastructure detected from configuration files.</p>
     
-    {% if diagrams and diagrams.physical_architecture %}
-    <div class="diagram-section">
-        <div class="mermaid">{{ diagrams.physical_architecture.mermaid }}</div>
-        <p class="diagram-info">{{ diagrams.physical_architecture.description }}</p>
-</div>
-{% endif %}
+    <div id="physical-arch-dynamic" class="diagram-section">
+        <h3>Live Deployment Analysis</h3>
+        <div class="loading-placeholder">
+            <div class="loading-spinner">🔄</div>
+            <span>Detecting deployment configurations...</span>
+        </div>
+    </div>
 </section>
 
 <!-- Pipeline Architecture -->
@@ -76,61 +80,25 @@
     <h2>⚙️ Pipeline Architecture</h2>
     <p>Data processing pipelines, AI enhancement workflows, and content generation flows.</p>
     
-    {% if diagrams and diagrams.pipeline_architecture %}
-    <div class="diagram-section">
-        <div class="mermaid">{{ diagrams.pipeline_architecture.mermaid }}</div>
-        <p class="diagram-info">{{ diagrams.pipeline_architecture.description }}</p>
+    <div id="pipeline-arch-dynamic" class="diagram-section">
+        <h3>Live Pipeline Analysis</h3>
+        <div class="loading-placeholder">
+            <div class="loading-spinner">🔄</div>
+            <span>Analyzing processing pipelines...</span>
+        </div>
     </div>
-    {% endif %}
 </section>
 
 <!-- System Component Overview -->
 <section class="system-components">
     <h2>🏗️ System Component Overview</h2>
-    <p>High-level view of system components and their architectural relationships.</p>
+    <p>Actual system components detected from code analysis with their relationships and dependencies.</p>
     
-    <div class="getting-started-card">
-        <div class="card-icon">🏢</div>
-        <h3>Component Hierarchy</h3>
-        <p>Simplified view of main system components and their interactions.</p>
-        
-        <div class="diagram-section">
-            <div class="mermaid">
-graph TB
-    subgraph "Presentation Layer"
-        UI[🖥️ User Interface]
-        API[🔌 API Gateway]
-    end
-    
-    subgraph "Business Layer"
-        CORE[🧠 Core Logic]
-        SERVICES[⚙️ Services]
-        WORKFLOW[🔄 Workflows]
-    end
-    
-    subgraph "Data Layer"
-        STORAGE[💾 Data Storage]
-        CACHE[⚡ Cache Layer]
-        CONFIG[⚙️ Configuration]
-    end
-    
-    UI --> API
-    API --> CORE
-    CORE --> SERVICES
-    SERVICES --> WORKFLOW
-    WORKFLOW --> STORAGE
-    SERVICES --> CACHE
-    CORE --> CONFIG
-    
-    classDef presentation fill:#e3f2fd,stroke:#1976d2
-    classDef business fill:#e8f5e8,stroke:#4caf50
-    classDef data fill:#fff3e0,stroke:#ff9800
-    
-    class UI,API presentation
-    class CORE,SERVICES,WORKFLOW business
-    class STORAGE,CACHE,CONFIG data
-            </div>
-            <p class="diagram-info">High-level component architecture showing the three-tier system design with clear separation of concerns.</p>
+    <div id="system-components-dynamic" class="diagram-section">
+        <h3>Live Component Analysis</h3>
+        <div class="loading-placeholder">
+            <div class="loading-spinner">🔄</div>
+            <span>Analyzing system components...</span>
         </div>
     </div>
 </section>
@@ -145,83 +113,14 @@ graph TB
 <section class="top-modules-section">
     <h2 id="modules">📁 Module Architecture</h2>
     <p>High-level view of core modules and their architectural relationships.</p>
-    
-    {% if diagrams and diagrams.module_dependency_flow %}
-    <div class="diagram-section">
-        <h3>Module Dependency Flow</h3>
-        <div class="mermaid">{{ diagrams.module_dependency_flow.mermaid }}</div>
-        <p class="diagram-info">{{ diagrams.module_dependency_flow.description }}</p>
-    </div>
-    {% elif modules %}
-    <!-- AI-Generated Module Dependency Diagram -->
-<div class="diagram-section">
-        <h3>Module Dependency Flow: UI → Business Logic → Features</h3>
-        <div class="mermaid">
-graph TD
-    subgraph "🎨 User Interface Layer"
-        CLI[🖥️ CLI Interface<br/>main.py]
-        CONFIG[⚙️ Configuration<br/>documentor.yaml]
-        TEMPLATES[📋 Templates<br/>html_templates/]
-    end
-    
-    subgraph "🧠 Business Logic Layer"
-        {% for module in modules[:6] %}
-        {% if 'analyzer' in module.path.lower() or 'generator' in module.path.lower() or 'main' in module.path.lower() %}
-        M{{ loop.index }}[📊 {{ module.name | title }}<br/>{{ module.path }}]
-        {% endif %}
-    {% endfor %}
-    end
-    
-    subgraph "🏭 Product Features"
-        DOC_GEN[📄 Documentation Generation]
-        AI_ENHANCE[🤖 AI Enhancement]
-        DIAGRAM_CREATE[📈 Diagram Creation]
-        CODE_ANALYSIS[🔍 Code Analysis]
-        HTML_OUTPUT[🌐 HTML Output]
-    end
-    
-    subgraph "💾 Data Layer"
-        FILE_IO[📁 File Operations]
-        CACHE[💾 Caching System]
-        MEMORY[🧠 Memory Store]
-    end
-    
-    %% User Interface to Business Logic
-    CLI --> M1
-    CONFIG --> M1
-    TEMPLATES --> M2
-    
-    %% Business Logic to Features
-    M1 --> CODE_ANALYSIS
-    M2 --> DOC_GEN
-    M3 --> AI_ENHANCE
-    M4 --> DIAGRAM_CREATE
-    M5 --> HTML_OUTPUT
-    
-    %% Features to Data Layer
-    CODE_ANALYSIS --> FILE_IO
-    AI_ENHANCE --> CACHE
-    DOC_GEN --> MEMORY
-    HTML_OUTPUT --> FILE_IO
-    
-    %% Cross-layer dependencies
-    DOC_GEN --> AI_ENHANCE
-    AI_ENHANCE --> DIAGRAM_CREATE
-    DIAGRAM_CREATE --> HTML_OUTPUT
-    
-    classDef ui fill:#e3f2fd
-    classDef business fill:#e8f5e8
-    classDef features fill:#fff3e0
-    classDef data fill:#f3e5f5
-    
-    class CLI,CONFIG,TEMPLATES ui
-    class M1,M2,M3,M4,M5,M6 business
-    class DOC_GEN,AI_ENHANCE,DIAGRAM_CREATE,CODE_ANALYSIS,HTML_OUTPUT features
-    class FILE_IO,CACHE,MEMORY data
+    <div id="arch-dynamic-diagram" class="diagram-section">
+        <h3>Live Module Dependency Flow (Repository Analysis)</h3>
+        <div class="loading-placeholder">
+            <div class="loading-spinner">🔄</div>
+            <span>Analyzing module dependencies...</span>
         </div>
-        <p class="diagram-info">Module dependency flow showing how user interface components connect through business logic to deliver product features, with data layer support.</p>
-            </div>
-            {% endif %}
+    </div>
+    
 
     <!-- Top Modules Summary Table -->
     {% if modules %}
@@ -317,6 +216,57 @@ graph TD
 </section> -->
 
 <style>
+/* Loading placeholders */
+.loading-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    border: 2px dashed #e2e8f0;
+    border-radius: 8px;
+    background: #f8fafc;
+    color: #64748b;
+    font-style: italic;
+}
+
+.loading-spinner {
+    animation: spin 2s linear infinite;
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Diagram sections */
+.diagram-section {
+    margin: 1.5rem 0;
+}
+
+.diagram-info {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background: #f1f5f9;
+    border-left: 4px solid #3b82f6;
+    border-radius: 0 4px 4px 0;
+    font-size: 0.9rem;
+    color: #475569;
+}
+
+.fallback-diagram {
+    padding: 1.5rem;
+    border: 2px solid #d1d5db;
+    border-radius: 8px;
+    background: #f9fafb;
+}
+
+.fallback-diagram h3 {
+    margin-top: 0;
+    color: #374151;
+}
+
 /* Top Modules specific styles */
 .top-modules-section {
     margin-top: 2rem;
