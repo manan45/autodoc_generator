@@ -717,4 +717,5 @@ if __name__ == '__main__':
     print("🔍 Module search available at: http://localhost:8000/api/search?q=<query>")
     print("📁 Code viewer available at: http://localhost:8000/code/<path>")
     
-    app.run(host='0.0.0.0', port=8000, debug=True)
+    debug_mode = os.environ.get('FLASK_DEBUG', '0').lower() in ('1', 'true', 'yes')
+    app.run(host='0.0.0.0', port=8000, debug=debug_mode)
