@@ -105,6 +105,7 @@ class CodeAnalyzer:
                 module_info = {
                     'name': py_file.stem,
                     'path': str(py_file.relative_to(self.repo_path)),
+                    'content': content,
                     'docstring': ast.get_docstring(tree),
                     'classes': [node.name for node in ast.walk(tree) if isinstance(node, ast.ClassDef)],
                     'functions': [node.name for node in ast.walk(tree) if isinstance(node, ast.FunctionDef)],

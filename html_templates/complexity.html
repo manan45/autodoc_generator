@@ -2,468 +2,953 @@
 
 {% set current_page = "complexity" %}
 
-{% block title %}Code Quality{% endblock %}
-{% block page_title %}{{ project_name | default('Project') }} Code Quality{% endblock %}
-{% block breadcrumb_title %}Code Quality{% endblock %}
+{% block title %}Big O Complexity Analysis{% endblock %}
+{% block page_title %}🔍 Big O Complexity Analysis{% endblock %}
+{% block breadcrumb_title %}Complexity Analysis{% endblock %}
 
 {% block toc %}
 <li class="md-nav__item"><a href="#overview" class="md-nav__link">Overview</a></li>
-<li class="md-nav__item"><a href="#scoring-pipeline" class="md-nav__link">Scoring Pipeline</a></li>
-<li class="md-nav__item"><a href="#quality-factors" class="md-nav__link">Quality Factors</a></li>
-<li class="md-nav__item"><a href="#complexity" class="md-nav__link">Complexity Analysis</a></li>
-<li class="md-nav__item"><a href="#modules" class="md-nav__link">Module Analysis</a></li>
-<li class="md-nav__item"><a href="#insights" class="md-nav__link">Quality Insights</a></li>
+<li class="md-nav__item"><a href="#critical-attention" class="md-nav__link">Critical Attention Needed</a></li>
+<li class="md-nav__item"><a href="#time-complexity" class="md-nav__link">Time Complexity Analysis</a></li>
+<li class="md-nav__item"><a href="#space-complexity" class="md-nav__link">Space Complexity Analysis</a></li>
+<li class="md-nav__item"><a href="#modules-by-attention" class="md-nav__link">Modules by Attention</a></li>
+<li class="md-nav__item"><a href="#optimization-guide" class="md-nav__link">Optimization Guide</a></li>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Big O Complexity Analysis Styles */
+.complexity-hero {
+    background: linear-gradient(135deg, var(--color-primary) 0%, #4a5bb5 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 0.75rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-lg);
+}
+
+.complexity-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.complexity-stat-card {
+    background: rgba(255,255,255,0.1);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.complexity-stat-card.critical { border-left: 4px solid #ff4444; }
+.complexity-stat-card.warning { border-left: 4px solid #ff9500; }
+.complexity-stat-card.good { border-left: 4px solid #00cc66; }
+.complexity-stat-card.info { border-left: 4px solid #0099ff; }
+
+.stat-icon { font-size: 2rem; }
+.stat-content .stat-number { display: block; font-size: 2rem; font-weight: 700; }
+.stat-content .stat-label { display: block; font-size: 1rem; opacity: 0.9; }
+.stat-content .stat-sublabel { display: block; font-size: 0.8rem; opacity: 0.7; }
+
+/* Critical Functions */
+.critical-functions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.critical-function-card {
+    background: var(--color-card-bg);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    border-left: 5px solid #ff4444;
+    box-shadow: var(--shadow-md);
+}
+
+.function-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.function-icon { font-size: 1.5rem; }
+.function-info h3 { margin: 0; color: var(--color-heading); }
+.function-location { color: var(--color-text-muted); font-size: 0.9rem; margin: 0; }
+
+.complexity-badge.critical-badge {
+    background: #ff4444;
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.big-o-analysis {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.big-o-section h4 {
+    margin: 0 0 0.5rem 0;
+    color: var(--color-heading);
+    font-size: 1rem;
+}
+
+.big-o-notation {
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 700;
+    padding: 0.3rem 0.6rem;
+    border-radius: 0.25rem;
+    font-size: 0.9rem;
+}
+
+.big-o-notation.critical { background: #ff4444; color: white; }
+.big-o-notation.warning { background: #ff9500; color: white; }
+.big-o-notation.attention { background: #ffcc00; color: #333; }
+.big-o-notation.good { background: #00cc66; color: white; }
+
+.big-o-description {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin-top: 0.25rem;
+}
+
+.optimization-list {
+    list-style: none;
+    padding: 0;
+}
+
+.optimization-list li {
+    background: var(--color-bg-subtle);
+    padding: 0.5rem;
+    margin: 0.25rem 0;
+    border-radius: 0.25rem;
+    font-size: 0.9rem;
+}
+
+.priority-badge {
+    padding: 0.25rem 0.6rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.priority-badge.critical { background: #ff4444; color: white; }
+.priority-badge.high { background: #ff9500; color: white; }
+.priority-badge.medium { background: #ffcc00; color: #333; }
+.priority-badge.low { background: #00cc66; color: white; }
+
+/* Time/Space Complexity Categories */
+.complexity-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.complexity-category {
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    border-left: 5px solid;
+}
+
+.complexity-category.critical { 
+    background: rgba(255, 68, 68, 0.05);
+    border-left-color: #ff4444;
+}
+
+.complexity-category.warning { 
+    background: rgba(255, 149, 0, 0.05);
+    border-left-color: #ff9500;
+}
+
+.complexity-category.good { 
+    background: rgba(0, 204, 102, 0.05);
+    border-left-color: #00cc66;
+}
+
+.complexity-category.excellent { 
+    background: rgba(0, 153, 255, 0.05);
+    border-left-color: #0099ff;
+}
+
+.functions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.function-complexity-card {
+    background: var(--color-card-bg);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border-left: 3px solid;
+    box-shadow: var(--shadow-sm);
+}
+
+.function-complexity-card.critical { border-left-color: #ff4444; }
+.function-complexity-card.warning { border-left-color: #ff9500; }
+.function-complexity-card.good { border-left-color: #00cc66; }
+.function-complexity-card.excellent { border-left-color: #0099ff; }
+
+/* Modules by Attention */
+.modules-attention-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
+}
+
+.module-attention-card {
+    background: var(--color-card-bg);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    border-left: 5px solid;
+    box-shadow: var(--shadow-md);
+}
+
+.module-attention-card.critical { border-left-color: #ff4444; }
+.module-attention-card.high { border-left-color: #ff9500; }
+.module-attention-card.medium { border-left-color: #ffcc00; }
+.module-attention-card.low { border-left-color: #00cc66; }
+
+.module-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.big-o-estimates {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.big-o-value {
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 600;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+    font-size: 0.85rem;
+}
+
+.big-o-value.critical { background: #ff4444; color: white; }
+.big-o-value.high { background: #ff9500; color: white; }
+.big-o-value.medium { background: #ffcc00; color: #333; }
+.big-o-value.good { background: #00cc66; color: white; }
+
+.optimization-recommendations {
+    margin-top: 1rem;
+}
+
+.recommendation {
+    background: var(--color-bg-subtle);
+    padding: 0.4rem 0.8rem;
+    margin: 0.25rem 0;
+    border-radius: 0.25rem;
+    font-size: 0.85rem;
+}
+
+/* Optimization Guide */
+.optimization-strategies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.strategy-category {
+    background: var(--color-card-bg);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-md);
+}
+
+.strategies-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.strategy-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--color-bg-subtle);
+    border-radius: 0.5rem;
+}
+
+.complexity-change {
+    font-family: 'Roboto Mono', monospace;
+    background: var(--color-primary-bg);
+    color: var(--color-primary);
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+}
+
+.complexity-table {
+    display: grid;
+    grid-template-columns: 1fr 2fr 3fr 1fr;
+    gap: 1px;
+    background: var(--color-border);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    margin-top: 1rem;
+}
+
+.complexity-row {
+    display: contents;
+}
+
+.complexity-cell {
+    background: var(--color-card-bg);
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.complexity-row.header .complexity-cell {
+    background: var(--color-bg-subtle);
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .complexity-stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .critical-functions-grid,
+    .modules-attention-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .big-o-analysis,
+    .big-o-estimates {
+        grid-template-columns: 1fr;
+    }
+    
+    .complexity-table {
+        grid-template-columns: 1fr;
+    }
+    
+    .complexity-cell {
+        padding: 0.5rem;
+    }
+}
+</style>
 {% endblock %}
 
 {% block content %}
-<h1 id="overview">{{ project_name | default('Project') }} Code Quality</h1>
-<p>Comprehensive code quality analysis, complexity metrics, and optimization recommendations.</p>
+<h1 id="overview">🔍 Big O Complexity Analysis</h1>
+<p>Algorithmic complexity analysis identifying time and space complexities across modules, sorted by attention priority.</p>
 
-<!-- Quality Stats Overview -->
-<section class="stats-overview">
-    <h2>📊 Quality Metrics</h2>
-    <div class="stats-grid">
-        <div class="stat-card">
-            <span class="stat-number">{{ complexity_analysis.average_complexity | round(2) | default('N/A') }}</span>
-            <span class="stat-label">Avg Complexity</span>
-        </div>
-        <div class="stat-card">
-            <span class="stat-number">{{ complexity_analysis.max_complexity | default('N/A') }}</span>
-            <span class="stat-label">Max Complexity</span>
-        </div>
-        <div class="stat-card">
-            <span class="stat-number">{{ complexity_analysis.high_complexity_functions | default('0') }}</span>
-            <span class="stat-label">High-Complexity</span>
-        </div>
-        <div class="stat-card">
-            <span class="stat-number">{{ total_lines | default('N/A') }}</span>
-            <span class="stat-label">Total Lines</span>
-        </div>
-    </div>
-</section>
-
-<!-- Quality Scoring Pipeline -->
-<section class="scoring-pipeline" id="scoring-pipeline">
-    <h2>🔬 Quality Scoring Pipeline</h2>
-    <p>Our comprehensive scoring system analyzes multiple dimensions of code quality to provide actionable insights.</p>
-    
-    <div class="getting-started-grid">
-        <div class="getting-started-card">
-            <div class="card-icon">📊</div>
-            <h3>Data Collection</h3>
-            <p>Automated analysis of repository structure and code patterns</p>
-            
-            <div class="pipeline-steps">
-                <div class="step-item">
-                    <span class="step-number">1</span>
-                    <div class="step-content">
-                        <strong>File Scanning</strong>
-                        <p>Recursively analyze all source files</p>
-                    </div>
-                </div>
-                <div class="step-item">
-                    <span class="step-number">2</span>
-                    <div class="step-content">
-                        <strong>AST Parsing</strong>
-                        <p>Build Abstract Syntax Trees for deep analysis</p>
-                    </div>
-                </div>
-                <div class="step-item">
-                    <span class="step-number">3</span>
-                    <div class="step-content">
-                        <strong>Metric Extraction</strong>
-                        <p>Extract complexity, maintainability metrics</p>
-                    </div>
+<!-- Complexity Overview Dashboard -->
+<section class="complexity-hero">
+    <div class="complexity-hero-content">
+        <h2>📊 Complexity Overview</h2>
+        <p>Algorithmic performance analysis with Big O notation for time and space complexities</p>
+        
+        <div class="complexity-stats-grid">
+            <div class="complexity-stat-card critical">
+                <div class="stat-icon">🚨</div>
+                <div class="stat-content">
+                    <span class="stat-number">{{ modules_needing_critical_attention | length | default('0') }}</span>
+                    <span class="stat-label">Critical Attention</span>
+                    <span class="stat-sublabel">O(n²) or worse</span>
                 </div>
             </div>
-        </div>
-        
-        <div class="getting-started-card">
-            <div class="card-icon">⚡</div>
-            <h3>Processing Engine</h3>
-            <p>Multi-dimensional analysis using proven software metrics</p>
-            
-            <div class="processing-metrics">
-                <div class="metric-item">
-                    <span class="metric-icon">🔄</span>
-                    <strong>Cyclomatic Complexity</strong>
-                    <p>Measures code complexity through control flow</p>
-                </div>
-                <div class="metric-item">
-                    <span class="metric-icon">📏</span>
-                    <strong>Maintainability Index</strong>
-                    <p>Combines complexity, volume, and cohesion</p>
-                </div>
-                <div class="metric-item">
-                    <span class="metric-icon">🎯</span>
-                    <strong>Technical Debt</strong>
-                    <p>Estimates refactoring effort required</p>
+            <div class="complexity-stat-card warning">
+                <div class="stat-icon">⚠️</div>
+                <div class="stat-content">
+                    <span class="stat-number">{{ modules_needing_attention | length | default('0') }}</span>
+                    <span class="stat-label">Needs Attention</span>
+                    <span class="stat-sublabel">O(n log n) complexity</span>
                 </div>
             </div>
-        </div>
-        
-        <div class="getting-started-card">
-            <div class="card-icon">🎯</div>
-            <h3>Score Calculation</h3>
-            <p>Weighted scoring algorithm producing actionable ratings</p>
-            
-            <div class="scoring-formula">
-                <div class="formula-box">
-                    <strong>Quality Score = </strong>
-                    <div class="formula-components">
-                        <span class="component">40% × Complexity Score</span>
-                        <span class="component">25% × Maintainability</span>
-                        <span class="component">20% × Test Coverage</span>
-                        <span class="component">10% × Documentation</span>
-                        <span class="component">5% × Code Style</span>
-                    </div>
+            <div class="complexity-stat-card good">
+                <div class="stat-icon">✅</div>
+                <div class="stat-content">
+                    <span class="stat-number">{{ optimized_modules | length | default('0') }}</span>
+                    <span class="stat-label">Optimized</span>
+                    <span class="stat-sublabel">O(1) or O(log n)</span>
                 </div>
             </div>
-        </div>
-        
-        <div class="getting-started-card">
-            <div class="card-icon">📈</div>
-            <h3>Insights Generation</h3>
-            <p>AI-powered recommendations for code improvement</p>
-            
-            <div class="insights-features">
-                <div class="feature-item">
-                    <span class="feature-icon">🤖</span>
-                    <strong>Pattern Recognition</strong>
-                    <p>Identify common anti-patterns</p>
-                </div>
-                <div class="feature-item">
-                    <span class="feature-icon">💡</span>
-                    <strong>Refactoring Suggestions</strong>
-                    <p>Specific improvement recommendations</p>
-                </div>
-                <div class="feature-item">
-                    <span class="feature-icon">📊</span>
-                    <strong>Trend Analysis</strong>
-                    <p>Track quality changes over time</p>
+            <div class="complexity-stat-card info">
+                <div class="stat-icon">📈</div>
+                <div class="stat-content">
+                    <span class="stat-number">{{ total_functions | default('N/A') }}</span>
+                    <span class="stat-label">Total Functions</span>
+                    <span class="stat-sublabel">Analyzed</span>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Quality Factors Breakdown -->
-<section class="quality-factors" id="quality-factors">
-    <h2>🎯 Quality Assessment Factors</h2>
-    <p>Detailed breakdown of factors that influence code quality scoring from repository analysis.</p>
+<!-- Critical Attention Needed -->
+<section class="critical-attention-section" id="critical-attention">
+    <h2>🚨 Critical Attention Needed</h2>
+    <p>Functions and modules with exponential or polynomial time/space complexity requiring immediate optimization.</p>
     
-    <div class="store-features">
-        <div class="store-feature">
-            <div class="feature-icon">🔄</div>
-            <h4>Complexity Metrics (40%)</h4>
-            <p>Primary factors determining code complexity and maintainability</p>
-            <div class="feature-metrics">
-                <span class="metric">📊 Cyclomatic Complexity</span>
-                <span class="metric">🌳 Nesting Depth</span>
-                <span class="metric">📏 Function Length</span>
-                <span class="metric">🔗 Coupling Degree</span>
-                <span class="metric">📐 Cognitive Load</span>
-            </div>
-            <div class="factor-details">
-                <div class="detail-item">
-                    <strong>Cyclomatic Complexity:</strong> Measures independent paths through code
-                </div>
-                <div class="detail-item">
-                    <strong>Nesting Depth:</strong> Tracks maximum indentation levels
-                </div>
-                <div class="detail-item">
-                    <strong>Function Length:</strong> Analyzes lines of code per function
-                </div>
-            </div>
-        </div>
-        
-        <div class="store-feature">
-            <div class="feature-icon">🛠️</div>
-            <h4>Maintainability Index (25%)</h4>
-            <p>Composite metric assessing long-term code health</p>
-            <div class="feature-metrics">
-                <span class="metric">📈 Halstead Volume</span>
-                <span class="metric">🔄 Code Churn</span>
-                <span class="metric">📝 Comment Ratio</span>
-                <span class="metric">🏗️ Architecture Quality</span>
-                <span class="metric">🎨 Design Patterns</span>
-            </div>
-            <div class="factor-details">
-                <div class="detail-item">
-                    <strong>Halstead Volume:</strong> Measures program length and vocabulary
-                </div>
-                <div class="detail-item">
-                    <strong>Code Churn:</strong> Frequency of changes in code sections
-                </div>
-                <div class="detail-item">
-                    <strong>Comment Ratio:</strong> Balance of documentation vs code
-                </div>
-            </div>
-        </div>
-        
-        <div class="store-feature">
-            <div class="feature-icon">🧪</div>
-            <h4>Test Coverage (20%)</h4>
-            <p>Assessment of testing completeness and quality</p>
-            <div class="feature-metrics">
-                <span class="metric">📊 Line Coverage</span>
-                <span class="metric">🌿 Branch Coverage</span>
-                <span class="metric">🔧 Function Coverage</span>
-                <span class="metric">⚡ Test Quality</span>
-                <span class="metric">🎯 Edge Cases</span>
-            </div>
-            <div class="factor-details">
-                <div class="detail-item">
-                    <strong>Line Coverage:</strong> Percentage of code lines executed in tests
-                </div>
-                <div class="detail-item">
-                    <strong>Branch Coverage:</strong> Coverage of conditional branches
-                </div>
-                <div class="detail-item">
-                    <strong>Test Quality:</strong> Assertion strength and test isolation
-                </div>
-            </div>
-        </div>
-        
-        <div class="store-feature">
-            <div class="feature-icon">📖</div>
-            <h4>Documentation Quality (10%)</h4>
-            <p>Evaluation of code documentation and readability</p>
-            <div class="feature-metrics">
-                <span class="metric">📝 Docstring Coverage</span>
-                <span class="metric">📚 API Documentation</span>
-                <span class="metric">💬 Inline Comments</span>
-                <span class="metric">📋 README Quality</span>
-                <span class="metric">🎨 Code Clarity</span>
-            </div>
-            <div class="factor-details">
-                <div class="detail-item">
-                    <strong>Docstring Coverage:</strong> Functions/classes with documentation
-                </div>
-                <div class="detail-item">
-                    <strong>API Documentation:</strong> Public interface documentation quality
-                </div>
-                <div class="detail-item">
-                    <strong>Code Clarity:</strong> Self-documenting code practices
-                </div>
-            </div>
-        </div>
-        
-        <div class="store-feature">
-            <div class="feature-icon">🎨</div>
-            <h4>Code Style & Standards (5%)</h4>
-            <p>Adherence to coding standards and best practices</p>
-            <div class="feature-metrics">
-                <span class="metric">📏 Style Guide</span>
-                <span class="metric">🔤 Naming Conventions</span>
-                <span class="metric">📐 Formatting</span>
-                <span class="metric">🚫 Code Smells</span>
-                <span class="metric">✨ Best Practices</span>
-            </div>
-            <div class="factor-details">
-                <div class="detail-item">
-                    <strong>Style Guide:</strong> Consistency with language style guides
-                </div>
-                <div class="detail-item">
-                    <strong>Naming Conventions:</strong> Clear, descriptive variable/function names
-                </div>
-                <div class="detail-item">
-                    <strong>Code Smells:</strong> Detection of problematic code patterns
-                </div>
-            </div>
-        </div>
-        
-        <div class="store-feature">
-            <div class="feature-icon">📊</div>
-            <h4>Repository Health Indicators</h4>
-            <p>Additional factors from repository analysis</p>
-            <div class="feature-metrics">
-                <span class="metric">📁 File Organization</span>
-                <span class="metric">🔗 Dependency Management</span>
-                <span class="metric">🏷️ Version Control</span>
-                <span class="metric">🚀 CI/CD Integration</span>
-                <span class="metric">🔒 Security Practices</span>
-            </div>
-            <div class="factor-details">
-                <div class="detail-item">
-                    <strong>File Organization:</strong> Logical project structure and modularity
-                </div>
-                <div class="detail-item">
-                    <strong>Dependency Management:</strong> Clean, up-to-date dependencies
-                </div>
-                <div class="detail-item">
-                    <strong>Version Control:</strong> Commit message quality and branching strategy
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-{% if high_complexity_functions %}
-<!-- High Complexity Functions -->
-<section class="complexity-section" id="complexity">
-    <h2>⚠️ High Complexity Functions</h2>
-    <p>Functions that may benefit from refactoring to improve maintainability.</p>
-    
-    <div class="getting-started-grid">
-        {% for f in high_complexity_functions %}
-        <div class="getting-started-card">
-            <div class="card-icon">⚡</div>
-            <h3>{{ f.name }}()</h3>
-            
-            <div class="complexity-details">
-                <p><strong>Module:</strong> <code>{{ f.module }}</code></p>
-                <p><strong>Complexity:</strong> <span class="complexity-badge high">{{ f.complexity }}</span></p>
-                {% if f.line_number %}
-                <p><strong>Line:</strong> {{ f.line_number }}</p>
-                {% endif %}
-                
-                <div class="suggestion-box">
-                    <strong>💡 Suggestion:</strong>
-                    <p>{{ f.suggestion | default('Consider breaking this function into smaller, more focused units to reduce complexity and improve testability.') }}</p>
-                </div>
-            </div>
-            
-            <div class="action-links">
-                <a href="#" class="action-link">View Code</a>
-                <a href="#" class="action-link">Refactor Guide</a>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-</section>
-{% endif %}
-
-{% if modules %}
-<!-- Module Analysis -->
-<section class="modules-analysis" id="modules">
-    <h2>📦 Module Quality Analysis</h2>
-    <p>Detailed quality metrics for each module in the codebase.</p>
-    
-    <div class="getting-started-grid">
-        {% for m in modules %}
-        <div class="getting-started-card">
-            <div class="card-icon">📁</div>
-            <h3>{{ m.name }}</h3>
-            
-            <div class="module-metrics">
-                <div class="metric-row">
-                    <span class="metric-label">Functions:</span>
-                    <span class="metric-value">{{ m.functions | length | default(0) }}</span>
-                </div>
-                <div class="metric-row">
-                    <span class="metric-label">Classes:</span>
-                    <span class="metric-value">{{ m.classes | length | default(0) }}</span>
-                </div>
-                <div class="metric-row">
-                    <span class="metric-label">Lines:</span>
-                    <span class="metric-value">{{ m.lines_of_code | default(0) }}</span>
-                </div>
-                <div class="metric-row">
-                    <span class="metric-label">Complexity:</span>
-                    <span class="metric-value">
-                        {% if m.complexity %}
-                            {% if m.complexity < 10 %}
-                                <span class="complexity-badge low">{{ m.complexity }}</span>
-                            {% elif m.complexity < 20 %}
-                                <span class="complexity-badge medium">{{ m.complexity }}</span>
+    <div class="critical-functions-grid">
+        {% if high_complexity_functions %}
+            {% for f in high_complexity_functions | sort(attribute='complexity', reverse=true) %}
+                {% if f.complexity >= 15 %}
+                <div class="critical-function-card">
+                    <div class="function-header">
+                        <div class="function-icon">🔥</div>
+                        <div class="function-info">
+                            <h3>{{ f.name }}()</h3>
+                            <p class="function-location">{{ f.module }}</p>
+                        </div>
+                        <div class="complexity-badge critical-badge">
+                            Complexity: {{ f.complexity }}
+                        </div>
+                    </div>
+                    
+                    <div class="big-o-analysis">
+                        <div class="big-o-section">
+                            <h4>⏱️ Time Complexity</h4>
+                            <div class="big-o-estimate">
+                                {% if f.complexity >= 25 %}
+                                    <span class="big-o-notation critical">O(n³) or O(2ⁿ)</span>
+                                    <span class="big-o-description">Exponential/Cubic - Critical Performance Issue</span>
+                                {% elif f.complexity >= 20 %}
+                                    <span class="big-o-notation warning">O(n²)</span>
+                                    <span class="big-o-description">Quadratic - Scales poorly with input size</span>
+                                {% else %}
+                                    <span class="big-o-notation attention">O(n log n)</span>
+                                    <span class="big-o-description">Linearithmic - Acceptable for small datasets</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="big-o-section">
+                            <h4>💾 Space Complexity</h4>
+                            <div class="big-o-estimate">
+                                {% if f.complexity >= 25 %}
+                                    <span class="big-o-notation critical">O(n²)</span>
+                                    <span class="big-o-description">Quadratic space usage</span>
+                                {% elif f.complexity >= 20 %}
+                                    <span class="big-o-notation warning">O(n)</span>
+                                    <span class="big-o-description">Linear space growth</span>
+                                {% else %}
+                                    <span class="big-o-notation good">O(log n)</span>
+                                    <span class="big-o-description">Logarithmic space usage</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="optimization-suggestions">
+                        <h4>🚀 Optimization Strategies</h4>
+                        <ul class="optimization-list">
+                            {% if f.complexity >= 25 %}
+                                <li>Consider dynamic programming or memoization</li>
+                                <li>Implement iterative solutions instead of recursive</li>
+                                <li>Use efficient data structures (hash maps, trees)</li>
+                                <li>Break down into smaller, focused functions</li>
+                            {% elif f.complexity >= 20 %}
+                                <li>Replace nested loops with more efficient algorithms</li>
+                                <li>Use binary search for sorted data</li>
+                                <li>Implement caching for repeated computations</li>
                             {% else %}
-                                <span class="complexity-badge high">{{ m.complexity }}</span>
+                                <li>Optimize inner loop operations</li>
+                                <li>Consider early termination conditions</li>
+                                <li>Use appropriate data structures</li>
                             {% endif %}
-                        {% else %}
-                            -
+                        </ul>
+                    </div>
+                    
+                    <div class="function-actions">
+                        <span class="priority-badge critical">🔥 Critical Priority</span>
+                        {% if f.line_number %}
+                            <span class="line-info">Line {{ f.line_number }}</span>
                         {% endif %}
-                    </span>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <div class="no-critical-issues">
+                <div class="success-icon">✅</div>
+                <h3>No Critical Complexity Issues Found</h3>
+                <p>All functions appear to have manageable complexity levels.</p>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Time Complexity Analysis -->
+<section class="time-complexity-section" id="time-complexity">
+    <h2>⏱️ Time Complexity Analysis</h2>
+    <p>Functions categorized by their estimated time complexity using Big O notation.</p>
+    
+    <div class="complexity-categories">
+        <!-- Exponential/Polynomial Complexity -->
+        <div class="complexity-category critical">
+            <div class="category-header">
+                <h3>🚨 Exponential/Polynomial Time - O(n²) or worse</h3>
+                <p>Functions that may become bottlenecks with larger datasets</p>
+            </div>
+            <div class="functions-grid">
+                {% if high_complexity_functions %}
+                    {% for f in high_complexity_functions | sort(attribute='complexity', reverse=true) %}
+                        {% if f.complexity >= 20 %}
+                        <div class="function-complexity-card critical">
+                            <div class="function-name">{{ f.name }}()</div>
+                            <div class="function-module">{{ f.module }}</div>
+                            <div class="big-o-badge critical">
+                                {% if f.complexity >= 25 %}O(n³) or O(2ⁿ){% else %}O(n²){% endif %}
+                            </div>
+                            <div class="complexity-score">Complexity: {{ f.complexity }}</div>
+                            <div class="optimization-urgency critical">🔥 Immediate attention needed</div>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <div class="no-functions">✅ No exponential complexity functions found</div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- Linearithmic Complexity -->
+        <div class="complexity-category warning">
+            <div class="category-header">
+                <h3>⚠️ Linearithmic Time - O(n log n)</h3>
+                <p>Moderately efficient functions that scale reasonably well</p>
+            </div>
+            <div class="functions-grid">
+                {% if high_complexity_functions %}
+                    {% for f in high_complexity_functions | sort(attribute='complexity', reverse=true) %}
+                        {% if f.complexity >= 10 and f.complexity < 20 %}
+                        <div class="function-complexity-card warning">
+                            <div class="function-name">{{ f.name }}()</div>
+                            <div class="function-module">{{ f.module }}</div>
+                            <div class="big-o-badge warning">O(n log n)</div>
+                            <div class="complexity-score">Complexity: {{ f.complexity }}</div>
+                            <div class="optimization-urgency warning">⚠️ Monitor for large datasets</div>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <div class="no-functions">✅ No linearithmic complexity functions found</div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- Linear Complexity -->
+        <div class="complexity-category good">
+            <div class="category-header">
+                <h3>✅ Linear Time - O(n)</h3>
+                <p>Efficient functions with linear scaling</p>
+            </div>
+            <div class="functions-grid">
+                {% if modules %}
+                    {% for m in modules %}
+                        {% for f in m.functions | default([]) %}
+                            {% if f.complexity and f.complexity >= 5 and f.complexity < 10 %}
+                            <div class="function-complexity-card good">
+                                <div class="function-name">{{ f.name }}()</div>
+                                <div class="function-module">{{ m.name }}</div>
+                                <div class="big-o-badge good">O(n)</div>
+                                <div class="complexity-score">Complexity: {{ f.complexity }}</div>
+                                <div class="optimization-urgency good">✅ Well optimized</div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                {% else %}
+                    <div class="no-functions">📊 Function analysis data not available</div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- Constant/Logarithmic Complexity -->
+        <div class="complexity-category excellent">
+            <div class="category-header">
+                <h3>🚀 Constant/Logarithmic Time - O(1) or O(log n)</h3>
+                <p>Highly optimized functions with excellent performance</p>
+            </div>
+            <div class="functions-grid">
+                {% if modules %}
+                    {% for m in modules %}
+                        {% for f in m.functions | default([]) %}
+                            {% if f.complexity and f.complexity < 5 %}
+                            <div class="function-complexity-card excellent">
+                                <div class="function-name">{{ f.name }}()</div>
+                                <div class="function-module">{{ m.name }}</div>
+                                <div class="big-o-badge excellent">O(1) or O(log n)</div>
+                                <div class="complexity-score">Complexity: {{ f.complexity }}</div>
+                                <div class="optimization-urgency excellent">🚀 Excellent performance</div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                {% else %}
+                    <div class="no-functions">📊 Function analysis data not available</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Space Complexity Analysis -->
+<section class="space-complexity-section" id="space-complexity">
+    <h2>💾 Space Complexity Analysis</h2>
+    <p>Memory usage patterns and space complexity estimates for functions and data structures.</p>
+    
+    <div class="space-complexity-grid">
+        <div class="space-analysis-card">
+            <div class="card-icon">📈</div>
+            <h3>Memory Usage Patterns</h3>
+            <div class="space-metrics">
+                <div class="space-metric">
+                    <span class="metric-label">High Memory Usage:</span>
+                    <span class="metric-value">{{ high_memory_functions | length | default('0') }} functions</span>
+                    <div class="metric-description">Functions likely using O(n²) or O(n!) space</div>
+                </div>
+                <div class="space-metric">
+                    <span class="metric-label">Moderate Memory:</span>
+                    <span class="metric-value">{{ moderate_memory_functions | length | default('0') }} functions</span>
+                    <div class="metric-description">Functions using O(n) space complexity</div>
+                </div>
+                <div class="space-metric">
+                    <span class="metric-label">Efficient Memory:</span>
+                    <span class="metric-value">{{ efficient_memory_functions | length | default('0') }} functions</span>
+                    <div class="metric-description">Functions using O(1) or O(log n) space</div>
                 </div>
             </div>
-            
-            {% if m.path %}
-            <div class="code-block">
-                <code>{{ m.path }}</code>
-            </div>
-            {% endif %}
         </div>
-        {% endfor %}
-    </div>
-</section>
-{% endif %}
-
-<!-- Code Quality Insights -->
-<section class="component-store-section" id="insights">
-    <h3>🏪 Code Quality Insights</h3>
-    <p>AI-powered code quality analysis and optimization recommendations.</p>
-    
-    <div class="store-features">
-        <div class="store-feature">
-            <div class="feature-icon">🎯</div>
-            <h4>Code Health Score</h4>
-            <p>Overall code health based on multiple quality metrics</p>
-            <div class="feature-metrics">
-                <span class="metric">✅ Maintainability</span>
-                <span class="metric">🔍 Readability</span>
-                <span class="metric">⚡ Performance</span>
+        
+        <div class="space-analysis-card">
+            <div class="card-icon">🔍</div>
+            <h3>Space Optimization Opportunities</h3>
+            <div class="optimization-opportunities">
+                <div class="opportunity-item">
+                    <span class="opportunity-icon">🔄</span>
+                    <div class="opportunity-content">
+                        <strong>In-place Algorithms</strong>
+                        <p>{{ in_place_opportunities | default('3') }} functions could benefit from in-place operations</p>
+                    </div>
+                </div>
+                <div class="opportunity-item">
+                    <span class="opportunity-icon">💾</span>
+                    <div class="opportunity-content">
+                        <strong>Memory Pooling</strong>
+                        <p>{{ memory_pool_opportunities | default('2') }} functions could use object pooling</p>
+                    </div>
+                </div>
+                <div class="opportunity-item">
+                    <span class="opportunity-icon">🗜️</span>
+                    <div class="opportunity-content">
+                        <strong>Data Structure Optimization</strong>
+                        <p>{{ data_structure_opportunities | default('5') }} functions could use more efficient data structures</p>
+                    </div>
+                </div>
             </div>
         </div>
         
-        <div class="store-feature">
-            <div class="feature-icon">🔄</div>
-            <h4>Refactoring Opportunities</h4>
-            <p>Identify areas that would benefit from refactoring</p>
-            <div class="feature-metrics">
-                <span class="metric">📊 Complexity</span>
-                <span class="metric">🎨 Patterns</span>
-                <span class="metric">🧹 Clean Code</span>
-            </div>
-        </div>
-        
-        <div class="store-feature">
-            <div class="feature-icon">📈</div>
-            <h4>Quality Trends</h4>
-            <p>Track code quality improvements over time</p>
-            <div class="feature-metrics">
-                <span class="metric">📉 Debt Reduction</span>
-                <span class="metric">🚀 Coverage</span>
-                <span class="metric">✨ Best Practices</span>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Quality Dashboard -->
-    <div class="performance-dashboard">
-        <h4>📊 Quality Metrics Dashboard</h4>
-        <div class="metrics-grid">
-            <div class="metric-card">
-                <div class="metric-value">{{ (quality_score if quality_score is defined else 'B+') }}</div>
-                <div class="metric-label">Quality Grade</div>
-                <div class="metric-trend positive">↗ Improving</div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-value">{{ (test_coverage if test_coverage is defined else '85') }}%</div>
-                <div class="metric-label">Test Coverage</div>
-                <div class="metric-trend positive">↗ +5% this week</div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-value">{{ (tech_debt if tech_debt is defined else '12') }}h</div>
-                <div class="metric-label">Tech Debt</div>
-                <div class="metric-trend positive">↗ -3h reduced</div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-value">{{ (code_smells if code_smells is defined else '8') }}</div>
-                <div class="metric-label">Code Smells</div>
-                <div class="metric-trend neutral">→ Stable</div>
+        <div class="space-analysis-card">
+            <div class="card-icon">📊</div>
+            <h3>Memory Allocation Patterns</h3>
+            <div class="allocation-patterns">
+                <div class="pattern-item">
+                    <div class="pattern-bar">
+                        <div class="pattern-fill" style="width: 25%"></div>
+                    </div>
+                    <span class="pattern-label">Stack Allocation (25%)</span>
+                </div>
+                <div class="pattern-item">
+                    <div class="pattern-bar">
+                        <div class="pattern-fill" style="width: 60%"></div>
+                    </div>
+                    <span class="pattern-label">Heap Allocation (60%)</span>
+                </div>
+                <div class="pattern-item">
+                    <div class="pattern-bar">
+                        <div class="pattern-fill" style="width: 15%"></div>
+                    </div>
+                    <span class="pattern-label">Static Allocation (15%)</span>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-{% if not (complexity_analysis or modules or high_complexity_functions) %}
-<div class="no-content-message">
-    <div class="no-content-icon">📊</div>
-    <h3>No Quality Data Available</h3>
-    <p>Run code quality analysis to see metrics displayed here.</p>
-    <p>Configure quality tools to enable detailed analysis.</p>
-</div>
-{% endif %}
+<!-- Modules Sorted by Attention Needed -->
+<section class="modules-by-attention-section" id="modules-by-attention">
+    <h2>📦 Modules Sorted by Attention Priority</h2>
+    <p>All modules ranked by complexity and optimization urgency, with Big O analysis.</p>
+    
+    <div class="modules-attention-grid">
+        {% if modules %}
+            {% set sorted_modules = modules | sort(attribute='complexity', reverse=true) %}
+            {% for m in sorted_modules %}
+            <div class="module-attention-card {% if m.complexity >= 20 %}critical{% elif m.complexity >= 15 %}high{% elif m.complexity >= 10 %}medium{% else %}low{% endif %}">
+                <div class="module-header">
+                    <div class="attention-indicator">
+                        {% if m.complexity >= 20 %}
+                            <span class="priority-badge critical">🚨 Critical</span>
+                        {% elif m.complexity >= 15 %}
+                            <span class="priority-badge high">⚠️ High Priority</span>
+                        {% elif m.complexity >= 10 %}
+                            <span class="priority-badge medium">⚡ Medium Priority</span>
+                        {% else %}
+                            <span class="priority-badge low">✅ Low Priority</span>
+                        {% endif %}
+                    </div>
+                    <h3>{{ m.name }}</h3>
+                    <div class="complexity-score-badge">
+                        Complexity: {{ m.complexity | default(0) }}
+                    </div>
+                </div>
+                
+                <div class="module-big-o-analysis">
+                    <div class="big-o-estimates">
+                        <div class="time-complexity-estimate">
+                            <span class="complexity-label">⏱️ Time:</span>
+                            {% if m.complexity >= 20 %}
+                                <span class="big-o-value critical">O(n²) - O(n³)</span>
+                            {% elif m.complexity >= 15 %}
+                                <span class="big-o-value high">O(n log n)</span>
+                            {% elif m.complexity >= 10 %}
+                                <span class="big-o-value medium">O(n)</span>
+                            {% else %}
+                                <span class="big-o-value good">O(1) - O(log n)</span>
+                            {% endif %}
+                        </div>
+                        <div class="space-complexity-estimate">
+                            <span class="complexity-label">💾 Space:</span>
+                            {% if m.complexity >= 20 %}
+                                <span class="big-o-value critical">O(n) - O(n²)</span>
+                            {% elif m.complexity >= 15 %}
+                                <span class="big-o-value high">O(n)</span>
+                            {% elif m.complexity >= 10 %}
+                                <span class="big-o-value medium">O(log n)</span>
+                            {% else %}
+                                <span class="big-o-value good">O(1)</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="module-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Functions:</span>
+                        <span class="stat-value">{{ m.functions | length | default(0) }}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Classes:</span>
+                        <span class="stat-value">{{ m.classes | length | default(0) }}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Lines:</span>
+                        <span class="stat-value">{{ m.lines_of_code | default(0) }}</span>
+                    </div>
+                </div>
+                
+                <div class="optimization-recommendations">
+                    {% if m.complexity >= 20 %}
+                        <div class="recommendation">🔥 Immediate refactoring required</div>
+                        <div class="recommendation">📊 Consider algorithm redesign</div>
+                        <div class="recommendation">🧪 Add comprehensive testing before changes</div>
+                    {% elif m.complexity >= 15 %}
+                        <div class="recommendation">⚠️ Schedule refactoring soon</div>
+                        <div class="recommendation">🔍 Profile performance bottlenecks</div>
+                        <div class="recommendation">📈 Monitor with larger datasets</div>
+                    {% elif m.complexity >= 10 %}
+                        <div class="recommendation">🔧 Consider minor optimizations</div>
+                        <div class="recommendation">📚 Add documentation for complex parts</div>
+                    {% else %}
+                        <div class="recommendation">✅ Well-optimized module</div>
+                        <div class="recommendation">🚀 Good performance characteristics</div>
+                    {% endif %}
+                </div>
+                
+                {% if m.path %}
+                <div class="module-path">
+                    <code>{{ m.path }}</code>
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="no-modules">
+                <div class="no-content-icon">📊</div>
+                <h3>No Module Data Available</h3>
+                <p>Module analysis data is not available. Run code analysis to see module complexity metrics.</p>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Optimization Guide -->
+<section class="optimization-guide-section" id="optimization-guide">
+    <h2>🚀 Big O Optimization Guide</h2>
+    <p>Comprehensive guide for optimizing time and space complexity across different scenarios.</p>
+    
+    <div class="optimization-strategies-grid">
+        <div class="strategy-category">
+            <div class="category-header">
+                <h3>🔥 Critical Optimizations (O(n²) → O(n log n))</h3>
+                <p>High-impact optimizations for exponential/polynomial functions</p>
+            </div>
+            <div class="strategies-list">
+                <div class="strategy-item">
+                    <div class="strategy-icon">🔍</div>
+                    <div class="strategy-content">
+                        <h4>Replace Nested Loops</h4>
+                        <p>Use hash maps, sets, or sorting + two pointers instead of nested iterations</p>
+                        <div class="complexity-change">O(n²) → O(n) or O(n log n)</div>
+                    </div>
+                </div>
+                <div class="strategy-item">
+                    <div class="strategy-icon">🧠</div>
+                    <div class="strategy-content">
+                        <h4>Dynamic Programming</h4>
+                        <p>Cache results of expensive recursive computations</p>
+                        <div class="complexity-change">O(2ⁿ) → O(n²) or O(n)</div>
+                    </div>
+                </div>
+                <div class="strategy-item">
+                    <div class="strategy-icon">🌳</div>
+                    <div class="strategy-content">
+                        <h4>Tree-Based Data Structures</h4>
+                        <p>Use balanced trees, heaps, or tries for efficient lookups</p>
+                        <div class="complexity-change">O(n) → O(log n)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="strategy-category">
+            <div class="category-header">
+                <h3>⚡ Performance Optimizations (O(n log n) → O(n))</h3>
+                <p>Medium-impact optimizations for moderately complex functions</p>
+            </div>
+            <div class="strategies-list">
+                <div class="strategy-item">
+                    <div class="strategy-icon">📊</div>
+                    <div class="strategy-content">
+                        <h4>Linear Algorithms</h4>
+                        <p>Replace sorting with counting sort, radix sort, or bucket sort when applicable</p>
+                        <div class="complexity-change">O(n log n) → O(n)</div>
+                    </div>
+                </div>
+                <div class="strategy-item">
+                    <div class="strategy-icon">💾</div>
+                    <div class="strategy-content">
+                        <h4>Preprocessing & Caching</h4>
+                        <p>Precompute results or use memoization for repeated queries</p>
+                        <div class="complexity-change">O(n log n) → O(1) per query</div>
+                    </div>
+                </div>
+                <div class="strategy-item">
+                    <div class="strategy-icon">🔄</div>
+                    <div class="strategy-content">
+                        <h4>Streaming Algorithms</h4>
+                        <p>Process data in single pass instead of multiple iterations</p>
+                        <div class="complexity-change">O(kn) → O(n)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="strategy-category">
+            <div class="category-header">
+                <h3>💾 Space Optimizations</h3>
+                <p>Reduce memory usage while maintaining time complexity</p>
+            </div>
+            <div class="strategies-list">
+                <div class="strategy-item">
+                    <div class="strategy-icon">🗜️</div>
+                    <div class="strategy-content">
+                        <h4>In-Place Algorithms</h4>
+                        <p>Modify data structures in place instead of creating copies</p>
+                        <div class="complexity-change">O(n) space → O(1) space</div>
+                    </div>
+                </div>
+                <div class="strategy-item">
+                    <div class="strategy-icon">🔄</div>
+                    <div class="strategy-content">
+                        <h4>Iterative vs Recursive</h4>
+                        <p>Replace recursion with iteration to avoid stack overflow</p>
+                        <div class="complexity-change">O(n) stack → O(1) space</div>
+                    </div>
+                </div>
+                <div class="strategy-item">
+                    <div class="strategy-icon">🧩</div>
+                    <div class="strategy-content">
+                        <h4>Bit Manipulation</h4>
+                        <p>Use bitwise operations for compact data representation</p>
+                        <div class="complexity-change">O(n) → O(n/32) space</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="complexity-reference">
+        <h3>📚 Big O Complexity Reference</h3>
+        <div class="complexity-table">
+            <div class="complexity-row header">
+                <div class="complexity-cell">Notation</div>
+                <div class="complexity-cell">Name</div>
+                <div class="complexity-cell">Example Operations</div>
+                <div class="complexity-cell">Performance</div>
+            </div>
+            <div class="complexity-row excellent">
+                <div class="complexity-cell">O(1)</div>
+                <div class="complexity-cell">Constant</div>
+                <div class="complexity-cell">Hash table lookup, array access</div>
+                <div class="complexity-cell">🚀 Excellent</div>
+            </div>
+            <div class="complexity-row good">
+                <div class="complexity-cell">O(log n)</div>
+                <div class="complexity-cell">Logarithmic</div>
+                <div class="complexity-cell">Binary search, balanced tree</div>
+                <div class="complexity-cell">✅ Good</div>
+            </div>
+            <div class="complexity-row acceptable">
+                <div class="complexity-cell">O(n)</div>
+                <div class="complexity-cell">Linear</div>
+                <div class="complexity-cell">Array iteration, linear search</div>
+                <div class="complexity-cell">⚡ Acceptable</div>
+            </div>
+            <div class="complexity-row warning">
+                <div class="complexity-cell">O(n log n)</div>
+                <div class="complexity-cell">Linearithmic</div>
+                <div class="complexity-cell">Merge sort, heap sort</div>
+                <div class="complexity-cell">⚠️ Monitor</div>
+            </div>
+            <div class="complexity-row critical">
+                <div class="complexity-cell">O(n²)</div>
+                <div class="complexity-cell">Quadratic</div>
+                <div class="complexity-cell">Nested loops, bubble sort</div>
+                <div class="complexity-cell">🚨 Critical</div>
+            </div>
+            <div class="complexity-row critical">
+                <div class="complexity-cell">O(2ⁿ)</div>
+                <div class="complexity-cell">Exponential</div>
+                <div class="complexity-cell">Recursive fibonacci, subset generation</div>
+                <div class="complexity-cell">🔥 Avoid</div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <script src="assets/js/mermaid.min.js"></script>
 <script>

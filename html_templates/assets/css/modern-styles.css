@@ -925,6 +925,146 @@ button {
     box-shadow: var(--shadow-lg);
 }
 
+/* ===== API Specific Styles ===== */
+.endpoint-details {
+    margin: 1rem 0;
+    padding: 0;
+}
+
+.endpoint-details strong {
+    color: var(--color-heading);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.action-links {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border-light);
+}
+
+.action-link {
+    padding: 0.5rem 1rem;
+    background: var(--color-primary);
+    color: white;
+    border-radius: 0.375rem;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    text-align: center;
+    flex: 1;
+}
+
+.action-link:hover {
+    background: var(--color-primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    color: white;
+}
+
+.http-method--get {
+    background-color: var(--color-success-bg);
+    color: var(--color-success);
+}
+
+.http-method--post {
+    background-color: var(--color-info-bg);
+    color: var(--color-info);
+}
+
+.http-method--put {
+    background-color: var(--color-warning-bg);
+    color: var(--color-warning);
+}
+
+.http-method--delete {
+    background-color: var(--color-error-bg);
+    color: var(--color-error);
+}
+
+.performance-dashboard {
+    background: var(--color-surface);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border: 1px solid var(--color-border-light);
+}
+
+.performance-dashboard h4 {
+    margin-bottom: 1rem;
+    color: var(--color-heading);
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.metric-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 0.25rem;
+    line-height: 1.2;
+}
+
+.metric-label {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.metric-trend {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    display: inline-block;
+}
+
+.metric-trend.positive {
+    background-color: var(--color-success-bg);
+    color: var(--color-success);
+}
+
+.metric-trend.negative {
+    background-color: var(--color-error-bg);
+    color: var(--color-error);
+}
+
+.metric-trend.neutral {
+    background-color: var(--color-border-light);
+    color: var(--color-text-muted);
+}
+
+.api-architecture {
+    margin: 2rem 0;
+}
+
+.endpoints-section {
+    margin: 2rem 0;
+}
+
+.interfaces-section {
+    margin: 2rem 0;
+}
+
+.patterns-section {
+    margin: 2rem 0;
+}
+
+.modules-section {
+    margin: 2rem 0;
+}
+
 .card__icon {
     font-size: 2.5rem;
     margin-bottom: 1rem;

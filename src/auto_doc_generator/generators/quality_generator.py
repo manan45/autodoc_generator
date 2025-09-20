@@ -24,6 +24,10 @@ class QualityGenerator:
         self.config = config or {}
         self.logger = logging.getLogger(__name__)
         
+        # Quality report configuration
+        quality_config = self.config.get('quality', {})
+        self.max_detailed_reports = quality_config.get('max_detailed_reports', 5)
+        
         # Ensure output directory exists
         self.output_dir.mkdir(parents=True, exist_ok=True)
     
@@ -585,18 +589,29 @@ class QualityGenerator:
         return json.dumps(visualization_data, indent=2)
     
     def _generate_module_quality_reports(self, quality_analysis: Dict[str, Any]) -> Dict[str, str]:
-        """Generate individual quality reports for each module."""
+        """Generate individual quality reports for top N modules (configurable, default 5)."""
         
         module_reports = {}
         module_assessments = quality_analysis.get('module_assessments', {})
         
-        for module_path, assessment in module_assessments.items():
+        # Sort modules by quality score and take only top N modules (configurable)
+        sorted_modules = sorted(
+            module_assessments.items(), 
+            key=lambda x: x[1].get('overall_score', 0), 
+            reverse=True
+        )[:self.max_detailed_reports]  # Limit to configured number of modules
+        
+        self.logger.info(f"🔬 Generating detailed reports for top {len(sorted_modules)} modules")
+        
+        for module_path, assessment in sorted_modules:
             # Generate individual module report
             safe_module_name = module_path.replace('/', '_').replace('.', '_')
             report_filename = f"quality_module_{safe_module_name}.html"
             
             module_report = self._generate_individual_module_report(module_path, assessment)
             module_reports[report_filename] = module_report
+            
+            self.logger.debug(f"   📄 Generated report for {module_path} (score: {assessment.get('overall_score', 0):.3f})")
         
         return module_reports
     

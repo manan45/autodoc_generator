@@ -98,25 +98,16 @@ class AIAnalysisCoordinator:
         enhanced_analysis = {}
         
         try:
-            # 1. API Analysis
-            self.logger.info("Analyzing API endpoints and interfaces...")
-            enhanced_analysis['api_analysis'] = self._analyze_api_endpoints(code_analysis, project_path)
+            # Perform comprehensive analysis in a single API call to reduce cost and latency
+            self.logger.info("Performing comprehensive AI analysis...")
+            comprehensive_analysis = self._perform_comprehensive_analysis(code_analysis, ai_analysis, project_path)
             
-            # 2. Architecture Analysis
-            self.logger.info("Analyzing system architecture patterns...")
-            enhanced_analysis['architecture_analysis'] = self._analyze_architecture_patterns(code_analysis, project_path)
-            
-            # 3. Component Analysis
-            self.logger.info("Analyzing component relationships...")
-            enhanced_analysis['component_analysis'] = self._analyze_component_relationships(code_analysis, project_path)
-            
-            # 4. Data Flow Analysis
-            self.logger.info("Analyzing data flow patterns...")
-            enhanced_analysis['dataflow_analysis'] = self._analyze_data_flow_patterns(code_analysis, project_path)
-            
-            # 5. ML Pipeline Analysis
-            self.logger.info("Analyzing ML pipelines and modules...")
-            enhanced_analysis['ml_analysis'] = self._analyze_ml_components(code_analysis, ai_analysis, project_path)
+            # Extract individual analysis components
+            enhanced_analysis['api_analysis'] = comprehensive_analysis.get('api_analysis', {})
+            enhanced_analysis['architecture_analysis'] = comprehensive_analysis.get('architecture_analysis', {})
+            enhanced_analysis['component_analysis'] = comprehensive_analysis.get('component_analysis', {})
+            enhanced_analysis['dataflow_analysis'] = comprehensive_analysis.get('dataflow_analysis', {})
+            enhanced_analysis['ml_analysis'] = comprehensive_analysis.get('ml_analysis', {})
             
             # 6. Generate Mermaid Diagrams
             self.logger.info("Generating comprehensive hierarchical diagrams...")
@@ -140,6 +131,133 @@ class AIAnalysisCoordinator:
             enhanced_analysis = self._create_basic_enhanced_analysis(code_analysis, ai_analysis)
         
         return enhanced_analysis
+    
+    def _perform_comprehensive_analysis(self, code_analysis: Dict[str, Any], ai_analysis: Dict[str, Any], project_path: str) -> Dict[str, Any]:
+        """Perform comprehensive analysis in a single API call to reduce costs and latency."""
+        
+        # Build comprehensive prompt combining all analysis types
+        comprehensive_prompt = f"""
+Analyze the following codebase and provide a comprehensive analysis covering all aspects below.
+
+{self.memory_system.enhance_prompt_with_context(
+    self.prompt_builder.build_api_analysis_prompt(code_analysis)[:1000] + "...", 
+    project_path, 'comprehensive_analysis'
+)}
+
+Please provide a comprehensive JSON response with ALL of the following sections:
+
+1. API Analysis - Identify endpoints, interfaces, and API patterns
+2. Architecture Analysis - Identify system architecture patterns, layers, and principles
+3. Component Analysis - Identify components, relationships, and communication patterns
+4. Data Flow Analysis - Identify data sources, transformations, stores, and flow patterns
+5. ML Analysis - Identify ML models, pipelines, and infrastructure
+
+Format your response as JSON with these exact keys:
+{{
+  "api_analysis": {{
+    "endpoints": [...],
+    "interfaces": [...],
+    "patterns": [...]
+  }},
+  "architecture_analysis": {{
+    "layers": [...],
+    "patterns": [...],
+    "principles": [...]
+  }},
+  "component_analysis": {{
+    "components": [...],
+    "relationships": [...],
+    "communication_patterns": [...]
+  }},
+  "dataflow_analysis": {{
+    "data_sources": [...],
+    "transformations": [...],
+    "data_stores": [...],
+    "flow_patterns": [...]
+  }},
+  "ml_analysis": {{
+    "models": [...],
+    "pipelines": [...],
+    "infrastructure": [...]
+  }}
+}}
+
+IMPORTANT: Return ONLY valid JSON with no additional text, explanations, or markdown formatting.
+"""
+        
+        try:
+            response = self._query_openai(comprehensive_prompt, use_gpt35=False)
+            result = self._parse_json_response(response, "Comprehensive analysis", {
+                "api_analysis": {"endpoints": [], "interfaces": [], "patterns": []},
+                "architecture_analysis": {"layers": [], "patterns": [], "principles": []},
+                "component_analysis": {"components": [], "relationships": [], "communication_patterns": []},
+                "dataflow_analysis": {"data_sources": [], "transformations": [], "data_stores": [], "flow_patterns": []},
+                "ml_analysis": {"models": [], "pipelines": [], "infrastructure": []}
+            })
+            
+            # Ensure all required sections exist with fallbacks
+            for section in ["api_analysis", "architecture_analysis", "component_analysis", "dataflow_analysis", "ml_analysis"]:
+                if section not in result or not result[section]:
+                    self.logger.warning(f"Missing {section} in comprehensive analysis, using fallback")
+                    result[section] = self._get_fallback_analysis(section, code_analysis, ai_analysis, project_path)
+            
+            return result
+            
+        except Exception as e:
+            self.logger.error(f"Comprehensive analysis failed: {e}")
+            self.logger.info("Falling back to individual analysis methods...")
+            return self._fallback_to_individual_analysis(code_analysis, ai_analysis, project_path)
+    
+    def _get_fallback_analysis(self, section: str, code_analysis: Dict[str, Any], ai_analysis: Dict[str, Any], project_path: str) -> Dict[str, Any]:
+        """Get fallback analysis for a specific section."""
+        if section == "api_analysis":
+            return {"endpoints": [], "interfaces": [], "patterns": []}
+        elif section == "architecture_analysis":
+            return {"layers": [], "patterns": [], "principles": []}
+        elif section == "component_analysis":
+            return {"components": [], "relationships": [], "communication_patterns": []}
+        elif section == "dataflow_analysis":
+            return {"data_sources": [], "transformations": [], "data_stores": [], "flow_patterns": []}
+        elif section == "ml_analysis":
+            return {"models": [], "pipelines": [], "infrastructure": []}
+        return {}
+    
+    def _fallback_to_individual_analysis(self, code_analysis: Dict[str, Any], ai_analysis: Dict[str, Any], project_path: str) -> Dict[str, Any]:
+        """Fallback to individual analysis methods if comprehensive analysis fails."""
+        self.logger.info("Using individual analysis methods as fallback...")
+        
+        result = {}
+        try:
+            result['api_analysis'] = self._analyze_api_endpoints(code_analysis, project_path)
+        except Exception as e:
+            self.logger.error(f"API analysis fallback failed: {e}")
+            result['api_analysis'] = {"endpoints": [], "interfaces": [], "patterns": []}
+        
+        try:
+            result['architecture_analysis'] = self._analyze_architecture_patterns(code_analysis, project_path)
+        except Exception as e:
+            self.logger.error(f"Architecture analysis fallback failed: {e}")
+            result['architecture_analysis'] = {"layers": [], "patterns": [], "principles": []}
+        
+        try:
+            result['component_analysis'] = self._analyze_component_relationships(code_analysis, project_path)
+        except Exception as e:
+            self.logger.error(f"Component analysis fallback failed: {e}")
+            result['component_analysis'] = {"components": [], "relationships": [], "communication_patterns": []}
+        
+        try:
+            result['dataflow_analysis'] = self._analyze_data_flow_patterns(code_analysis, project_path)
+        except Exception as e:
+            self.logger.error(f"Data flow analysis fallback failed: {e}")
+            result['dataflow_analysis'] = {"data_sources": [], "transformations": [], "data_stores": [], "flow_patterns": []}
+        
+        try:
+            result['ml_analysis'] = self._analyze_ml_components(code_analysis, ai_analysis, project_path)
+        except Exception as e:
+            self.logger.error(f"ML analysis fallback failed: {e}")
+            result['ml_analysis'] = {"models": [], "pipelines": [], "infrastructure": []}
+        
+        return result
     
     def _analyze_api_endpoints(self, code_analysis: Dict[str, Any], project_path: str) -> Dict[str, Any]:
         """Analyze API endpoints and interfaces using AI with memory enhancement."""

@@ -46,6 +46,9 @@ generation:
     api: "api_template.md"
     onboarding: "onboarding_template.md"
     base: "base_template.md"
+
+quality:
+  max_detailed_reports: 5  # Maximum number of detailed module quality reports to generate
   
 deployment:
   target: "github_pages"
