@@ -11,7 +11,7 @@ libcst==1.1.0
 radon==6.0.1
 
 # Git integration
-GitPython==3.1.40
+GitPython==3.1.41
 
 # AI/ML documentation
 mlflow-skinny==2.8.1
