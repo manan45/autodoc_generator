@@ -540,6 +540,9 @@ const TOCManager = (() => {
         });
     };
     
+    let lastScrollY = 0;
+    let isVisible = false;
+    
     const handleAutoHide = () => {
         if (!tocElement) return;
         

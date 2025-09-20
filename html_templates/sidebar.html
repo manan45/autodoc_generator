@@ -49,7 +49,7 @@
 
         <!-- Development Section -->
         <li class="md-nav__item md-nav__item--section">
-            <input class="md-nav__toggle md-toggle" data-md-toggle="nav-development" type="checkbox" id="nav-development" {% if current_page in ['api'] %}checked{% endif %}>
+            <input class="md-nav__toggle md-toggle" data-md-toggle="nav-development" type="checkbox" id="nav-development" {% if current_page in ['api', 'ai_models', 'ai_pipelines'] %}checked{% endif %}>
             <label class="md-nav__link md-nav__link--index" for="nav-development">
                 Development
                 <span class="md-nav__icon md-nav__icon--expand">▼</span>
@@ -64,13 +64,23 @@
                             API Reference
                         </a>
                     </li>
+                    <li class="md-nav__item">
+                        <a href="ai_models.html" class="md-nav__link {% if current_page == 'ai_models' %}md-nav__link--active{% endif %}">
+                            AI Models
+                        </a>
+                    </li>
+                    <li class="md-nav__item">
+                        <a href="ai_pipelines.html" class="md-nav__link {% if current_page == 'ai_pipelines' %}md-nav__link--active{% endif %}">
+                            AI Pipelines
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </li>
 
         <!-- Code Quality Section -->
         <li class="md-nav__item md-nav__item--section">
-            <input class="md-nav__toggle md-toggle" data-md-toggle="nav-quality" type="checkbox" id="nav-quality" {% if current_page in ['complexity'] %}checked{% endif %}>
+            <input class="md-nav__toggle md-toggle" data-md-toggle="nav-quality" type="checkbox" id="nav-quality" {% if current_page in ['complexity', 'quality'] %}checked{% endif %}>
             <label class="md-nav__link md-nav__link--index" for="nav-quality">
                 Code Quality
                 <span class="md-nav__icon md-nav__icon--expand">▼</span>
@@ -81,18 +91,13 @@
                 </label>
                 <ul class="md-nav__list md-nav__list--nested">
                     <li class="md-nav__item">
+                        <a href="quality.html" class="md-nav__link {% if current_page == 'quality' %}md-nav__link--active{% endif %}">
+                            🔬 Quality Scoring Pipeline
+                        </a>
+                    </li>
+                    <li class="md-nav__item">
                         <a href="complexity.html" class="md-nav__link {% if current_page == 'complexity' %}md-nav__link--active{% endif %}">
-                            Quality Analysis
-                        </a>
-                    </li>
-                    <li class="md-nav__item">
-                        <a href="complexity.html#scoring-pipeline" class="md-nav__link {% if current_page == 'complexity' %}md-nav__link--active{% endif %}">
-                            Scoring Pipeline
-                        </a>
-                    </li>
-                    <li class="md-nav__item">
-                        <a href="complexity.html#quality-factors" class="md-nav__link {% if current_page == 'complexity' %}md-nav__link--active{% endif %}">
-                            Quality Factors
+                            Complexity Analysis
                         </a>
                     </li>
                 </ul>

@@ -37,8 +37,10 @@ class HTMLGenerator:
         self.env.filters['truncate_docstring'] = self._truncate_docstring
         self.env.filters['format_list'] = self._format_list
         self.env.filters['to_json'] = lambda obj: json.dumps(obj, default=str)
+        # Alias commonly used filter name in templates
+        self.env.filters['tojson'] = self.env.filters['to_json']
     
-    def generate_all_documentation(self, code_analysis: Dict[str, Any], ai_analysis: Dict[str, Any], enhanced_analysis: Dict[str, Any] = None) -> Dict[str, str]:
+    def generate_all_documentation(self, code_analysis: Dict[str, Any], ai_analysis: Dict[str, Any], enhanced_analysis: Dict[str, Any] = None, quality_analysis: Dict[str, Any] = None) -> Dict[str, str]:
         """Generate all documentation pages from analysis results."""
         
         docs = {}
@@ -54,6 +56,9 @@ class HTMLGenerator:
         docs['ai_pipelines.html'] = self.generate_ai_pipelines_page(ai_analysis)
         docs['components.html'] = self.generate_components_page(code_analysis, enhanced_analysis)
         docs['complexity.html'] = self.generate_complexity_page(code_analysis)
+        # Quality page (uses template-based rendering with quality analysis)
+        if quality_analysis:
+            docs['quality.html'] = self.generate_quality_page(code_analysis, quality_analysis)
         
         # Store enhanced analysis for use by main.py
         if enhanced_analysis:
@@ -172,6 +177,34 @@ class HTMLGenerator:
         }
         template = self.env.get_template('components.html')
         return template.render(**context)
+
+    def generate_routing_page(self, code_analysis: Dict[str, Any], enhanced_analysis: Dict[str, Any] = None) -> str:
+        """Generate Code Routing & Navigation page."""
+        project_name = self._extract_project_name(code_analysis)
+        modules = code_analysis.get('modules', [])
+        
+        # Calculate routing statistics for initial display
+        total_modules = len(modules)
+        entry_points = len([m for m in modules if self._is_entry_point(m)])
+        
+        context = {
+            'title': f'{project_name} Code Routing',
+            'project_name': project_name,
+            'generation_date': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            'total_modules': total_modules,
+            'entry_points': entry_points
+        }
+        template = self.env.get_template('routing.html')
+        return template.render(**context)
+
+    def _is_entry_point(self, module: Dict[str, Any]) -> bool:
+        """Check if a module is likely an entry point."""
+        path = module.get('path', '').lower()
+        name = module.get('name', '').lower()
+        
+        # Entry point patterns
+        entry_patterns = ['main', 'app', 'index', '__init__', 'entry', 'bootstrap', 'start']
+        return any(pattern in path or pattern in name for pattern in entry_patterns)
 
     def generate_all_modules_page(self, code_analysis: Dict[str, Any], enhanced_analysis: Dict[str, Any] = None) -> str:
         """Generate Key Contributing Modules page with an all-modules table."""
@@ -337,6 +370,68 @@ class HTMLGenerator:
         }
         
         template = self.env.get_template('complexity.html')
+        return template.render(**context)
+
+    def generate_quality_page(self, code_analysis: Dict[str, Any], quality_analysis: Dict[str, Any]) -> str:
+        """Generate code quality documentation page using Jinja template."""
+        # Extract project name
+        project_name = self._extract_project_name(code_analysis) or code_analysis.get('project_name', 'Project')
+        qa_overview = (quality_analysis or {}).get('overview', {})
+        qa_distribution = (quality_analysis or {}).get('quality_distribution', {})
+        qa_metadata = (quality_analysis or {}).get('metadata', {})
+        module_assessments = (quality_analysis or {}).get('module_assessments', {})
+        recommendations = (quality_analysis or {}).get('recommendations', [])
+        trends = (quality_analysis or {}).get('trends', {})
+        global_insights = (quality_analysis or {}).get('global_insights', {}) or (quality_analysis or {}).get('insights', {})
+        
+        # Helper functions expected by the template
+        def get_best_metric(metrics: Dict[str, Any]) -> str:
+            if not isinstance(metrics, dict) or not metrics:
+                return "N/A"
+            try:
+                best_key = max(metrics.keys(), key=lambda k: (metrics.get(k) or {}).get('score', (metrics.get(k) or {}).get('average', 0)))
+                return best_key.replace('_', ' ').title()
+            except Exception:
+                return "N/A"
+        
+        def get_worst_metric(metrics: Dict[str, Any]) -> str:
+            if not isinstance(metrics, dict) or not metrics:
+                return "N/A"
+            try:
+                worst_key = min(metrics.keys(), key=lambda k: (metrics.get(k) or {}).get('score', (metrics.get(k) or {}).get('average', 0)))
+                return worst_key.replace('_', ' ').title()
+            except Exception:
+                return "N/A"
+        
+        context = {
+            'title': 'Quality Scoring',
+            'project_name': project_name,
+            'generation_date': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            'total_modules': qa_overview.get('total_modules', qa_metadata.get('total_modules_analyzed', 0)),
+            'analysis_timestamp': qa_metadata.get('analysis_timestamp', datetime.now().isoformat()),
+            # Flags
+            'llm_enabled': bool(global_insights),
+            'embeddings_enabled': qa_metadata.get('embeddings_enabled', False),
+            # Summary scores
+            'average_quality_score': qa_overview.get('average_quality_score', 0),
+            'median_quality_score': qa_overview.get('median_quality_score', 0),
+            'quality_std_dev': qa_overview.get('quality_std_dev', 0),
+            'top_quality_modules': qa_overview.get('top_quality_modules', []),
+            'lowest_quality_modules': qa_overview.get('lowest_quality_modules', []),
+            # Distribution & metrics
+            'quality_ranges': qa_distribution.get('quality_ranges', {}),
+            'metric_averages': qa_distribution.get('metric_averages', {}),
+            # Detailed assessments
+            'module_assessments': module_assessments,
+            # Recommendations and insights
+            'recommendations': recommendations,
+            'global_insights': (quality_analysis or {}).get('global_insights', None),
+            'trends': trends,
+            # Helpers
+            'get_best_metric': get_best_metric,
+            'get_worst_metric': get_worst_metric,
+        }
+        template = self.env.get_template('quality.html')
         return template.render(**context)
     
     def save_documentation(self, docs: Dict[str, str]) -> None:

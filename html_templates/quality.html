@@ -1,0 +1,254 @@
+{% extends "base.html" %}
+
+{% set current_page = "quality" %}
+
+{% block title %}Quality Scoring{% endblock %}
+{% block page_title %}🔬 Quality Scoring Pipeline{% endblock %}
+{% block breadcrumb_title %}Quality{% endblock %}
+
+{% block toc %}
+<li class="md-nav__item"><a href="#distribution" class="md-nav__link">Quality Distribution</a></li>
+<li class="md-nav__item"><a href="#metrics" class="md-nav__link">Quality Metrics</a></li>
+<li class="md-nav__item"><a href="#performance" class="md-nav__link">Module Performance</a></li>
+<li class="md-nav__item"><a href="#analysis" class="md-nav__link">Detailed Analysis</a></li>
+<li class="md-nav__item"><a href="#recommendations" class="md-nav__link">Recommendations</a></li>
+{% if global_insights %}<li class="md-nav__item"><a href="#ai-insights" class="md-nav__link">AI Insights</a></li>{% endif %}
+{% if trends %}<li class="md-nav__item"><a href="#trends" class="md-nav__link">Quality Trends</a></li>{% endif %}
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .quality-hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 2rem; text-align: center; margin-bottom: 2rem; border-radius: 12px; }
+    .quality-hero h1 { margin: 0 0 .5rem 0; }
+    .analysis-meta { display: flex; flex-wrap: wrap; gap: .75rem; justify-content: center; margin-top: .75rem; opacity: .9; }
+    .analysis-meta span { background: rgba(255,255,255,0.2); padding: .4rem .8rem; border-radius: 20px; font-size: .875rem; }
+    .quality-dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin: 1.5rem 0 2rem; }
+    .quality-card { background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-left: 5px solid #3B82F6; }
+    .quality-score { font-size: 2.25rem; font-weight: 700; color: #1F2937; line-height: 1; margin-bottom: .25rem; }
+    .section-header { margin: 2rem 0 1rem; padding-bottom: .75rem; border-bottom: 2px solid #E5E7EB; }
+    .chart-container { position: relative; height: 380px; margin: 1rem 0; background: white; border-radius: 12px; padding: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .metric-card { background: #F9FAFB; padding: 1rem; border-radius: 8px; border: 1px solid #E5E7EB; text-align: center; }
+    .metric-score { font-size: 1.5rem; font-weight: 700; margin-bottom: .25rem; }
+    .metric-name { color: #6B7280; font-size: .875rem; text-transform: uppercase; letter-spacing: .05em; }
+    .quality-progress { width: 100%; height: 8px; background-color: #E5E7EB; border-radius: 4px; overflow: hidden; margin: .5rem 0 0; }
+    .quality-progress-bar { height: 100%; transition: width .6s ease; border-radius: 4px; }
+    .quality-level { display: inline-block; padding: .4rem .8rem; border-radius: 20px; font-size: .8rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
+        .level-excellent { background-color: #D1FAE5; color: #065F46; }
+        .level-good { background-color: #DBEAFE; color: #1E40AF; }
+        .level-fair { background-color: #FEF3C7; color: #92400E; }
+        .level-poor { background-color: #FEE2E2; color: #991B1B; }
+        .level-critical { background-color: #FEE2E2; color: #7C2D12; }
+    .module-quality-table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    .module-quality-table th, .module-quality-table td { padding: 1rem; text-align: left; border-bottom: 1px solid #E5E7EB; }
+    .module-quality-table th { background: #F9FAFB; color: #374151; font-weight: 600; text-transform: uppercase; font-size: .85rem; letter-spacing: .05em; }
+    .module-link { color: #3B82F6; text-decoration: none; font-family: 'Monaco','Menlo','Ubuntu Mono',monospace; font-size: .9rem; }
+    .module-link:hover { text-decoration: underline; }
+    .recommendations-section { background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%); border: 1px solid #0EA5E9; border-radius: 12px; padding: 1.25rem; margin: 1.5rem 0; }
+    .recommendation-item { background: white; border-left: 4px solid #0EA5E9; border-radius: 8px; padding: .9rem 1rem .9rem 2.5rem; position: relative; margin-bottom: .75rem; }
+    .recommendation-item::before { content: "💡"; position: absolute; left: .9rem; top: 50%; transform: translateY(-50%); }
+    .insights-section { background: linear-gradient(135deg, #FEF3C7 0%, #FEF9C3 100%); border: 1px solid #F59E0B; border-radius: 12px; padding: 1.25rem; margin: 1.5rem 0; }
+    .trend-indicator { display: inline-flex; align-items: center; padding: .25rem .6rem; border-radius: 20px; font-size: .85rem; font-weight: 500; }
+        .trend-improving { background-color: #D1FAE5; color: #065F46; }
+        .trend-stable { background-color: #DBEAFE; color: #1E40AF; }
+        .trend-declining { background-color: #FEE2E2; color: #991B1B; }
+    @media (max-width: 768px) { .chart-container { height: 300px; padding: .75rem; } }
+</style>
+{% endblock %}
+
+{% block content %}
+        <div class="quality-hero">
+            <h1>🔬 Quality Scoring Pipeline</h1>
+            <p>Comprehensive code quality analysis using repository analysis, vector embeddings, and LLM insights</p>
+            <div class="analysis-meta">
+                <span>📊 {{ total_modules | default(0) }} modules analyzed</span>
+                <span>⏰ {{ analysis_timestamp | default('Recent') }}</span>
+                <span>🧠 {{ 'LLM Enhanced' if llm_enabled else 'Static Analysis' }}</span>
+                <span>🔍 {{ 'Vector Embeddings Enabled' if embeddings_enabled else 'Basic Analysis' }}</span>
+            </div>
+        </div>
+
+        <section class="quality-dashboard">
+            <div class="quality-card">
+                <div class="quality-score">{{ average_quality_score | default(0) | round(3) }}</div>
+                <h3>Average Quality Score</h3>
+                <p>Overall quality across all analyzed modules</p>
+            </div>
+            <div class="quality-card">
+                <div class="quality-score">{{ median_quality_score | default(0) | round(3) }}</div>
+                <h3>Median Quality Score</h3>
+                <p>Middle point of quality distribution</p>
+            </div>
+            <div class="quality-card">
+                <div class="quality-score">{{ quality_std_dev | default(0) | round(3) }}</div>
+                <h3>Quality Consistency</h3>
+                <p>Standard deviation of scores (lower = more consistent)</p>
+            </div>
+            <div class="quality-card">
+                <div class="quality-score">{{ top_quality_modules | length | default(0) }}</div>
+                <h3>Top Quality Modules</h3>
+                <p>Highest scoring modules in the codebase</p>
+            </div>
+        </section>
+
+<div class="section-header"><h2 id="distribution">📊 Quality Level Distribution</h2></div>
+<div class="chart-container"><canvas id="qualityDistributionChart" data-ranges='{{ quality_ranges | tojson | safe }}'></canvas></div>
+
+<div class="section-header"><h2 id="metrics">📈 Quality Metrics Overview</h2></div>
+<div class="chart-container"><canvas id="metricsRadarChart" data-metrics='{{ metric_averages | tojson | safe }}'></canvas></div>
+        
+        <div class="metrics-grid">
+            {% for metric_name, metric_data in metric_averages.items() %}
+            <div class="metric-card">
+        <div class="metric-score" data-score="{{ metric_data.average }}">{{ metric_data.average | round(3) }}</div>
+                <div class="metric-name">{{ metric_name.replace('_', ' ').title() }}</div>
+        <div class="quality-progress"><div class="quality-progress-bar" data-score="{{ metric_data.average }}"></div></div>
+            </div>
+            {% endfor %}
+        </div>
+
+<div class="section-header"><h2 id="performance">🏆 Module Performance</h2></div>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin: 1rem 0;">
+            <div class="quality-card">
+                <h3 style="color: #10B981;">🥇 Top Quality Modules</h3>
+                <ul style="list-style: none; padding: 0;">
+                    {% for module in top_quality_modules[:5] %}
+            <li style="margin-bottom: .5rem;"><span style="color: #10B981; margin-right: .5rem;">●</span><code>{{ module }}</code></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="quality-card">
+                <h3 style="color: #EF4444;">⚠️ Modules Needing Improvement</h3>
+                <ul style="list-style: none; padding: 0;">
+                    {% for module in lowest_quality_modules[:5] %}
+            <li style="margin-bottom: .5rem;"><span style="color: #EF4444; margin-right: .5rem;">●</span><code>{{ module }}</code></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+<div class="section-header"><h2 id="analysis">📋 Detailed Module Analysis</h2></div>
+        <table class="module-quality-table">
+            <thead>
+                <tr>
+                    <th>Module</th>
+                    <th>Overall Score</th>
+                    <th>Quality Level</th>
+                    <th>Top Metric</th>
+                    <th>Needs Improvement</th>
+                    <th>Vector Similarity</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for module_path, assessment in module_assessments.items() %}
+                <tr>
+            <td><a href="#" class="module-link">{{ module_path }}</a></td>
+            <td class="overall-score" data-score="{{ assessment.overall_score }}">{{ assessment.overall_score | round(3) }}</td>
+            <td><span class="quality-level level-{{ assessment.quality_level }}">{{ assessment.quality_level }}</span></td>
+                    <td>{{ get_best_metric(assessment.metrics) }}</td>
+                    <td>{{ get_worst_metric(assessment.metrics) }}</td>
+                    <td>{{ assessment.vector_similarity_score | round(3) }}</td>
+            <td><a href="quality_module_{{ module_path.replace('/', '_').replace('.', '_') }}.html" style="color: #3B82F6; text-decoration: none;">View Details →</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+<div class="section-header"><h2 id="recommendations">💡 Global Recommendations</h2></div>
+        <div class="recommendations-section">
+            <h3>Priority Improvements</h3>
+            {% for recommendation in recommendations %}
+    <div class="recommendation-item">{{ recommendation }}</div>
+            {% endfor %}
+        </div>
+
+        {% if global_insights %}
+<div class="section-header"><h2 id="ai-insights">🧠 AI-Powered Insights</h2></div>
+        <div class="insights-section">
+            <h3>Strategic Assessment</h3>
+            <p><strong>Health Score:</strong> {{ global_insights.health_score | round(3) }}</p>
+            <p><strong>Assessment:</strong> {{ global_insights.health_assessment }}</p>
+            <h4>Critical Areas</h4>
+    <ul>{% for area in global_insights.critical_areas %}<li>{{ area }}</li>{% endfor %}</ul>
+            <h4>Strategic Recommendations</h4>
+    <ul>{% for rec in global_insights.strategic_recommendations %}<li>{{ rec }}</li>{% endfor %}</ul>
+        </div>
+        {% endif %}
+
+        {% if trends %}
+<div class="section-header"><h2 id="trends">📈 Quality Trends</h2></div>
+        <div class="quality-card">
+            <h3>Current Snapshot</h3>
+            <p><strong>Timestamp:</strong> {{ trends.current_snapshot.timestamp }}</p>
+            <p><strong>Average Score:</strong> {{ trends.current_snapshot.average_score | round(3) }}</p>
+            <p><strong>Total Modules:</strong> {{ trends.current_snapshot.total_modules }}</p>
+            {% if trends.trend_analysis %}
+    <p><strong>Trend:</strong> <span class="trend-indicator trend-{{ trends.trend_analysis.trend_direction }}">{{ trends.trend_analysis.trend_direction | title }}</span></p>
+            {% endif %}
+        </div>
+        {% endif %}
+
+<div style="margin-top: 2rem; text-align: center;">
+    <a href="index.html" class="btn-primary" style="margin-right: .5rem;">← Back to Overview</a>
+    <a href="architecture.html" class="btn-secondary" style="margin-right: .5rem;">View Architecture</a>
+            <a href="complexity.html" class="btn-secondary">View Complexity Analysis</a>
+        </div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+  try {
+    // Apply colors and widths via JS to avoid inline style parsing issues in linters
+    var scoreColor = function(score){
+      if (score >= 0.85) return '#10B981';
+      if (score >= 0.70) return '#3B82F6';
+      if (score >= 0.55) return '#F59E0B';
+      if (score >= 0.40) return '#EF4444';
+      return '#7C2D12';
+    };
+    var metricScores = document.querySelectorAll('.metric-card .metric-score');
+    metricScores.forEach(function(el){
+      var s = parseFloat(el.getAttribute('data-score') || '0');
+      el.style.color = scoreColor(s);
+    });
+    var bars = document.querySelectorAll('.quality-progress-bar');
+    bars.forEach(function(bar){
+      var s = parseFloat(bar.getAttribute('data-score') || '0');
+      bar.style.width = Math.max(0, Math.min(100, s * 100)).toFixed(1) + '%';
+      bar.style.backgroundColor = scoreColor(s);
+    });
+    var overall = document.querySelectorAll('td.overall-score');
+    overall.forEach(function(td){
+      var s = parseFloat(td.getAttribute('data-score') || '0');
+      td.style.color = scoreColor(s);
+      td.style.fontWeight = 'bold';
+    });
+    var distEl = document.getElementById('qualityDistributionChart');
+    if (distEl && window.Chart) {
+      var rangesAttr = distEl.getAttribute('data-ranges') || '{}';
+      var qualityRanges = {};
+      try { qualityRanges = JSON.parse(rangesAttr); } catch(e) { qualityRanges = {}; }
+      new Chart(distEl.getContext('2d'), {
+                type: 'doughnut',
+        data: { labels: Object.keys(qualityRanges).map(function(k){ return k.charAt(0).toUpperCase()+k.slice(1); }), datasets: [{ data: Object.values(qualityRanges), backgroundColor: ['#10B981','#3B82F6','#F59E0B','#EF4444','#7C2D12'], borderWidth: 3, borderColor: '#ffffff' }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { padding: 16 } }, title: { display: true, text: 'Quality Level Distribution' } } }
+      });
+    }
+    var radarEl = document.getElementById('metricsRadarChart');
+    if (radarEl && window.Chart) {
+      var metricsAttr = radarEl.getAttribute('data-metrics') || '{}';
+      var metricAverages = {};
+      try { metricAverages = JSON.parse(metricsAttr); } catch(e) { metricAverages = {}; }
+      new Chart(radarEl.getContext('2d'), {
+        type: 'radar',
+        data: { labels: Object.keys(metricAverages).map(function(k){ return k.replace('_',' ').replace(/\b\w/g,function(l){return l.toUpperCase();}); }), datasets: [{ label: 'Average Scores', data: Object.values(metricAverages).map(function(m){ return m.average; }), backgroundColor: 'rgba(59,130,246,0.2)', borderColor: 'rgb(59,130,246)', borderWidth: 2, pointBackgroundColor: 'rgb(59,130,246)', pointBorderColor: '#fff', pointBorderWidth: 2 }] },
+        options: { responsive: true, maintainAspectRatio: false, scales: { r: { beginAtZero: true, max: 1.0, ticks: { stepSize: 0.2 } } }, plugins: { legend: { display: false }, title: { display: true, text: 'Quality Metrics Radar' } } }
+      });
+    }
+  } catch(e) {}
+});
+    </script>
+{% endblock %}

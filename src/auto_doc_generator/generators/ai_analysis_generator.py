@@ -22,6 +22,7 @@ from datetime import datetime, timedelta
 import hashlib
 import sqlite3
 import pickle
+import numpy as np
 
 # Load environment variables from .env file
 try:
@@ -33,12 +34,10 @@ except ImportError:
 
 # Optional: Vector embeddings for semantic search
 try:
-    import numpy as np
     from sentence_transformers import SentenceTransformer
     EMBEDDINGS_AVAILABLE = True
 except ImportError:
     EMBEDDINGS_AVAILABLE = False
-    np = None
     SentenceTransformer = None
 
 

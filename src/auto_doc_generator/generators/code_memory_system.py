@@ -15,15 +15,14 @@ from typing import Dict, List, Any, Optional, Tuple
 import logging
 from datetime import datetime, timedelta
 import hashlib
+import numpy as np
 
 # Optional: Vector embeddings for semantic search
 try:
-    import numpy as np
     from sentence_transformers import SentenceTransformer
     EMBEDDINGS_AVAILABLE = True
 except ImportError:
     EMBEDDINGS_AVAILABLE = False
-    np = None
     SentenceTransformer = None
 
 

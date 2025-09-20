@@ -20,9 +20,12 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 from analyzers.code_analyzer import CodeAnalyzer
 from analyzers.ai_pipeline_analyzer import AIPipelineAnalyzer
+from analyzers.quality_analyzer import QualityAnalyzer
 from generators.markdown_generator import MarkdownGenerator
 from generators.html_generator import HTMLGenerator
 from generators.ai_analysis_coordinator import AIAnalysisCoordinator
+from generators.quality_generator import QualityGenerator
+from generators.quality_llm_integration import QualityLLMIntegration
 
 
 def setup_logging(config: Dict[str, Any]) -> None:
@@ -94,6 +97,7 @@ def analyze_codebase(repo_path: str, config: Dict[str, Any]) -> tuple:
     # Initialize analyzers
     code_analyzer = CodeAnalyzer(repo_path, config)
     ai_analyzer = AIPipelineAnalyzer(config)
+    quality_analyzer = QualityAnalyzer(config)
     
     # Perform code analysis
     print("\n📊 Analyzing code structure...")
@@ -103,17 +107,24 @@ def analyze_codebase(repo_path: str, config: Dict[str, Any]) -> tuple:
     print("🤖 Analyzing AI/ML components...")
     ai_analysis = ai_analyzer.analyze_ai_components(Path(repo_path))
     
+    # Perform quality analysis
+    print("🔬 Analyzing code quality...")
+    quality_analysis = quality_analyzer.analyze_quality(code_analysis, ai_analysis)
+    
     print("\n✅ Analysis complete!")
     print(f"   📁 {code_analysis.get('overview', {}).get('total_files', 0)} files analyzed")
     print(f"   🏗️ {code_analysis.get('overview', {}).get('total_functions', 0)} functions found")
     print(f"   📦 {code_analysis.get('overview', {}).get('total_classes', 0)} classes found")
     print(f"   🤖 {len(ai_analysis.get('ml_models', []))} ML models detected")
+    print(f"   🔬 {quality_analysis.get('metadata', {}).get('total_modules_analyzed', 0)} modules quality-analyzed")
+    print(f"   📈 Average quality score: {quality_analysis.get('overview', {}).get('average_quality_score', 0):.3f}")
     
-    return code_analysis, ai_analysis
+    return code_analysis, ai_analysis, quality_analysis
 
 
 def generate_documentation(code_analysis: Dict[str, Any], ai_analysis: Dict[str, Any], 
-                         config: Dict[str, Any], output_dir: str = "docs") -> None:
+                         quality_analysis: Dict[str, Any], config: Dict[str, Any], 
+                         output_dir: str = "docs") -> None:
     """Generate documentation from analysis results."""
     print("\n" + "=" * 60)
     print("📚 GENERATING DOCUMENTATION")
@@ -134,15 +145,59 @@ def generate_documentation(code_analysis: Dict[str, Any], ai_analysis: Dict[str,
     # Initialize AI analysis coordinator (refactored from generator)
     ai_analysis_coordinator = AIAnalysisCoordinator(config=config)
     
+    # Initialize quality generator and LLM integration
+    quality_generator = QualityGenerator(template_dir="html_templates", output_dir=output_dir, config=config)
+    quality_llm = QualityLLMIntegration(config=config)
+    
     # Step 1: Enhance code analysis with AI insights
     print("🧠 Enhancing analysis with AI insights...")
     enhanced_analysis = ai_analysis_coordinator.enhance_code_analysis(code_analysis, ai_analysis)
     
-    # Step 2: Generate documentation using enhanced analysis
-    print("📚 Generating documentation with enhanced analysis...")
-    docs = doc_gen.generate_all_documentation(code_analysis, ai_analysis, enhanced_analysis)
+    # Step 2: Enhance quality analysis with LLM insights
+    print("🔬 Enhancing quality analysis with LLM insights...")
+    enhanced_quality_analysis = quality_analysis.copy()
     
-    # Step 3: Use AI-enhanced diagrams (already generated in enhanced analysis)
+    # Add LLM insights to quality analysis
+    for module_path, assessment in enhanced_quality_analysis.get('module_assessments', {}).items():
+        try:
+            # Get module content for LLM analysis
+            module_content = ""
+            for module in code_analysis.get('modules', []):
+                if module.get('path') == module_path:
+                    module_content = module.get('content', '')
+                    break
+            
+            # Enhance with LLM insights
+            llm_insights = quality_llm.enhance_quality_assessment(
+                module_path, assessment.get('metrics', {}), module_content
+            )
+            assessment['llm_assessment'] = llm_insights
+            
+        except Exception as e:
+            print(f"   ⚠️ Warning: Could not enhance quality assessment for {module_path}: {e}")
+    
+    # Generate global quality insights
+    try:
+        global_insights = quality_llm.generate_quality_insights(enhanced_quality_analysis)
+        enhanced_quality_analysis['global_insights'] = global_insights
+    except Exception as e:
+        print(f"   ⚠️ Warning: Could not generate global quality insights: {e}")
+    
+    # Step 3: Generate quality reports
+    print("🔬 Generating quality reports...")
+    quality_reports = quality_generator.generate_quality_report(
+        enhanced_quality_analysis, code_analysis, enhanced_analysis
+    )
+    
+    # Step 4: Generate documentation using enhanced analysis
+    print("📚 Generating documentation with enhanced analysis...")
+    docs = doc_gen.generate_all_documentation(code_analysis, ai_analysis, enhanced_analysis, quality_analysis=enhanced_quality_analysis)
+    
+    # Step 5: Add quality reports to documentation (exclude standalone main page to preserve template)
+    quality_reports_no_main = {k: v for k, v in quality_reports.items() if k != 'quality.html'}
+    docs.update(quality_reports_no_main)
+    
+    # Step 6: Use AI-enhanced diagrams (already generated in enhanced analysis)
     if 'diagrams' in enhanced_analysis and enhanced_analysis['diagrams']:
         print("✨ Using AI-enhanced diagrams...")
         
@@ -154,14 +209,17 @@ def generate_documentation(code_analysis: Dict[str, Any], ai_analysis: Dict[str,
             docs['diagrams'] = {}
         docs['diagrams'].update(enhanced_analysis['diagrams'])
     
-    # Save all documentation
+    # Step 7: Save all documentation
     print("💾 Saving documentation files...")
     doc_gen.save_documentation(docs)
+    quality_generator.save_quality_reports(quality_reports)
     
     print("\n✅ Documentation generation complete!")
     print(f"   📁 Documentation saved to: {output_dir}/")
+    print(f"   🔬 Quality reports saved to: {output_dir}/quality.html")
     if output_format == 'html':
         print(f"   🌐 Open {output_dir}/index.html to view the documentation")
+        print(f"   📊 Open {output_dir}/quality.html to view quality analysis")
     else:
         print(f"   🌐 Open {output_dir}/index.md to view the documentation")
 
@@ -503,7 +561,8 @@ def start_enhanced_server(output_dir: str, port: int, repo_path: str) -> None:
     app.run(host='0.0.0.0', port=port, debug=False)
 
 
-def print_summary(code_analysis: Dict[str, Any], ai_analysis: Dict[str, Any]) -> None:
+def print_summary(code_analysis: Dict[str, Any], ai_analysis: Dict[str, Any], 
+                 quality_analysis: Dict[str, Any] = None) -> None:
     """Print analysis summary."""
     print("\n" + "=" * 60)
     print("📊 ANALYSIS SUMMARY")
@@ -528,6 +587,23 @@ def print_summary(code_analysis: Dict[str, Any], ai_analysis: Dict[str, Any]) ->
         print(f"   • Average Complexity: {summary.get('avg_complexity', 0):.2f}")
         print(f"   • Max Complexity: {summary.get('max_complexity', 0)}")
         print(f"   • High Complexity Functions: {len(summary.get('high_complexity_functions', []))}")
+    
+    # Quality Analysis Summary
+    if quality_analysis:
+        quality_overview = quality_analysis.get('overview', {})
+        quality_dist = quality_analysis.get('quality_distribution', {})
+        
+        print(f"\n🔬 Quality Analysis:")
+        print(f"   • Average Quality Score: {quality_overview.get('average_quality_score', 0):.3f}")
+        print(f"   • Median Quality Score: {quality_overview.get('median_quality_score', 0):.3f}")
+        print(f"   • Modules Analyzed: {quality_overview.get('total_modules', 0)}")
+        
+        quality_ranges = quality_dist.get('quality_ranges', {})
+        if quality_ranges:
+            print(f"   • Quality Distribution:")
+            for level, count in quality_ranges.items():
+                if count > 0:
+                    print(f"     - {level.title()}: {count} modules")
     
     print(f"\n🤖 AI/ML Components:")
     print(f"   • Frameworks Detected: {len(ai_analysis.get('frameworks_detected', []))}")
@@ -641,21 +717,21 @@ Examples:
     try:
         # Analysis phase
         if args.analyze:
-            code_analysis, ai_analysis = analyze_codebase(args.repo, config)
+            code_analysis, ai_analysis, quality_analysis = analyze_codebase(args.repo, config)
             
             # Print summary
-            print_summary(code_analysis, ai_analysis)
+            print_summary(code_analysis, ai_analysis, quality_analysis)
         else:
             # Load existing analysis (if available)
-            code_analysis, ai_analysis = {}, {}
+            code_analysis, ai_analysis, quality_analysis = {}, {}, {}
         
         # Generation phase
         if args.generate:
             if not (code_analysis and ai_analysis):
                 print("⚠️ No analysis data available. Running analysis first...")
-                code_analysis, ai_analysis = analyze_codebase(args.repo, config)
+                code_analysis, ai_analysis, quality_analysis = analyze_codebase(args.repo, config)
             
-            generate_documentation(code_analysis, ai_analysis, config, args.output)
+            generate_documentation(code_analysis, ai_analysis, quality_analysis, config, args.output)
         
         # Build phase
         if args.build:
