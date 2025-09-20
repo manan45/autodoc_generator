@@ -669,6 +669,12 @@ const RepositoryDataManager = (() => {
             card.setAttribute('data-module-path', m.path || '');
             const classDiagram = createClassDiagram(m);
             const functionsList = (m.functions || []).map(fn => formatFunctionSignature(fn)).slice(0,8).join('<br/>');
+            const isArchitecture = (window.location.pathname || '').includes('architecture.html');
+            const actionsHtml = isArchitecture ? '' : `
+                <div class="card-actions">
+                    <a href="#" class="code-link" data-module-path="${m.path || ''}">📁 View Code</a>
+                    <button class="btn btn--secondary btn--sm" onclick="RepositoryDataManager.findSimilar('${(m.name||'').replace(/'/g, "\'")}')">🔍 Similar</button>
+                </div>`;
             card.innerHTML = `
                 <div class="card-icon">📦</div>
                 <h3>${m.name || 'module'}</h3>
@@ -681,10 +687,7 @@ const RepositoryDataManager = (() => {
                     <div class="stat-item"><span class="stat-value">${m.stats?.lines || m.lines_of_code || 0}</span><span class="stat-label">Lines</span></div>
                 </div>
                 ${functionsList ? `<div class="code-block" style="margin-top:.5rem">${functionsList}</div>` : ''}
-                <div class="card-actions">
-                    <a href="#" class="code-link" data-module-path="${m.path || ''}">📁 View Code</a>
-                    <button class="btn btn--secondary btn--sm" onclick="RepositoryDataManager.findSimilar('${(m.name||'').replace(/'/g, "\'")}')">🔍 Similar</button>
-                </div>
+                ${actionsHtml}
             `;
             return card;
         };
