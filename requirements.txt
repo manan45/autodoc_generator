@@ -33,7 +33,7 @@ colorama==0.4.6
 pathlib2==2.3.7
 
 # Additional utilities
-tqdm==4.66.1
+tqdm==4.66.3
 rich==13.7.0
 
 # AI/OpenAI integration for AI-powered diagram generation
