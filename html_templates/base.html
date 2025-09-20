@@ -25,9 +25,14 @@
             .md-main { margin-right: 0; max-width: calc(100vw - 18rem); }
         }
         @media (max-width: 900px) {
-            .md-sidebar--primary { position: fixed; left: 0; top: 4rem; bottom: 0; transform: translateX(-100%); transition: transform .2s ease; }
+            .md-sidebar--primary { position: fixed; left: 0; top: 4rem; bottom: 0; transform: translateX(-100%); transition: transform .2s ease; z-index: 90; box-shadow: 2px 0 10px rgba(0,0,0,0.1); }
             body.nav-open .md-sidebar--primary { transform: translateX(0); }
+            body.nav-open::after { content: ''; position: fixed; top: 4rem; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 85; }
             .md-main { margin-left: 0; }
+            .header__menu-btn { display: block !important; }
+        }
+        @media (min-width: 901px) {
+            .header__menu-btn { display: none !important; }
         }
     </style>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -198,6 +203,38 @@
             document.body.classList.toggle('toc-open');
           });
         }
+      } catch(e) {}
+    })();
+    
+    // Mobile navigation toggle
+    (function(){
+      try {
+        var menuBtn = document.querySelector('.header__menu-btn');
+        if (menuBtn) {
+          menuBtn.addEventListener('click', function(e){
+            e.preventDefault();
+            document.body.classList.toggle('nav-open');
+          });
+        }
+        
+        // Close mobile nav when clicking outside or on overlay
+        document.addEventListener('click', function(e) {
+          var sidebar = document.querySelector('.md-sidebar--primary');
+          var menuBtn = document.querySelector('.header__menu-btn');
+          if (sidebar && menuBtn && document.body.classList.contains('nav-open')) {
+            // Check if click is on the overlay (outside sidebar but inside the page)
+            if (!sidebar.contains(e.target) && !menuBtn.contains(e.target)) {
+              document.body.classList.remove('nav-open');
+            }
+          }
+        });
+        
+        // Close mobile nav on escape key
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && document.body.classList.contains('nav-open')) {
+            document.body.classList.remove('nav-open');
+          }
+        });
       } catch(e) {}
     })();
     </script>

@@ -61,7 +61,7 @@
                 {% elif (e.method or 'GET') == 'DELETE' %}🗑️
                 {% else %}🔄{% endif %}
             </div>
-            <h3><span class="http-method http-method--{{ (e.method or 'GET') | lower }}">{{ e.method or 'GET' }}</span></h3>
+            <h3><span class="http-method http-method--{{ (e.method or 'GET') | lower }}">{{ e.method or 'GET' }}</span> {{ e.name or e.path or e.endpoint }}</h3>
             
             <div class="endpoint-details">
                 <strong>Path:</strong>

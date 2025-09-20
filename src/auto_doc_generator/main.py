@@ -153,12 +153,26 @@ def generate_documentation(code_analysis: Dict[str, Any], ai_analysis: Dict[str,
     print("🧠 Enhancing analysis with AI insights...")
     enhanced_analysis = ai_analysis_coordinator.enhance_code_analysis(code_analysis, ai_analysis)
     
-    # Step 2: Enhance quality analysis with LLM insights
+    # Step 2: Enhance quality analysis with LLM insights (only for top modules)
     print("🔬 Enhancing quality analysis with LLM insights...")
     enhanced_quality_analysis = quality_analysis.copy()
     
-    # Add LLM insights to quality analysis
-    for module_path, assessment in enhanced_quality_analysis.get('module_assessments', {}).items():
+    # Get quality config for limiting LLM enhancements
+    quality_config = config.get('quality', {})
+    max_llm_enhanced_modules = quality_config.get('max_detailed_reports', 5)
+    
+    # Sort modules by quality score and enhance only top N modules
+    module_assessments = enhanced_quality_analysis.get('module_assessments', {})
+    sorted_modules = sorted(
+        module_assessments.items(), 
+        key=lambda x: x[1].get('overall_score', 0), 
+        reverse=True
+    )[:max_llm_enhanced_modules]
+    
+    print(f"   🧠 Enhancing {len(sorted_modules)} top-quality modules with LLM insights...")
+    
+    # Add LLM insights to quality analysis (only for top modules)
+    for module_path, assessment in sorted_modules:
         try:
             # Get module content for LLM analysis
             module_content = ""
@@ -167,18 +181,22 @@ def generate_documentation(code_analysis: Dict[str, Any], ai_analysis: Dict[str,
                     module_content = module.get('content', '')
                     break
             
-            # Enhance with LLM insights
+            # Enhance with LLM insights using enhanced AI analysis context
             llm_insights = quality_llm.enhance_quality_assessment(
-                module_path, assessment.get('metrics', {}), module_content
+                module_path, assessment.get('metrics', {}), module_content, 
+                enhanced_analysis=enhanced_analysis
             )
             assessment['llm_assessment'] = llm_insights
+            print(f"   ✅ Enhanced {module_path} (score: {assessment.get('overall_score', 0):.3f})")
             
         except Exception as e:
             print(f"   ⚠️ Warning: Could not enhance quality assessment for {module_path}: {e}")
     
-    # Generate global quality insights
+    # Generate global quality insights with enhanced context
     try:
-        global_insights = quality_llm.generate_quality_insights(enhanced_quality_analysis)
+        global_insights = quality_llm.generate_quality_insights(
+            enhanced_quality_analysis, enhanced_analysis=enhanced_analysis
+        )
         enhanced_quality_analysis['global_insights'] = global_insights
     except Exception as e:
         print(f"   ⚠️ Warning: Could not generate global quality insights: {e}")
@@ -212,7 +230,11 @@ def generate_documentation(code_analysis: Dict[str, Any], ai_analysis: Dict[str,
     # Step 7: Save all documentation
     print("💾 Saving documentation files...")
     doc_gen.save_documentation(docs)
-    quality_generator.save_quality_reports(quality_reports)
+    
+    # Save quality reports but exclude the main quality.html to preserve template-based version
+    quality_reports_to_save = {k: v for k, v in quality_reports.items() if k != 'quality.html'}
+    if quality_reports_to_save:
+        quality_generator.save_quality_reports(quality_reports_to_save)
     
     print("\n✅ Documentation generation complete!")
     print(f"   📁 Documentation saved to: {output_dir}/")

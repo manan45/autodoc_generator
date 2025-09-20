@@ -262,26 +262,48 @@ class QualityAnalyzer:
         """Analyze complexity-related quality factors."""
         
         complexity_data = code_analysis.get('complexity', {})
-        functions = module.get('functions', [])
-        
+        module_functions = module.get('functions', [])
+
+        # Normalize function details: module_functions from CodeAnalyzer are names (str),
+        # while some analyzers might provide dicts with complexity. Support both.
+        detailed_functions = []
+
+        if module_functions and isinstance(module_functions[0], dict):
+            detailed_functions = module_functions  # Already detailed
+        else:
+            # Fall back to global functions list and filter by file/path match
+            module_path = module.get('path')
+            global_functions = code_analysis.get('functions', [])
+            if module_path:
+                detailed_functions = [
+                    f for f in global_functions
+                    if f.get('file') == module_path
+                ]
+            else:
+                detailed_functions = global_functions
+
         # Calculate complexity metrics
-        function_complexities = []
-        for func in functions:
-            complexity = func.get('complexity', 1)
-            function_complexities.append(complexity)
-        
+        function_complexities = [
+            f.get('complexity', 1) for f in detailed_functions if isinstance(f, dict)
+        ]
+
         avg_complexity = np.mean(function_complexities) if function_complexities else 1
         max_complexity = max(function_complexities) if function_complexities else 1
-        
+
         # Scoring (lower complexity = higher score)
         complexity_score = max(0.0, min(1.0, (10 - avg_complexity) / 10))
-        
+
         suggestions = []
         if avg_complexity > 5:
             suggestions.append("Consider breaking down complex functions into smaller ones")
         if max_complexity > 10:
             suggestions.append("Refactor highly complex functions (complexity > 10)")
-        
+
+        high_complexity_functions = [
+            f.get('name') for f in detailed_functions
+            if isinstance(f, dict) and f.get('complexity', 0) > 7
+        ]
+
         return QualityMetric(
             name="Complexity",
             score=complexity_score,
@@ -290,8 +312,8 @@ class QualityAnalyzer:
             details={
                 'average_complexity': avg_complexity,
                 'max_complexity': max_complexity,
-                'total_functions': len(functions),
-                'high_complexity_functions': [f['name'] for f in functions if f.get('complexity', 0) > 7]
+                'total_functions': len(detailed_functions) or len(module_functions),
+                'high_complexity_functions': high_complexity_functions
             },
             suggestions=suggestions
         )
