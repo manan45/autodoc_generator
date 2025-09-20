@@ -11,7 +11,7 @@ libcst==1.1.0
 radon==6.0.1
 
 # Git integration
-GitPython==3.1.40
+GitPython==3.1.41
 
 # AI/ML documentation
 mlflow-skinny==2.8.1
@@ -22,7 +22,7 @@ diagrams==0.23.3
 graphviz==0.20.1
 
 # Template engine
-Jinja2==3.1.2
+Jinja2==3.1.6
 
 # CLI and utilities
 click==8.1.7
@@ -33,7 +33,7 @@ colorama==0.4.6
 pathlib2==2.3.7
 
 # Additional utilities
-tqdm==4.66.1
+tqdm==4.66.3
 rich==13.7.0
 
 # AI/OpenAI integration for AI-powered diagram generation
