@@ -50,7 +50,7 @@ html_templates/
 │   └── content_item.html    # Reusable content components
 ├── assets/
 │   ├── css/
-│   │   └── styles.css       # Enhanced styles with new components
+│   │   └── modern-styles.css # Modern consolidated CSS with all components
 │   └── js/
 │       └── main.js          # Agentic JavaScript functionality
 └── README.md               # This documentation

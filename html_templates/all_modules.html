@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% set current_page = "modules" %}
+
+{% block title %}Key Contributing Modules{% endblock %}
+{% block page_title %}{{ project_name | default('Project') }} - Key Contributing Modules{% endblock %}
+{% block breadcrumb_title %}Key Contributing Modules{% endblock %}
+
+{% block toc %}
+<li class="md-nav__item"><a href="#overview" class="md-nav__link">Overview</a></li>
+<li class="md-nav__item"><a href="#stats" class="md-nav__link">Statistics</a></li>
+<li class="md-nav__item"><a href="#all-modules" class="md-nav__link">All Modules</a></li>
+{% endblock %}
+
+{% block content %}
+<h1 id="overview">Key Contributing Modules</h1>
+<p>Complete list of modules discovered in the analysed repository.</p>
+
+<section class="stats-overview" id="stats">
+  <h2>📊 Codebase Statistics</h2>
+  <div class="stats-grid" id="all-modules-stats">
+    <div class="stat-card" data-stat="avgComplexity"><span class="stat-number">0</span><span class="stat-label">Avg Complexity</span></div>
+    <div class="stat-card" data-stat="highComplexity"><span class="stat-number">0</span><span class="stat-label">High-Complexity Modules</span></div>
+    <div class="stat-card" data-stat="documented"><span class="stat-number">0</span><span class="stat-label">Documented Components</span></div>
+    <div class="stat-card" data-stat="lines"><span class="stat-number">0</span><span class="stat-label">Total Lines</span></div>
+  </div>
+</section>
+
+<section id="all-modules">
+  <h2>All Detected Modules</h2>
+  <div class="toolbar" style="margin: 1rem 0; display: flex; gap: .75rem; align-items: center;">
+    <input id="all-modules-search" type="search" placeholder="Search modules, paths…" aria-label="Search modules" style="flex:1; padding:.6rem 1rem; border:1px solid var(--color-border); border-radius:.5rem; background: var(--color-bg); color: var(--color-text);">
+    <select id="density-select" aria-label="Card density" style="padding:.5rem .75rem; border:1px solid var(--color-border); border-radius:.5rem; background: var(--color-bg); color: var(--color-text);">
+      <option value="compact">Compact</option>
+      <option value="normal" selected>Normal</option>
+      <option value="detailed">Detailed</option>
+    </select>
+    <span id="all-modules-count" class="md-nav__count"></span>
+  </div>
+  <div id="all-modules-grid" class="getting-started-grid"></div>
+  <div style="display:flex; justify-content:center; margin-top:1rem;">
+    <button id="load-more-btn" class="btn btn--secondary">Load more</button>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  /* Density styles for module cards */
+  #all-modules .getting-started-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+  #all-modules .getting-started-card.compact { padding: .75rem; }
+  #all-modules .getting-started-card.compact h3 { font-size: 1rem; margin: .25rem 0; }
+  #all-modules .getting-started-card.compact .module-description { display:none; }
+  #all-modules .getting-started-card.compact .diagram-section { display:none; }
+  #all-modules .getting-started-card.compact .code-block { margin:.25rem 0; }
+  #all-modules .getting-started-card.normal .diagram-section { display:none; }
+  #all-modules .getting-started-card.detailed .diagram-section { display:block; }
+  #all-modules .module-stats { display:flex; gap:1rem; margin-top:.25rem; }
+  #all-modules .module-stats .stat-item { display:flex; flex-direction:column; align-items:flex-start; }
+  #all-modules .module-stats .stat-value { font-weight:600; }
+</style>
+{% endblock %}
+
+

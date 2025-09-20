@@ -11,6 +11,8 @@
 {% if diagrams.dataflow %}<li class="md-nav__item"><a href="#data-flow" class="md-nav__link">Data Flow</a></li>{% endif %}
 <li class="md-nav__item"><a href="#components" class="md-nav__link">Components</a></li>
 <li class="md-nav__item"><a href="#modules" class="md-nav__link">Modules</a></li>
+<li class="md-nav__item"><a href="#module-structures" class="md-nav__link">Module Structures</a></li>
+<li class="md-nav__item"><a href="#all-modules" class="md-nav__link">All Modules</a></li>
 {% endblock %}
 
 {% block content %}
@@ -133,43 +135,11 @@ graph TB
     </div>
 </section>
 
-{% if components %}
-<section class="components-overview" id="components">
+<!-- <section class="components-overview" id="components">
     <h2>📦 System Components</h2>
     <p>High-level overview of major system components and their roles.</p>
-    
-    <div class="getting-started-grid">
-        {% for c in components %}
-        <div class="getting-started-card">
-            <div class="card-icon">📦</div>
-            <h3>{{ c.name }}</h3>
-            <p>{{ c.description | default('Core system component') }}</p>
-            
-            <div class="component-metrics">
-                <div class="metric-row">
-                    <span class="metric-label">Scope:</span>
-                    <span class="metric-value">{{ c.files | default(0) }} modules</span>
-                </div>
-                <div class="metric-row">
-                    <span class="metric-label">Complexity:</span>
-                    <span class="metric-value">
-                        {% set total_items = (c.functions | default(0)) + (c.classes | default(0)) %}
-                        {% if total_items > 50 %}High
-                        {% elif total_items > 20 %}Medium
-                        {% else %}Low{% endif %}
-                    </span>
-                </div>
-            </div>
-            
-            <div class="action-links">
-                <a href="#" class="action-link">View Details</a>
-                <a href="#" class="action-link">Dependencies</a>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-</section>
-{% endif %}
+    <div class="getting-started-grid" id="components-grid"></div>
+</section> -->
 
 <!-- High-Level Module Architecture -->
 <section class="top-modules-section">
@@ -314,7 +284,37 @@ graph TD
         </table>
 </div>
 {% endif %}
-</section>
+<!-- Module Code Structure (populated by data-integration.js) -->
+<!-- <section class="module-structures" id="module-structures">
+    <h2>📁 Modules</h2>
+    <p>Code structure per file with a simple diagram and listed components.</p>
+    <div id="modules-structure" class="getting-started-grid"></div>
+    
+</section> -->
+
+<!-- All Modules Table mirrored under Architecture -->
+<!-- <section id="all-modules">
+  <h2>All Detected Modules</h2>
+  <div class="toolbar" style="margin: 1rem 0; display: flex; gap: .75rem; align-items: center;">
+    <input id="all-modules-search" type="search" placeholder="Search modules, paths…" aria-label="Search modules" style="flex:1; padding:.6rem 1rem; border:1px solid var(--color-border); border-radius:.5rem; background: var(--color-bg); color: var(--color-text);">
+    <span id="all-modules-count" class="md-nav__count"></span>
+  </div>
+  <div class="table-responsive">
+    <table class="table" style="width:100%; border-collapse: collapse;">
+      <thead>
+        <tr>
+          <th style="text-align:left; padding:.5rem; border-bottom:1px solid var(--color-border);">Module</th>
+          <th style="text-align:left; padding:.5rem; border-bottom:1px solid var(--color-border);">Path</th>
+          <th style="text-align:right; padding:.5rem; border-bottom:1px solid var(--color-border);">Functions</th>
+          <th style="text-align:right; padding:.5rem; border-bottom:1px solid var(--color-border);">Classes</th>
+          <th style="text-align:right; padding:.5rem; border-bottom:1px solid var(--color-border);">Lines</th>
+          <th style="text-align:left; padding:.5rem; border-bottom:1px solid var(--color-border);">Description</th>
+        </tr>
+      </thead>
+      <tbody id="all-modules-body"></tbody>
+    </table>
+  </div>
+</section> -->
 
 <style>
 /* Top Modules specific styles */
@@ -428,6 +428,39 @@ document.addEventListener('DOMContentLoaded', function(){
   });
 });
 </script>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  /* Enhanced table visuals for Architecture page section */
+  #all-modules .table-responsive {
+    border: 1px solid var(--color-border);
+    border-radius: .5rem;
+    overflow: auto;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    max-height: 60vh;
+  }
+  #all-modules table thead th {
+    position: sticky;
+    top: 0;
+    background: var(--color-bg);
+    z-index: 1;
+  }
+  #all-modules table tbody tr:nth-child(odd) { background: rgba(0,0,0,0.02); }
+  #all-modules table tbody tr:hover { background: rgba(59,130,246,0.08); }
+  #all-modules td code {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    max-width: 40ch;
+  }
+  #all-modules td:nth-child(3),
+  #all-modules td:nth-child(4),
+  #all-modules td:nth-child(5) { font-variant-numeric: tabular-nums; width: 6rem; }
+  #all-modules thead th:first-child { border-top-left-radius: .5rem; }
+  #all-modules thead th:last-child { border-top-right-radius: .5rem; }
+</style>
 {% endblock %}
 
 

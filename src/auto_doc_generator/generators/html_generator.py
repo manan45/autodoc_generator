@@ -47,10 +47,12 @@ class HTMLGenerator:
         docs['index.html'] = self.generate_index_page(code_analysis, ai_analysis, enhanced_analysis)
         docs['architecture.html'] = self.generate_architecture_page(code_analysis, enhanced_analysis)
         docs['modules.html'] = self.generate_modules_page(code_analysis, enhanced_analysis)
+        docs['all_modules.html'] = self.generate_all_modules_page(code_analysis, enhanced_analysis)
         docs['api.html'] = self.generate_api_page(code_analysis, enhanced_analysis)
         docs['onboarding.html'] = self.generate_onboarding_page(code_analysis, ai_analysis)
         docs['ai_models.html'] = self.generate_ai_models_page(ai_analysis)
         docs['ai_pipelines.html'] = self.generate_ai_pipelines_page(ai_analysis)
+        docs['components.html'] = self.generate_components_page(code_analysis, enhanced_analysis)
         docs['complexity.html'] = self.generate_complexity_page(code_analysis)
         
         # Store enhanced analysis for use by main.py
@@ -158,6 +160,41 @@ class HTMLGenerator:
         }
         
         template = self.env.get_template('modules.html')
+        return template.render(**context)
+
+    def generate_components_page(self, code_analysis: Dict[str, Any], enhanced_analysis: Dict[str, Any] = None) -> str:
+        """Generate standalone Components page (JS-populated grid)."""
+        project_name = self._extract_project_name(code_analysis)
+        context = {
+            'title': f'{project_name} Components',
+            'project_name': project_name,
+            'generation_date': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        }
+        template = self.env.get_template('components.html')
+        return template.render(**context)
+
+    def generate_all_modules_page(self, code_analysis: Dict[str, Any], enhanced_analysis: Dict[str, Any] = None) -> str:
+        """Generate Key Contributing Modules page with an all-modules table."""
+        project_name = self._extract_project_name(code_analysis)
+        modules = code_analysis.get('modules', [])
+        sorted_modules = sorted(modules, key=lambda m: (
+            len(m.get('classes', [])) * 2 +
+            len(m.get('functions', [])) +
+            m.get('lines_of_code', 0) / 100
+        ), reverse=True)
+        context = {
+            'title': f'{project_name} Key Contributing Modules',
+            'project_name': project_name,
+            'generation_date': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            'modules': sorted_modules,
+            'total_modules': len(modules),
+            'total_classes': sum(len(m.get('classes', [])) for m in modules),
+            'total_functions': sum(len(m.get('functions', [])) for m in modules),
+            'total_lines': sum(m.get('lines_of_code', 0) for m in modules),
+            'code_analysis': code_analysis,
+            'enhanced_analysis': enhanced_analysis
+        }
+        template = self.env.get_template('all_modules.html')
         return template.render(**context)
     
     def generate_api_page(self, code_analysis: Dict[str, Any], enhanced_analysis: Dict[str, Any] = None) -> str:

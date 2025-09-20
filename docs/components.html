@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Overview - App</title>
+    <title>Components - App</title>
     <meta name="description" content="Auto-generated documentation for App">
     
     <!-- Modern CSS Architecture -->
-    <link rel="stylesheet" href="assets/css/modern-styles.css?v=8988">
+    <link rel="stylesheet" href="assets/css/modern-styles.css?v=1330">
     <style>
         /* Emergency fallback styles to ensure basic layout works */
         body { font-family: 'Roboto', sans-serif; margin: 0; }
@@ -34,6 +34,10 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono:400,400i,700,700i&display=fallback">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     
+<style>
+  #components .getting-started-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+  #components .getting-started-card { min-height: 180px; }
+</style>
 </head>
 
 <body dir="ltr" data-md-color-scheme="" data-md-color-primary="indigo" data-md-color-accent="indigo">
@@ -64,7 +68,7 @@
                         <span class="md-ellipsis">App</span>
                     </div>
                     <div class="md-header__topic" data-md-component="header-topic">
-                        <span class="md-ellipsis">App Overview</span>
+                        <span class="md-ellipsis">App Components</span>
                     </div>
                 </div>
             </div>
@@ -114,14 +118,14 @@
     <ul class="md-nav__list md-nav__list--top" data-md-scrollfix>
         <!-- Overview Section -->
         <li class="md-nav__item">
-            <a href="index.html" class="md-nav__link md-nav__link--active">
+            <a href="index.html" class="md-nav__link ">
                 Overview
             </a>
         </li>
 
         <!-- Architecture & Design Section -->
         <li class="md-nav__item md-nav__item--section">
-            <input class="md-nav__toggle md-toggle" data-md-toggle="nav-architecture" type="checkbox" id="nav-architecture" >
+            <input class="md-nav__toggle md-toggle" data-md-toggle="nav-architecture" type="checkbox" id="nav-architecture" checked>
             <label class="md-nav__link md-nav__link--index" for="nav-architecture">
                 Architecture & Design
                 <span class="md-nav__icon md-nav__icon--expand">▼</span>
@@ -143,7 +147,7 @@
                         </a>
                     </li>
                     <li class="md-nav__item">
-                        <a href="components.html" class="md-nav__link " data-entity="components">
+                        <a href="components.html" class="md-nav__link md-nav__link--active" data-entity="components">
                             Components
                             <span class="md-nav__count" id="sidebar-components-count"></span>
                         </a>
@@ -205,30 +209,6 @@
         </li>
 
         <!-- AI & Machine Learning Section -->
-        <li class="md-nav__item md-nav__item--section">
-            <input class="md-nav__toggle md-toggle" data-md-toggle="nav-ai" type="checkbox" id="nav-ai" >
-            <label class="md-nav__link md-nav__link--index" for="nav-ai">
-                AI & Machine Learning
-                <span class="md-nav__icon md-nav__icon--expand">▼</span>
-            </label>
-            <nav class="md-nav" data-md-level="1">
-                <label class="md-nav__title" for="nav-ai">
-                    AI & Machine Learning
-                </label>
-                <ul class="md-nav__list md-nav__list--nested">
-                    <li class="md-nav__item">
-                        <a href="ai_models.html" class="md-nav__link ">
-                            AI Models
-                        </a>
-                    </li>
-                    <li class="md-nav__item">
-                        <a href="ai_pipelines.html" class="md-nav__link ">
-                            AI Pipelines
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </li>
 
         <!-- Getting Started Section -->
         <li class="md-nav__item">
@@ -253,9 +233,7 @@
                         <label class="md-nav__title" for="__toc">Table of contents</label>
                         <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
 <li class="md-nav__item"><a href="#overview" class="md-nav__link">Overview</a></li>
-<li class="md-nav__item"><a href="#stats" class="md-nav__link">Stats</a></li>
-<li class="md-nav__item"><a href="#components" class="md-nav__link">🏗️ System Components</a></li>
-<li class="md-nav__item"><a href="#getting-started" class="md-nav__link">🚀 Getting Started</a></li>
+<li class="md-nav__item"><a href="#components" class="md-nav__link">Components</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -271,223 +249,19 @@
                         
 
                         <!-- Content -->
-<h1 id="overview">App Overview</h1>
-<p>Essential facts, frameworks, and top modules to get you oriented fast.</p>
+<h1 id="overview">Components</h1>
+<p>Modules with clear descriptions from the analysed repository.</p>
 
-<h2 id="stats">Stats</h2>
-<div class="stats-grid" id="overview-stats">
-    <div class="stat-card" data-stat="modules"><span class="stat-number">0</span><span class="stat-label">Modules</span></div>
-    <div class="stat-card" data-stat="files"><span class="stat-number">0</span><span class="stat-label">Files</span></div>
-    <div class="stat-card" data-stat="functions"><span class="stat-number">0</span><span class="stat-label">Functions</span></div>
-    <div class="stat-card" data-stat="classes"><span class="stat-number">0</span><span class="stat-label">Classes</span></div>
-</div>
-
-<p><strong>Frameworks:</strong> pandas, numpy, tensorflow, keras, sklearn, xgboost</p>
-
-<!-- System Components Diagram -->
-<section class="components-overview">
-    <h2 id="components">🏗️ System Components</h2>
-    <p>High-level and low-level component hierarchy showing system architecture layers.</p>
-    
-    
-    
-    <!-- Fallback component diagram when AI diagrams not available -->
-    <div class="diagram-section">
-        <h3>System Component Hierarchy</h3>
-        <div class="mermaid">
-graph TD
-    subgraph "High-Level Components"
-        APP[📱 Application Layer]
-        CORE[🧠 Core Logic Layer]
-        DATA[💾 Data Access Layer]
-    end
-    
-    subgraph "Low-Level Components"
-        subgraph "Application Components"
-            CLI[🖥️ CLI Interface]
-            CONFIG[⚙️ Configuration]
-            MAIN[🚀 Main Controller]
-        end
-        
-        subgraph "Core Components"
-            ANALYZERS[🔍 Code Analyzers]
-            GENERATORS[📄 Doc Generators]
-            AI_ENGINE[🤖 AI Enhancement]
-        end
-        
-        subgraph "Data Components"
-            FILE_IO[📁 File I/O]
-            CACHE[💾 Cache System]
-            MEMORY[🧠 Memory Store]
-        end
-    end
-    
-    APP --> CLI
-    APP --> CONFIG
-    APP --> MAIN
-    
-    CORE --> ANALYZERS
-    CORE --> GENERATORS
-    CORE --> AI_ENGINE
-    
-    DATA --> FILE_IO
-    DATA --> CACHE
-    DATA --> MEMORY
-    
-    CLI --> ANALYZERS
-    GENERATORS --> AI_ENGINE
-    AI_ENGINE --> CACHE
-    ANALYZERS --> FILE_IO
-    
-    classDef high fill:#e3f2fd
-    classDef low fill:#e8f5e8
-    classDef connection fill:#fff3e0
-    
-    class APP,CORE,DATA high
-    class CLI,CONFIG,MAIN,ANALYZERS,GENERATORS,AI_ENGINE,FILE_IO,CACHE,MEMORY low
-        </div>
-        <p class="diagram-info">System component hierarchy showing high-level layers and their low-level implementation components.</p>
-    </div>
+<section class="components-list" id="components">
+    <h2>🧩 Components</h2>
+    <div class="getting-started-grid" id="components-grid"></div>
 </section>
 
-<!-- Getting Started Section -->
-<section class="getting-started">
-    <h2 id="getting-started">🚀 Getting Started</h2>
-    <p>Quick setup and essential information to get you started with this project.</p>
-    
-    <div class="getting-started-grid">
-        <div class="getting-started-card">
-            <div class="card-icon">📦</div>
-            <h3>Installation</h3>
-            <p>Install the project dependencies and set up your development environment.</p>
-            <div class="code-block">
-                <code>pip install -r requirements.txt</code>
-            </div>
-        </div>
-        
-        <div class="getting-started-card">
-            <div class="card-icon">⚡</div>
-            <h3>Quick Start</h3>
-            <p>Run the main application to get started immediately.</p>
-            <div class="code-block">
-                <code>python src/auto_doc_generator/main.py</code>
-            </div>
-        </div>
-        
-        <div class="getting-started-card">
-            <div class="card-icon">🔧</div>
-            <h3>Configuration</h3>
-            <p>Customize the application settings using the configuration files.</p>
-            <div class="code-block">
-                <code>config/doc_config.yaml</code>
-            </div>
-        </div>
-        
-        <div class="getting-started-card">
-            <div class="card-icon">📖</div>
-            <h3>Documentation</h3>
-            <p>Explore detailed documentation and API references.</p>
-            <div class="action-links">
-                <a href="architecture.html" class="action-link">Architecture</a>
-                <a href="api.html" class="action-link">API Reference</a>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Key Modules (API-driven) -->
-    <div class="component-store-section">
-        <h3>🏪 Key Modules</h3>
-        <p>Top modules from the analysed codebase, fetched live from the API.</p>
-        <div class="store-features" id="overview-modules"></div>
-    </div>
-
-    <!-- Component Store Section -->
-    <div class="component-store-section">
-        <h3>🏪 Component Store</h3>
-        <p>AI-powered component management and optimization based on Cursor knowledge and LLM performance analytics.</p>
-        
-        <div class="store-features">
-            <div class="store-feature">
-                <div class="feature-icon">🤖</div>
-                <h4>AI Management Fees</h4>
-                <p>Track and optimize AI service costs with intelligent usage patterns and rate limiting.</p>
-                <div class="feature-metrics">
-                    <span class="metric">💰 Cost Tracking</span>
-                    <span class="metric">📊 Usage Analytics</span>
-                    <span class="metric">⚡ Rate Optimization</span>
-                </div>
-            </div>
-            
-            <div class="store-feature">
-                <div class="feature-icon">🎯</div>
-                <h4>Performance Scoring</h4>
-                <p>Cursor memory-based scoring system to make LLM calls faster and more cost-effective.</p>
-                <div class="feature-metrics">
-                    <span class="metric">🚀 Speed Score</span>
-                    <span class="metric">💡 Efficiency Rating</span>
-                    <span class="metric">📈 Performance Trends</span>
-                </div>
-            </div>
-            
-            <div class="store-feature">
-                <div class="feature-icon">🔍</div>
-                <h4>System Issues Detection</h4>
-                <p>Monitor and identify systems causing performance bottlenecks in LLM operations.</p>
-                <div class="feature-metrics">
-                    <span class="metric">⚠️ Issue Detection</span>
-                    <span class="metric">🔧 Auto-Resolution</span>
-                    <span class="metric">📋 Health Reports</span>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Performance Dashboard -->
-        <div class="performance-dashboard">
-            <h4>📊 Live Performance Metrics</h4>
-            <div class="metrics-grid">
-                <div class="metric-card">
-                    <div class="metric-value">95%</div>
-                    <div class="metric-label">Speed Score</div>
-                    <div class="metric-trend positive">↗ +5% this week</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-value">$1,247</div>
-                    <div class="metric-label">Cost Savings</div>
-                    <div class="metric-trend positive">↗ 23% reduction</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-value">12</div>
-                    <div class="metric-label">Issues Resolved</div>
-                    <div class="metric-trend neutral">→ Auto-fixed</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-value">A+</div>
-                    <div class="metric-label">Efficiency Rating</div>
-                    <div class="metric-trend positive">↗ Improved</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<script src="assets/js/mermaid.min.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function(){
-  if (window.mermaid) { 
-    mermaid.initialize({ 
-      startOnLoad: true,
-      theme: 'default',
-      flowchart: { useMaxWidth: true },
-      graph: { useMaxWidth: true }
-    }); 
-  }
-});
-</script>
 
                         <!-- Edit button -->
                         <div class="md-source-file">
                             <small>
-                                Generated on 2025-09-20 06:32:01
+                                Generated on 2025-09-20 06:32:02
                             </small>
                         </div>
                     </article>
