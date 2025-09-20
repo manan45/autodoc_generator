@@ -23,23 +23,11 @@
 <!-- API Stats Overview -->
 <section class="stats-overview" id="stats">
     <h2>📊 API Statistics</h2>
-    <div class="stats-grid">
-        <div class="stat-card">
-            <span class="stat-number">{{ endpoints|length if endpoints else 0 }}</span>
-            <span class="stat-label">Total Endpoints</span>
-        </div>
-        <div class="stat-card">
-            <span class="stat-number">{{ enhanced_api.interfaces|length if enhanced_api and enhanced_api.interfaces else 0 }}</span>
-            <span class="stat-label">Interfaces</span>
-        </div>
-        <div class="stat-card">
-            <span class="stat-number">{{ enhanced_api.patterns|length if enhanced_api and enhanced_api.patterns else 0 }}</span>
-            <span class="stat-label">API Patterns</span>
-        </div>
-        <div class="stat-card">
-            <span class="stat-number">{{ modules|length if modules else 0 }}</span>
-            <span class="stat-label">API Modules</span>
-        </div>
+    <div class="stats-grid" id="api-stats">
+        <div class="stat-card" data-stat="endpoints"><span class="stat-number">0</span><span class="stat-label">Total Endpoints</span></div>
+        <div class="stat-card" data-stat="interfaces"><span class="stat-number">0</span><span class="stat-label">Interfaces</span></div>
+        <div class="stat-card" data-stat="patterns"><span class="stat-number">0</span><span class="stat-label">API Patterns</span></div>
+        <div class="stat-card" data-stat="modules"><span class="stat-number">0</span><span class="stat-label">API Modules</span></div>
     </div>
 </section>
 
@@ -56,6 +44,7 @@
     {% endif %}
 </section>
 
+<div id="api-endpoints-root"></div>
 {% if endpoints %}
 <!-- Endpoints Section -->
 <section class="endpoints-section" id="endpoints">

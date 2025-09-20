@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Getting Started - Project</title>
-    <meta name="description" content="Auto-generated documentation for Project">
+    <title>Key Contributing Modules - App</title>
+    <meta name="description" content="Auto-generated documentation for App">
     
     <!-- Modern CSS Architecture -->
-    <link rel="stylesheet" href="assets/css/modern-styles.css?v=5487">
+    <link rel="stylesheet" href="assets/css/modern-styles.css?v=5018">
     <style>
         /* Emergency fallback styles to ensure basic layout works */
         body { font-family: 'Roboto', sans-serif; margin: 0; }
@@ -34,6 +34,20 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono:400,400i,700,700i&display=fallback">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     
+<style>
+  /* Density styles for module cards */
+  #all-modules .getting-started-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+  #all-modules .getting-started-card.compact { padding: .75rem; }
+  #all-modules .getting-started-card.compact h3 { font-size: 1rem; margin: .25rem 0; }
+  #all-modules .getting-started-card.compact .module-description { display:none; }
+  #all-modules .getting-started-card.compact .diagram-section { display:none; }
+  #all-modules .getting-started-card.compact .code-block { margin:.25rem 0; }
+  #all-modules .getting-started-card.normal .diagram-section { display:none; }
+  #all-modules .getting-started-card.detailed .diagram-section { display:block; }
+  #all-modules .module-stats { display:flex; gap:1rem; margin-top:.25rem; }
+  #all-modules .module-stats .stat-item { display:flex; flex-direction:column; align-items:flex-start; }
+  #all-modules .module-stats .stat-value { font-weight:600; }
+</style>
 </head>
 
 <body dir="ltr" data-md-color-scheme="" data-md-color-primary="indigo" data-md-color-accent="indigo">
@@ -48,7 +62,7 @@
             </button>
             
             <!-- Link to home -->
-            <a href="index.html" title="Project" class="md-header__button md-logo header__logo" aria-label="Project">
+            <a href="index.html" title="App" class="md-header__button md-logo header__logo" aria-label="App">
                 <span class="logo-text header__logo-icon">📚</span>
             </a>
 
@@ -61,10 +75,10 @@
             <div class="md-header__title" data-md-component="header-title">
                 <div class="md-header__ellipsis">
                     <div class="md-header__topic">
-                        <span class="md-ellipsis">Project</span>
+                        <span class="md-ellipsis">App</span>
                     </div>
                     <div class="md-header__topic" data-md-component="header-topic">
-                        <span class="md-ellipsis">Project Getting Started</span>
+                        <span class="md-ellipsis">App - Key Contributing Modules</span>
                     </div>
                 </div>
             </div>
@@ -106,8 +120,8 @@
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
     <!-- Project Header -->
     <label class="md-nav__title" for="__drawer">
-        <a href="index.html" title="Project" class="md-nav__button md-logo" aria-label="Project">
-            Project
+        <a href="index.html" title="App" class="md-nav__button md-logo" aria-label="App">
+            App
         </a>
     </label>
 
@@ -121,7 +135,7 @@
 
         <!-- Architecture & Design Section -->
         <li class="md-nav__item md-nav__item--section">
-            <input class="md-nav__toggle md-toggle" data-md-toggle="nav-architecture" type="checkbox" id="nav-architecture" >
+            <input class="md-nav__toggle md-toggle" data-md-toggle="nav-architecture" type="checkbox" id="nav-architecture" checked>
             <label class="md-nav__link md-nav__link--index" for="nav-architecture">
                 Architecture & Design
                 <span class="md-nav__icon md-nav__icon--expand">▼</span>
@@ -137,7 +151,7 @@
                         </a>
                     </li>
                     <li class="md-nav__item">
-                        <a href="all_modules.html" class="md-nav__link " data-entity="modules">
+                        <a href="all_modules.html" class="md-nav__link md-nav__link--active" data-entity="modules">
                             Key Contributing Modules
                             <span class="md-nav__count" id="sidebar-modules-count"></span>
                         </a>
@@ -205,34 +219,10 @@
         </li>
 
         <!-- AI & Machine Learning Section -->
-        <li class="md-nav__item md-nav__item--section">
-            <input class="md-nav__toggle md-toggle" data-md-toggle="nav-ai" type="checkbox" id="nav-ai" >
-            <label class="md-nav__link md-nav__link--index" for="nav-ai">
-                AI & Machine Learning
-                <span class="md-nav__icon md-nav__icon--expand">▼</span>
-            </label>
-            <nav class="md-nav" data-md-level="1">
-                <label class="md-nav__title" for="nav-ai">
-                    AI & Machine Learning
-                </label>
-                <ul class="md-nav__list md-nav__list--nested">
-                    <li class="md-nav__item">
-                        <a href="ai_models.html" class="md-nav__link ">
-                            AI Models
-                        </a>
-                    </li>
-                    <li class="md-nav__item">
-                        <a href="ai_pipelines.html" class="md-nav__link ">
-                            AI Pipelines
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </li>
 
         <!-- Getting Started Section -->
         <li class="md-nav__item">
-            <a href="onboarding.html" class="md-nav__link md-nav__link--active">
+            <a href="onboarding.html" class="md-nav__link ">
                 Getting Started
             </a>
         </li>
@@ -253,9 +243,8 @@
                         <label class="md-nav__title" for="__toc">Table of contents</label>
                         <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
 <li class="md-nav__item"><a href="#overview" class="md-nav__link">Overview</a></li>
-<li class="md-nav__item"><a href="#quickstart" class="md-nav__link">Quick Start</a></li>
-<li class="md-nav__item"><a href="#setup" class="md-nav__link">Setup Guide</a></li>
-<li class="md-nav__item"><a href="#development" class="md-nav__link">Development</a></li>
+<li class="md-nav__item"><a href="#stats" class="md-nav__link">Statistics</a></li>
+<li class="md-nav__item"><a href="#all-modules" class="md-nav__link">All Modules</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -271,257 +260,36 @@
                         
 
                         <!-- Content -->
-<h1 id="overview">Project Getting Started</h1>
-<p>Everything you need to get up and running with the project quickly.</p>
+<h1 id="overview">Key Contributing Modules</h1>
+<p>Complete list of modules discovered in the analysed repository.</p>
 
-<!-- Quick Start Cards -->
-<section class="getting-started" id="quickstart">
-    <h2>🚀 Quick Start</h2>
-    <div class="getting-started-grid">
-        <div class="getting-started-card">
-            <div class="card-icon">📋</div>
-            <h3>Prerequisites</h3>
-            <p>Required tools and dependencies</p>
-            <ul class="prerequisite-list">
-                <li>Git</li>
-            </ul>
-        </div>
-        
-        <div class="getting-started-card">
-            <div class="card-icon">⚡</div>
-            <h3>Installation</h3>
-            <p>Get the project running in minutes</p>
-            <div class="code-block">
-                <code>git clone &lt;repo-url&gt;</code>
-                <code>cd project</code>
-            </div>
-        </div>
-        
-        <div class="getting-started-card">
-            <div class="card-icon">▶️</div>
-            <h3>Run Application</h3>
-            <p>Start the application with one command</p>
-            <div class="code-block">
-                <code>python -m project</code>
-            </div>
-        </div>
-        
-        <div class="getting-started-card">
-            <div class="card-icon">🔧</div>
-            <h3>Configuration</h3>
-            <p>Set up your environment</p>
-            <div class="code-block">
-                <code>config/settings.yaml</code>
-            </div>
-        </div>
-    </div>
+<section class="stats-overview" id="stats">
+  <h2>📊 Codebase Statistics</h2>
+  <div class="stats-grid" id="all-modules-stats">
+    <div class="stat-card" data-stat="avgComplexity"><span class="stat-number">0</span><span class="stat-label">Avg Complexity</span></div>
+    <div class="stat-card" data-stat="highComplexity"><span class="stat-number">0</span><span class="stat-label">High-Complexity Modules</span></div>
+    <div class="stat-card" data-stat="documented"><span class="stat-number">0</span><span class="stat-label">Documented Components</span></div>
+    <div class="stat-card" data-stat="lines"><span class="stat-number">0</span><span class="stat-label">Total Lines</span></div>
+  </div>
 </section>
 
-<!-- Detailed Setup Guide -->
-<section class="setup-guide" id="setup">
-    <h2>⚙️ Detailed Setup</h2>
-    
-    <div class="getting-started-grid">
-        
-        
-        
-        <div class="getting-started-card">
-            <div class="card-icon">🗄️</div>
-            <h3>Database Setup</h3>
-            <p>Initialize the database</p>
-            <div class="code-block">
-                <code># Database setup instructions</code>
-            </div>
-        </div>
-    </div>
+<section id="all-modules">
+  <h2>All Detected Modules</h2>
+  <div class="toolbar" style="margin: 1rem 0; display: flex; gap: .75rem; align-items: center;">
+    <input id="all-modules-search" type="search" placeholder="Search modules, paths…" aria-label="Search modules" style="flex:1; padding:.6rem 1rem; border:1px solid var(--color-border); border-radius:.5rem; background: var(--color-bg); color: var(--color-text);">
+    <select id="density-select" aria-label="Card density" style="padding:.5rem .75rem; border:1px solid var(--color-border); border-radius:.5rem; background: var(--color-bg); color: var(--color-text);">
+      <option value="compact">Compact</option>
+      <option value="normal" selected>Normal</option>
+      <option value="detailed">Detailed</option>
+    </select>
+    <span id="all-modules-count" class="md-nav__count"></span>
+  </div>
+  <div id="all-modules-grid" class="getting-started-grid"></div>
+  <div style="display:flex; justify-content:center; margin-top:1rem;">
+    <button id="load-more-btn" class="btn btn--secondary">Load more</button>
+  </div>
 </section>
 
-<!-- Development Workflow -->
-<section class="development-workflow" id="development">
-    <h2>💻 Development Workflow</h2>
-    
-    <div class="getting-started-grid">
-        <div class="getting-started-card">
-            <div class="card-icon">🌿</div>
-            <h3>Git Workflow</h3>
-            <p>Standard development workflow</p>
-            <div class="code-block">
-                <code>git checkout -b feature/name</code>
-                <code>git commit -m "feat: description"</code>
-                <code>git push origin feature/name</code>
-            </div>
-            <div class="action-links">
-                <a href="#" class="action-link">PR Template</a>
-                <a href="#" class="action-link">Guidelines</a>
-            </div>
-        </div>
-        
-        <div class="getting-started-card">
-            <div class="card-icon">🧪</div>
-            <h3>Testing</h3>
-            <p>Run tests before committing</p>
-            <div class="code-block">
-                <code># Run test suite</code>
-            </div>
-        </div>
-        
-        <div class="getting-started-card">
-            <div class="card-icon">🎨</div>
-            <h3>Code Style</h3>
-            <p>Maintain consistent code style</p>
-            <div class="code-block">
-                <code># Linting commands</code>
-            </div>
-        </div>
-        
-        <div class="getting-started-card">
-            <div class="card-icon">📖</div>
-            <h3>Documentation</h3>
-            <p>Keep documentation up to date</p>
-            <div class="action-links">
-                <a href="architecture.html" class="action-link">Architecture</a>
-                <a href="api.html" class="action-link">API Reference</a>
-                <a href="modules.html" class="action-link">Modules</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Key Modules -->
-<section class="component-store-section">
-    <h3>🏪 Key Modules</h3>
-    <p>Essential modules to understand for working with this project.</p>
-    
-    <div class="store-features">
-        <div class="store-feature">
-            <div class="feature-icon">📦</div>
-            <h4>feature_generation</h4>
-            <p>Contains 36 functions and 2 classes</p>
-            <div class="code-block">
-                <code>app/core/ai/features/feature_generation.py</code>
-            </div>
-        </div>
-        <div class="store-feature">
-            <div class="feature-icon">📦</div>
-            <h4>session_manager</h4>
-            <p>Contains 35 functions and 2 classes</p>
-            <div class="code-block">
-                <code>app/core/ai/session/session_manager.py</code>
-            </div>
-        </div>
-        <div class="store-feature">
-            <div class="feature-icon">📦</div>
-            <h4>modelv4Enhanced</h4>
-            <p>Contains 30 functions and 2 classes</p>
-            <div class="code-block">
-                <code>experiments/modelv4Enhanced.py</code>
-            </div>
-        </div>
-        <div class="store-feature">
-            <div class="feature-icon">📦</div>
-            <h4>model_engine</h4>
-            <p>Contains 23 functions and 4 classes</p>
-            <div class="code-block">
-                <code>app/core/ai/core_ml/model_engine.py</code>
-            </div>
-        </div>
-        <div class="store-feature">
-            <div class="feature-icon">📦</div>
-            <h4>traning_logger</h4>
-            <p>Contains 16 functions and 6 classes</p>
-            <div class="code-block">
-                <code>app/core/utils/traning_logger.py</code>
-            </div>
-        </div>
-        <div class="store-feature">
-            <div class="feature-icon">📦</div>
-            <h4>dhanhq</h4>
-            <p>A class to interact with the DhanHQ APIs.</p>
-            <div class="code-block">
-                <code>app/connectors/dhanhq/dhanhq.py</code>
-            </div>
-        </div>
-        <div class="store-feature">
-            <div class="feature-icon">📦</div>
-            <h4>modelv3</h4>
-            <p>Contains 21 functions and 2 classes</p>
-            <div class="code-block">
-                <code>experiments/modelv3.py</code>
-            </div>
-        </div>
-        <div class="store-feature">
-            <div class="feature-icon">📦</div>
-            <h4>tradewise_ai</h4>
-            <p>Contains 16 functions and 4 classes</p>
-            <div class="code-block">
-                <code>app/core/ai/tradewise_ai.py</code>
-            </div>
-        </div>
-        <div class="store-feature">
-            <div class="feature-icon">📦</div>
-            <h4>trading_session</h4>
-            <p>Contains 16 functions and 3 classes</p>
-            <div class="code-block">
-                <code>app/core/ai/session/trading_session.py</code>
-            </div>
-        </div>
-        <div class="store-feature">
-            <div class="feature-icon">📦</div>
-            <h4>zone</h4>
-            <p>Contains 17 functions and 1 classes</p>
-            <div class="code-block">
-                <code>app/core/ai/analysis/zone.py</code>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-<!-- Developer Resources -->
-<section class="component-store-section">
-    <h3>🎯 Developer Resources</h3>
-    <p>Essential resources and tools for productive development.</p>
-    
-    <div class="performance-dashboard">
-        <h4>📊 Project Health</h4>
-        <div class="metrics-grid">
-            <div class="metric-card">
-                <div class="metric-value">✅</div>
-                <div class="metric-label">Build Status</div>
-                <div class="metric-trend positive">Passing</div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-value">85%</div>
-                <div class="metric-label">Coverage</div>
-                <div class="metric-trend positive">↗ Good</div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-value">12</div>
-                <div class="metric-label">Open Issues</div>
-                <div class="metric-trend neutral">→ Active</div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-value">8</div>
-                <div class="metric-label">Contributors</div>
-                <div class="metric-trend positive">↗ Growing</div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<script src="assets/js/mermaid.min.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function(){
-  if (window.mermaid) { 
-    mermaid.initialize({ 
-      startOnLoad: true,
-      theme: 'default',
-      flowchart: { useMaxWidth: true },
-      graph: { useMaxWidth: true }
-    }); 
-  }
-});
-</script>
 
                         <!-- Edit button -->
                         <div class="md-source-file">
@@ -566,8 +334,8 @@ document.addEventListener('DOMContentLoaded', function(){
 
     <!-- Scripts -->
     <!-- Modern JavaScript Application -->
-    <script src="assets/js/app.js?v=7775"></script>
-    <script src="assets/js/data-integration.js?v=2038"></script>
+    <script src="assets/js/app.js?v=9362"></script>
+    <script src="assets/js/data-integration.js?v=4494"></script>
     
     <script>
     // TOC toggle behavior

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% set current_page = "components" %}
+
+{% block title %}Components{% endblock %}
+{% block page_title %}{{ project_name | default('Project') }} Components{% endblock %}
+{% block breadcrumb_title %}Components{% endblock %}
+
+{% block toc %}
+<li class="md-nav__item"><a href="#overview" class="md-nav__link">Overview</a></li>
+<li class="md-nav__item"><a href="#components" class="md-nav__link">Components</a></li>
+{% endblock %}
+
+{% block content %}
+<h1 id="overview">Components</h1>
+<p>Modules with clear descriptions from the analysed repository.</p>
+
+<section class="components-list" id="components">
+    <h2>🧩 Components</h2>
+    <div class="getting-started-grid" id="components-grid"></div>
+</section>
+
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  #components .getting-started-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+  #components .getting-started-card { min-height: 180px; }
+</style>
+{% endblock %}
+

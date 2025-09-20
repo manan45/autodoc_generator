@@ -191,48 +191,316 @@ def build_site(output_dir: str = "docs") -> None:
         print(f"❌ Error building site: {e}")
 
 
-def serve_site(output_dir: str = "docs", port: int = 8000) -> None:
-    """Serve the documentation site locally."""
-    print(f"\n🚀 Starting documentation server on port {port}...")
+def serve_site(output_dir: str = "docs", port: int = 8000, repo_path: str = ".") -> None:
+    """Serve the documentation site locally with API integration."""
+    print(f"\n🚀 Starting enhanced documentation server on port {port}...")
+    print(f"📊 Repository analysis enabled for: {repo_path}")
     
     try:
-        import subprocess
-        import os
         from pathlib import Path
         
-        # Check if we're serving HTML or MkDocs format
+        # Check if we have Flask available for API server
+        try:
+            from flask import Flask, jsonify, request, send_from_directory
+            from flask_cors import CORS
+            flask_available = True
+        except ImportError:
+            print("⚠️ Flask not available. Install with: pip install flask flask-cors")
+            flask_available = False
+        
         output_path = Path(output_dir)
         html_index = output_path / "index.html"
         mkdocs_config = Path("mkdocs.yml")
         
-        if html_index.exists() and not mkdocs_config.exists():
-            # Serve HTML files directly using Python's built-in server
-            print(f"📄 Serving HTML documentation from {output_dir}")
-            os.chdir(output_dir)
-            subprocess.run(['python3', '-m', 'http.server', str(port)])
+        if flask_available and html_index.exists():
+            # Start enhanced Flask server with API endpoints
+            print(f"🎯 Starting enhanced server with live repository data")
+            start_enhanced_server(output_dir, port, repo_path)
         elif mkdocs_config.exists():
-            # Use MkDocs serve
-            print(f"📚 Serving MkDocs site")
+            # Use MkDocs serve (no API integration)
+            print(f"📚 Serving MkDocs site (basic mode)")
+            import subprocess
             subprocess.run(['mkdocs', 'serve', '--dev-addr', f'127.0.0.1:{port}'])
         else:
             # Fallback to simple HTTP server
-            print(f"📄 Serving documentation from {output_dir}")
+            print(f"📄 Serving documentation from {output_dir} (basic mode)")
+            import subprocess
+            import os
             os.chdir(output_dir)
             subprocess.run(['python3', '-m', 'http.server', str(port)])
         
-    except ImportError:
-        print("⚠️ MkDocs not installed. Install with: pip install mkdocs mkdocs-material")
     except KeyboardInterrupt:
         print("\n🛑 Server stopped")
     except Exception as e:
         print(f"❌ Error serving site: {e}")
         # Fallback to simple HTTP server
         try:
+            import subprocess
             import os
             os.chdir(output_dir)
             subprocess.run(['python3', '-m', 'http.server', str(port)])
         except Exception as fallback_error:
             print(f"❌ Fallback server also failed: {fallback_error}")
+
+
+def start_enhanced_server(output_dir: str, port: int, repo_path: str) -> None:
+    """Start Flask server with API endpoints and static file serving."""
+    from flask import Flask, jsonify, request, send_from_directory
+    from flask_cors import CORS
+    import ast
+    import hashlib
+    from pathlib import Path
+    from datetime import datetime
+    import os
+    
+    app = Flask(__name__)
+    CORS(app)
+    
+    # Ensure output_dir is absolute path
+    output_dir = os.path.abspath(output_dir)
+    print(f"📁 Serving files from: {output_dir}")
+    
+    class RepositoryAnalyzer:
+        def __init__(self, repo_path="."):
+            self.repo_path = Path(repo_path)
+            
+        def analyze_repository(self):
+            """Analyze the repository and extract module information"""
+            try:
+                modules = []
+                total_files = 0
+                total_functions = 0
+                total_classes = 0
+                
+                # Find Python files
+                python_files = list(self.repo_path.rglob("*.py"))
+                
+                for file_path in python_files:
+                    if self._should_skip_file(file_path):
+                        continue
+                        
+                    try:
+                        module_info = self._analyze_python_file(file_path)
+                        if module_info:
+                            modules.append(module_info)
+                            total_files += 1
+                            total_functions += module_info.get('stats', {}).get('functions', 0)
+                            total_classes += module_info.get('stats', {}).get('classes', 0)
+                    except Exception as e:
+                        print(f"Error analyzing {file_path}: {e}")
+                        
+                return {
+                    'modules': modules,
+                    'totalFiles': total_files,
+                    'totalFunctions': total_functions,
+                    'totalClasses': total_classes,
+                    'lastUpdated': datetime.now().isoformat(),
+                    'repositoryPath': str(self.repo_path.absolute())
+                }
+            except Exception as e:
+                print(f"Repository analysis error: {e}")
+                return self._get_fallback_data()
+        
+        def _should_skip_file(self, file_path):
+            skip_patterns = [
+                '__pycache__', '.git', 'venv', 'env', 'node_modules',
+                '.pytest_cache', '.mypy_cache', 'build', 'dist'
+            ]
+            path_str = str(file_path)
+            return any(pattern in path_str for pattern in skip_patterns)
+        
+        def _analyze_python_file(self, file_path):
+            try:
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    content = f.read()
+                
+                tree = ast.parse(content)
+                
+                functions = []
+                classes = []
+                imports = []
+                
+                for node in ast.walk(tree):
+                    if isinstance(node, ast.FunctionDef):
+                        functions.append({
+                            'name': node.name,
+                            'line': node.lineno,
+                            'docstring': ast.get_docstring(node),
+                            'args': len(node.args.args)
+                        })
+                    elif isinstance(node, ast.ClassDef):
+                        classes.append({
+                            'name': node.name,
+                            'line': node.lineno,
+                            'docstring': ast.get_docstring(node),
+                            'methods': len([n for n in node.body if isinstance(n, ast.FunctionDef)])
+                        })
+                    elif isinstance(node, (ast.Import, ast.ImportFrom)):
+                        if isinstance(node, ast.ImportFrom):
+                            module = node.module or ''
+                            for alias in node.names:
+                                imports.append(f"{module}.{alias.name}")
+                        else:
+                            for alias in node.names:
+                                imports.append(alias.name)
+                
+                rel_path = file_path.relative_to(self.repo_path)
+                module_type = self._infer_module_type(file_path, content)
+                complexity = self._calculate_complexity(functions, classes, content)
+                
+                return {
+                    'id': str(rel_path).replace('/', '_').replace('.py', ''),
+                    'name': file_path.stem,
+                    'path': str(rel_path),
+                    'description': self._extract_module_docstring(tree),
+                    'type': module_type,
+                    'complexity': complexity,
+                    'stats': {
+                        'functions': len(functions),
+                        'classes': len(classes),
+                        'imports': len(imports),
+                        'lines': len(content.splitlines())
+                    },
+                    'functions': functions[:5],
+                    'classes': classes[:3],
+                    'imports': imports[:10],
+                    'embedding': self._generate_embedding(content, str(rel_path))
+                }
+            except Exception as e:
+                print(f"Error analyzing file {file_path}: {e}")
+                return None
+        
+        def _extract_module_docstring(self, tree):
+            if (tree.body and isinstance(tree.body[0], ast.Expr) 
+                and isinstance(tree.body[0].value, ast.Constant)
+                and isinstance(tree.body[0].value.value, str)):
+                return tree.body[0].value.value.strip()
+            return ""
+        
+        def _infer_module_type(self, file_path, content):
+            path_str = str(file_path).lower()
+            content_lower = content.lower()
+            
+            if 'api' in path_str or 'endpoint' in path_str or 'flask' in content_lower:
+                return 'api'
+            elif 'test' in path_str or 'spec' in path_str:
+                return 'test'
+            elif any(ai_term in content_lower for ai_term in ['tensorflow', 'torch', 'sklearn', 'model']):
+                return 'ai'
+            elif 'pipeline' in path_str or 'workflow' in path_str:
+                return 'pipeline'
+            elif 'util' in path_str or 'helper' in path_str:
+                return 'utility'
+            elif 'service' in path_str or 'manager' in path_str:
+                return 'service'
+            elif 'component' in path_str or 'widget' in path_str:
+                return 'component'
+            else:
+                return 'module'
+        
+        def _calculate_complexity(self, functions, classes, content):
+            total_items = len(functions) + len(classes)
+            lines = len(content.splitlines())
+            complexity_score = total_items + (lines / 100)
+            
+            if complexity_score > 50:
+                return 'high'
+            elif complexity_score > 20:
+                return 'medium'
+            else:
+                return 'low'
+        
+        def _generate_embedding(self, content, path):
+            text = f"{path} {content[:1000]}"
+            words = text.lower().split()
+            embedding = []
+            for i in range(50):
+                hash_input = f"{text}_{i}"
+                hash_val = int(hashlib.md5(hash_input.encode()).hexdigest()[:8], 16)
+                embedding.append((hash_val % 1000) / 1000.0)
+            return embedding
+        
+        def _get_fallback_data(self):
+            return {
+                'modules': [],
+                'totalFiles': 0,
+                'totalFunctions': 0,
+                'totalClasses': 0,
+                'lastUpdated': datetime.now().isoformat()
+            }
+    
+    # Initialize analyzer
+    analyzer = RepositoryAnalyzer(repo_path)
+    
+    @app.route('/api/repository-data')
+    def get_repository_data():
+        try:
+            data = analyzer.analyze_repository()
+            return jsonify(data)
+        except Exception as e:
+            print(f"API error: {e}")
+            return jsonify(analyzer._get_fallback_data()), 500
+    
+    @app.route('/api/search')
+    def search_modules():
+        query = request.args.get('q', '')
+        limit = int(request.args.get('limit', 5))
+        
+        if not query:
+            return jsonify({'results': []})
+        
+        try:
+            repo_data = analyzer.analyze_repository()
+            results = []
+            
+            for module in repo_data['modules']:
+                score = 0
+                query_lower = query.lower()
+                
+                if query_lower in module['name'].lower():
+                    score += 10
+                if query_lower in module.get('description', '').lower():
+                    score += 5
+                if query_lower in module['type'].lower():
+                    score += 3
+                
+                if score > 0:
+                    results.append({
+                        'module': module,
+                        'score': score
+                    })
+            
+            results.sort(key=lambda x: x['score'], reverse=True)
+            results = results[:limit]
+            
+            return jsonify({
+                'results': [r['module'] for r in results],
+                'query': query,
+                'total': len(results)
+            })
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
+    
+    @app.route('/')
+    def serve_index():
+        try:
+            return send_from_directory(output_dir, 'index.html')
+        except Exception as e:
+            return f"Error serving index.html: {e}", 404
+    
+    @app.route('/<path:path>')
+    def serve_static(path):
+        try:
+            return send_from_directory(output_dir, path)
+        except Exception as e:
+            return f"Error serving {path}: {e}", 404
+    
+    print("🚀 Starting Enhanced Documentation Server...")
+    print("📊 Repository analysis available at: http://localhost:8000/api/repository-data")
+    print("🔍 Module search available at: http://localhost:8000/api/search?q=<query>")
+    print("📚 Documentation available at: http://localhost:8000")
+    
+    app.run(host='0.0.0.0', port=port, debug=False)
 
 
 def print_summary(code_analysis: Dict[str, Any], ai_analysis: Dict[str, Any]) -> None:
@@ -395,7 +663,7 @@ Examples:
         
         # Serve phase
         if args.serve:
-            serve_site(args.output, args.port)
+            serve_site(args.output, args.port, args.repo)
         
         print(f"\n🎉 Process completed successfully!")
         print(f"⏰ Finished: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")

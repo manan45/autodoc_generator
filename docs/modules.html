@@ -6,8 +6,30 @@
     <title>Modules - App</title>
     <meta name="description" content="Auto-generated documentation for App">
     
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <!-- Modern CSS Architecture -->
+    <link rel="stylesheet" href="assets/css/modern-styles.css?v=6536">
+    <style>
+        /* Emergency fallback styles to ensure basic layout works */
+        body { font-family: 'Roboto', sans-serif; margin: 0; }
+        .md-header { background: #3b82f6; color: white; height: 4rem; position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
+        .md-container { margin-top: 4rem; display: flex; }
+        .md-sidebar { width: 18rem; background: #f8fafc; border-right: 1px solid #e2e8f0; }
+        .md-sidebar--secondary { width: 15rem; }
+        .md-main { flex: 1; margin-left: 18rem; margin-right: 0; max-width: calc(100vw - 18rem); }
+        .md-content__inner { padding: 2rem; }
+        /* TOC: hidden by default, toggle with body.toc-open */
+        .md-sidebar--secondary.autohide { transition: transform .2s ease, opacity .2s ease; transform: translateX(100%); opacity: 0; pointer-events: none; }
+        body.toc-open .md-sidebar--secondary.autohide { transform: translateX(0); opacity: 1; pointer-events: auto; }
+        body.toc-open .md-main { margin-right: 15rem; max-width: calc(100vw - 33rem); }
+        @media (max-width: 1280px) {
+            .md-main { margin-right: 0; max-width: calc(100vw - 18rem); }
+        }
+        @media (max-width: 900px) {
+            .md-sidebar--primary { position: fixed; left: 0; top: 4rem; bottom: 0; transform: translateX(-100%); transition: transform .2s ease; }
+            body.nav-open .md-sidebar--primary { transform: translateX(0); }
+            .md-main { margin-left: 0; }
+        }
+    </style>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono:400,400i,700,700i&display=fallback">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -15,22 +37,23 @@
 </head>
 
 <body dir="ltr" data-md-color-scheme="" data-md-color-primary="indigo" data-md-color-accent="indigo">
-    <!-- Skip to content -->
-    <input class="md-skip" data-md-skip tabindex="-1" type="checkbox" id="__skip" autocomplete="off">
-    <label class="md-skip__button" for="__skip">
-        Skip to content
-    </label>
+    
 
     <!-- Header -->
     <header class="md-header" data-md-component="header">
-        <nav class="md-header__inner md-grid" aria-label="Header">
+        <nav class="md-header__inner md-grid header__container" aria-label="Header">
+            <!-- Mobile menu button -->
+            <button class="header__menu-btn md-header__button md-icon" aria-label="Open navigation menu">
+                <span class="menu-icon">☰</span>
+            </button>
+            
             <!-- Link to home -->
-            <a href="index.html" title="App" class="md-header__button md-logo" aria-label="App">
-                <span class="logo-text">📚</span>
+            <a href="index.html" title="App" class="md-header__button md-logo header__logo" aria-label="App">
+                <span class="logo-text header__logo-icon">📚</span>
             </a>
 
-            <!-- Button to toggle drawer -->
-            <label class="md-header__button md-icon" for="__drawer">
+            <!-- Button to toggle drawer (legacy) -->
+            <label class="md-header__button md-icon" for="__drawer" style="display: none;">
                 <span class="menu-icon">☰</span>
             </label>
 
@@ -47,13 +70,16 @@
             </div>
 
             <!-- Header actions -->
-            <div class="md-header__option">
+            <div class="header__actions">
                 <!-- Search button -->
-                <div class="md-header__source">
-                    <button class="md-search__button md-icon" aria-label="Search" data-md-search-button>
-                        <span class="search-icon">🔍</span>
-                    </button>
-                </div>
+                <button class="md-search__button md-header__button md-icon" aria-label="Search" data-md-search-button>
+                    <span class="search-icon">🔍</span>
+                </button>
+
+                <!-- TOC toggle -->
+                <button class="md-header__button md-icon" id="toc-toggle" aria-label="Toggle table of contents" title="Toggle table of contents">
+                    <span>📑</span>
+                </button>
 
                 <!-- Theme toggle -->
                 <button class="md-header__button md-icon theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode">
@@ -62,29 +88,6 @@
             </div>
         </nav>
 
-        <!-- Search interface -->
-        <div class="md-search" data-md-component="search" role="dialog">
-            <label class="md-search__overlay" for="__search"></label>
-            <div class="md-search__inner" role="search">
-                <form class="md-search__form" name="search">
-                    <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-md-search-input id="search-input">
-                    <label class="md-search__icon md-icon" for="__search">
-                        <span class="search-icon">🔍</span>
-                    </label>
-                    <nav class="md-search__options" aria-label="Search">
-                        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
-                            <span class="close-icon">✕</span>
-                        </button>
-                    </nav>
-                </form>
-                <div class="md-search__output">
-                    <div class="md-search__scrollwrap" data-md-scrollfix>
-                        <div class="md-search-result" data-md-component="search-result" id="search-results">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </header>
 
     <!-- Container -->
@@ -108,7 +111,7 @@
         </a>
     </label>
 
-    <ul class="md-nav__list" data-md-scrollfix>
+    <ul class="md-nav__list md-nav__list--top" data-md-scrollfix>
         <!-- Overview Section -->
         <li class="md-nav__item">
             <a href="index.html" class="md-nav__link ">
@@ -127,15 +130,22 @@
                 <label class="md-nav__title" for="nav-architecture">
                     Architecture & Design
                 </label>
-                <ul class="md-nav__list">
+                <ul class="md-nav__list md-nav__list--nested">
                     <li class="md-nav__item">
                         <a href="architecture.html" class="md-nav__link ">
                             System Architecture
                         </a>
                     </li>
                     <li class="md-nav__item">
-                        <a href="modules.html" class="md-nav__link md-nav__link--active">
-                            Modules & Components
+                        <a href="all_modules.html" class="md-nav__link md-nav__link--active" data-entity="modules">
+                            Key Contributing Modules
+                            <span class="md-nav__count" id="sidebar-modules-count"></span>
+                        </a>
+                    </li>
+                    <li class="md-nav__item">
+                        <a href="components.html" class="md-nav__link " data-entity="components">
+                            Components
+                            <span class="md-nav__count" id="sidebar-components-count"></span>
                         </a>
                     </li>
                 </ul>
@@ -153,7 +163,7 @@
                 <label class="md-nav__title" for="nav-development">
                     Development
                 </label>
-                <ul class="md-nav__list">
+                <ul class="md-nav__list md-nav__list--nested">
                     <li class="md-nav__item">
                         <a href="api.html" class="md-nav__link ">
                             API Reference
@@ -174,19 +184,19 @@
                 <label class="md-nav__title" for="nav-quality">
                     Code Quality
                 </label>
-                <ul class="md-nav__list">
+                <ul class="md-nav__list md-nav__list--nested">
                     <li class="md-nav__item">
                         <a href="complexity.html" class="md-nav__link ">
                             Quality Analysis
                         </a>
                     </li>
                     <li class="md-nav__item">
-                        <a href="complexity.html#scoring-pipeline" class="md-nav__link">
+                        <a href="complexity.html#scoring-pipeline" class="md-nav__link ">
                             Scoring Pipeline
                         </a>
                     </li>
                     <li class="md-nav__item">
-                        <a href="complexity.html#quality-factors" class="md-nav__link">
+                        <a href="complexity.html#quality-factors" class="md-nav__link ">
                             Quality Factors
                         </a>
                     </li>
@@ -203,43 +213,16 @@
             </a>
         </li>
 
-        <!-- Quick Links Section -->
-        <li class="md-nav__item md-nav__item--section">
-            <div class="md-nav__separator"></div>
-            <label class="md-nav__section-title">Quick Links</label>
-        </li>
-        
-        <li class="md-nav__item">
-            <a href="#search" class="md-nav__link" data-md-search-button>
-                Search Documentation
-            </a>
-        </li>
+        <!-- Search link removed (search available via header button) -->
 
-        <!-- Project Stats -->
-        <li class="md-nav__item md-nav__item--section">
-            <div class="md-nav__separator"></div>
-            <div class="md-nav__stats">
-                <div class="md-nav__stats-item">
-                    <span class="md-nav__stats-number">0</span>
-                    <span class="md-nav__stats-label">Files</span>
-                </div>
-                <div class="md-nav__stats-item">
-                    <span class="md-nav__stats-number">646</span>
-                    <span class="md-nav__stats-label">Functions</span>
-                </div>
-                <div class="md-nav__stats-item">
-                    <span class="md-nav__stats-number">132</span>
-                    <span class="md-nav__stats-label">Classes</span>
-                </div>
-            </div>
-        </li>
+        <!-- Project Stats removed in favor of Live Repository Data banner injected at runtime -->
     </ul>
 </nav>                </div>
             </div>
         </div>
 
         <!-- Table of contents (Right) -->
-        <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+        <div class="md-sidebar md-sidebar--secondary autohide" data-md-component="sidebar" data-md-type="toc">
             <div class="md-sidebar__scrollwrap">
                 <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
@@ -261,18 +244,7 @@
                 <div class="md-content" data-md-component="content">
                     <article class="md-content__inner md-typeset">
                         <!-- Breadcrumbs -->
-                        <div class="md-breadcrumbs">
-                            <nav class="md-breadcrumbs__list" aria-label="Breadcrumbs">
-                                <ol class="md-breadcrumbs__list">
-                                    <li class="md-breadcrumbs__item">
-                                        <a href="index.html" class="md-breadcrumbs__link">Home</a>
-                                    </li>
-                                    <li class="md-breadcrumbs__item">
-                                        <a href="#" class="md-breadcrumbs__link">Modules</a>
-                                    </li>
-                                </ol>
-                            </nav>
-                        </div>
+                        
 
                         <!-- Content -->
 <h1 id="overview">App Modules</h1>
@@ -281,23 +253,11 @@
 <!-- Module Statistics -->
 <section class="stats-overview" id="stats">
     <h2>📊 Module Statistics</h2>
-    <div class="stats-grid">
-        <div class="stat-card">
-            <span class="stat-number">95</span>
-            <span class="stat-label">Total Modules</span>
-        </div>
-        <div class="stat-card">
-            <span class="stat-number">646</span>
-            <span class="stat-label">Total Functions</span>
-        </div>
-        <div class="stat-card">
-            <span class="stat-number">132</span>
-            <span class="stat-label">Total Classes</span>
-        </div>
-        <div class="stat-card">
-            <span class="stat-number">20888</span>
-            <span class="stat-label">Total Lines</span>
-        </div>
+    <div class="stats-grid" id="modules-stats">
+        <div class="stat-card" data-stat="modules"><span class="stat-number">0</span><span class="stat-label">Total Modules</span></div>
+        <div class="stat-card" data-stat="functions"><span class="stat-number">0</span><span class="stat-label">Total Functions</span></div>
+        <div class="stat-card" data-stat="classes"><span class="stat-number">0</span><span class="stat-label">Total Classes</span></div>
+        <div class="stat-card" data-stat="lines"><span class="stat-number">0</span><span class="stat-label">Total Lines</span></div>
     </div>
 </section>
 
@@ -439,8 +399,8 @@ graph TB
         4["📦 Modev1"]
         5["📦 Kafka_connector"]
         6["📦 Postgres_client"]
-        7["📦 Generate_html"]
-        8["📦 Autodoc_module"]
+        7["📦 Autodoc_module"]
+        8["📦 Data_service"]
     end
     
     1 --> 2
@@ -461,7 +421,7 @@ graph TB
     class 7 moduleBox
     class 8 moduleBox
             </div>
-            <p class="diagram-info">High-level architecture showing 26 main modules and their interconnections.</p>
+            <p class="diagram-info">High-level architecture showing 23 main modules and their interconnections.</p>
         </div>
         
         <div class="action-links">
@@ -480,7 +440,7 @@ graph TB
             <div class="mermaid">
 pie title Module Distribution
     "Core Modules" : 1
-    "Sub Modules" : 94
+    "Sub Modules" : 82
     "Utilities" : 1
     "Services" : 4
             </div>
@@ -494,651 +454,11 @@ pie title Module Distribution
     </div>
 </section>
 
-<!-- Top-Level Modules Grid -->
-<section class="all-modules" id="all-modules">
-    <h2>📁 Top-Level Modules</h2>
-    <p>Main modules that form the core architecture of the project.</p>
-    
-    
-    <div class="getting-started-grid">
-        <div class="getting-started-card">
-            <div class="card-icon">📁</div>
-            <h3>modelv4Enhanced</h3>
-            
-            <div class="module-type-badge">
-                <span class="badge">Package Module</span>
-                <span class="badge">Classes</span>
-                <span class="badge">Functions</span>
-            </div>
-            
-            <div class="module-info">
-                <strong>Module:</strong>
-                <div class="code-block">
-                    <code>modelv4Enhanced</code>
-                </div>
-                
-            </div>
-            
-            <!-- Module Metrics -->
-            <div class="module-metrics">
-                <div class="metric-row">
-                    <span class="metric-label">Functions:</span>
-                    <span class="metric-value">30</span>
-                </div>
-                <div class="metric-row">
-                    <span class="metric-label">Classes:</span>
-                    <span class="metric-value">2</span>
-                </div>
-                <div class="metric-row">
-                    <span class="metric-label">Lines:</span>
-                    <span class="metric-value">932</span>
-                </div>
-            </div>
-            
-            <!-- High-Level Module Summary -->
-            <div class="module-section">
-                <strong>Module Summary:</strong>
-                <div class="method-list">
-                    <span class="badge">2 Classes</span>
-                    <span class="badge">30 Functions</span>
-                    <span class="badge">932 LOC</span>
-                </div>
-            </div>
-            
-            <div class="module-section">
-                <strong>Dependencies:</strong>
-                <div class="method-list">
-                    <span class="badge">random</span>
-                    <span class="badge">pandas</span>
-                    <span class="badge">numpy</span>
-                    <span class="badge">+15 more</span>
-                </div>
-            </div>
-            
-            <div class="action-links">
-                <a href="#" class="action-link">View Source</a>
-                <a href="#" class="action-link">Documentation</a>
-                <a href="#" class="action-link">Dependencies</a>
-            </div>
-        </div>
-        <div class="getting-started-card">
-            <div class="card-icon">📁</div>
-            <h3>modelv3</h3>
-            
-            <div class="module-type-badge">
-                <span class="badge">Package Module</span>
-                <span class="badge">Classes</span>
-                <span class="badge">Functions</span>
-            </div>
-            
-            <div class="module-info">
-                <strong>Module:</strong>
-                <div class="code-block">
-                    <code>modelv3</code>
-                </div>
-                
-            </div>
-            
-            <!-- Module Metrics -->
-            <div class="module-metrics">
-                <div class="metric-row">
-                    <span class="metric-label">Functions:</span>
-                    <span class="metric-value">21</span>
-                </div>
-                <div class="metric-row">
-                    <span class="metric-label">Classes:</span>
-                    <span class="metric-value">2</span>
-                </div>
-                <div class="metric-row">
-                    <span class="metric-label">Lines:</span>
-                    <span class="metric-value">827</span>
-                </div>
-            </div>
-            
-            <!-- High-Level Module Summary -->
-            <div class="module-section">
-                <strong>Module Summary:</strong>
-                <div class="method-list">
-                    <span class="badge">2 Classes</span>
-                    <span class="badge">21 Functions</span>
-                    <span class="badge">827 LOC</span>
-                </div>
-            </div>
-            
-            <div class="module-section">
-                <strong>Dependencies:</strong>
-                <div class="method-list">
-                    <span class="badge">random</span>
-                    <span class="badge">pandas</span>
-                    <span class="badge">numpy</span>
-                    <span class="badge">+12 more</span>
-                </div>
-            </div>
-            
-            <div class="action-links">
-                <a href="#" class="action-link">View Source</a>
-                <a href="#" class="action-link">Documentation</a>
-                <a href="#" class="action-link">Dependencies</a>
-            </div>
-        </div>
-        <div class="getting-started-card">
-            <div class="card-icon">📁</div>
-            <h3>modelv2</h3>
-            
-            <div class="module-type-badge">
-                <span class="badge">Package Module</span>
-                <span class="badge">Functions</span>
-            </div>
-            
-            <div class="module-info">
-                <strong>Module:</strong>
-                <div class="code-block">
-                    <code>modelv2</code>
-                </div>
-                
-            </div>
-            
-            <!-- Module Metrics -->
-            <div class="module-metrics">
-                <div class="metric-row">
-                    <span class="metric-label">Functions:</span>
-                    <span class="metric-value">14</span>
-                </div>
-                <div class="metric-row">
-                    <span class="metric-label">Classes:</span>
-                    <span class="metric-value">0</span>
-                </div>
-                <div class="metric-row">
-                    <span class="metric-label">Lines:</span>
-                    <span class="metric-value">688</span>
-                </div>
-            </div>
-            
-            <!-- High-Level Module Summary -->
-            <div class="module-section">
-                <strong>Module Summary:</strong>
-                <div class="method-list">
-                    <span class="badge">14 Functions</span>
-                    <span class="badge">688 LOC</span>
-                </div>
-            </div>
-            
-            <div class="module-section">
-                <strong>Dependencies:</strong>
-                <div class="method-list">
-                    <span class="badge">pandas</span>
-                    <span class="badge">numpy</span>
-                    <span class="badge">sklearn</span>
-                    <span class="badge">+11 more</span>
-                </div>
-            </div>
-            
-            <div class="action-links">
-                <a href="#" class="action-link">View Source</a>
-                <a href="#" class="action-link">Documentation</a>
-                <a href="#" class="action-link">Dependencies</a>
-            </div>
-        </div>
-        <div class="getting-started-card">
-            <div class="card-icon">📁</div>
-            <h3>modev1</h3>
-            
-            <div class="module-type-badge">
-                <span class="badge">Package Module</span>
-                <span class="badge">Functions</span>
-            </div>
-            
-            <div class="module-info">
-                <strong>Module:</strong>
-                <div class="code-block">
-                    <code>modev1</code>
-                </div>
-                
-            </div>
-            
-            <!-- Module Metrics -->
-            <div class="module-metrics">
-                <div class="metric-row">
-                    <span class="metric-label">Functions:</span>
-                    <span class="metric-value">13</span>
-                </div>
-                <div class="metric-row">
-                    <span class="metric-label">Classes:</span>
-                    <span class="metric-value">0</span>
-                </div>
-                <div class="metric-row">
-                    <span class="metric-label">Lines:</span>
-                    <span class="metric-value">691</span>
-                </div>
-            </div>
-            
-            <!-- High-Level Module Summary -->
-            <div class="module-section">
-                <strong>Module Summary:</strong>
-                <div class="method-list">
-                    <span class="badge">13 Functions</span>
-                    <span class="badge">691 LOC</span>
-                </div>
-            </div>
-            
-            <div class="module-section">
-                <strong>Dependencies:</strong>
-                <div class="method-list">
-                    <span class="badge">pandas</span>
-                    <span class="badge">numpy</span>
-                    <span class="badge">sklearn</span>
-                    <span class="badge">+8 more</span>
-                </div>
-            </div>
-            
-            <div class="action-links">
-                <a href="#" class="action-link">View Source</a>
-                <a href="#" class="action-link">Documentation</a>
-                <a href="#" class="action-link">Dependencies</a>
-            </div>
-        </div>
-        <div class="getting-started-card">
-            <div class="card-icon">📁</div>
-            <h3>generate_html</h3>
-            
-            <div class="module-type-badge">
-                <span class="badge">Package Module</span>
-                <span class="badge">Classes</span>
-                <span class="badge">Functions</span>
-            </div>
-            
-            <div class="module-info">
-                <strong>Module:</strong>
-                <div class="code-block">
-                    <code>generate_html</code>
-                </div>
-                
-                <strong>Purpose:</strong>
-                <p class="small-text">HTML Documentation Generator
-Converts template data to HTML pages for MkDocs</p>
-            </div>
-            
-            <!-- Module Metrics -->
-            <div class="module-metrics">
-                <div class="metric-row">
-                    <span class="metric-label">Functions:</span>
-                    <span class="metric-value">7</span>
-                </div>
-                <div class="metric-row">
-                    <span class="metric-label">Classes:</span>
-                    <span class="metric-value">1</span>
-                </div>
-                <div class="metric-row">
-                    <span class="metric-label">Lines:</span>
-                    <span class="metric-value">343</span>
-                </div>
-            </div>
-            
-            <!-- High-Level Module Summary -->
-            <div class="module-section">
-                <strong>Module Summary:</strong>
-                <div class="method-list">
-                    <span class="badge">1 Classes</span>
-                    <span class="badge">7 Functions</span>
-                    <span class="badge">343 LOC</span>
-                </div>
-            </div>
-            
-            <div class="module-section">
-                <strong>Dependencies:</strong>
-                <div class="method-list">
-                    <span class="badge">datetime</span>
-                    <span class="badge">pathlib</span>
-                </div>
-            </div>
-            
-            <div class="action-links">
-                <a href="#" class="action-link">View Source</a>
-                <a href="#" class="action-link">Documentation</a>
-                <a href="#" class="action-link">Dependencies</a>
-            </div>
-        </div>
-        <div class="getting-started-card">
-            <div class="card-icon">📁</div>
-            <h3>autodoc_module</h3>
-            
-            <div class="module-type-badge">
-                <span class="badge">Core Module</span>
-                <span class="badge">Functions</span>
-            </div>
-            
-            <div class="module-info">
-                <strong>Module:</strong>
-                <div class="code-block">
-                    <code>autodoc_module</code>
-                </div>
-                
-                <strong>Purpose:</strong>
-                <p class="small-text">AutoDoc Module - Wrapper for the existing AutoDoc system
-Uses the existing autodoc functionality from @autodoc/src/</p>
-            </div>
-            
-            <!-- Module Metrics -->
-            <div class="module-metrics">
-                <div class="metric-row">
-                    <span class="metric-label">Functions:</span>
-                    <span class="metric-value">8</span>
-                </div>
-                <div class="metric-row">
-                    <span class="metric-label">Classes:</span>
-                    <span class="metric-value">0</span>
-                </div>
-                <div class="metric-row">
-                    <span class="metric-label">Lines:</span>
-                    <span class="metric-value">322</span>
-                </div>
-            </div>
-            
-            <!-- High-Level Module Summary -->
-            <div class="module-section">
-                <strong>Module Summary:</strong>
-                <div class="method-list">
-                    <span class="badge">8 Functions</span>
-                    <span class="badge">322 LOC</span>
-                </div>
-            </div>
-            
-            <div class="module-section">
-                <strong>Dependencies:</strong>
-                <div class="method-list">
-                    <span class="badge">pathlib</span>
-                    <span class="badge">auto_doc_generator</span>
-                    <span class="badge">auto_doc_generator</span>
-                    <span class="badge">+2 more</span>
-                </div>
-            </div>
-            
-            <div class="action-links">
-                <a href="#" class="action-link">View Source</a>
-                <a href="#" class="action-link">Documentation</a>
-                <a href="#" class="action-link">Dependencies</a>
-            </div>
-        </div>
-        <div class="getting-started-card">
-            <div class="card-icon">📁</div>
-            <h3>publish</h3>
-            
-            <div class="module-type-badge">
-                <span class="badge">Package Module</span>
-                <span class="badge">Functions</span>
-            </div>
-            
-            <div class="module-info">
-                <strong>Module:</strong>
-                <div class="code-block">
-                    <code>publish</code>
-                </div>
-                
-                <strong>Purpose:</strong>
-                <p class="small-text">Package Publishing Helper
-
-This script helps with publishing the auto-doc-generator package.</p>
-            </div>
-            
-            <!-- Module Metrics -->
-            <div class="module-metrics">
-                <div class="metric-row">
-                    <span class="metric-label">Functions:</span>
-                    <span class="metric-value">9</span>
-                </div>
-                <div class="metric-row">
-                    <span class="metric-label">Classes:</span>
-                    <span class="metric-value">0</span>
-                </div>
-                <div class="metric-row">
-                    <span class="metric-label">Lines:</span>
-                    <span class="metric-value">181</span>
-                </div>
-            </div>
-            
-            <!-- High-Level Module Summary -->
-            <div class="module-section">
-                <strong>Module Summary:</strong>
-                <div class="method-list">
-                    <span class="badge">9 Functions</span>
-                    <span class="badge">181 LOC</span>
-                </div>
-            </div>
-            
-            <div class="module-section">
-                <strong>Dependencies:</strong>
-                <div class="method-list">
-                    <span class="badge">subprocess</span>
-                    <span class="badge">argparse</span>
-                    <span class="badge">pathlib</span>
-                    <span class="badge">+5 more</span>
-                </div>
-            </div>
-            
-            <div class="action-links">
-                <a href="#" class="action-link">View Source</a>
-                <a href="#" class="action-link">Documentation</a>
-                <a href="#" class="action-link">Dependencies</a>
-            </div>
-        </div>
-        <div class="getting-started-card">
-            <div class="card-icon">📁</div>
-            <h3>env</h3>
-            
-            <div class="module-type-badge">
-                <span class="badge">Package Module</span>
-                <span class="badge">Functions</span>
-            </div>
-            
-            <div class="module-info">
-                <strong>Module:</strong>
-                <div class="code-block">
-                    <code>env</code>
-                </div>
-                
-            </div>
-            
-            <!-- Module Metrics -->
-            <div class="module-metrics">
-                <div class="metric-row">
-                    <span class="metric-label">Functions:</span>
-                    <span class="metric-value">2</span>
-                </div>
-                <div class="metric-row">
-                    <span class="metric-label">Classes:</span>
-                    <span class="metric-value">0</span>
-                </div>
-                <div class="metric-row">
-                    <span class="metric-label">Lines:</span>
-                    <span class="metric-value">81</span>
-                </div>
-            </div>
-            
-            <!-- High-Level Module Summary -->
-            <div class="module-section">
-                <strong>Module Summary:</strong>
-                <div class="method-list">
-                    <span class="badge">2 Functions</span>
-                    <span class="badge">81 LOC</span>
-                </div>
-            </div>
-            
-            <div class="module-section">
-                <strong>Dependencies:</strong>
-                <div class="method-list">
-                    <span class="badge">logging</span>
-                    <span class="badge">sqlalchemy</span>
-                    <span class="badge">sqlalchemy</span>
-                    <span class="badge">+2 more</span>
-                </div>
-            </div>
-            
-            <div class="action-links">
-                <a href="#" class="action-link">View Source</a>
-                <a href="#" class="action-link">Documentation</a>
-                <a href="#" class="action-link">Dependencies</a>
-            </div>
-        </div>
-        <div class="getting-started-card">
-            <div class="card-icon">📁</div>
-            <h3>setup</h3>
-            
-            <div class="module-type-badge">
-                <span class="badge">Package Module</span>
-            </div>
-            
-            <div class="module-info">
-                <strong>Module:</strong>
-                <div class="code-block">
-                    <code>setup</code>
-                </div>
-                
-                <strong>Purpose:</strong>
-                <p class="small-text">Setup script for Auto Documentation Generation System</p>
-            </div>
-            
-            <!-- Module Metrics -->
-            <div class="module-metrics">
-                <div class="metric-row">
-                    <span class="metric-label">Functions:</span>
-                    <span class="metric-value">0</span>
-                </div>
-                <div class="metric-row">
-                    <span class="metric-label">Classes:</span>
-                    <span class="metric-value">0</span>
-                </div>
-                <div class="metric-row">
-                    <span class="metric-label">Lines:</span>
-                    <span class="metric-value">83</span>
-                </div>
-            </div>
-            
-            <!-- High-Level Module Summary -->
-            <div class="module-section">
-                <strong>Module Summary:</strong>
-                <div class="method-list">
-                    <span class="badge">83 LOC</span>
-                </div>
-            </div>
-            
-            <div class="module-section">
-                <strong>Dependencies:</strong>
-                <div class="method-list">
-                    <span class="badge">setuptools</span>
-                    <span class="badge">pathlib</span>
-                </div>
-            </div>
-            
-            <div class="action-links">
-                <a href="#" class="action-link">View Source</a>
-                <a href="#" class="action-link">Documentation</a>
-                <a href="#" class="action-link">Dependencies</a>
-            </div>
-        </div>
-        <div class="getting-started-card">
-            <div class="card-icon">📁</div>
-            <h3>main</h3>
-            
-            <div class="module-type-badge">
-                <span class="badge">Package Module</span>
-            </div>
-            
-            <div class="module-info">
-                <strong>Module:</strong>
-                <div class="code-block">
-                    <code>main</code>
-                </div>
-                
-            </div>
-            
-            <!-- Module Metrics -->
-            <div class="module-metrics">
-                <div class="metric-row">
-                    <span class="metric-label">Functions:</span>
-                    <span class="metric-value">0</span>
-                </div>
-                <div class="metric-row">
-                    <span class="metric-label">Classes:</span>
-                    <span class="metric-value">0</span>
-                </div>
-                <div class="metric-row">
-                    <span class="metric-label">Lines:</span>
-                    <span class="metric-value">31</span>
-                </div>
-            </div>
-            
-            <!-- High-Level Module Summary -->
-            <div class="module-section">
-                <strong>Module Summary:</strong>
-                <div class="method-list">
-                    <span class="badge">31 LOC</span>
-                </div>
-            </div>
-            
-            <div class="module-section">
-                <strong>Dependencies:</strong>
-                <div class="method-list">
-                    <span class="badge">asyncio</span>
-                    <span class="badge">logging</span>
-                    <span class="badge">core</span>
-                    <span class="badge">+3 more</span>
-                </div>
-            </div>
-            
-            <div class="action-links">
-                <a href="#" class="action-link">View Source</a>
-                <a href="#" class="action-link">Documentation</a>
-                <a href="#" class="action-link">Dependencies</a>
-            </div>
-        </div>
-        <div class="getting-started-card">
-            <div class="card-icon">📁</div>
-            <h3>__init__</h3>
-            
-            <div class="module-type-badge">
-                <span class="badge">Package Module</span>
-            </div>
-            
-            <div class="module-info">
-                <strong>Module:</strong>
-                <div class="code-block">
-                    <code>__init__</code>
-                </div>
-                
-            </div>
-            
-            <!-- Module Metrics -->
-            <div class="module-metrics">
-                <div class="metric-row">
-                    <span class="metric-label">Functions:</span>
-                    <span class="metric-value">0</span>
-                </div>
-                <div class="metric-row">
-                    <span class="metric-label">Classes:</span>
-                    <span class="metric-value">0</span>
-                </div>
-                <div class="metric-row">
-                    <span class="metric-label">Lines:</span>
-                    <span class="metric-value">1</span>
-                </div>
-            </div>
-            
-            <!-- High-Level Module Summary -->
-            <div class="module-section">
-                <strong>Module Summary:</strong>
-                <div class="method-list">
-                    <span class="badge">1 LOC</span>
-                </div>
-            </div>
-            
-            
-            <div class="action-links">
-                <a href="#" class="action-link">View Source</a>
-                <a href="#" class="action-link">Documentation</a>
-                <a href="#" class="action-link">Dependencies</a>
-            </div>
-        </div>
-    </div>
+<!-- Components (Modules with descriptions) -->
+<section class="components-list" id="components">
+    <h2>🧩 Components</h2>
+    <p>Modules with clear descriptions from the analysed repository.</p>
+    <div class="getting-started-grid" id="components-grid"></div>
 </section>
 
 <!-- Module Performance Dashboard -->
@@ -1226,7 +546,7 @@ document.addEventListener('DOMContentLoaded', function(){
                         <!-- Edit button -->
                         <div class="md-source-file">
                             <small>
-                                Generated on 2025-09-20 02:28:22
+                                Generated on 2025-09-20 06:41:01
                             </small>
                         </div>
                     </article>
@@ -1246,42 +566,41 @@ document.addEventListener('DOMContentLoaded', function(){
         </div>
     </footer>
 
+    <!-- Mobile Overlay -->
+    <div class="overlay" aria-hidden="true"></div>
+
+    <!-- Search Modal -->
+    <dialog class="search-modal" aria-labelledby="search-title">
+        <div class="search-modal__container">
+            <div class="search-modal__header">
+                <input type="text" class="search-modal__input" placeholder="Search documentation, modules, and code..." aria-label="Search">
+                <button type="button" class="btn-icon" onclick="this.closest('dialog').close()" aria-label="Close search">
+                    <span class="close-icon">✕</span>
+                </button>
+            </div>
+            <div class="search-modal__results" id="search-results">
+                <!-- Search results will be populated here -->
+            </div>
+        </div>
+    </dialog>
+
     <!-- Scripts -->
-    <script src="assets/js/main.js"></script>
+    <!-- Modern JavaScript Application -->
+    <script src="assets/js/app.js?v=2298"></script>
+    <script src="assets/js/data-integration.js?v=8855"></script>
     
-    <!-- Theme Toggle Script -->
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const themeToggle = document.getElementById('theme-toggle');
-        const themeIcon = document.getElementById('theme-icon');
-        const html = document.documentElement;
-        
-        // Check for saved theme preference or default to light
-        const currentTheme = localStorage.getItem('theme') || 'light';
-        html.setAttribute('data-theme', currentTheme);
-        
-        // Update icon based on current theme
-        if (currentTheme === 'dark') {
-            themeIcon.textContent = '☀️';
-        } else {
-            themeIcon.textContent = '🌙';
+    // TOC toggle behavior
+    (function(){
+      try {
+        var btn = document.getElementById('toc-toggle');
+        if (btn) {
+          btn.addEventListener('click', function(){
+            document.body.classList.toggle('toc-open');
+          });
         }
-        
-        themeToggle.addEventListener('click', function() {
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            
-            // Update icon
-            if (newTheme === 'dark') {
-                themeIcon.textContent = '☀️';
-            } else {
-                themeIcon.textContent = '🌙';
-            }
-        });
-    });
+      } catch(e) {}
+    })();
     </script>
     
 </body>

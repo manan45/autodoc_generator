@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>{% block title %}{{ title | default('Documentation') }}{% endblock %} - {{ project_name | default('Project') }}</title>
-    <meta name="description" content="{% block description %}Auto-generated documentation for {{ project_name | default('Project') }}{% endblock %}">
+    <title>Components - App</title>
+    <meta name="description" content="Auto-generated documentation for App">
     
     <!-- Modern CSS Architecture -->
-    <link rel="stylesheet" href="assets/css/modern-styles.css?v={{ range(1000, 9999) | random }}">
+    <link rel="stylesheet" href="assets/css/modern-styles.css?v=1534">
     <style>
         /* Emergency fallback styles to ensure basic layout works */
         body { font-family: 'Roboto', sans-serif; margin: 0; }
@@ -34,7 +34,10 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono:400,400i,700,700i&display=fallback">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     
-    {% block extra_css %}{% endblock %}
+<style>
+  #components .getting-started-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+  #components .getting-started-card { min-height: 180px; }
+</style>
 </head>
 
 <body dir="ltr" data-md-color-scheme="" data-md-color-primary="indigo" data-md-color-accent="indigo">
@@ -49,7 +52,7 @@
             </button>
             
             <!-- Link to home -->
-            <a href="index.html" title="{{ project_name | default('Documentation') }}" class="md-header__button md-logo header__logo" aria-label="{{ project_name | default('Documentation') }}">
+            <a href="index.html" title="App" class="md-header__button md-logo header__logo" aria-label="App">
                 <span class="logo-text header__logo-icon">📚</span>
             </a>
 
@@ -62,10 +65,10 @@
             <div class="md-header__title" data-md-component="header-title">
                 <div class="md-header__ellipsis">
                     <div class="md-header__topic">
-                        <span class="md-ellipsis">{{ project_name | default('Documentation') }}</span>
+                        <span class="md-ellipsis">App</span>
                     </div>
                     <div class="md-header__topic" data-md-component="header-topic">
-                        <span class="md-ellipsis">{% block page_title %}{{ title | default('Documentation') }}{% endblock %}</span>
+                        <span class="md-ellipsis">App Components</span>
                     </div>
                 </div>
             </div>
@@ -104,26 +107,138 @@
         <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
             <div class="md-sidebar__scrollwrap">
                 <div class="md-sidebar__inner">
-                    {% include 'sidebar.html' %}
-                </div>
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+    <!-- Project Header -->
+    <label class="md-nav__title" for="__drawer">
+        <a href="index.html" title="App" class="md-nav__button md-logo" aria-label="App">
+            App
+        </a>
+    </label>
+
+    <ul class="md-nav__list md-nav__list--top" data-md-scrollfix>
+        <!-- Overview Section -->
+        <li class="md-nav__item">
+            <a href="index.html" class="md-nav__link ">
+                Overview
+            </a>
+        </li>
+
+        <!-- Architecture & Design Section -->
+        <li class="md-nav__item md-nav__item--section">
+            <input class="md-nav__toggle md-toggle" data-md-toggle="nav-architecture" type="checkbox" id="nav-architecture" checked>
+            <label class="md-nav__link md-nav__link--index" for="nav-architecture">
+                Architecture & Design
+                <span class="md-nav__icon md-nav__icon--expand">▼</span>
+            </label>
+            <nav class="md-nav" data-md-level="1">
+                <label class="md-nav__title" for="nav-architecture">
+                    Architecture & Design
+                </label>
+                <ul class="md-nav__list md-nav__list--nested">
+                    <li class="md-nav__item">
+                        <a href="architecture.html" class="md-nav__link ">
+                            System Architecture
+                        </a>
+                    </li>
+                    <li class="md-nav__item">
+                        <a href="all_modules.html" class="md-nav__link " data-entity="modules">
+                            Key Contributing Modules
+                            <span class="md-nav__count" id="sidebar-modules-count"></span>
+                        </a>
+                    </li>
+                    <li class="md-nav__item">
+                        <a href="components.html" class="md-nav__link md-nav__link--active" data-entity="components">
+                            Components
+                            <span class="md-nav__count" id="sidebar-components-count"></span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </li>
+
+        <!-- Development Section -->
+        <li class="md-nav__item md-nav__item--section">
+            <input class="md-nav__toggle md-toggle" data-md-toggle="nav-development" type="checkbox" id="nav-development" >
+            <label class="md-nav__link md-nav__link--index" for="nav-development">
+                Development
+                <span class="md-nav__icon md-nav__icon--expand">▼</span>
+            </label>
+            <nav class="md-nav" data-md-level="1">
+                <label class="md-nav__title" for="nav-development">
+                    Development
+                </label>
+                <ul class="md-nav__list md-nav__list--nested">
+                    <li class="md-nav__item">
+                        <a href="api.html" class="md-nav__link ">
+                            API Reference
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </li>
+
+        <!-- Code Quality Section -->
+        <li class="md-nav__item md-nav__item--section">
+            <input class="md-nav__toggle md-toggle" data-md-toggle="nav-quality" type="checkbox" id="nav-quality" >
+            <label class="md-nav__link md-nav__link--index" for="nav-quality">
+                Code Quality
+                <span class="md-nav__icon md-nav__icon--expand">▼</span>
+            </label>
+            <nav class="md-nav" data-md-level="1">
+                <label class="md-nav__title" for="nav-quality">
+                    Code Quality
+                </label>
+                <ul class="md-nav__list md-nav__list--nested">
+                    <li class="md-nav__item">
+                        <a href="complexity.html" class="md-nav__link ">
+                            Quality Analysis
+                        </a>
+                    </li>
+                    <li class="md-nav__item">
+                        <a href="complexity.html#scoring-pipeline" class="md-nav__link ">
+                            Scoring Pipeline
+                        </a>
+                    </li>
+                    <li class="md-nav__item">
+                        <a href="complexity.html#quality-factors" class="md-nav__link ">
+                            Quality Factors
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </li>
+
+        <!-- AI & Machine Learning Section -->
+
+        <!-- Getting Started Section -->
+        <li class="md-nav__item">
+            <a href="onboarding.html" class="md-nav__link ">
+                Getting Started
+            </a>
+        </li>
+
+        <!-- Search link removed (search available via header button) -->
+
+        <!-- Project Stats removed in favor of Live Repository Data banner injected at runtime -->
+    </ul>
+</nav>                </div>
             </div>
         </div>
 
         <!-- Table of contents (Right) -->
-        {% block toc_sidebar %}
         <div class="md-sidebar md-sidebar--secondary autohide" data-md-component="sidebar" data-md-type="toc">
             <div class="md-sidebar__scrollwrap">
                 <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
                         <label class="md-nav__title" for="__toc">Table of contents</label>
                         <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-                            {% block toc %}{% endblock %}
+<li class="md-nav__item"><a href="#overview" class="md-nav__link">Overview</a></li>
+<li class="md-nav__item"><a href="#components" class="md-nav__link">Components</a></li>
                         </ul>
                     </nav>
                 </div>
             </div>
         </div>
-        {% endblock %}
 
         <!-- Main content -->
         <main class="md-main" data-md-component="main">
@@ -134,15 +249,19 @@
                         
 
                         <!-- Content -->
-                        {% block content %}
-                        <h1>{{ title | default('Documentation') }}</h1>
-                        <p>Content not provided.</p>
-                        {% endblock %}
+<h1 id="overview">Components</h1>
+<p>Modules with clear descriptions from the analysed repository.</p>
+
+<section class="components-list" id="components">
+    <h2>🧩 Components</h2>
+    <div class="getting-started-grid" id="components-grid"></div>
+</section>
+
 
                         <!-- Edit button -->
                         <div class="md-source-file">
                             <small>
-                                Generated on {{ generation_date | default('Recently') }}
+                                Generated on 2025-09-20 06:41:01
                             </small>
                         </div>
                     </article>
@@ -182,8 +301,8 @@
 
     <!-- Scripts -->
     <!-- Modern JavaScript Application -->
-    <script src="assets/js/app.js?v={{ range(1000, 9999) | random }}"></script>
-    <script src="assets/js/data-integration.js?v={{ range(1000, 9999) | random }}"></script>
+    <script src="assets/js/app.js?v=5452"></script>
+    <script src="assets/js/data-integration.js?v=7359"></script>
     
     <script>
     // TOC toggle behavior
@@ -199,6 +318,5 @@
     })();
     </script>
     
-    {% block extra_js %}{% endblock %}
 </body>
 </html>

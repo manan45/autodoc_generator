@@ -18,12 +18,12 @@
 <p>Essential facts, frameworks, and top modules to get you oriented fast.</p>
 
 <h2 id="stats">Stats</h2>
-<div class="stats-grid">
-    <div class="stat-card"><span class="stat-number">{{ total_files | default(0) }}</span><span class="stat-label">Files</span></div>
-    <div class="stat-card"><span class="stat-number">{{ total_functions | default(0) }}</span><span class="stat-label">Functions</span></div>
-    <div class="stat-card"><span class="stat-number">{{ total_classes | default(0) }}</span><span class="stat-label">Classes</span></div>
-    <div class="stat-card"><span class="stat-number">{{ total_lines | default(0) }}</span><span class="stat-label">Lines</span></div>
-  </div>
+<div class="stats-grid" id="overview-stats">
+    <div class="stat-card" data-stat="modules"><span class="stat-number">0</span><span class="stat-label">Modules</span></div>
+    <div class="stat-card" data-stat="files"><span class="stat-number">0</span><span class="stat-label">Files</span></div>
+    <div class="stat-card" data-stat="functions"><span class="stat-number">0</span><span class="stat-label">Functions</span></div>
+    <div class="stat-card" data-stat="classes"><span class="stat-number">0</span><span class="stat-label">Classes</span></div>
+</div>
 
 {% if frameworks_detected %}
 <p><strong>Frameworks:</strong> {{ frameworks_detected | join(', ') }}</p>
@@ -155,6 +155,13 @@ graph TD
         </div>
     </div>
     
+    <!-- Key Modules (API-driven) -->
+    <div class="component-store-section">
+        <h3>🏪 Key Modules</h3>
+        <p>Top modules from the analysed codebase, fetched live from the API.</p>
+        <div class="store-features" id="overview-modules"></div>
+    </div>
+
     <!-- Component Store Section -->
     <div class="component-store-section">
         <h3>🏪 Component Store</h3>

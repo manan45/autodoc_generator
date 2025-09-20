@@ -6,7 +6,7 @@
         </a>
     </label>
 
-    <ul class="md-nav__list" data-md-scrollfix>
+    <ul class="md-nav__list md-nav__list--top" data-md-scrollfix>
         <!-- Overview Section -->
         <li class="md-nav__item">
             <a href="index.html" class="md-nav__link {% if current_page == 'index' %}md-nav__link--active{% endif %}">
@@ -16,7 +16,7 @@
 
         <!-- Architecture & Design Section -->
         <li class="md-nav__item md-nav__item--section">
-            <input class="md-nav__toggle md-toggle" data-md-toggle="nav-architecture" type="checkbox" id="nav-architecture" {% if current_page in ['architecture', 'modules'] %}checked{% endif %}>
+            <input class="md-nav__toggle md-toggle" data-md-toggle="nav-architecture" type="checkbox" id="nav-architecture" {% if current_page in ['architecture', 'modules', 'components'] %}checked{% endif %}>
             <label class="md-nav__link md-nav__link--index" for="nav-architecture">
                 Architecture & Design
                 <span class="md-nav__icon md-nav__icon--expand">▼</span>
@@ -25,15 +25,22 @@
                 <label class="md-nav__title" for="nav-architecture">
                     Architecture & Design
                 </label>
-                <ul class="md-nav__list">
+                <ul class="md-nav__list md-nav__list--nested">
                     <li class="md-nav__item">
                         <a href="architecture.html" class="md-nav__link {% if current_page == 'architecture' %}md-nav__link--active{% endif %}">
                             System Architecture
                         </a>
                     </li>
                     <li class="md-nav__item">
-                        <a href="modules.html" class="md-nav__link {% if current_page == 'modules' %}md-nav__link--active{% endif %}">
-                            Modules & Components
+                        <a href="all_modules.html" class="md-nav__link {% if current_page == 'modules' %}md-nav__link--active{% endif %}" data-entity="modules">
+                            Key Contributing Modules
+                            <span class="md-nav__count" id="sidebar-modules-count"></span>
+                        </a>
+                    </li>
+                    <li class="md-nav__item">
+                        <a href="components.html" class="md-nav__link {% if current_page == 'components' %}md-nav__link--active{% endif %}" data-entity="components">
+                            Components
+                            <span class="md-nav__count" id="sidebar-components-count"></span>
                         </a>
                     </li>
                 </ul>
@@ -51,7 +58,7 @@
                 <label class="md-nav__title" for="nav-development">
                     Development
                 </label>
-                <ul class="md-nav__list">
+                <ul class="md-nav__list md-nav__list--nested">
                     <li class="md-nav__item">
                         <a href="api.html" class="md-nav__link {% if current_page == 'api' %}md-nav__link--active{% endif %}">
                             API Reference
@@ -72,19 +79,19 @@
                 <label class="md-nav__title" for="nav-quality">
                     Code Quality
                 </label>
-                <ul class="md-nav__list">
+                <ul class="md-nav__list md-nav__list--nested">
                     <li class="md-nav__item">
                         <a href="complexity.html" class="md-nav__link {% if current_page == 'complexity' %}md-nav__link--active{% endif %}">
                             Quality Analysis
                         </a>
                     </li>
                     <li class="md-nav__item">
-                        <a href="complexity.html#scoring-pipeline" class="md-nav__link">
+                        <a href="complexity.html#scoring-pipeline" class="md-nav__link {% if current_page == 'complexity' %}md-nav__link--active{% endif %}">
                             Scoring Pipeline
                         </a>
                     </li>
                     <li class="md-nav__item">
-                        <a href="complexity.html#quality-factors" class="md-nav__link">
+                        <a href="complexity.html#quality-factors" class="md-nav__link {% if current_page == 'complexity' %}md-nav__link--active{% endif %}">
                             Quality Factors
                         </a>
                     </li>
@@ -104,7 +111,7 @@
                 <label class="md-nav__title" for="nav-ai">
                     AI & Machine Learning
                 </label>
-                <ul class="md-nav__list">
+                <ul class="md-nav__list md-nav__list--nested">
                     <li class="md-nav__item">
                         <a href="ai_models.html" class="md-nav__link {% if current_page == 'ai_models' %}md-nav__link--active{% endif %}">
                             AI Models
@@ -127,35 +134,8 @@
             </a>
         </li>
 
-        <!-- Quick Links Section -->
-        <li class="md-nav__item md-nav__item--section">
-            <div class="md-nav__separator"></div>
-            <label class="md-nav__section-title">Quick Links</label>
-        </li>
-        
-        <li class="md-nav__item">
-            <a href="#search" class="md-nav__link" data-md-search-button>
-                Search Documentation
-            </a>
-        </li>
+        <!-- Search link removed (search available via header button) -->
 
-        <!-- Project Stats -->
-        <li class="md-nav__item md-nav__item--section">
-            <div class="md-nav__separator"></div>
-            <div class="md-nav__stats">
-                <div class="md-nav__stats-item">
-                    <span class="md-nav__stats-number">{{ total_files | default(0) }}</span>
-                    <span class="md-nav__stats-label">Files</span>
-                </div>
-                <div class="md-nav__stats-item">
-                    <span class="md-nav__stats-number">{{ total_functions | default(0) }}</span>
-                    <span class="md-nav__stats-label">Functions</span>
-                </div>
-                <div class="md-nav__stats-item">
-                    <span class="md-nav__stats-number">{{ total_classes | default(0) }}</span>
-                    <span class="md-nav__stats-label">Classes</span>
-                </div>
-            </div>
-        </li>
+        <!-- Project Stats removed in favor of Live Repository Data banner injected at runtime -->
     </ul>
 </nav>
